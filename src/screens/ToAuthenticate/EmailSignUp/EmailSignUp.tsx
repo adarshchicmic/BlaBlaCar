@@ -1,0 +1,70 @@
+import {View, Text, KeyboardAvoidingView} from 'react-native';
+import React, {useState} from 'react';
+import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
+import styles from './styles';
+import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
+import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateEmail} from '../../../store/slices/UserSlice';
+const EmailSignUp = ({navigation}: any) => {
+  const [email, setEmail] = useState<string>('');
+  const [validEmail, setValidEmail] = useState<boolean>(false);
+  const [showValidationError, setShowValidationError] =
+    useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const handleTextChange = value => {
+    setEmail(value);
+    setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
+  };
+  const states = useSelector(state => state);
+  console.log(states, 'ye states hai ');
+  const handleBackArrowPress = () => {
+    navigation.goBack();
+  };
+  const handleForwardArrowButtonPress = () => {
+    if (validEmail) {
+      navigation.navigate('FirstNameLastName');
+      dispatch(updateEmail({email: email}));
+    } else {
+      setShowValidationError(true);
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView style={styles.container}>
+      <TouchableOpacity onPress={() => handleBackArrowPress()}>
+        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+      </TouchableOpacity>
+      <View style={styles.textView}>
+        <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAILQ}</Text>
+      </View>
+      <View>
+        <CustomTextInput
+          styleInputText={styles.textInputStyle}
+          placeholderTextColor={'#969693'}
+          inputTextPlaceholder={COMMON_CONSTS.EMAIL}
+          onChangeTextFunction={text => handleTextChange(text)}
+        />
+        {showValidationError && (
+          <Text style={styles.errorTextStyle}>
+            {COMMON_CONSTS.ENTER_VALID_EMAIL}
+          </Text>
+        )}
+      </View>
+
+      {email && (
+        <View style={styles.buttonView}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => handleForwardArrowButtonPress()}>
+            <SvgRightArrow color="red" />
+          </TouchableOpacity>
+        </View>
+      )}
+    </KeyboardAvoidingView>
+  );
+};
+
+export default EmailSignUp;
