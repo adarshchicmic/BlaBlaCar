@@ -53,7 +53,7 @@ const TabNavigation = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: () => <SvgProfile width={20} height={20} />,
+          tabBarIcon: () => <SvgProfile width={25} height={25} />,
         }}
       />
     </Tab.Navigator>

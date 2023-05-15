@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {initialState} from '../store/slices/UserSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://0499-112-196-113-2.ngrok-free.app',
+  baseUrl: 'https://c778-112-196-113-2.in.ngrok.io',
   prepareHeaders: headers => {
     if (initialState.token) {
       headers.append('authorization', initialState.token);

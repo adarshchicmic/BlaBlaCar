@@ -15,8 +15,10 @@ const SvgCalender: any = require('./calender.svg').default;
 const SvgUser: any = require('./user.svg').default;
 const SvgMinus: any = require('./minus.svg').default;
 const SvgPlush: any = require('./plush.svg').default;
+const SvgFlag: any = require('./flag.svg').default;
 
 export {
+  SvgFlag,
   SvgUser,
   SvgMinus,
   SvgPlush,
