@@ -23,6 +23,9 @@ const EditPersonalDetail = ({navigation}: any) => {
   const handleOnPressDob = () => {
     navigation.navigate('WhatIsYourDob');
   };
+  const handleOnPressEmail = () => {
+    navigation.navigate('WhatIsYourEmail');
+  };
   return (
     <View>
       <CustomButton
@@ -64,6 +67,7 @@ const EditPersonalDetail = ({navigation}: any) => {
         <CustomButtonEdit
           first={COMMON_CONSTS.EMAIL_ADDRESS}
           second={userData?.email}
+          onPressFunction={() => handleOnPressEmail()}
         />
       </View>
       <View style={styles.addPhoneNumberView}>

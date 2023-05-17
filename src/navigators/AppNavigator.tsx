@@ -11,6 +11,7 @@ import EditPersonalDetail from '../screens/Authenticated/EditPersonalDetail/Edit
 import WhatIsYourFirstName from '../screens/Authenticated/WhatIsYourFirstName/WhatIsYourFirstName';
 import WhatIsYourLastName from '../screens/Authenticated/WhatIsYourLastName/WhatIsYourLastName';
 import WhatIsYourDob from '../screens/Authenticated/WhatIsYourDob/WhatIsYourDob';
+import WhatIsYourEmail from '../screens/Authenticated/WhatIsYourEmail/WhatIsYourEmail';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -30,6 +31,7 @@ const AppNavigator = () => {
       />
       <Stack.Screen name="WhatIsYourLastName" component={WhatIsYourLastName} />
       <Stack.Screen name="WhatIsYourDob" component={WhatIsYourDob} />
+      <Stack.Screen name="WhatIsYourEmail" component={WhatIsYourEmail} />
     </Stack.Navigator>
   );
 };
