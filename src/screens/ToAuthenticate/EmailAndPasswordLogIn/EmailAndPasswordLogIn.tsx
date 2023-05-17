@@ -12,15 +12,17 @@ import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput
 import {SvgCloseEye, SvgLeftArrow, SvgOpenEye} from '../../../assets/svg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useLogInMutation} from '../../../services/modules/login';
+import {useSelector} from 'react-redux';
 
 const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [openEye, setOpenEye] = useState<boolean>(false);
   const [validEmail, setValidEmail] = useState<boolean>(true);
-  const [logIn, {data, isLoading, isSuccess, isUninitialized}] =
+  const [logIn, {data, isLoading, isSuccess, isError, isUninitialized}] =
     useLogInMutation();
 
+  const states = useSelector(state => state);
   const handleTextChange = value => {
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
@@ -36,20 +38,19 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   };
   const handleShowOpenOrCloseEye = () => {
     setOpenEye(!openEye);
-
-    console.log(openEye, 'button pressed ');
   };
   const handelLoginButtonPress = async () => {
-    console.log(validEmail, 'button Pressed login ');
     if (validEmail) {
       console.log(password, 'this is password');
       const res: any = await logIn({
         email: email,
         password: password,
       });
+      console.log(res, 'this is result ');
       if (res?.data?.status?.code === 200) {
-        console.log(res.data.status.code, 'ye result hai bhai');
-        navigation.navigate('HomeScreen');
+        // navigation.navigate('HomeScreen');
+        console.log(res?.data?.status, 'this is result guys');
+        console.log(states, 'this is state value in pafd');
       }
       console.log(data, isLoading, isSuccess, isUninitialized, 'jla;ksdfsj');
     }
@@ -78,7 +79,7 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
             secureTextEntry={!openEye}
             onChangeTextFunction={text => handlePasswordChange(text)}
           />
-
+          {isError && <Text>error</Text>}
           {password && (
             <View style={styles.svgOpenCloseStyle}>
               <TouchableOpacity onPress={handleShowOpenOrCloseEye}>

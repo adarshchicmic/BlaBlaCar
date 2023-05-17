@@ -18,7 +18,7 @@ const styles = StyleSheet.create<any>({
     marginVertical: hp(4),
   },
   arrowStyle: {
-    marginTop: hp(2),
+    marginTop: hp(1),
     fontSize: RFValue(20),
     color: '#2dbeff',
   },
@@ -34,6 +34,15 @@ const styles = StyleSheet.create<any>({
     paddingLeft: wp(4),
     paddingRight: wp(10),
   },
+  forgotPasswordButtonStyle: {
+    marginTop: hp(2),
+    width: wp(35),
+  },
+  forgotPasswordTextStyle: {
+    color: '#2dbeff',
+    fontSize: RFValue(14),
+    fontWeight: '600',
+  },
   svgOpenCloseStyle: {
     marginTop: hp(2),
     marginRight: wp(7.5),
@@ -42,19 +51,28 @@ const styles = StyleSheet.create<any>({
     zIndex: 1,
   },
   buttonStyle: {
-    height: hp(7),
-    width: wp(12),
+    width: wp(20),
     backgroundColor: '#2dbeff',
-    padding: hp(1),
-    borderRadius: 60,
+    padding: hp(2),
+    borderRadius: 10,
+    alignSelf: 'center',
+    marginTop: hp(4),
   },
-  errorTextStyle: {
-    color: '#f00',
-    fontSize: RFValue(12),
+  buttonTextStyle: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: '500',
+    fontSize: RFValue(17),
+  },
+  buttonStyleArrow: {
+    width: wp(20),
+    backgroundColor: '#2dbeff',
+    padding: 10,
+    borderRadius: 20,
   },
   buttonView: {
     width: wp(10),
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginRight: wp(5),
     marginTop: hp(4),
   },

@@ -29,14 +29,18 @@ const CustomTextInput: React.FC<Props | any> = ({
   onEndEditing,
   maxLength,
   secureTextEntry,
+  inputMode,
+  defaultValue,
 }: Props | any) => {
   return (
     <View style={customInputTextOuterStyle}>
       <TextInput
+        defaultValue={defaultValue}
         style={styleInputText}
         placeholder={inputTextPlaceholder}
         onChangeText={onChangeTextFunction}
         value={valueTextInput}
+        inputMode={inputMode}
         keyboardType={keyboardTypeTextInput}
         autoCapitalize={autoCapitalizeTextInput}
         onFocus={onFocusInput}

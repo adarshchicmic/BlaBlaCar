@@ -11,6 +11,7 @@ export const initialState = {
     title: '',
   },
   token: '',
+  jwt: '',
 };
 
 const userSlice: any = createSlice({
@@ -38,8 +39,23 @@ const userSlice: any = createSlice({
       const {title} = action.payload;
       state.user.title = title;
     },
+    updateJwt: (state, action) => {
+      const {jwt} = action.payload;
+      state.jwt = jwt;
+    },
+    updatePassword: (state, action) => {
+      const {password} = action.payload;
+      state.user.password = password;
+    },
   },
 });
-export const {updateEmail, updateToken, updateName, updateDob, updateTitle} =
-  userSlice.actions;
+export const {
+  updateEmail,
+  updateToken,
+  updateName,
+  updateDob,
+  updateTitle,
+  updateJwt,
+  updatePassword,
+} = userSlice.actions;
 export default userSlice;

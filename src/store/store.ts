@@ -13,12 +13,14 @@ import {
 import {MMKV} from 'react-native-mmkv';
 import {api} from '../services/api';
 import rideSlice from './slices/rideSlice';
+import profileSlice from './slices/profileSlice';
 
 import userSlice from './slices/UserSlice';
 const reducers = combineReducers({
   userSlice: userSlice.reducer,
   rideSlice: rideSlice.reducer,
   [api.reducerPath]: api.reducer,
+  profileSlice: profileSlice.reducer,
 });
 const storage = new MMKV();
 export const reduxStorage = {

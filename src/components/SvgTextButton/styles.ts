@@ -10,7 +10,8 @@ const styles = StyleSheet.create<any>({
     color: '#2dbeff',
     fontSize: RFValue(15),
     fontWeight: '500',
-    marginBottom: hp(3),
+    alignSelf: 'flex-start',
+    justifyContent: 'center',
   },
   plushSvgTextStyle: {
     flexDirection: 'row',

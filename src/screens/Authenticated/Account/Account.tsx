@@ -1,14 +1,24 @@
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, ActivityIndicator} from 'react-native';
 import React from 'react';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomButton from '../../../components/CustomButton/CustomButton';
+import {useSignOutMutation} from '../../../services/modules/signOut';
+import {useDispatch} from 'react-redux';
+import {updateToken} from '../../../store/slices/UserSlice';
 
 const Account = () => {
-  const handleLogoutPress = () => {};
+  const dispatch = useDispatch();
+  const [signOut, {isLoading: isLoadingSignOut}]: any = useSignOutMutation();
+
+  const handleLogoutPress = async () => {
+    const dataa = await signOut();
+    dataa?.data?.status === 200 ? dispatch(updateToken({token: ''})) : null;
+  };
   return (
     <ScrollView>
+      {isLoadingSignOut && <ActivityIndicator />}
       <View style={styles.buttonContainer}>
         <NameArrowButton name={COMMON_CONSTS.RATING} />
       </View>

@@ -16,8 +16,10 @@ const SvgUser: any = require('./user.svg').default;
 const SvgMinus: any = require('./minus.svg').default;
 const SvgPlush: any = require('./plush.svg').default;
 const SvgFlag: any = require('./flag.svg').default;
+const SvgDownArrow: any = require('./downArrow.svg').default;
 
 export {
+  SvgDownArrow,
   SvgFlag,
   SvgUser,
   SvgMinus,

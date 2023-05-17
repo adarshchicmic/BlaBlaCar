@@ -19,7 +19,12 @@ const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const numberOfSeat: any = useSelector(state => state);
-  console.log(numberOfSeat?.rideSlice, 'this is number of seats ');
+  const handleleavingFromPress = () => {
+    navigation.navigate('Location');
+  };
+  const handleGoingToPress = () => {
+    navigation.navigate('Location');
+  };
   return (
     <ScrollView>
       <ImageBackground
@@ -43,13 +48,17 @@ const Search = ({navigation}: any) => {
                 <SvgSwap width={25} height={25} />
               </TouchableOpacity>
             )}
-          <Pressable style={styles.continueWithEmailView(0)}>
+          <Pressable
+            style={styles.continueWithEmailView(0)}
+            onPress={() => handleleavingFromPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
               {numberOfSeat?.rideSlice?.leavingFrom}
             </Text>
           </Pressable>
-          <Pressable style={styles.continueWithEmailView(0)}>
+          <Pressable
+            style={styles.continueWithEmailView(0)}
+            onPress={() => handleGoingToPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
               {numberOfSeat?.rideSlice?.goingTo}

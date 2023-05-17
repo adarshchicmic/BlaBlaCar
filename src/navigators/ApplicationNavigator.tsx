@@ -1,11 +1,15 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthNavigator from './AuthNavigator';
+import {useSelector} from 'react-redux';
+import AppNavigator from './AppNavigator';
 
 const ApplicationNavigator = () => {
+  const states: any = useSelector(state => state);
+  console.log(states, 'thiss is states m');
   return (
     <NavigationContainer>
-      <AuthNavigator />
+      {states?.userSlice?.token ? <AppNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };

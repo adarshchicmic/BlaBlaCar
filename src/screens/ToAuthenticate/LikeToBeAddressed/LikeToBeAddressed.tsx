@@ -5,6 +5,7 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {updateTitle} from '../../../store/slices/UserSlice';
+
 const LikeToBeAddressed = ({navigation}: any) => {
   const dispatch = useDispatch();
   const handleBackArrowPress = () => {

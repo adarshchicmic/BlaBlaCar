@@ -12,52 +12,81 @@ type Style = {
 const styles = StyleSheet.create<Style | any>({
   container: {
     justifyContent: 'center',
-    marginLeft: wp(7),
   },
-  textStyle: (value: number) => ({
-    fontSize: value === 1 ? RFValue(30) : RFValue(20),
-    fontWeight: '600',
-  }),
   textView: {
-    marginTop: hp(2),
+    marginTop: hp(5),
+    marginHorizontal: wp(5),
   },
-  bottomTextView: {
-    alignSelf: 'flex-start',
+  textStyle: {
+    fontSize: RFValue(30),
+    fontWeight: '600',
   },
-  continueWithEmailView: {
-    marginVertical: hp(5),
+  textInputView: {
+    paddingBottom: hp(5),
+  },
+  flagTextInputViewStyle: {
+    marginTop: hp(4),
+    width: wp(90),
+
     flexDirection: 'row',
+    borderBottomWidth: 1,
+    marginHorizontal: wp(5),
+  },
+  doItLaterStyle: {
+    paddingHorizontal: wp(5),
+  },
+  textInputStyle: {
+    // alignSelf: 'center',
+    height: hp(6),
+    backgroundColor: '#d9dbde',
+    paddingLeft: wp(30),
+    borderRadius: 10,
+    fontSize: RFValue(18),
+    fontWeight: '500',
+    color: '#000000',
+    marginBottom: hp(1.5),
+  },
+  svgViewStyle: {
+    alignSelf: 'center',
+    left: wp(2),
+    position: 'absolute',
+    zIndex: 1,
+    top: hp(1),
   },
   svgStyle: {
-    width: wp(8),
-    height: hp(2),
+    width: wp(25),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignSelf: 'center',
-  },
-  arrowStyle: {
-    marginLeft: wp(25),
-    fontSize: RFValue(20),
-    fontWeight: '500',
-  },
-  continueWithEmail: {
-    marginLeft: wp(2),
-    fontSize: RFValue(18),
-    alignSelf: 'center',
-    fontWeight: '500',
-  },
-  buttonTextStyle: {
-    color: '#2dbeff',
-  },
-  buttonStyle: {
-    marginTop: hp(2),
-    width: wp(20),
+    alignContent: 'center',
   },
   crossStyle: {
+    fontSize: RFValue(20),
     color: '#2dbeff',
-    fontSize: RFValue(15),
     marginTop: hp(2),
+    marginHorizontal: wp(5),
   },
-  crossButtonStyle: {
+  svgArrowStyle: {
+    alignSelf: 'center',
+  },
+  textNineOneStyle: {
+    alignSelf: 'center',
+    fontSize: RFValue(18),
+    fontWeight: '500',
+  },
+  buttonStyleArrow: {
+    height: hp(7),
+    width: wp(12),
+    backgroundColor: '#2dbeff',
+    padding: hp(1),
+    borderRadius: 60,
+  },
+
+  buttonView: {
     width: wp(10),
+    alignSelf: 'flex-end',
+    marginRight: wp(5),
+    marginTop: hp(4),
   },
 });
 

@@ -19,19 +19,19 @@ const styles = StyleSheet.create<Style | any>({
     fontWeight: '600',
   }),
   textView: {
-    marginTop: hp(2),
+    marginVertical: hp(3),
   },
   bottomTextView: {
     alignSelf: 'flex-start',
   },
   continueWithEmailView: {
     width: wp(85),
-    marginVertical: hp(5),
+
+    marginBottom: hp(5),
     flexDirection: 'row',
     borderBottomWidth: 1,
-    paddingBottom: hp(3),
+    paddingBottom: hp(1),
   },
-
   arrowStyle: {
     right: 0,
     position: 'absolute',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create<Style | any>({
     color: '#2dbeff',
   },
   buttonStyle: {
-    marginTop: hp(2),
+    marginTop: hp(1),
     width: wp(20),
   },
   buttonGoBackStyle: {

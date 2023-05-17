@@ -16,9 +16,7 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
   warning,
   navigation,
 }: Props) => {
-  console.log(navigation);
   const onLogInSignUpPress = () => {
-    console.log(logInOrSignUp, 'button pressed');
     if (logInOrSignUp === COMMON_CONSTS.SIGN_UP) {
       navigation.navigate('SignUpOptions');
     } else {
@@ -26,7 +24,6 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
     }
   };
   const onContinueWithEmailPress = () => {
-    console.log(logInOrSignUp, 'jkldfdfkl');
     if (logInOrSignUp === COMMON_CONSTS.SIGN_UP) {
       navigation.navigate('EmailAndPasswordLogIn');
     } else {

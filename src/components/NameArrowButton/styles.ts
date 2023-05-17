@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16),
     fontWeight: '500',
   },
+  viewStyle: {
+    flexDirection: 'row',
+  },
 });
 
 export default styles;

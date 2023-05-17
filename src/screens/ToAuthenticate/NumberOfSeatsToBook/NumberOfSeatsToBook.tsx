@@ -1,9 +1,8 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SvgMinus, SvgPlush, SvgRightArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
 import {addSeats, subtractSeats} from '../../../store/slices/rideSlice';
