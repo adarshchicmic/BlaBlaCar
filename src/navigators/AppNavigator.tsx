@@ -9,6 +9,7 @@ import Location from '../screens/ToAuthenticate/Location/Location';
 import LikeToBeAddressed from '../screens/ToAuthenticate/LikeToBeAddressed/LikeToBeAddressed';
 import EditPersonalDetail from '../screens/Authenticated/EditPersonalDetail/EditPersonalDetail';
 import WhatIsYourFirstName from '../screens/Authenticated/WhatIsYourFirstName/WhatIsYourFirstName';
+import WhatIsYourLastName from '../screens/Authenticated/WhatIsYourLastName/WhatIsYourLastName';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -26,6 +27,7 @@ const AppNavigator = () => {
         name="WhatIsYourFirstName"
         component={WhatIsYourFirstName}
       />
+      <Stack.Screen name="WhatIsYourLastName" component={WhatIsYourLastName} />
     </Stack.Navigator>
   );
 };

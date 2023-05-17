@@ -11,7 +11,6 @@ import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgLeftArrow} from '../../../assets/svg';
 import {useDispatch} from 'react-redux';
-import {updateName} from '../../../store/slices/UserSlice';
 import {useSelector} from 'react-redux';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import {updateProfileData} from '../../../store/slices/profileSlice';
@@ -25,7 +24,6 @@ const WhatIsYourFirstName = ({navigation}: any) => {
   const states: any = useSelector(state => state);
   const firstNameValue = states?.profileSlice?.profileData?.first_name;
   const userDetail = states?.profileSlice?.profileData;
-  console.log(states?.profileSlice?.profileData, 'this is state');
 
   const handleFirstNameChange = value => {
     setFirstName(value);

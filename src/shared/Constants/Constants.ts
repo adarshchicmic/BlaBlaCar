@@ -99,4 +99,5 @@ export const COMMON_CONSTS = {
   NAMEQ: 'name?',
   SAVE: 'Save',
   ERROR_WHILE_UPDATING: 'Error while updating',
+  WHAT_IS_YOUR_LAST: 'What is your last',
 };

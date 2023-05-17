@@ -17,6 +17,9 @@ const EditPersonalDetail = ({navigation}: any) => {
   const handleOnPressFirstName = () => {
     navigation.navigate('WhatIsYourFirstName');
   };
+  const handleOnPressLastName = () => {
+    navigation.navigate('WhatIsYourLastName');
+  };
   return (
     <View>
       <CustomButton
@@ -37,6 +40,7 @@ const EditPersonalDetail = ({navigation}: any) => {
         <CustomButtonEdit
           first={COMMON_CONSTS?.LAST_NAME}
           second={userData?.last_name}
+          onPressFunction={() => handleOnPressLastName()}
         />
 
         <CustomButtonEdit
