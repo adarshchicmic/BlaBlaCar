@@ -2,10 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs to get your location...</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App requires to access Audio recording to record and uplod videos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App requires to access camera for uploading photos to your profile or posts</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App would like to upload photos from your photo gallery</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>BlaBla</string>
+	<string>Ride Sharing App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
