@@ -9,18 +9,25 @@ import React, {useState} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
-import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
+import {SvgLeftArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
-import {updateEmail} from '../../../store/slices/UserSlice';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import {updateProfileData} from '../../../store/slices/profileSlice';
-
-const WhatIsYourEmail = ({navigation}: any) => {
+import {useConfirmEmailMutation} from '../../../services/modules/confirmEmail';
+const WhatIsYourEmail = ({navigation, route}: any) => {
+  const screen = route?.params?.screen;
   const [email, setEmail] = useState<string>('');
   const [validEmail, setValidEmail] = useState<boolean>(false);
   const [showValidationError, setShowValidationError] =
     useState<boolean>(false);
-  const [updateProfile, {isLoading, isError}] = useUpdateProfileMutation();
+  const [
+    confirmEmail,
+    {isLoading: confirmEmailIsLoading, isError: confirmEmailIsError},
+  ] = useConfirmEmailMutation();
+  const [
+    updateProfile,
+    {isLoading: updateProfileIsLoading, isError: updateProfileIsError},
+  ] = useUpdateProfileMutation();
   const dispatch = useDispatch();
   const states: any = useSelector(state => state);
   const emailValue = states?.profileSlice?.profileData?.email;
@@ -37,21 +44,32 @@ const WhatIsYourEmail = ({navigation}: any) => {
   };
   const handleSaveButtonPress = async () => {
     if (validEmail) {
-      const dataa: any = await updateProfile({
-        email: email,
-        firstName: userDetail?.first_name,
-        lastName: userDetail?.last_name,
-        dob: userDetail?.dob,
-        title: userDetail?.title,
-        phoneNumber: userDetail?.phone_number,
-        bio: userDetail?.bio,
-        travelPreferences: userDetail?.travel_preferences,
-        postalAddress: userDetail?.postal_address,
-      });
-      console.log(dataa, 'this is dataa');
-      if (dataa?.data?.status?.code === 200) {
-        dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
-        navigation.goBack();
+      if (screen === 'confirmEmail') {
+        const dataa: any = await confirmEmail({
+          email: email,
+        });
+        console.log(dataa, 'this is dataa');
+        // if (dataa?.data?.status?.code === 200) {
+        //   dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
+        //   navigation.goBack();
+        // }
+      } else {
+        const dataa: any = await updateProfile({
+          email: email,
+          firstName: userDetail?.first_name,
+          lastName: userDetail?.last_name,
+          dob: userDetail?.dob,
+          title: userDetail?.title,
+          phoneNumber: userDetail?.phone_number,
+          bio: userDetail?.bio,
+          travelPreferences: userDetail?.travel_preferences,
+          postalAddress: userDetail?.postal_address,
+        });
+        console.log(dataa, 'this is dataa');
+        if (dataa?.data?.status?.code === 200) {
+          dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
+          navigation.goBack();
+        }
       }
     } else {
       setShowValidationError(true);
@@ -79,8 +97,12 @@ const WhatIsYourEmail = ({navigation}: any) => {
             {COMMON_CONSTS.ENTER_VALID_EMAIL}
           </Text>
         )}
-        {isLoading && <ActivityIndicator />}
-        {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
+        {(confirmEmailIsLoading || updateProfileIsLoading) && (
+          <ActivityIndicator />
+        )}
+        {(confirmEmailIsError || updateProfileIsError) && (
+          <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>
+        )}
       </View>
 
       {email && (

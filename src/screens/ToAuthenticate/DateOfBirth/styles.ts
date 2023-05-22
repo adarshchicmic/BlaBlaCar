@@ -58,6 +58,7 @@ const styles = StyleSheet.create<any>({
     marginRight: wp(5),
     marginTop: hp(4),
   },
+  
 });
 
 export default styles;

@@ -15,6 +15,8 @@ const Account = () => {
   const handleLogoutPress = async () => {
     const dataa = await signOut();
     dataa?.data?.status === 200 ? dispatch(updateToken({token: ''})) : null;
+
+    // dispatch(updateToken({token: ''}));
   };
   return (
     <ScrollView>

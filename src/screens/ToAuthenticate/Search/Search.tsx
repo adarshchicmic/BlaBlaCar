@@ -20,10 +20,10 @@ const Search = ({navigation}: any) => {
   const dispatch = useDispatch();
   const numberOfSeat: any = useSelector(state => state);
   const handleleavingFromPress = () => {
-    navigation.navigate('Location');
+    navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
   };
   const handleGoingToPress = () => {
-    navigation.navigate('Location');
+    navigation.navigate('Location', {screen: COMMON_CONSTS.GOING_TO});
   };
   return (
     <ScrollView>
@@ -53,7 +53,7 @@ const Search = ({navigation}: any) => {
             onPress={() => handleleavingFromPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {numberOfSeat?.rideSlice?.leavingFrom}
+              {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 20)}
             </Text>
           </Pressable>
           <Pressable
@@ -61,7 +61,7 @@ const Search = ({navigation}: any) => {
             onPress={() => handleGoingToPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {numberOfSeat?.rideSlice?.goingTo}
+              {(numberOfSeat?.rideSlice?.goingTo).slice(0, 25)}
             </Text>
           </Pressable>
           <View style={styles.dateAndUserView}>

@@ -26,6 +26,9 @@ const EditPersonalDetail = ({navigation}: any) => {
   const handleOnPressEmail = () => {
     navigation.navigate('WhatIsYourEmail');
   };
+  const handleOnPressAddMiniBio = () => {
+    navigation.navigate('AddUpdateBio');
+  };
   return (
     <View>
       <CustomButton
@@ -52,7 +55,7 @@ const EditPersonalDetail = ({navigation}: any) => {
         <CustomButtonEdit
           first={COMMON_CONSTS.GENDER}
           second={
-            userData.title === COMMON_CONSTS.SIR
+            userData?.title === COMMON_CONSTS.SIR
               ? COMMON_CONSTS?.MALE
               : COMMON_CONSTS?.FEMALE
           }
@@ -61,7 +64,7 @@ const EditPersonalDetail = ({navigation}: any) => {
         />
         <CustomButtonEdit
           first={COMMON_CONSTS?.DATE_OF_BIRTH}
-          second={userData.dob}
+          second={userData?.dob}
           onPressFunction={() => handleOnPressDob()}
         />
         <CustomButtonEdit
@@ -70,11 +73,18 @@ const EditPersonalDetail = ({navigation}: any) => {
           onPressFunction={() => handleOnPressEmail()}
         />
       </View>
-      <View style={styles.addPhoneNumberView}>
-        <SvgTextButton text={COMMON_CONSTS.ADD_PHONE_NUMBER} />
+      <View style={styles?.addPhoneNumberView}>
+        <SvgTextButton text={COMMON_CONSTS?.ADD_PHONE_NUMBER} />
       </View>
-      <View style={styles.addMiniBioView}>
-        <SvgTextButton text={COMMON_CONSTS.ADD_MINI_BIO} />
+      <View style={styles?.addMiniBioView}>
+        {userData?.bio === null ? (
+          <SvgTextButton
+            text={COMMON_CONSTS?.ADD_MINI_BIO}
+            onPress={() => handleOnPressAddMiniBio()}
+          />
+        ) : (
+          <Text>{userData?.bio}</Text>
+        )}
       </View>
     </View>
   );

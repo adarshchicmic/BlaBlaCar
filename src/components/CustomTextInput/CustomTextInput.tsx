@@ -31,6 +31,7 @@ const CustomTextInput: React.FC<Props | any> = ({
   secureTextEntry,
   inputMode,
   defaultValue,
+  multiline,
 }: Props | any) => {
   return (
     <View style={customInputTextOuterStyle}>
@@ -49,6 +50,7 @@ const CustomTextInput: React.FC<Props | any> = ({
         onEndEditing={onEndEditing}
         maxLength={maxLength}
         secureTextEntry={secureTextEntry}
+        multiline={multiline}
         // {valueField}
       />
     </View>

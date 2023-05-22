@@ -3,6 +3,7 @@ import {
   Text,
   KeyboardAvoidingView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -10,7 +11,6 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgCloseEye, SvgLeftArrow, SvgOpenEye} from '../../../assets/svg';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useLogInMutation} from '../../../services/modules/login';
 import {useSelector} from 'react-redux';
 
@@ -34,7 +34,7 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
     navigation.goBack();
   };
   const handleForgotPasswordButtonPress = () => {
-    console.log('forgot Password Pressed');
+    navigation.navigate('ForgotPassword');
   };
   const handleShowOpenOrCloseEye = () => {
     setOpenEye(!openEye);

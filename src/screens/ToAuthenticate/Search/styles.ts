@@ -53,13 +53,13 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
   },
   continueWithEmailView: (value: number) => ({
+    height: hp(6),
     alignSelf: 'center',
     width: value === 0 ? wp(75) : wp(53),
     marginTop: hp(1),
     flexDirection: 'row',
     borderBottomWidth: value === 0 ? 1 : 0,
     borderColor: '#adaca8',
-    paddingVertical: hp(2),
     paddingRight: wp(2),
   }),
   arrowStyle: {
@@ -86,11 +86,13 @@ const styles = StyleSheet.create<any>({
     borderWidth: 3,
   },
   dateAndUserView: {
+    height: hp(5),
     flexDirection: 'row',
     alignSelf: 'center',
+    marginBottom: hp(1),
   },
   userViewStyle: {
-    height: hp(6),
+    height: hp(5),
     alignSelf: 'center',
     justifyContent: 'center',
     borderLeftWidth: 2,
@@ -105,6 +107,7 @@ const styles = StyleSheet.create<any>({
     fontSize: RFValue(15),
     fontWeight: '600',
     marginLeft: wp(3),
+    alignSelf: 'center',
   },
 });
 

@@ -1,4 +1,10 @@
-import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -16,9 +22,9 @@ const WhatIsYourDob = ({navigation}: any) => {
   const dispatch = useDispatch();
   const states: any = useSelector(state => state);
   const dobValue = states?.profileSlice?.profileData?.dob;
-  const splitString = dobValue.split('');
+  const splitString = dobValue.split('-');
   const reverseArray = splitString.reverse();
-  const joinArray = reverseArray.join('');
+  const joinArray = reverseArray.join('/');
   const userDetail = states?.profileSlice?.profileData;
 
   const handleDobChange = value => {
@@ -86,7 +92,8 @@ const WhatIsYourDob = ({navigation}: any) => {
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.ENTER_VALID_DOB}</Text>}
-
+      {isLoading && <ActivityIndicator />}
+      {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {dob && (
         <View style={styles.buttonView}>
           <TouchableOpacity

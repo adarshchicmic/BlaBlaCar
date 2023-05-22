@@ -14,6 +14,8 @@ import {MMKV} from 'react-native-mmkv';
 import {api} from '../services/api';
 import rideSlice from './slices/rideSlice';
 import profileSlice from './slices/profileSlice';
+import preferencesSlice from './slices/travelPreferences';
+import vehicleSlice from './slices/vehicleSlice';
 
 import userSlice from './slices/UserSlice';
 const reducers = combineReducers({
@@ -21,6 +23,8 @@ const reducers = combineReducers({
   rideSlice: rideSlice.reducer,
   [api.reducerPath]: api.reducer,
   profileSlice: profileSlice.reducer,
+  preferencesSlice: preferencesSlice.reducer,
+  vehicleSlice: vehicleSlice.reducer,
 });
 const storage = new MMKV();
 export const reduxStorage = {
@@ -40,7 +44,7 @@ export const reduxStorage = {
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,
-  whitelist: ['theme', 'auth', 'userSlice'],
+  whitelist: ['theme', 'auth', 'userSlice', 'profileSlice'],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 const store = configureStore({

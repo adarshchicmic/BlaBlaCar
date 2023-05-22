@@ -1,10 +1,11 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
+import PickUp from '../PickUp/PickUp';
 
-const Publish = () => {
+const Publish = ({navigation}: any) => {
   return (
     <View>
-      <Text>Publish</Text>
+      <PickUp navigation={navigation} />
     </View>
   );
 };

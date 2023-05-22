@@ -8,20 +8,26 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import SvgTextButton from '../../../components/SvgTextButton/SvgTextButton';
 import {useLazyProfileQuery} from '../../../services/modules/profile';
 import {useIsFocused} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {updateProfileData} from '../../../store/slices/profileSlice';
 
 const AboutYou = ({navigation}: any) => {
   const [userDetail, setUserDetail] = useState<any>({});
   const [profile, {isLoading, isError}]: any = useLazyProfileQuery();
+
   const focus = useIsFocused();
   const dispatch = useDispatch();
-
+  const states = useSelector(state => state);
+  console.log(states, 'this is states');
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await profile();
-      setUserDetail(userData?.data?.status?.data);
-      dispatch(updateProfileData({profileData: userData?.data?.status?.data}));
+      userData?.data?.status?.data
+        ? (setUserDetail(userData?.data?.status?.data),
+          dispatch(
+            updateProfileData({profileData: userData?.data?.status?.data}),
+          ))
+        : null;
     };
     fetchUserData();
   }, [profile, focus, dispatch]);
@@ -29,7 +35,21 @@ const AboutYou = ({navigation}: any) => {
   const handleEditProfileDetail = () => {
     navigation.navigate('EditPersonalDetail');
   };
-
+  const handleOnPressAddVehicle = () => {
+    navigation.navigate('LicensePlateNumber');
+  };
+  const handleConfirmEmail = () => {
+    navigation.navigate('WhatIsYourEmail', {screen: 'confirmEmail'});
+  };
+  const handleAddMiniBio = () => {
+    navigation.navigate('AddUpdateBio');
+  };
+  const handleAddMyPreferences = () => {
+    navigation.navigate('AddMyPreferences');
+  };
+  const handleEditProfilePicturePress = () => {
+    navigation.navigate('EditProfilePicture');
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.profileDetailContainer}>
@@ -49,6 +69,7 @@ const AboutYou = ({navigation}: any) => {
         <CustomButton
           btnText={COMMON_CONSTS.EDIT_PROFILE_PICTURE}
           styleTxt={styles.buttonTextStyle}
+          onPressFunction={() => handleEditProfilePicturePress()}
         />
         <CustomButton
           btnText={COMMON_CONSTS.EDIT_PERSONAL_DETAILS}
@@ -65,6 +86,7 @@ const AboutYou = ({navigation}: any) => {
           <SvgTextButton
             text={COMMON_CONSTS.CONFIRM_EMAIL}
             extra={userDetail?.email}
+            onPress={() => handleConfirmEmail()}
           />
           <SvgTextButton
             text={COMMON_CONSTS.CONFIRM_PHONE_NUMBER}
@@ -73,15 +95,24 @@ const AboutYou = ({navigation}: any) => {
         </View>
       </View>
       {isLoading && <ActivityIndicator />}
-      {isError && alert('error while loading your personal data')}
+      {/* {isError && alert('error while loading your personal data')} */}
       <View style={styles.profileDetailContainer}>
         <Text style={styles.titleStyle}>{COMMON_CONSTS.ABOUT_YOU}</Text>
-        <SvgTextButton text={COMMON_CONSTS.ADD_MINI_BIO} />
-        <SvgTextButton text={COMMON_CONSTS.ADD_MY_PREFERENCES} />
+        <SvgTextButton
+          text={COMMON_CONSTS.ADD_MINI_BIO}
+          onPress={() => handleAddMiniBio()}
+        />
+        <SvgTextButton
+          text={COMMON_CONSTS.ADD_MY_PREFERENCES}
+          onPress={() => handleAddMyPreferences()}
+        />
       </View>
       <View style={styles.profileDetailContainer}>
         <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
-        <SvgTextButton text={COMMON_CONSTS.ADD_VEHICLE} />
+        <SvgTextButton
+          text={COMMON_CONSTS.ADD_VEHICLE}
+          onPress={() => handleOnPressAddVehicle()}
+        />
       </View>
     </ScrollView>
   );
