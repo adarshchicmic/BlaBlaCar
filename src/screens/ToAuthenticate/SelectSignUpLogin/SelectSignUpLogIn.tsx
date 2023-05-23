@@ -20,25 +20,29 @@ const SelectSignUpLogIn = ({navigation}: any) => {
           source={require('../../../assets/images/selectSignUpLogin.png')}
         />
       </View>
-      <View style={styles.pickYourRideViewStyle}>
-        <Text style={styles.pickYourRideStyle}>
-          {COMMON_CONSTS.YOUR_PICK_OF_RIDES_AT}
-        </Text>
-        <Text style={styles.pickYourRideStyle}>{COMMON_CONSTS.LOW_PRICES}</Text>
-      </View>
-      <View style={styles.buttonView}>
-        <CustomButton
-          btnText={COMMON_CONSTS.SIGN_UP}
-          styleBtn={styles.buttonStyle('SignUp')}
-          styleTxt={styles.buttonTextStyle('SignUp')}
-          onPressFunction={() => onPressSignUp()}
-        />
-        <CustomButton
-          btnText={COMMON_CONSTS.LOG_IN}
-          styleBtn={styles.buttonStyle('LogIn')}
-          styleTxt={styles.buttonTextStyle('LogIn')}
-          onPressFunction={() => onPressLogIn()}
-        />
+      <View style={styles.textButtonViewStyle}>
+        <View style={styles.pickYourRideViewStyle}>
+          <Text style={styles.pickYourRideStyle}>
+            {COMMON_CONSTS.YOUR_PICK_OF_RIDES_AT}
+          </Text>
+          {/* <Text style={styles.pickYourRideStyle}>
+            {COMMON_CONSTS.LOW_PRICES}
+          </Text> */}
+        </View>
+        <View style={styles.buttonView}>
+          <CustomButton
+            btnText={COMMON_CONSTS.SIGN_UP}
+            styleBtn={styles.buttonStyle('SignUp')}
+            styleTxt={styles.buttonTextStyle('SignUp')}
+            onPressFunction={() => onPressSignUp()}
+          />
+          <CustomButton
+            btnText={COMMON_CONSTS.LOG_IN}
+            styleBtn={styles.buttonStyle('LogIn')}
+            styleTxt={styles.buttonTextStyle('LogIn')}
+            onPressFunction={() => onPressLogIn()}
+          />
+        </View>
       </View>
     </View>
   );

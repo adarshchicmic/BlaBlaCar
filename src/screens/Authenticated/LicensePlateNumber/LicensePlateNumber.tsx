@@ -22,8 +22,7 @@ const LicensePlateNumber = ({navigation}) => {
   const [showError, setShowError] = useState<boolean>(false);
 
   const handleTextChange = value => {
-    console.log(value);
-    value.length > 8 || value.length < 12
+    value.length > 8 && value.length < 12
       ? setValidLicensePlate(true)
       : setValidLicensePlate(false);
     setLicensePlateNumber(value);
@@ -37,8 +36,8 @@ const LicensePlateNumber = ({navigation}) => {
   const handleSaveButtonPress = async () => {
     if (validLicensePlate) {
       setShowError(false);
-
-      navigation.goBack();
+      navigation.navigate('VehicleInformation');
+      // navigation.goBack();
     } else {
       setShowError(true);
     }
@@ -65,7 +64,7 @@ const LicensePlateNumber = ({navigation}) => {
         <TextInput
           style={styles.inputTextStyle}
           placeholder={COMMON_CONSTS.NUMBER_PLATE}
-          onChange={value => handleTextChange(value)}
+          onChangeText={value => handleTextChange(value)}
         />
       </View>
       <View style={styles.nameArrowButtonView}>
@@ -74,7 +73,7 @@ const LicensePlateNumber = ({navigation}) => {
           onPressFunction={() => handleDoNotKnowLicensePlateOnPress()}
         />
       </View>
-      {showError && <Text>{COMMON_CONSTS.ERROR_BIO}</Text>}
+      {showError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       {/* {isLoading && <ActivityIndicator />} */}
       {/* {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>} */}
       {licensePlateNumber && (

@@ -26,6 +26,7 @@ const styles = StyleSheet.create<any>({
   nameStyle: {
     fontSize: RFValue(25),
     fontWeight: '600',
+    color: '#000',
   },
   nameBesideTextStyle: {
     fontWeight: '500',
@@ -36,6 +37,15 @@ const styles = StyleSheet.create<any>({
     padding: 10,
     fontSize: RFValue(20),
   },
+  imageView: {
+    height: hp(5),
+    width: wp(35),
+  },
+  imageStyle: {
+    height: hp(15),
+    width: wp(30),
+    borderRadius: 60,
+  },
   buttonTextStyle: {
     color: '#2dbeff',
     fontSize: RFValue(15),
@@ -45,6 +55,7 @@ const styles = StyleSheet.create<any>({
   titleStyle: {
     fontSize: RFValue(20),
     marginVertical: hp(2),
+    color: '#000',
   },
   plushSvgTextStyle: {
     flexDirection: 'row',

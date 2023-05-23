@@ -43,15 +43,17 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
         </Text>
         <Text style={styles.textStyle(1)}>{logInOrSignUpQ}</Text>
       </View>
-      <TouchableOpacity
-        style={styles.continueWithEmailView}
-        onPress={() => onContinueWithEmailPress()}>
-        <SvgMail style={styles.svgStyle} />
-        <Text style={styles.continueWithEmail}>
-          {COMMON_CONSTS.CONTINUE_WITH_EMAIL}
-        </Text>
-        <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
-      </TouchableOpacity>
+      <View style={styles.continueWithEmailView}>
+        <TouchableOpacity
+          style={styles.continueWithEmailView}
+          onPress={() => onContinueWithEmailPress()}>
+          <SvgMail style={styles.svgStyle} />
+          <Text style={styles.continueWithEmail}>
+            {COMMON_CONSTS.CONTINUE_WITH_EMAIL}
+          </Text>
+          <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.bottomTextView}>
         <Text style={styles.textStyle(2)}>{warning}</Text>
         <CustomButton

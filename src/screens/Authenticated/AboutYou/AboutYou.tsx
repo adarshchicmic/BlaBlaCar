@@ -1,4 +1,4 @@
-import {View, Text, ActivityIndicator} from 'react-native';
+import {View, Text, ActivityIndicator, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SvgProfile} from '../../../assets/svg';
@@ -17,7 +17,8 @@ const AboutYou = ({navigation}: any) => {
 
   const focus = useIsFocused();
   const dispatch = useDispatch();
-  const states = useSelector(state => state);
+  const states: any = useSelector(state => state);
+  const imageUri = states?.profileSlice?.image;
   console.log(states, 'this is states');
   useEffect(() => {
     const fetchUserData = async () => {
@@ -62,7 +63,13 @@ const AboutYou = ({navigation}: any) => {
             </Text>
           </View>
           <View style={styles.svgArrowStyle}>
-            <SvgProfile width={'100'} height={'100'} />
+            {imageUri ? (
+              <View>
+                <Image style={styles.imageStyle} source={{uri: imageUri}} />
+              </View>
+            ) : (
+              <SvgProfile width={'100'} height={'100'} />
+            )}
             <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
           </View>
         </View>

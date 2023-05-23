@@ -82,8 +82,6 @@ const styles = StyleSheet.create<any>({
     position: 'absolute',
     right: wp(2),
     top: hp(3),
-
-    borderWidth: 3,
   },
   dateAndUserView: {
     height: hp(5),
@@ -108,6 +106,7 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
     marginLeft: wp(3),
     alignSelf: 'center',
+    color: '#000',
   },
 });
 

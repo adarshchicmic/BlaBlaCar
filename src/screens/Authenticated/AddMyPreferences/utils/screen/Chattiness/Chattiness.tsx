@@ -26,7 +26,7 @@ const Chattiness = ({navigation}) => {
     navigation.goBack();
   };
   const handleSaveButtonPress = () => {
-    console.log('button pressed ');
+    navigation.goBack();
   };
   return (
     <View>
@@ -49,13 +49,15 @@ const Chattiness = ({navigation}) => {
           buttonSize={20}
         />
       </View>
-      <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => handleSaveButtonPress()}>
-          <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.SAVE}</Text>
-        </TouchableOpacity>
-      </View>
+      {buttonSelected && (
+        <View style={styles.buttonView}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => handleSaveButtonPress()}>
+            <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.SAVE}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

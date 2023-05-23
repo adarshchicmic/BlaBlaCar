@@ -79,7 +79,7 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
             secureTextEntry={!openEye}
             onChangeTextFunction={text => handlePasswordChange(text)}
           />
-          {isError && <Text>error</Text>}
+          {isError && <Text style={styles.errorStyle}>error</Text>}
           {password && (
             <View style={styles.svgOpenCloseStyle}>
               <TouchableOpacity onPress={handleShowOpenOrCloseEye}>

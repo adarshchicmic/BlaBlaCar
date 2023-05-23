@@ -13,6 +13,7 @@ const styles = StyleSheet.create<any>({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   textView: {
     marginVertical: hp(4),
@@ -28,6 +29,7 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
     paddingLeft: wp(4),
     paddingRight: wp(10),
+    color: '#000',
   },
   textPasswordMustContain: {
     color: '#969693',

@@ -17,6 +17,7 @@ const styles = StyleSheet.create<Style | any>({
   textStyle: (value: number) => ({
     fontSize: value === 1 ? RFValue(30) : RFValue(20),
     fontWeight: '600',
+    color: '#000',
   }),
   textView: {
     marginTop: hp(2),
@@ -26,6 +27,7 @@ const styles = StyleSheet.create<Style | any>({
   },
   continueWithEmailView: {
     marginVertical: hp(5),
+    width: wp(100),
     flexDirection: 'row',
   },
   svgStyle: {
@@ -37,19 +39,21 @@ const styles = StyleSheet.create<Style | any>({
     marginLeft: wp(25),
     fontSize: RFValue(20),
     fontWeight: '500',
+    color: '#000',
+    width: wp(10),
   },
   continueWithEmail: {
     marginLeft: wp(2),
     fontSize: RFValue(18),
     alignSelf: 'center',
     fontWeight: '500',
+    color: '#000',
   },
   buttonTextStyle: {
     color: '#2dbeff',
   },
   buttonStyle: {
     marginTop: hp(2),
-    width: wp(20),
   },
   crossStyle: {
     color: '#2dbeff',

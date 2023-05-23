@@ -1,4 +1,10 @@
-import {View, KeyboardAvoidingView, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState} from 'react';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -13,7 +19,7 @@ const VehicleInformation = ({navigation}: any) => {
   const [vehicleType, setVehicleType] = useState<string>('');
   const [vehicleColor, setVehicleColor] = useState<string>('');
   const [vehicleModelYear, setVehicleModelYear] = useState<string>('');
-  const [addVehicle, {isLoading, isError}] = useAddVehicleMutation();
+  const [addVehicle, {isLoading, isError, isSuccess}] = useAddVehicleMutation();
 
   const handleVehicleBrandChange = value => {
     setVehicleBrand(value);
@@ -88,6 +94,8 @@ const VehicleInformation = ({navigation}: any) => {
             onChangeTextFunction={value => handleVehicleModelYearChange(value)}
           />
         </View>
+        {isLoading && <ActivityIndicator />}
+        {isSuccess && navigation.navigate('Profile')}
         {vehicleBrand &&
           vehicleColor &&
           vehicleModelYear &&

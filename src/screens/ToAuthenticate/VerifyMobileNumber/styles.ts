@@ -20,6 +20,7 @@ const styles = StyleSheet.create<Style | any>({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   textInputView: {
     paddingBottom: hp(5),
@@ -27,7 +28,6 @@ const styles = StyleSheet.create<Style | any>({
   flagTextInputViewStyle: {
     marginTop: hp(4),
     width: wp(90),
-
     flexDirection: 'row',
     borderBottomWidth: 1,
     marginHorizontal: wp(5),
@@ -43,8 +43,8 @@ const styles = StyleSheet.create<Style | any>({
     borderRadius: 10,
     fontSize: RFValue(18),
     fontWeight: '500',
-    color: '#000000',
     marginBottom: hp(1.5),
+    color: '#000',
   },
   svgViewStyle: {
     alignSelf: 'center',
@@ -73,6 +73,7 @@ const styles = StyleSheet.create<Style | any>({
     alignSelf: 'center',
     fontSize: RFValue(18),
     fontWeight: '500',
+    color: '#000',
   },
   buttonStyleArrow: {
     height: hp(7),
@@ -81,7 +82,6 @@ const styles = StyleSheet.create<Style | any>({
     padding: hp(1),
     borderRadius: 60,
   },
-
   buttonView: {
     width: wp(10),
     alignSelf: 'flex-end',

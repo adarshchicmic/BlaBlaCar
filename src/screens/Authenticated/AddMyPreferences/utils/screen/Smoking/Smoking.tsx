@@ -30,7 +30,7 @@ const Smoking = ({navigation}) => {
     navigation.goBack();
   };
   const handleSaveButtonPress = () => {
-    console.log('Button Pressed');
+    navigation.goBack();
   };
   return (
     <View>
@@ -50,16 +50,18 @@ const Smoking = ({navigation}) => {
           onPress={value => handleRadioPress(value)}
           buttonColor={'#2196f3'}
           buttonInnerColor={'#2196f3'}
-          buttonSize={widthPercentageToDP(20)}
+          buttonSize={widthPercentageToDP(5)}
         />
       </View>
-      <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => handleSaveButtonPress()}>
-          <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.SAVE}</Text>
-        </TouchableOpacity>
-      </View>
+      {buttonSelected && (
+        <View style={styles.buttonView}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => handleSaveButtonPress()}>
+            <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.SAVE}</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
