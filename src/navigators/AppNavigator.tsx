@@ -22,6 +22,7 @@ import Publish from '../screens/Authenticated/Publish/Publish';
 import DropOff from '../screens/ToAuthenticate/DropOff/DropOff';
 import VehicleInformation from '../screens/Authenticated/VehicleInformation/VehicleInformation';
 import EditProfilePicture from '../screens/Authenticated/EditProfilePicture/EditProfilePicture';
+import MapScreen from '../screens/Authenticated/Map/Map';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -52,6 +53,7 @@ const AppNavigator = () => {
       <Stack.Screen name="DropOff" component={DropOff} />
       <Stack.Screen name="VehicleInformation" component={VehicleInformation} />
       <Stack.Screen name="EditProfilePicture" component={EditProfilePicture} />
+      <Stack.Screen name="MapScreen" component={MapScreen} />
     </Stack.Navigator>
   );
 };

@@ -25,6 +25,9 @@ const Search = ({navigation}: any) => {
   const handleGoingToPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.GOING_TO});
   };
+  const handleSearchButtonPress = () => {
+    navigation.navigate('MapScreen');
+  };
   return (
     <ScrollView>
       <ImageBackground
@@ -89,6 +92,7 @@ const Search = ({navigation}: any) => {
             btnText={COMMON_CONSTS.SEARCH}
             styleBtn={styles.buttonStyle}
             styleTxt={styles.buttonTextStyle}
+            onPressFunction={() => handleSearchButtonPress()}
           />
         </View>
       )}
