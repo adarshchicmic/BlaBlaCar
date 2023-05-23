@@ -17,6 +17,7 @@ const styles = StyleSheet.create<Style | any>({
   textStyle: (value: number) => ({
     fontSize: value === 1 ? RFValue(30) : RFValue(20),
     fontWeight: '600',
+    color: '#000',
   }),
   textView: {
     marginVertical: hp(3),
@@ -43,6 +44,7 @@ const styles = StyleSheet.create<Style | any>({
     fontWeight: '600',
     paddingLeft: wp(4),
     paddingRight: wp(10),
+    color: '#000',
   },
   arrowStyle: {
     right: 0,
@@ -55,6 +57,7 @@ const styles = StyleSheet.create<Style | any>({
     fontSize: RFValue(18),
     alignSelf: 'center',
     fontWeight: '500',
+    color: '#000',
   },
   buttonTextStyle: {
     color: '#ffffff',

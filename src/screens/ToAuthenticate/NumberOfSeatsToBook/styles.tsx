@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     fontSize: RFValue(30),
     fontWeight: '600',
     marginLeft: wp(5),
+    color: '#000',
   },
   plushMinusView: {
     marginTop: hp(4),
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
   },
   numberStyle: {
     fontSize: RFValue(40),
+    color: '#000',
   },
   buttonStyleArrow: {
     height: hp(7),

@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   titleTextStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   crossStyle: {
     fontSize: RFValue(20),
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   inputTextView: {
     height: hp(18),
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: '500',
     letterSpacing: 1,
+    color: '#000',
   },
   buttonView: {
     width: wp(30),

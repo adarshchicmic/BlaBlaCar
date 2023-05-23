@@ -21,6 +21,7 @@
     "react-native": "0.71.7",
     "react-native-deep-linking": "^2.2.0",
     "react-native-flipper": "^0.190.0",
+    "react-native-geocoding": "^0.5.0",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-google-places-autocomplete": "^2.5.1",
     "react-native-image-crop-picker": "^0.39.0",

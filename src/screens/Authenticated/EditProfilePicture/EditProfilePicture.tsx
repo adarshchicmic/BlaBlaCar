@@ -22,14 +22,17 @@ const EditProfilePicture = ({navigation}: any) => {
     navigation.goBack();
   };
   const handleTakeAPicturePress = async () => {
-    const data = ImagePicker.openCamera({
-      width: widthPercentageToDP(100),
-      height: heightPercentageToDP(100),
-      cropping: true,
-    });
-    console.log(data, 'this is data ');
-    const imageUri: any = await updateProfilePic({image: data});
-    dispatch(updateImage({image: imageUri?.data?.data?.image_url}));
+    try {
+      const dataa: any = await ImagePicker.openCamera({
+        width: widthPercentageToDP(100),
+        height: heightPercentageToDP(100),
+        cropping: true,
+      });
+      const imageUri: any = await updateProfilePic({image: dataa});
+      dispatch(updateImage({image: imageUri?.data?.data?.image_url}));
+    } catch (error) {
+      console.log(error, 'this is an error');
+    }
   };
   const handleChooseAPicturePress = async () => {
     try {

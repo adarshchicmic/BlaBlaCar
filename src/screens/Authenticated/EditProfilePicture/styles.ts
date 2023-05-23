@@ -16,6 +16,7 @@ const styles = StyleSheet.create<any>({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   btnStyle: {
     width: wp(90),

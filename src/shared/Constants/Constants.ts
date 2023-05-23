@@ -2,7 +2,7 @@ export const COMMON_CONSTS = {
   SIGN_UP: 'Sign up',
   LOG_IN: 'Log in',
   YOUR_PICK_OF_RIDES_AT: 'Your Pick of rides at low prices',
-  // LOW_PRICES: 'low prices',
+  LOW_PRICES: 'low prices',
   HOW_DO_YOU_WANT_TO: 'How do you want to',
   LOG_INQ: 'Log in?',
   SIGN_UPQ: 'Sign up?',

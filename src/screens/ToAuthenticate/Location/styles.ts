@@ -7,17 +7,17 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create<any>({
   container: {
+    flex: 1,
     marginTop: hp(2),
-    justifyContent: 'center',
-    alignSelf: 'center',
+    marginHorizontal: wp(5),
   },
   styleTextInput: {
     textInputContainer: {
-      width: wp(90),
+      width: wp(80),
       alignSelf: 'center',
     },
     textInput: {
-      paddingLeft: wp(11),
+      paddingLeft: wp(4),
       color: '#000000',
       fontSize: RFValue(18),
       backgroundColor: '#d7d8de',
@@ -35,15 +35,16 @@ const styles = StyleSheet.create<any>({
   //   borderRadius: 5,
   // },
   locationView: {
-    width: wp(90),
+    width: wp(80),
     height: hp(55),
+    marginHorizontal: wp(5),
+  },
+  arrowInputStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   leftArrowViewStyle: {
-    position: 'absolute',
-    paddingVertical: hp(0.5),
-    top: 0,
-    left: wp(6),
-    zIndex: 1,
+    fontSize: RFValue(20),
   },
   leftArrowStyle: {
     fontSize: RFValue(23),

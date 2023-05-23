@@ -4,8 +4,12 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomButtonEdit from '../../../components/CustomButtonEdit/CustomButtonEdit';
+import {useSelector} from 'react-redux';
 
 const AddMyPreferences = ({navigation}) => {
+  const states: any = useSelector(state => state);
+  const preferences: any = states?.preferencesSlice;
+  console.log(states, 'this is states');
   const handleCrossButtonPress = () => {
     navigation.goBack();
   };
@@ -35,22 +39,22 @@ const AddMyPreferences = ({navigation}) => {
       <View style={styles.buttonView}>
         <CustomButtonEdit
           first={COMMON_CONSTS.CHATTINESS}
-          second={COMMON_CONSTS.IAM_CHATTY_WHEN_I_FEEL_COMFORTABLE}
+          second={preferences?.chattiness}
           onPressFunction={() => handleChattinessPress()}
         />
         <CustomButtonEdit
           first={COMMON_CONSTS.MUSIC}
-          second={COMMON_CONSTS.I_LL_JAM_DEPENDING_ON_THE_MOOD}
+          second={preferences?.music}
           onPressFunction={() => handleMusicPress()}
         />
         <CustomButtonEdit
           first={COMMON_CONSTS.SMOKING}
-          second={COMMON_CONSTS.I_LL_JAM_DEPENDING_ON_THE_MOOD}
+          second={preferences?.smoking}
           onPressFunction={() => handleSmokingPress()}
         />
         <CustomButtonEdit
           first={COMMON_CONSTS.PETS}
-          second={COMMON_CONSTS.I_LL_TRAVEL_WITH_PETS_DEPENDING_ON_THE_ANIMALS}
+          second={preferences?.pets}
           onPressFunction={() => handlePetsPress()}
         />
       </View>

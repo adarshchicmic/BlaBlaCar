@@ -94,6 +94,7 @@ const VehicleInformation = ({navigation}: any) => {
             onChangeTextFunction={value => handleVehicleModelYearChange(value)}
           />
         </View>
+        {isError && <Text> {COMMON_CONSTS.ERROR}</Text>}
         {isLoading && <ActivityIndicator />}
         {isSuccess && navigation.navigate('Profile')}
         {vehicleBrand &&

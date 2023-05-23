@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   textView: {
     marginTop: hp(3),

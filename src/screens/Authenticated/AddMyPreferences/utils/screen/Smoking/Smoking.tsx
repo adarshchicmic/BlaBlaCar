@@ -5,9 +5,12 @@ import {COMMON_CONSTS} from '../../../../../../shared/Constants/Constants';
 import styles from './styles';
 import RadioForm from 'react-native-simple-radio-button';
 import {widthPercentageToDP} from 'react-native-responsive-screen';
+import {useDispatch} from 'react-redux';
+import {updateSmoking} from '../../../../../../store/slices/travelPreferences';
 
 const Smoking = ({navigation}) => {
   const [buttonSelected, setSelectedButton] = useState<string>('');
+  const dispatch = useDispatch();
   const options = [
     {
       label: COMMON_CONSTS.I_AM_FINE_WITH_SMOKING,
@@ -31,6 +34,7 @@ const Smoking = ({navigation}) => {
   };
   const handleSaveButtonPress = () => {
     navigation.goBack();
+    dispatch(updateSmoking({smoking: buttonSelected}));
   };
   return (
     <View>

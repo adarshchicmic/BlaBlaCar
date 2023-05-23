@@ -87,21 +87,25 @@ const Location = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       {/* <CustomTextInput styleInputText={styles.textInputStyle} /> */}
-      <View style={styles.leftArrowViewStyle}>
-        <TouchableOpacity onPress={() => arrowButtonPress()}>
-          <Text style={styles.leftArrowStyle}>{COMMON_CONSTS.LEFT_ARROW}</Text>
-        </TouchableOpacity>
+      <View style={styles.arrowInputStyle}>
+        <View style={styles.leftArrowViewStyle}>
+          <TouchableOpacity onPress={() => arrowButtonPress()}>
+            <Text style={styles.leftArrowStyle}>
+              {COMMON_CONSTS.LEFT_ARROW}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <GooglePlacesAutocomplete
+          styles={styles.styleTextInput}
+          placeholder="Search"
+          onPress={(data, details) => handlePlaceSelected(data, details)}
+          query={{
+            key: 'AIzaSyDUzn63K64-sXadyIwRJExCfMaicagwGq4',
+            language: 'en',
+          }}
+          fetchDetails={true}
+        />
       </View>
-      <GooglePlacesAutocomplete
-        styles={styles.styleTextInput}
-        placeholder="Search"
-        onPress={(data, details) => handlePlaceSelected(data, details)}
-        query={{
-          key: 'AIzaSyDUzn63K64-sXadyIwRJExCfMaicagwGq4',
-          language: 'en',
-        }}
-        fetchDetails={true}
-      />
       {/* <View style={styles.nameArrowButtonViewStyle}>
         <NameArrowButton name={COMMON_CONSTS.USE_CURRENT_LOCATION} />
       </View> */}

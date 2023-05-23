@@ -4,9 +4,12 @@ import CustomButton from '../../../../../../components/CustomButton/CustomButton
 import {COMMON_CONSTS} from '../../../../../../shared/Constants/Constants';
 import styles from './styles';
 import RadioForm from 'react-native-simple-radio-button';
+import {useDispatch} from 'react-redux';
+import {updatePets} from '../../../../../../store/slices/travelPreferences';
 
 const Pets = ({navigation}) => {
   const [buttonSelected, setSelectedButton] = useState<string>('');
+  const dispatch = useDispatch();
   const options = [
     {
       label: COMMON_CONSTS.PETS_WELCOME_WOOFA,
@@ -30,6 +33,7 @@ const Pets = ({navigation}) => {
   };
   const handleSaveButtonPress = () => {
     navigation.goBack();
+    dispatch(updatePets({pets: buttonSelected}));
   };
   return (
     <View>

@@ -34,7 +34,7 @@ const Search = ({navigation}: any) => {
           <Text style={styles.textUpperStyle}>
             {COMMON_CONSTS.YOUR_PICK_OF_RIDES_AT}
           </Text>
-          <Text style={styles.textUpperStyle}>{COMMON_CONSTS.LOW_PRICES}</Text>
+          {/* <Text style={styles.textUpperStyle}>{COMMON_CONSTS.LOW_PRICES}</Text> */}
         </View>
       </ImageBackground>
       {isFocused && (

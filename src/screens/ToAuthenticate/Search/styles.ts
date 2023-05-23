@@ -100,6 +100,7 @@ const styles = StyleSheet.create<any>({
   profileNumberStyle: {
     flexDirection: 'row',
     width: wp(15),
+    height: hp(10),
   },
   numberStyle: {
     fontSize: RFValue(15),

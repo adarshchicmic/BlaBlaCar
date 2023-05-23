@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   inputTextView: {
     height: hp(6),

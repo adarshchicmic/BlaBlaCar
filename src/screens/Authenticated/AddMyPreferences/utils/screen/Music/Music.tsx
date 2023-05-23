@@ -4,9 +4,12 @@ import CustomButton from '../../../../../../components/CustomButton/CustomButton
 import {COMMON_CONSTS} from '../../../../../../shared/Constants/Constants';
 import styles from './styles';
 import RadioForm from 'react-native-simple-radio-button';
+import {useDispatch} from 'react-redux';
+import {updateMusic} from '../../../../../../store/slices/travelPreferences';
 
 const Music = ({navigation}) => {
   const [buttonSelected, setSelectedButton] = useState<string>('');
+  const dispatch = useDispatch();
   const options = [
     {
       label: COMMON_CONSTS.ITS_ALL_ABOUT_PLAYLIST,
@@ -30,6 +33,7 @@ const Music = ({navigation}) => {
   };
   const handleSaveButtonPress = () => {
     navigation.goBack();
+    dispatch(updateMusic({music: buttonSelected}));
   };
   return (
     <View>
