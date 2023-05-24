@@ -9,7 +9,7 @@ import {updateDate} from '../../store/slices/rideSlice';
 import {updatePublishDate} from '../../store/slices/publishRideSlice';
 
 const DateComponent = ({navigation, route}: any) => {
-  const screen = route.params.screen;
+  const screen = route?.params?.screen;
   console.log(screen, 'thsi sis screen ');
   const dispatch: any = useDispatch();
 
