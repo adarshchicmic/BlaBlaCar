@@ -24,7 +24,7 @@ const AddAboutRide = ({navigation}) => {
   };
   const handlePublishRide = async () => {
     console.log('hkdshkjlsd');
-    const datata = await publish({
+    const datata: any = await publish({
       source: states.rideSlice.pickUp,
       destination: states.rideSlice.dropOff,
       sourceLongitude: states.rideSlice.statsPickUp.longitude,
@@ -45,7 +45,7 @@ const AddAboutRide = ({navigation}) => {
       estimatedTime: states.publishRideSlice.select_route.estimatedTime,
     });
     console.log(datata, 'jkldshkjhfjkshkj');
-    datata.data.status === 200 ? navigation.navigate('HomeScreen') : null;
+    datata.data.status === 'created' ? navigation.navigate('HomeScreen') : null;
   };
   return (
     <View>

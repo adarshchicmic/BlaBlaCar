@@ -73,7 +73,7 @@ const LicensePlateNumber = ({navigation}) => {
           onPressFunction={() => handleDoNotKnowLicensePlateOnPress()}
         />
       </View>
-      {showError && <Text>{COMMON_CONSTS.ERROR}</Text>}
+      {showError && <Text>{COMMON_CONSTS.PLATE_ERROR}</Text>}
       {/* {isLoading && <ActivityIndicator />} */}
       {/* {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>} */}
       {licensePlateNumber && (
