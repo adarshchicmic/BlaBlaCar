@@ -21,15 +21,33 @@ const styles = StyleSheet.create({
   errorStyle: {
     color: '#f00',
   },
-  map: {
-    alignSelf: 'flex-start',
-    width: wp(100),
-    height: hp(70),
-    zIndex: 0,
+  buttonStyle: {
+    width: wp(90),
+    padding: 10,
+    borderWidth: 0.8,
+    borderRadius: 30,
+  },
+  textView: {
+    marginTop: hp(10),
+    marginHorizontal: wp(5),
+  },
+  textStyle: {
+    fontSize: RFValue(30),
+    fontWeight: '700',
+  },
+  buttonView: {
+    marginTop: hp(5),
+    alignItems: 'center',
+  },
+  buttonTextStyle: {
+    color: '#000',
+    textAlign: 'center',
+    fontSize: RFValue(30),
+    fontWeight: '600',
   },
   button: {
     position: 'absolute',
-    bottom: 20,
+    top: hp(86),
     right: wp(4),
     backgroundColor: '#2dbeff',
     padding: 10,
@@ -39,18 +57,18 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  textStyle: {
-    color: '#000',
-    fontSize: RFValue(20),
-    fontWeight: '700',
-    marginLeft: wp(2),
-  },
-  textView: {
-    width: wp(90),
-    marginTop: hp(1),
-    marginLeft: wp(5),
-    alignSelf: 'flex-start',
-  },
+  //   textStyle: {
+  //     color: '#000',
+  //     fontSize: RFValue(20),
+  //     fontWeight: '700',
+  //     marginLeft: wp(2),
+  //   },
+  //   textView: {
+  //     width: wp(90),
+  //     marginTop: hp(1),
+  //     marginLeft: wp(5),
+  //     alignSelf: 'flex-start',
+  //   },
   svgValView: {
     flexDirection: 'row',
     width: wp(90),

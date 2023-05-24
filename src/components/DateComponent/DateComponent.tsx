@@ -6,16 +6,21 @@ import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {updateDate} from '../../store/slices/rideSlice';
+import {updatePublishDate} from '../../store/slices/publishRideSlice';
 
-const DateComponent = ({navigation}: any) => {
+const DateComponent = ({navigation, route}: any) => {
+  const screen = route.params.screen;
+  console.log(screen, 'thsi sis screen ');
   const dispatch: any = useDispatch();
 
   const handleCrossButtonPress = () => {
     navigation.goBack();
   };
   const handleDateChange = date => {
-    dispatch(updateDate({date: date}));
-    navigation.goBack();
+    screen === COMMON_CONSTS.STOPOVER
+      ? (dispatch(updatePublishDate({date: date})),
+        navigation.navigate('TimePublish'))
+      : (dispatch(updateDate({date: date})), navigation.goBack());
   };
 
   return (

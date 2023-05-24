@@ -28,6 +28,7 @@ const EditProfilePicture = ({navigation}: any) => {
         height: heightPercentageToDP(100),
         cropping: true,
       });
+      console.log(dataa, 'this is datavjkhkljaghkjdfghjkhgjklsdfh');
       const imageUri: any = await updateProfilePic({image: dataa});
       dispatch(updateImage({image: imageUri?.data?.data?.image_url}));
     } catch (error) {
@@ -41,6 +42,7 @@ const EditProfilePicture = ({navigation}: any) => {
         height: heightPercentageToDP(100),
         cropping: true,
       });
+      console.log(dataa, 'this is datavjkhkljaghkjdfghjkhgjklsdfh');
       const imageUri: any = await updateProfilePic({image: dataa});
       dispatch(updateImage({image: imageUri?.data?.data?.image_url}));
     } catch (error) {

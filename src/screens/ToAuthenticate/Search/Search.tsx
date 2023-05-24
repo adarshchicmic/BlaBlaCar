@@ -78,7 +78,12 @@ const Search = ({navigation}: any) => {
               </Text>
             </Pressable>
             <View style={styles.userViewStyle}>
-              <Pressable onPress={() => navigation.navigate('NumberOfSeats')}>
+              <Pressable
+                onPress={() =>
+                  navigation.navigate('NumberOfSeats', {
+                    screen: COMMON_CONSTS.SEARCH,
+                  })
+                }>
                 <View style={styles.profileNumberStyle}>
                   <SvgUser width={15} height={15} style={styles.svgStyle} />
                   <Text style={styles.numberStyle}>

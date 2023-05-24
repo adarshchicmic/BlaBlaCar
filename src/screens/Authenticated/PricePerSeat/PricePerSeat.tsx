@@ -5,8 +5,8 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import {SvgMinus, SvgPlush, SvgRightArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
-import {addSeats, subtractSeats} from '../../../store/slices/rideSlice';
-const NumberOfSeatsToBook = ({navigation, route}: any) => {
+import {addPrice, subtractPrice} from '../../../store/slices/publishRideSlice';
+const PricePerSeat = ({navigation, route}: any) => {
   const screen = route.params.screen;
   const numberOfSeat: any = useSelector(state => state);
   console.log(
@@ -18,15 +18,17 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
     navigation.goBack();
   };
   const handleMinusButton = () => {
-    dispatch(subtractSeats());
+    dispatch(subtractPrice());
   };
   const handlePlusButton = () => {
-    dispatch(addSeats());
+    dispatch(addPrice());
   };
   const handleForwardArrowButtonPress = () => {
-    screen === COMMON_CONSTS.BOOK
-      ? navigation.navigate('BookInstantly')
-      : navigation.goBack();
+    screen === COMMON_CONSTS.BOOK ? navigation.navigate('BookInstantly') : null;
+    screen === COMMON_CONSTS.SEARCH ? navigation.goBack() : null;
+    screen === COMMON_CONSTS.CAN_PASSENGER_BOOK_INSTANTLY
+      ? navigation.navigate('AddAboutRide')
+      : null;
   };
   return (
     <View>
@@ -37,24 +39,34 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
         viewStyleButton={styles.crossButtonStyle}
       />
       <View style={styles.textView}>
-        <Text style={styles.textStyle}>{COMMON_CONSTS.NUMBER_OF_SEATS}</Text>
-        <Text style={styles.textStyle}>{COMMON_CONSTS.BOOK}</Text>
+        <Text style={styles.textStyle}>
+          {COMMON_CONSTS.SET_THE_PRICE_PER_SEAT}
+        </Text>
       </View>
       <View style={styles.plushMinusView}>
         <TouchableOpacity
           onPress={() => handleMinusButton()}
-          disabled={numberOfSeat?.rideSlice?.numberOfSeats === 1}>
+          disabled={
+            numberOfSeat?.publishRideSlice?.set_price ===
+            numberOfSeat?.publishRideSlice?.minPrice
+          }>
           <SvgMinus width={50} height={50} />
         </TouchableOpacity>
         <Text style={styles.numberStyle}>
-          {numberOfSeat?.rideSlice?.numberOfSeats}
+          {COMMON_CONSTS.RS}
+          {numberOfSeat?.publishRideSlice?.set_price}
         </Text>
+
         <TouchableOpacity
           onPress={() => handlePlusButton()}
           disabled={numberOfSeat?.rideSlice?.numberOfSeats === 8}>
           <SvgPlush width={50} height={50} />
         </TouchableOpacity>
       </View>
+      <Text>
+        {COMMON_CONSTS.MIN_PRICE} {numberOfSeat?.publishRideSlice?.minPrice},
+        {COMMON_CONSTS.MAX_PRICE} {numberOfSeat?.publishRideSlice?.maxPrice}
+      </Text>
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={styles.buttonStyleArrow}
@@ -66,4 +78,4 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
   );
 };
 
-export default NumberOfSeatsToBook;
+export default PricePerSeat;

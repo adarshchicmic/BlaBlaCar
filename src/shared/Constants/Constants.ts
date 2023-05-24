@@ -36,10 +36,14 @@ export const COMMON_CONSTS = {
   TO_BE_ADDRESSED: 'to be adddressed?',
   MISS_OR_MADAM: 'Miss / Madam',
   SIR: 'Sir',
+  ADD_STOPOVERS_TO_GET_MORE_PASSENGERS: 'Add stops to get more passengers',
   PASSENGER: 'passenger',
   RATHER_NOT_TO_SAY: "I'd rather not say",
   DEFINE_YOUR: 'Define your',
   PASSWORDS: 'password',
+  STOPOVER: 'StopOver',
+  AT_WHAT_TIME_WILL_YOU_PICK_PASSENGERS_UP:
+    'At what time will you pick passengers up?',
   IT_MUST_HAVE_ATLEAST_EIGHT_CHARACTERS_ONE:
     'It must have at least 8 characters, 1',
   LETTER_ONE_NUMBER_AND_ONE_SPECIAL_CHARACTER:
@@ -158,6 +162,18 @@ export const COMMON_CONSTS = {
   CHOOSE_A_PICTURE: 'Choose a picture',
   PLATE_ERROR: 'should contain atleast 8 charectors and atmost 12',
   ERROR: 'ERROR',
+  THINK_COMFORT_KEEP_THE_MIDDLE_SEAT_EMPTY:
+    'Think comfort, keep the middle seat empty!',
+  YES_SURE: 'Yes, sure!',
+  SET_THE_PRICE_PER_SEAT: 'Set the price per seat',
+  CAN_PASSENGER_BOOK_INSTANTLY: 'Can passengers book instantly?',
+  NO_ILL_SQEEZE_IN_THREE: "No, I'll squeeze in 3",
+  NO_ILL_REPLY_TO_EACH_REQUEST_MYSELF: "No, I'll reply to each request myself",
+  RS: '₹',
+  MIN_PRICE: 'min price: ',
+  MAX_PRICE: 'max price',
+  ANYTHING_TO_ADD_ABOUT_YOUR_RIDE: 'Anything to add about your ride?',
+  PUBLISH: 'Publish',
   EXAMPLE:
     'Example: "I\'m a student at Delhi University, and I often visit friends in Jaipur. I love photography and rock music."',
 };

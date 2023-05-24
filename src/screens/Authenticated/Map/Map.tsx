@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, memo} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import styles from './styles';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useGoogleMutation} from '../../../services/modules/googleLocation';
 import {
   SvgDistance,
@@ -20,6 +20,7 @@ import {
   SvgRoute,
   SvgTime,
 } from '../../../assets/svg';
+import {updateRoadDistanceDuration} from '../../../store/slices/publishRideSlice';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -29,13 +30,15 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 Geocoder.init('AIzaSyDUzn63K64-sXadyIwRJExCfMaicagwGq4'); // Initialize Geocoder with your API key
 
 const MapScreen = ({navigation}: any) => {
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [destination, setDestination] = useState<any>(null);
+  // const [currentLocation, setCurrentLocation] = useState<any>(null);
+  // const [destination, setDestination] = useState<any>(null);
   const [distance, setDistance] = useState<string>('');
   const [duration, setDuration] = useState<string>('');
   const [route, setRoute] = useState<any>(null);
   const [routeName, setRouteName] = useState<any>(null);
   const [google, {isLoading, isError}] = useGoogleMutation();
+
+  const dispatch = useDispatch();
 
   const states: any = useSelector(state => state);
   console.log(states, 'this is states in map');
@@ -45,13 +48,13 @@ const MapScreen = ({navigation}: any) => {
   console.log(currLocation, destLocation);
   useEffect(() => {
     // Get the current device location
-    Geolocation.getCurrentPosition(
-      (position: any) => {
-        setCurrentLocation(position.coords);
-      },
-      error => console.log(error),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    );
+    // Geolocation.getCurrentPosition(
+    //   (position: any) => {
+    //     setCurrentLocation(position.coords);
+    //   },
+    //   error => console.log(error),
+    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    // );
     handleCalculateRoute();
   }, []);
 
@@ -70,6 +73,13 @@ const MapScreen = ({navigation}: any) => {
       const dis = data.routes[0].legs[0].distance.text;
       const dur = data.routes[0].legs[0].duration.text;
 
+      dispatch(
+        updateRoadDistanceDuration({
+          road: data.routes[0].summary,
+          distance: dis,
+          duration: dur,
+        }),
+      );
       setRouteName(data.routes[0].summary);
       setDistance(dis);
       setDuration(dur);
@@ -80,6 +90,9 @@ const MapScreen = ({navigation}: any) => {
   };
   const handleBackArrowPress = () => {
     navigation.goBack();
+  };
+  const handleRightArrowButtonPress = () => {
+    navigation.navigate('AddStopOver');
   };
   return (
     <View style={styles.container}>
@@ -129,7 +142,10 @@ const MapScreen = ({navigation}: any) => {
           </Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.button} onPress={handleCalculateRoute}>
+      {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleRightArrowButtonPress()}>
         <SvgRightArrow width={25} height={25} />
       </TouchableOpacity>
       {isLoading && <ActivityIndicator />}
@@ -178,4 +194,4 @@ function decodePolyline(encoded) {
   return poly;
 }
 
-export default MapScreen;
+export default memo(MapScreen);

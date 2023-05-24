@@ -23,6 +23,12 @@ import DropOff from '../screens/ToAuthenticate/DropOff/DropOff';
 import VehicleInformation from '../screens/Authenticated/VehicleInformation/VehicleInformation';
 import EditProfilePicture from '../screens/Authenticated/EditProfilePicture/EditProfilePicture';
 import MapScreen from '../screens/Authenticated/Map/Map';
+import AddStopOver from '../screens/Authenticated/AddStopover/AddStopOver';
+import TimePublish from '../screens/Authenticated/TimePublish/TimePublish';
+import MiddleSeatEmpty from '../screens/Authenticated/MiddleSeatEmpty/MiddleSeatEmpty';
+import BookInstantly from '../screens/Authenticated/BookInstantly/BookInstantly';
+import PricePerSeat from '../screens/Authenticated/PricePerSeat/PricePerSeat';
+import AddAboutRide from '../screens/Authenticated/AddAboutRide/AddAboutRide';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -54,6 +60,17 @@ const AppNavigator = () => {
       <Stack.Screen name="VehicleInformation" component={VehicleInformation} />
       <Stack.Screen name="EditProfilePicture" component={EditProfilePicture} />
       <Stack.Screen name="MapScreen" component={MapScreen} />
+      <Stack.Screen name="AddStopOver" component={AddStopOver} />
+      <Stack.Screen name="DateComponent" component={DateComponent} />
+      <Stack.Screen name="TimePublish" component={TimePublish} />
+      <Stack.Screen name="MiddleSeatEmpty" component={MiddleSeatEmpty} />
+      <Stack.Screen
+        name="NumberOfSeatsToBook"
+        component={NumberOfSeatsToBook}
+      />
+      <Stack.Screen name="BookInstantly" component={BookInstantly} />
+      <Stack.Screen name="PricePerSeat" component={PricePerSeat} />
+      <Stack.Screen name="AddAboutRide" component={AddAboutRide} />
     </Stack.Navigator>
   );
 };

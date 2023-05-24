@@ -41,15 +41,19 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: '#000',
-    fontSize: RFValue(20),
+    marginTop: hp(5),
+    fontSize: RFValue(30),
     fontWeight: '700',
     marginLeft: wp(2),
   },
+  nameArrowView: {
+    width: wp(86),
+    alignSelf: 'center',
+  },
   textView: {
     width: wp(90),
-    marginTop: hp(1),
-    marginLeft: wp(5),
-    alignSelf: 'flex-start',
+    marginTop: hp(3),
+    alignSelf: 'center',
   },
   svgValView: {
     flexDirection: 'row',
