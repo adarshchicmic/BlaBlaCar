@@ -17,7 +17,7 @@ const SelectSignUpLogIn = ({navigation}: any) => {
       <View>
         <Image
           style={styles.imageStyle}
-          source={require('../../../assets/images/selectSignUpLogin.png')}
+          source={require('../../../assets/images/selectSignUpLogin.jpg')}
         />
       </View>
       <View style={styles.textButtonViewStyle}>

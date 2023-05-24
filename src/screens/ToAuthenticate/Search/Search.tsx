@@ -14,6 +14,7 @@ import {SvgCalender, SvgCircle, SvgSwap, SvgUser} from '../../../assets/svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {swapLocation} from '../../../store/slices/rideSlice';
+import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
@@ -97,6 +98,11 @@ const Search = ({navigation}: any) => {
         </View>
       )}
       <View style={styles.addressView}>
+        <CustomLeavingFromGoingTo
+          leavingFrom="india"
+          goingTo="pakistan"
+          passengerCount={1}
+        />
         {/* <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever

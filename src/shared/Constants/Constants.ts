@@ -36,6 +36,7 @@ export const COMMON_CONSTS = {
   TO_BE_ADDRESSED: 'to be adddressed?',
   MISS_OR_MADAM: 'Miss / Madam',
   SIR: 'Sir',
+  PASSENGER: 'passenger',
   RATHER_NOT_TO_SAY: "I'd rather not say",
   DEFINE_YOUR: 'Define your',
   PASSWORDS: 'password',
