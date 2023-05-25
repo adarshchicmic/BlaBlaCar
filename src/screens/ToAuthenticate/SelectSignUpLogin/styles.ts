@@ -18,7 +18,7 @@ const styles = StyleSheet.create<Style | any>({
   },
   imageStyle: {
     width: wp(100),
-    height: hp(60),
+    height: hp(70),
   },
   pickYourRideViewStyle: {
     marginTop: hp(2),
@@ -28,9 +28,11 @@ const styles = StyleSheet.create<Style | any>({
     textAlign: 'center',
     fontWeight: '700',
     color: '#000',
-    height: hp(20),
+    // height: hp(15),
   },
   buttonView: {
+    position: 'absolute',
+    bottom: hp(2),
     alignSelf: 'center',
     marginTop: hp(2),
   },
@@ -46,7 +48,7 @@ const styles = StyleSheet.create<Style | any>({
     textAlign: 'center',
   }),
   textButtonViewStyle: {
-    height: hp(40),
+    height: hp(30),
   },
 });
 export default styles;

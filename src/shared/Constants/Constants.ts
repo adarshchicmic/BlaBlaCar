@@ -170,6 +170,7 @@ export const COMMON_CONSTS = {
   NO_ILL_SQEEZE_IN_THREE: "No, I'll squeeze in 3",
   NO_ILL_REPLY_TO_EACH_REQUEST_MYSELF: "No, I'll reply to each request myself",
   RS: '₹',
+  VEHICLE_ERROR: 'Please add vehicle first to publish your ride',
   MIN_PRICE: 'min price: ',
   MAX_PRICE: 'max price',
   ANYTHING_TO_ADD_ABOUT_YOUR_RIDE: 'Anything to add about your ride?',

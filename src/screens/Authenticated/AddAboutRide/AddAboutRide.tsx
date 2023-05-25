@@ -1,19 +1,40 @@
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {usePublishRideMutation} from '../../../services/modules/PublishRide';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
+import {updateVehicleId} from '../../../store/slices/publishRideSlice';
 
 const AddAboutRide = ({navigation}) => {
   const [text, setText] = useState('');
-
+  const [vehiclePresent, setVehiclePresent] = useState(null);
+  const [showError, setShowError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
+  const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
+    useLazyVehicleQuery();
 
   const states: any = useSelector(state => state);
   console.log(states, 'this is statesjhdsjkahkjh');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      const fun: any = async () => {
+        const payload: any = await vehicle();
+        console.log('fulfilled', payload.data[0].id);
+        dispatch(updateVehicleId({id: payload.data[0].id}));
+        setVehiclePresent(payload?.data?.length);
+        console.log(payload?.data?.length);
+      };
+      fun();
+    } catch (error) {
+      console.error('rejected', error);
+    }
+  }, [vehicle]);
 
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -24,28 +45,34 @@ const AddAboutRide = ({navigation}) => {
   };
   const handlePublishRide = async () => {
     console.log('hkdshkjlsd');
-    const datata: any = await publish({
-      source: states.rideSlice.pickUp,
-      destination: states.rideSlice.dropOff,
-      sourceLongitude: states.rideSlice.statsPickUp.longitude,
-      sourceLatitude: states.rideSlice.statsPickUp.latitude,
-      destinationLatitude: states.rideSlice.statsDropOff.latitude,
-      destinationLongitude: states.rideSlice.statsDropOff.longitude,
-      passsengerCount: states.rideSlice.numberOfSeats,
-      addCity: 'Punjab',
-      addCityLongitude: 77.102493,
-      addCityLatitude: 28.70406,
-      date: states.publishRideSlice.date,
-      time: states.publishRideSlice.time,
-      setPrice: states.publishRideSlice.set_price,
-      aboutRide: text,
-      vehicleId: 11,
-      bookInstantly: states.publishRideSlice.bookInstantly,
-      midSeat: states.publishRideSlice.midSeat,
-      estimatedTime: states.publishRideSlice.select_route.estimatedTime,
-    });
-    console.log(datata, 'jkldshkjhfjkshkj');
-    datata.data.status === 'created' ? navigation.navigate('HomeScreen') : null;
+    if (vehiclePresent) {
+      const datata: any = await publish({
+        source: states.rideSlice.pickUp,
+        destination: states.rideSlice.dropOff,
+        sourceLongitude: states.rideSlice.statsPickUp.longitude,
+        sourceLatitude: states.rideSlice.statsPickUp.latitude,
+        destinationLatitude: states.rideSlice.statsDropOff.latitude,
+        destinationLongitude: states.rideSlice.statsDropOff.longitude,
+        passsengerCount: states.rideSlice.numberOfSeats,
+        addCity: 'Punjab',
+        addCityLongitude: 77.102493,
+        addCityLatitude: 28.70406,
+        date: states.publishRideSlice.date,
+        time: states.publishRideSlice.time,
+        setPrice: states.publishRideSlice.set_price,
+        aboutRide: text,
+        vehicleId: states.publishRideSlice.vehicle_id,
+        bookInstantly: states.publishRideSlice.bookInstantly,
+        midSeat: states.publishRideSlice.midSeat,
+        estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+      });
+      console.log(datata, 'jkldshkjhfjkshkj');
+      datata.data.status === 'created'
+        ? navigation.navigate('HomeScreen')
+        : null;
+    } else {
+      setShowError(true);
+    }
   };
   return (
     <View>
@@ -67,6 +94,7 @@ const AddAboutRide = ({navigation}) => {
           styleInputText={styles.textInputStyle}
         />
       </View>
+      {showError && <Text>{COMMON_CONSTS.VEHICLE_ERROR}</Text>}
       {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       {isLoading && <ActivityIndicator />}
       {text && (
