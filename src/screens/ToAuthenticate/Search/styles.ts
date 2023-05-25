@@ -36,7 +36,7 @@ const styles = StyleSheet.create<any>({
     shadowOpacity: 0.8,
   },
   addressView: {
-    marginTop: hp(19),
+    marginTop: hp(15),
   },
   buttonStyle: {
     position: 'absolute',

@@ -66,7 +66,6 @@ const WhatIsYourDob = ({navigation}: any) => {
         navigation.goBack();
       }
     } else {
-      null;
       setShowError(true);
     }
   };

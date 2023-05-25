@@ -17,6 +17,7 @@ import profileSlice from './slices/profileSlice';
 import preferencesSlice from './slices/travelPreferences';
 import vehicleSlice from './slices/vehicleSlice';
 import publishRideSlice from './slices/publishRideSlice';
+import searchSlice from './slices/searchSlice';
 
 import userSlice from './slices/UserSlice';
 const reducers = combineReducers({
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   preferencesSlice: preferencesSlice.reducer,
   vehicleSlice: vehicleSlice.reducer,
   publishRideSlice: publishRideSlice.reducer,
+  searchSlice: searchSlice.reducer,
 });
 const storage = new MMKV();
 export const reduxStorage = {

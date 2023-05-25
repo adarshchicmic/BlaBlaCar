@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useEffect, useRef} from 'react';
+import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -16,6 +16,8 @@ import {
 } from '../../../store/slices/rideSlice';
 
 const Location = ({navigation, route}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
   const screen = route.params.screen;
   const dispatch = useDispatch();
   const myRef: any = useRef();
@@ -29,6 +31,7 @@ const Location = ({navigation, route}) => {
   const arrowButtonPress = () => {
     navigation.goBack();
   };
+  const preProcessFunction = () => {};
 
   const handlePlaceSelected = (data, details) => {
     console.log(screen, 'this is screen guys ');
@@ -72,6 +75,11 @@ const Location = ({navigation, route}) => {
         navigation.navigate('MapScreen'))
       : null;
   };
+  const onFail = () => {
+    let executed = true;
+    executed ? (setShowError(true), (executed = false)) : null;
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.arrowInputStyle}>
@@ -92,8 +100,15 @@ const Location = ({navigation, route}) => {
             language: 'en',
           }}
           fetchDetails={true}
+          onFail={() => onFail()}
+          nearbyPlacesAPI="GooglePlacesSearch"
+          // currentLocation={true}
+          // currentLocationLabel="current location"
+          // preProcess={(index) => preProcessFunction(index)}
         />
       </View>
+      {showError && <Text>{COMMON_CONSTS.NETWORK_ERROR}</Text>}
+      {isLoading && <ActivityIndicator />}
     </View>
   );
 };

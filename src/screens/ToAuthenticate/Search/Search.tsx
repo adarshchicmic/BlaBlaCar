@@ -15,11 +15,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {swapLocation} from '../../../store/slices/rideSlice';
 import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
+import {updateSearch} from '../../../store/slices/searchSlice';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const numberOfSeat: any = useSelector(state => state);
+  console.log('number of seat is this', numberOfSeat);
+
   const handleleavingFromPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
   };
@@ -27,7 +30,15 @@ const Search = ({navigation}: any) => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.GOING_TO});
   };
   const handleSearchButtonPress = () => {
-    navigation.navigate('MapScreen');
+    dispatch(
+      updateSearch({
+        search: {
+          leavingFrom: numberOfSeat?.rideSlice?.leavingFrom,
+          goingTo: numberOfSeat?.rideSlice?.goingTo,
+          passengerCount: numberOfSeat?.rideSlice?.numberOfSeats,
+        },
+      }),
+    );
   };
   return (
     <ScrollView>
@@ -103,11 +114,14 @@ const Search = ({navigation}: any) => {
         </View>
       )}
       <View style={styles.addressView}>
-        <CustomLeavingFromGoingTo
-          leavingFrom="india"
-          goingTo="pakistan"
-          passengerCount={1}
-        />
+        {numberOfSeat?.searchSlice?.search?.map(val => (
+          <CustomLeavingFromGoingTo
+            leavingFrom={val.leavingFrom}
+            goingTo={val.goingTo}
+            passengerCount={val?.passengerCount}
+          />
+        ))}
+
         {/* <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever

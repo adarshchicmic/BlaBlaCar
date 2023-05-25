@@ -172,6 +172,8 @@ export const COMMON_CONSTS = {
   RS: '₹',
   VEHICLE_ERROR: 'Please add vehicle first to publish your ride',
   MIN_PRICE: 'min price: ',
+  NETWORK_ERROR:
+    'Network error: make sure you are connected to stable internet',
   MAX_PRICE: 'max price',
   ANYTHING_TO_ADD_ABOUT_YOUR_RIDE: 'Anything to add about your ride?',
   PUBLISH: 'Publish',

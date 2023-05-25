@@ -14,27 +14,28 @@ const AddAboutRide = ({navigation}) => {
   const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
-  const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
-    useLazyVehicleQuery();
-
+  const [vehicle, {}] = useLazyVehicleQuery();
   const states: any = useSelector(state => state);
   console.log(states, 'this is statesjhdsjkahkjh');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    try {
-      const fun: any = async () => {
-        const payload: any = await vehicle();
-        console.log('fulfilled', payload.data[0].id);
-        dispatch(updateVehicleId({id: payload.data[0].id}));
-        setVehiclePresent(payload?.data?.length);
-        console.log(payload?.data?.length);
-      };
-      fun();
-    } catch (error) {
-      console.error('rejected', error);
-    }
-  }, [vehicle]);
+    vehicle().then(payload => {
+      console.log(payload, 'this is data guys ');
+      dispatch(updateVehicleId({id: payload.data[0].id}));
+      setVehiclePresent(payload?.data?.length);
+    });
+  }, [vehicle, dispatch]);
+  // useEffect(() => {
+  //   const fun: any = async () => {
+  //     const payload: any = await vehicle();
+  //     console.log('fulfilled', payload?.data[0]?.id);
+  //     // dispatch(updateVehicleId({id: payload.data[0].id}));
+  //     // setVehiclePresent(payload?.data?.length);
+  //     // console.log(payload?.data?.length);
+  //   };
+  //   fun();
+  // }, [vehicle, dispatch]);
 
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -67,9 +68,7 @@ const AddAboutRide = ({navigation}) => {
         estimatedTime: states.publishRideSlice.select_route.estimatedTime,
       });
       console.log(datata, 'jkldshkjhfjkshkj');
-      datata.data.status === 'created'
-        ? navigation.navigate('HomeScreen')
-        : null;
+      datata.data.status === 'created' ? navigation.popToTop() : null;
     } else {
       setShowError(true);
     }
