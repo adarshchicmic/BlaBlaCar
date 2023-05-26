@@ -22,7 +22,22 @@ const DateComponent = ({navigation, route}: any) => {
         navigation.navigate('TimePublish'))
       : (dispatch(updateDate({date: date})), navigation.goBack());
   };
+  const today: Date = new Date();
+  const formatDate = (value: Date) => {
+    var d = new Date(value),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('/');
+  };
   return (
     <View>
       <CustomButton
@@ -38,6 +53,7 @@ const DateComponent = ({navigation, route}: any) => {
       <DatePicker
         onSelectedChange={(date: any) => handleDateChange(date)}
         mode="date"
+        minimumDate={formatDate(today)}
       />
     </View>
   );

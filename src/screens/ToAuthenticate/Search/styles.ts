@@ -1,17 +1,19 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create<any>({
   container: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    flex: 1,
   },
   imageBackgroundStyle: {
     height: hp(50),
-    width: wp(100),
+    width: width,
+    resizeMode: 'contain',
   },
   textUpperViewStyle: {
     marginTop: hp(5),

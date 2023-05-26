@@ -1,15 +1,24 @@
 import {api} from '../../api';
 export const userApi = api.injectEndpoints({
   endpoints: build => ({
-    logIn: build.mutation({
-      query: ({email, password}) => ({
-        url: 'users/sign_in',
+    search: build.mutation({
+      query: ({
+        sourceLatitude,
+        destinationLatitude,
+        sourceLongitude,
+        destinationLongitude,
+        passCount,
+        date,
+      }) => ({
+        url: 'search/',
         method: 'POST',
         body: {
-          user: {
-            email: email,
-            password: password,
-          },
+          source_longitude: sourceLongitude,
+          source_latitude: sourceLatitude,
+          destination_longitude: destinationLongitude,
+          destination_latitude: destinationLatitude,
+          pass_count: passCount,
+          date: date,
         },
       }),
     }),
@@ -17,4 +26,4 @@ export const userApi = api.injectEndpoints({
 
   overrideExisting: true,
 });
-export const {useLogInMutation} = userApi;
+export const {useSearchMutation} = userApi;

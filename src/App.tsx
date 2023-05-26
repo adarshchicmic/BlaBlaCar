@@ -5,6 +5,7 @@ import ApplicationNavigator from './navigators/ApplicationNavigator';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
 // import AppNavigator from './navigators/AppNavigator';
+
 const App = () => {
   return (
     <Provider store={store}>

@@ -30,12 +30,16 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
       navigation.navigate('EmailSignUp');
     }
   };
+  const handleCrossButtonPress = () => {
+    navigation.goBack();
+  };
   return (
     <View style={styles.container}>
       <CustomButton
         btnText={COMMON_CONSTS.X}
         styleTxt={styles.crossStyle}
         styleBtn={styles.crossButtonStyle}
+        onPressFunction={() => handleCrossButtonPress()}
       />
       <View style={styles.textView}>
         <Text style={styles.textStyle(1)}>

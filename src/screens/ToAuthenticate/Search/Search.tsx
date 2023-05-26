@@ -16,10 +16,12 @@ import {useIsFocused} from '@react-navigation/native';
 import {swapLocation} from '../../../store/slices/rideSlice';
 import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
 import {updateSearch} from '../../../store/slices/searchSlice';
+import {useSearchMutation} from '../../../services/modules/Search';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
+  const [search, {isLoading}] = useSearchMutation();
   const numberOfSeat: any = useSelector(state => state);
   console.log('number of seat is this', numberOfSeat);
 
@@ -29,7 +31,7 @@ const Search = ({navigation}: any) => {
   const handleGoingToPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.GOING_TO});
   };
-  const handleSearchButtonPress = () => {
+  const handleSearchButtonPress = async () => {
     dispatch(
       updateSearch({
         search: {
@@ -39,9 +41,19 @@ const Search = ({navigation}: any) => {
         },
       }),
     );
+    const cal = await search({
+      sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.latitude,
+      destinationLatitude: numberOfSeat?.rideSlice?.statsGointTo?.latitude,
+      sourceLongitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
+      destinationLongitude: numberOfSeat?.rideSlice?.statsGointTo?.longitude,
+      passCount: numberOfSeat?.rideSlice?.numberOfSeats,
+      date: numberOfSeat?.rideSlice?.date,
+    });
+    console.log(cal, 'this is cal');
+    navigation.navigate('SearchResult');
   };
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.imageBackgroundStyle}
         source={require('../../../assets/images/search.jpg')}>
@@ -65,7 +77,7 @@ const Search = ({navigation}: any) => {
             )}
           <Pressable
             style={styles.continueWithEmailView(0)}
-            onPress={() => handleleavingFromPress()}>
+            onPress={handleleavingFromPress}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
               {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 20)}

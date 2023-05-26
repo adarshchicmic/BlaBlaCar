@@ -40,9 +40,10 @@ const styles = StyleSheet.create<any>({
     width: wp(90),
     marginVertical: hp(2),
   },
+
   svgOpenCloseStyle: {
-    marginTop: hp(2),
-    marginRight: wp(7.5),
+    marginTop: hp(1.5),
+    marginRight: wp(8),
     position: 'absolute',
     right: 0,
     zIndex: 1,

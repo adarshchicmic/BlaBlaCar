@@ -10,10 +10,14 @@ import {useLazyProfileQuery} from '../../../services/modules/profile';
 import {useIsFocused} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateProfileData} from '../../../store/slices/profileSlice';
+import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
 
 const AboutYou = ({navigation}: any) => {
   const [userDetail, setUserDetail] = useState<any>({});
+  const [vehicleData, setVehicleData] = useState<any>({});
   const [profile, {isLoading, isError}]: any = useLazyProfileQuery();
+  const [vehicle, {isLoading: isLadingVehicle, isError: isErrorVehicle}]: any =
+    useLazyVehicleQuery();
 
   const focus = useIsFocused();
   const dispatch = useDispatch();
@@ -29,9 +33,12 @@ const AboutYou = ({navigation}: any) => {
             updateProfileData({profileData: userData?.data?.status?.data}),
           ))
         : null;
+      const vehiclesData = await vehicle();
+      setVehicleData(vehiclesData);
+      console.log(vehiclesData, 'this is vehicle datat');
     };
     fetchUserData();
-  }, [profile, focus, dispatch]);
+  }, [profile, focus, dispatch, vehicle]);
 
   const handleEditProfileDetail = () => {
     navigation.navigate('EditPersonalDetail');
@@ -116,6 +123,9 @@ const AboutYou = ({navigation}: any) => {
       </View>
       <View style={styles.profileDetailContainer}>
         <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
+        {vehicleData.isSucces
+          ? vehicleData?.data.map(vehicle => console.log(vehicle))
+          : null}
         <SvgTextButton
           text={COMMON_CONSTS.ADD_VEHICLE}
           onPress={() => handleOnPressAddVehicle()}

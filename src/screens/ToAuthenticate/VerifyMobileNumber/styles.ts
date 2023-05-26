@@ -37,6 +37,7 @@ const styles = StyleSheet.create<Style | any>({
   },
   textInputStyle: {
     // alignSelf: 'center',
+    width: wp(90),
     height: hp(6),
     backgroundColor: '#d9dbde',
     paddingLeft: wp(30),

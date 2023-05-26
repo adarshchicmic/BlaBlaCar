@@ -29,6 +29,7 @@ import MiddleSeatEmpty from '../screens/Authenticated/MiddleSeatEmpty/MiddleSeat
 import BookInstantly from '../screens/Authenticated/BookInstantly/BookInstantly';
 import PricePerSeat from '../screens/Authenticated/PricePerSeat/PricePerSeat';
 import AddAboutRide from '../screens/Authenticated/AddAboutRide/AddAboutRide';
+import SearchResult from '../screens/Authenticated/SearchResult/SearchResult';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -71,6 +72,7 @@ const AppNavigator = () => {
       <Stack.Screen name="BookInstantly" component={BookInstantly} />
       <Stack.Screen name="PricePerSeat" component={PricePerSeat} />
       <Stack.Screen name="AddAboutRide" component={AddAboutRide} />
+      <Stack.Screen name="SearchResult" component={SearchResult} />
     </Stack.Navigator>
   );
 };

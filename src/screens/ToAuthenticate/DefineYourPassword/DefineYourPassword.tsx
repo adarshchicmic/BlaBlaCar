@@ -11,6 +11,10 @@ import {
 } from '../../../assets/svg';
 import {updatePassword} from '../../../store/slices/UserSlice';
 import {useDispatch} from 'react-redux';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const DefineYourPassword = ({navigation}: any) => {
   const [password, setPassword] = useState<string>('');
@@ -109,9 +113,15 @@ const DefineYourPassword = ({navigation}: any) => {
             <View style={styles.svgOpenCloseStyle}>
               <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
                 {openEye ? (
-                  <SvgOpenEye width={25} height={25} />
+                  <SvgOpenEye
+                    width={widthPercentageToDP(7)}
+                    height={heightPercentageToDP(5)}
+                  />
                 ) : (
-                  <SvgCloseEye width={25} height={25} />
+                  <SvgCloseEye
+                    width={widthPercentageToDP(7)}
+                    height={heightPercentageToDP(5)}
+                  />
                 )}
               </TouchableOpacity>
             </View>
