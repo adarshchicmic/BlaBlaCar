@@ -22,7 +22,9 @@ const searchSlice: any = createSlice({
   reducers: {
     updateSearch: (state, action) => {
       const {search} = action.payload;
-      isObjectUnique(state.search, search)
+      isObjectUnique(state.search, search) &&
+      (search?.leavingFrom !== COMMON_CONSTS.LEAVING_FROM ||
+        search?.goingTo !== COMMON_CONSTS.GOING_TO)
         ? state.search.unshift(search)
         : null;
     },

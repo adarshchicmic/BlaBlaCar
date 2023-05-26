@@ -114,8 +114,9 @@ const Search = ({navigation}: any) => {
         </View>
       )}
       <View style={styles.addressView}>
-        {numberOfSeat?.searchSlice?.search?.map(val => (
+        {numberOfSeat?.searchSlice?.search?.map((val, id) => (
           <CustomLeavingFromGoingTo
+            key={id}
             leavingFrom={val.leavingFrom}
             goingTo={val.goingTo}
             passengerCount={val?.passengerCount}

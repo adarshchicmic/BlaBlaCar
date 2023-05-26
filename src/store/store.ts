@@ -48,7 +48,7 @@ export const reduxStorage = {
 const persistConfig = {
   key: 'root',
   storage: reduxStorage,
-  whitelist: ['theme', 'auth', 'userSlice', 'profileSlice'],
+  whitelist: ['theme', 'auth', 'userSlice', 'profileSlice', 'searchSlice'],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 const store = configureStore({
