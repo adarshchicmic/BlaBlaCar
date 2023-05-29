@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import styles from './styles';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import CustomButton from '../../../components/CustomButton/CustomButton';
@@ -66,4 +66,4 @@ const TimePublish = ({navigation}) => {
   );
 };
 
-export default TimePublish;
+export default memo(TimePublish);

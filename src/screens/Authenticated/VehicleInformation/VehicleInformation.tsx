@@ -5,7 +5,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -115,4 +115,4 @@ const VehicleInformation = ({navigation}: any) => {
   );
 };
 
-export default VehicleInformation;
+export default memo(VehicleInformation);

@@ -1,5 +1,5 @@
 import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
@@ -73,4 +73,4 @@ const FirstNameLastName = ({navigation}: any) => {
   );
 };
 
-export default FirstNameLastName;
+export default memo(FirstNameLastName);

@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -93,4 +93,4 @@ const LicensePlateNumber = ({navigation}) => {
   );
 };
 
-export default LicensePlateNumber;
+export default memo(LicensePlateNumber);

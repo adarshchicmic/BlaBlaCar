@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import CustomButtonEdit from '../../../components/CustomButtonEdit/CustomButtonEdit';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -90,4 +90,4 @@ const EditPersonalDetail = ({navigation}: any) => {
   );
 };
 
-export default EditPersonalDetail;
+export default memo(EditPersonalDetail);

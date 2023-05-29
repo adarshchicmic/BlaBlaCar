@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -66,4 +66,4 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
   );
 };
 
-export default NumberOfSeatsToBook;
+export default memo(NumberOfSeatsToBook);

@@ -1,5 +1,5 @@
 import {View, ScrollView, ActivityIndicator} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -49,4 +49,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default memo(Account);

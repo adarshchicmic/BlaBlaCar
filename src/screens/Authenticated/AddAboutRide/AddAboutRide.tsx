@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, memo} from 'react';
 import styles from './styles';
 import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -107,4 +107,4 @@ const AddAboutRide = ({navigation}) => {
   );
 };
 
-export default AddAboutRide;
+export default memo(AddAboutRide);

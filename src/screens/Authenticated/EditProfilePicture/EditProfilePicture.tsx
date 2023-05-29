@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {SvgLeftArrow} from '../../../assets/svg';
 import styles from './styles';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -79,4 +79,4 @@ const EditProfilePicture = ({navigation}: any) => {
   );
 };
 
-export default EditProfilePicture;
+export default memo(EditProfilePicture);

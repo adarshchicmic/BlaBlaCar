@@ -1,5 +1,5 @@
 import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
@@ -68,4 +68,4 @@ const EmailSignUp = ({navigation}: any) => {
   );
 };
 
-export default EmailSignUp;
+export default memo(EmailSignUp);

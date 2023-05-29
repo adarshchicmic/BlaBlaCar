@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import ProfileNavigation from '../../../navigators/ProfileNavigation';
 
 const Profile = () => {
@@ -10,4 +10,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default memo(Profile);

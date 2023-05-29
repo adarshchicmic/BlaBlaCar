@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import styles from './styles';
@@ -112,4 +112,4 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   );
 };
 
-export default EmailAndPasswordLogIn;
+export default memo(EmailAndPasswordLogIn);

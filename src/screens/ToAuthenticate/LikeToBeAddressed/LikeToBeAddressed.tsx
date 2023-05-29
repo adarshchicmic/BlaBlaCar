@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import {SvgLeftArrow} from '../../../assets/svg';
 import styles from './styles';
@@ -67,4 +67,4 @@ const LikeToBeAddressed = ({navigation}: any) => {
   );
 };
 
-export default LikeToBeAddressed;
+export default memo(LikeToBeAddressed);

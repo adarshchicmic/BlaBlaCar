@@ -1,5 +1,5 @@
 import {View, Text, ActivityIndicator, Image} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, memo} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SvgProfile} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -123,7 +123,7 @@ const AboutYou = ({navigation}: any) => {
       </View>
       <View style={styles.profileDetailContainer}>
         <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
-        {vehicleData.isSucces
+        {vehicleData.isSuccess
           ? vehicleData?.data.map(vehicle => console.log(vehicle))
           : null}
         <SvgTextButton
@@ -135,4 +135,4 @@ const AboutYou = ({navigation}: any) => {
   );
 };
 
-export default AboutYou;
+export default memo(AboutYou);

@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -58,6 +58,7 @@ const ForgotPassword = ({navigation}: any) => {
         )}
       </View>
       {isLoading ? <ActivityIndicator /> : null}
+      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       {email && (
         <View style={styles.buttonView}>
           <TouchableOpacity
@@ -71,4 +72,4 @@ const ForgotPassword = ({navigation}: any) => {
   );
 };
 
-export default ForgotPassword;
+export default memo(ForgotPassword);

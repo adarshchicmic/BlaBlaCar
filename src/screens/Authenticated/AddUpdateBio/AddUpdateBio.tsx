@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -90,4 +90,4 @@ const AddUpdateBio = ({navigation}) => {
   );
 };
 
-export default AddUpdateBio;
+export default memo(AddUpdateBio);

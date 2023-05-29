@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import styles from './styles';
 import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -48,4 +48,4 @@ const MiddleSeatEmpty = ({navigation}) => {
   );
 };
 
-export default MiddleSeatEmpty;
+export default memo(MiddleSeatEmpty);

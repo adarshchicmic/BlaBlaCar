@@ -1,5 +1,5 @@
 import {View, Text, Image} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import styles from './styles';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomButton from '../../../components/CustomButton/CustomButton';
@@ -48,4 +48,4 @@ const SelectSignUpLogIn = ({navigation}: any) => {
   );
 };
 
-export default SelectSignUpLogIn;
+export default memo(SelectSignUpLogIn);

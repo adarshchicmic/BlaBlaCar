@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import PickUp from '../PickUp/PickUp';
 
 const Publish = ({navigation}: any) => {
@@ -10,4 +10,4 @@ const Publish = ({navigation}: any) => {
   );
 };
 
-export default Publish;
+export default memo(Publish);

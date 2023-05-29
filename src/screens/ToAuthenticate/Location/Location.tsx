@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, memo} from 'react';
 import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -113,4 +113,4 @@ const Location = ({navigation, route}) => {
   );
 };
 
-export default Location;
+export default memo(Location);

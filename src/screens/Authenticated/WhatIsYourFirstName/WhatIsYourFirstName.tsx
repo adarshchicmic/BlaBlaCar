@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
@@ -90,4 +90,4 @@ const WhatIsYourFirstName = ({navigation}: any) => {
   );
 };
 
-export default WhatIsYourFirstName;
+export default memo(WhatIsYourFirstName);

@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import CustomButton from '../../../../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../../../../shared/Constants/Constants';
 import styles from './styles';
@@ -66,4 +66,4 @@ const Chattiness = ({navigation}) => {
   );
 };
 
-export default Chattiness;
+export default memo(Chattiness);

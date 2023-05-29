@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -114,4 +114,4 @@ const VerifyMobileNumber = ({navigation}: any) => {
   );
 };
 
-export default VerifyMobileNumber;
+export default memo(VerifyMobileNumber);

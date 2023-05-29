@@ -1,5 +1,5 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import CustomLoginSignUpOption from '../../../components/CustomLogInSignUpOptions/CustomLoginSignUpOption';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 
@@ -16,4 +16,4 @@ const SignUpOption = ({navigation}: any) => {
   );
 };
 
-export default SignUpOption;
+export default memo(SignUpOption);
