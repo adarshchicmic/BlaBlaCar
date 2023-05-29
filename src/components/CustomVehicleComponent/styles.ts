@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   container: {
     width: wp(90),
     flexDirection: 'row',
-    padding: 10,
+    marginBottom: hp(2),
+    alignSelf: 'center',
   },
   textView: {
     alignSelf: 'flex-start',

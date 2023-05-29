@@ -23,8 +23,10 @@ const SvgRoute: any = require('./route.svg').default;
 const SvgTimes: any = require('./times.svg').default;
 const SvgBlackRightArrow: any = require('./rightBlackArrow.svg').default;
 const SvgLeftArrowWithout: any = require('./leftArrowWithout.svg').default;
+const SvgDanger: any = require('./svgDanger.svg').default;
 
 export {
+  SvgDanger,
   SvgLeftArrowWithout,
   SvgBlackRightArrow,
   SvgTimes,

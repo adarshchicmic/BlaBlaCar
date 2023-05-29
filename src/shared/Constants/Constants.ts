@@ -56,6 +56,10 @@ export const COMMON_CONSTS = {
   GOING: 'going?',
   NUMBER_OF_SEATS: 'Number of seats to',
   BOOK: 'book',
+  EDIT_INFO: 'Edit info',
+  DELETE_VEHICLE: 'Delete Vehicle',
+  DELETING_A_CAR_FROM_YOUR_PROFILE_MIGHT_MAKE_IT_HARDER:
+    'Deleting a car from your profile might make it harder for passengers to find you at the meeting point.',
   LEAVING_FROM: 'Leaving from',
   GOING_TO: 'Going to',
   TODAY: 'Today',

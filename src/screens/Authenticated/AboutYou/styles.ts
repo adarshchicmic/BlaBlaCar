@@ -17,6 +17,9 @@ const styles = StyleSheet.create<any>({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  vehicleView: {
+    marginLeft: wp(6),
+  },
   nameView: {
     alignSelf: 'center',
   },

@@ -2,21 +2,22 @@ import {
   View,
   Text,
   TouchableOpacity,
-  ActivityIndicator,
+  // ActivityIndicator,
   TextInput,
 } from 'react-native';
 import React, {useState, memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
-import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
-import {useSelector, useDispatch} from 'react-redux';
-import {updateProfileData} from '../../../store/slices/profileSlice';
-import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
+// import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
+// import {useSelector, useDispatch} from 'react-redux';
+// import {updateProfileData} from '../../../store/slices/profileSlice';
+// import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {SvgRightArrow} from '../../../assets/svg';
 
-const LicensePlateNumber = ({navigation}) => {
+const LicensePlateNumber = ({navigation, route}) => {
+  const screen = route?.params?.screen;
   const [licensePlateNumber, setLicensePlateNumber] = useState<string>('');
   const [validLicensePlate, setValidLicensePlate] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
@@ -31,12 +32,12 @@ const LicensePlateNumber = ({navigation}) => {
     navigation.goBack();
   };
   const handleDoNotKnowLicensePlateOnPress = () => {
-    navigation.navigate('VehicleInformation');
+    navigation.navigate('VehicleInformation', {screen: screen});
   };
   const handleSaveButtonPress = async () => {
     if (validLicensePlate) {
       setShowError(false);
-      navigation.navigate('VehicleInformation');
+      navigation.navigate('VehicleInformation', {screen: screen});
       // navigation.goBack();
     } else {
       setShowError(true);

@@ -34,6 +34,9 @@ const AboutYou = ({navigation}: any) => {
           ))
         : null;
       const vehiclesData = await vehicle();
+      console.log('====================================');
+      console.log(vehicleData);
+      console.log('====================================');
       setVehicleData(vehiclesData);
     };
     fetchUserData();
@@ -43,7 +46,9 @@ const AboutYou = ({navigation}: any) => {
     navigation.navigate('EditPersonalDetail');
   };
   const handleOnPressAddVehicle = () => {
-    navigation.navigate('LicensePlateNumber');
+    navigation.navigate('LicensePlateNumber', {
+      screen: COMMON_CONSTS.ABOUT_YOU,
+    });
   };
   const handleConfirmEmail = () => {
     navigation.navigate('WhatIsYourEmail', {screen: 'confirmEmail'});
@@ -122,15 +127,20 @@ const AboutYou = ({navigation}: any) => {
       </View>
       <View style={styles.profileDetailContainer}>
         <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
-        {vehicleData.isSuccess
-          ? vehicleData?.data.map((vehicle, i) => (
-              <CustomVehicleComponent
-                key={i}
-                vehicleName={vehicle?.vehicle_name}
-                vehicleColor={vehicle?.vehicle_color}
-              />
-            ))
-          : null}
+        <View style={styles.vehicleView}>
+          {vehicleData.isSuccess
+            ? vehicleData?.data.map((vehicle, i) => (
+                <CustomVehicleComponent
+                  navigation={navigation}
+                  key={i}
+                  vehicleName={vehicle?.vehicle_name}
+                  vehicleColor={vehicle?.vehicle_color}
+                  show={true}
+                  vehicleId={vehicle?.id}
+                />
+              ))
+            : null}
+        </View>
         <SvgTextButton
           text={COMMON_CONSTS.ADD_VEHICLE}
           onPress={() => handleOnPressAddVehicle()}

@@ -30,6 +30,8 @@ import BookInstantly from '../screens/Authenticated/BookInstantly/BookInstantly'
 import PricePerSeat from '../screens/Authenticated/PricePerSeat/PricePerSeat';
 import AddAboutRide from '../screens/Authenticated/AddAboutRide/AddAboutRide';
 import SearchResult from '../screens/Authenticated/SearchResult/SearchResult';
+import VehiclePage from '../screens/Authenticated/VehiclePage/VehiclePage';
+import DeleteACar from '../screens/Authenticated/DeleteACar/DeleteACar';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -73,6 +75,8 @@ const AppNavigator = () => {
       <Stack.Screen name="PricePerSeat" component={PricePerSeat} />
       <Stack.Screen name="AddAboutRide" component={AddAboutRide} />
       <Stack.Screen name="SearchResult" component={SearchResult} />
+      <Stack.Screen name="VehiclePage" component={VehiclePage} />
+      <Stack.Screen name="DeleteACar" component={DeleteACar} />
     </Stack.Navigator>
   );
 };

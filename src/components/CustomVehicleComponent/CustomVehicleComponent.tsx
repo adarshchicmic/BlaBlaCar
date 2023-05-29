@@ -5,23 +5,39 @@ import styles from './styles';
 interface Props {
   vehicleName: string;
   vehicleColor: string;
-  onPress: () => {};
+  navigation: any;
+  show: boolean;
+  vehicleId?: number;
 }
 
 const CustomVehicleComponent: React.FC<Props> = ({
   vehicleColor,
   vehicleName,
-  onPress = () => {},
+  navigation,
+  show,
+  vehicleId,
 }) => {
+  const handleOnPress = () => {
+    navigation.navigate('VehiclePage', {
+      vehicleId: vehicleId,
+      vehicleName: vehicleName,
+      vehicleColor: vehicleColor,
+    });
+  };
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      disabled={!show}
+      onPress={() => handleOnPress()}>
       <View style={styles.textView}>
         <Text style={styles.vehicleNameStyle}>{vehicleName}</Text>
         <Text style={styles.vehicleColorStyle}>{vehicleColor}</Text>
       </View>
-      <View style={styles.arrowView}>
-        <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
-      </View>
+      {show && (
+        <View style={styles.arrowView}>
+          <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+        </View>
+      )}
     </TouchableOpacity>
   );
 };

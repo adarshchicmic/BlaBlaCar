@@ -44,7 +44,7 @@ const EditProfilePicture = ({navigation}: any) => {
       });
       console.log(dataa, 'this is datavjkhkljaghkjdfghjkhgjklsdfh');
       const imageUri: any = await updateProfilePic({image: dataa});
-      dispatch(updateImage({image: imageUri?.data?.data?.image_url}));
+      dispatch(updateImage({image: imageUri?.data?.status?.image_url}));
     } catch (error) {
       console.log(error, 'this is an error');
     }

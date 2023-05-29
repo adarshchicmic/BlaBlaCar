@@ -13,7 +13,8 @@ import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useAddVehicleMutation} from '../../../services/modules/addVehicle';
 
-const VehicleInformation = ({navigation}: any) => {
+const VehicleInformation = ({navigation, route}: any) => {
+  const screen = route?.params?.screen;
   const [vehicleBrand, setVehicleBrand] = useState<string>('');
   const [vehicleName, setVehicleName] = useState<string>('');
   const [vehicleType, setVehicleType] = useState<string>('');
@@ -41,16 +42,21 @@ const VehicleInformation = ({navigation}: any) => {
   };
   const handleForwardArrowButtonPress = async () => {
     console.log('pressed');
-    const dataa = await addVehicle({
-      country: 'India',
-      vehicleNumber: null,
-      vehicleBrand: vehicleBrand,
-      vehicleName: vehicleName,
-      vehicleType: vehicleType,
-      vehicleColor: vehicleColor,
-      vehicleModelYear: vehicleModelYear,
-    });
-    console.log(dataa, 'thsi is sfdjhkfdsahjkfh');
+    if (screen === COMMON_CONSTS.ABOUT_YOU) {
+      const dataa = await addVehicle({
+        country: 'India',
+        vehicleNumber: null,
+        vehicleBrand: vehicleBrand,
+        vehicleName: vehicleName,
+        vehicleType: vehicleType,
+        vehicleColor: vehicleColor,
+        vehicleModelYear: vehicleModelYear,
+      });
+      console.log(dataa, 'thsi is sfdjhkfdsahjkfh');
+    }
+    // if (screen === COMMON_CONSTS.EDIT_INFO) {
+
+    // }
   };
   return (
     <KeyboardAvoidingView>
