@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {
-  heightPercentageToDP as hp,
+  // heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {RFValue} from 'react-native-responsive-fontsize';
+// import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   container: {

@@ -11,6 +11,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateProfileData} from '../../../store/slices/profileSlice';
 import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
+import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';
 
 const AboutYou = ({navigation}: any) => {
   const [userDetail, setUserDetail] = useState<any>({});
@@ -23,7 +24,6 @@ const AboutYou = ({navigation}: any) => {
   const dispatch = useDispatch();
   const states: any = useSelector(state => state);
   const imageUri = states?.profileSlice?.image;
-  console.log(states, 'this is states');
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await profile();
@@ -35,7 +35,6 @@ const AboutYou = ({navigation}: any) => {
         : null;
       const vehiclesData = await vehicle();
       setVehicleData(vehiclesData);
-      console.log(vehiclesData, 'this is vehicle datat');
     };
     fetchUserData();
   }, [profile, focus, dispatch, vehicle]);
@@ -124,7 +123,13 @@ const AboutYou = ({navigation}: any) => {
       <View style={styles.profileDetailContainer}>
         <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
         {vehicleData.isSuccess
-          ? vehicleData?.data.map(vehicle => console.log(vehicle))
+          ? vehicleData?.data.map((vehicle, i) => (
+              <CustomVehicleComponent
+                key={i}
+                vehicleName={vehicle?.vehicle_name}
+                vehicleColor={vehicle?.vehicle_color}
+              />
+            ))
           : null}
         <SvgTextButton
           text={COMMON_CONSTS.ADD_VEHICLE}
