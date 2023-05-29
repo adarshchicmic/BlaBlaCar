@@ -5,7 +5,7 @@ import {
   // ActivityIndicator,
   TextInput,
 } from 'react-native';
-import React, {useState, memo} from 'react';
+import React, {useState, memo, useEffect} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -15,12 +15,26 @@ import styles from './styles';
 // import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {SvgRightArrow} from '../../../assets/svg';
+import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
 
 const LicensePlateNumber = ({navigation, route}) => {
   const screen = route?.params?.screen;
+  const vehicleId = route?.params?.vehicleId;
+  console.log(vehicleId, 'this is vehicle id ');
   const [licensePlateNumber, setLicensePlateNumber] = useState<string>('');
   const [validLicensePlate, setValidLicensePlate] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
+  const [vehicle, {isLoading, isError}] = useLazyVehicleQuery();
+
+  useEffect(() => {
+    const fun = async () => {
+      if (vehicleId) {
+        const data = await vehicle({vehicleId: vehicleId});
+        console.log(data, 'thisis data from vehicle');
+      }
+    };
+    fun();
+  }, [vehicleId, vehicle]);
 
   const handleTextChange = value => {
     value.length > 8 && value.length < 12

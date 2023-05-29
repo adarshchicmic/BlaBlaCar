@@ -69,7 +69,6 @@ const AboutYou = ({navigation}: any) => {
           <View style={styles.nameView}>
             <Text style={styles.nameStyle}>{userDetail?.first_name}</Text>
             <Text style={styles.nameBesideTextStyle}>
-              {' '}
               {COMMON_CONSTS.NEWCOMER}
             </Text>
           </View>

@@ -20,6 +20,7 @@ const VehiclePage = ({navigation, route}) => {
   const handleEditInfoPress = () => {
     navigation.navigate('LicensePlateNumber', {
       screen: COMMON_CONSTS.EDIT_INFO,
+      vehicleId: vehicleId,
     });
   };
   return (

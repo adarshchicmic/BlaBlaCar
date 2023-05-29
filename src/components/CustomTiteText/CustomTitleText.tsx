@@ -1,7 +1,12 @@
-import {View, Text} from 'react-native';
+import {View, Text, TextStyle} from 'react-native';
 import React from 'react';
 import styles from './styles';
-const CustomTitleText = ({text, moreStyle}) => {
+
+interface Props {
+  text: string;
+  moreStyle?: TextStyle;
+}
+const CustomTitleText: React.FC<Props> = ({text, moreStyle}) => {
   return (
     <View style={styles.container}>
       <Text style={[styles.textStyle, moreStyle]}>{text}</Text>

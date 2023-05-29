@@ -58,14 +58,21 @@ export const COMMON_CONSTS = {
   BOOK: 'book',
   EDIT_INFO: 'Edit info',
   DELETE_VEHICLE: 'Delete Vehicle',
+  INBOX: 'Inbox',
   DELETING_A_CAR_FROM_YOUR_PROFILE_MIGHT_MAKE_IT_HARDER:
     'Deleting a car from your profile might make it harder for passengers to find you at the meeting point.',
   LEAVING_FROM: 'Leaving from',
+  NO_MESSAGES_RIGHT_NOW:
+    'No messages right now. Book or offer a ride to contact someone.',
   GOING_TO: 'Going to',
   TODAY: 'Today',
   PLEASE_VERIFY_YOUR: 'Please verify your',
   MOBILE_NUMBER: 'mobile number',
   I_WILL_DO_IT_LATER: "I'll do it later",
+  YOUR_FUTURE_TRAVEL_PLANS_WILL_APPEAR_HERE:
+    'Your future travel plans will appear here.',
+  FIND_THE_PERFECT_RIDE_FROM:
+    'Find the perfect ride from thousands of destinations, or publish to share your travel costs.',
   ABOUT_YOU: 'About you',
   ACCOUNT: 'Account',
   EDIT_PROFILE_PICTURE: 'Edit profile picture',
