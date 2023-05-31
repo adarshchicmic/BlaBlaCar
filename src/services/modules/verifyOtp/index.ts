@@ -1,12 +1,12 @@
 import {api} from '../../api';
 export const userApi = api.injectEndpoints({
   endpoints: build => ({
-    forgotPassword: build.mutation({
-      query: ({email}) => ({
-        url: 'send_otp/',
+    verifyOtp: build.mutation({
+      query: ({otp}) => ({
+        url: 'verify_otp/',
         method: 'POST',
         body: {
-          email: email,
+          otp: otp,
         },
       }),
     }),
@@ -14,4 +14,4 @@ export const userApi = api.injectEndpoints({
 
   overrideExisting: true,
 });
-export const {useForgotPasswordMutation} = userApi;
+export const {useVerifyOtpMutation} = userApi;

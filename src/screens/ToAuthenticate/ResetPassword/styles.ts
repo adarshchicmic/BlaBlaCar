@@ -10,6 +10,10 @@ const styles = StyleSheet.create<any>({
     justifyContent: 'center',
     marginLeft: wp(5),
   },
+  fullView: {
+    flex: 1,
+    alignSelf: 'center',
+  },
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
@@ -17,6 +21,7 @@ const styles = StyleSheet.create<any>({
   },
   textView: {
     marginVertical: hp(4),
+    zIndex: 1,
   },
   textInputStyle: {
     width: wp(90),

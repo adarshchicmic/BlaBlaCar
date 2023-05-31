@@ -22,7 +22,7 @@ const ForgotPassword = ({navigation}: any) => {
   const handleForwardArrowButtonPress = async () => {
     if (validEmail) {
       const datat = await forgotPassword({email: email});
-      // navigation.navigate('ResetPassword');
+      navigation.navigate('VerifyOtp');
       console.log(datat, 'this is result from datat');
     } else {
       setShowValidationError(true);

@@ -16,6 +16,7 @@ import VerifyMobileNumber from '../screens/ToAuthenticate/VerifyMobileNumber/Ver
 import SMSCode from '../screens/ToAuthenticate/SMSCode/SMSCode';
 import ForgotPassword from '../screens/ToAuthenticate/ForgotPassword/ForgotPassword';
 import ResetPassword from '../screens/ToAuthenticate/ResetPassword/ResetPassword';
+import VerifyOtp from '../screens/ToAuthenticate/VerifyOtp/VerifyOtp';
 
 const Stack = createNativeStackNavigator();
 const AuthNavigator = () => {
@@ -42,6 +43,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="SMSCode" component={SMSCode} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      <Stack.Screen name="VerifyOtp" component={VerifyOtp} />
     </Stack.Navigator>
   );
 };

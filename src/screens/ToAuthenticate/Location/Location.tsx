@@ -83,7 +83,7 @@ const Location = ({navigation, route}) => {
             longitude: longitudee,
           }),
         ),
-        navigation.navigate('DateComponent'))
+        navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER}))
       : null;
   };
   const onFail = () => {
