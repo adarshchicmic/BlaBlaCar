@@ -32,7 +32,7 @@ const styles = StyleSheet.create<Style | any>({
   },
   buttonView: {
     position: 'absolute',
-    bottom: hp(2),
+    bottom: hp(5),
     alignSelf: 'center',
     marginTop: hp(2),
   },

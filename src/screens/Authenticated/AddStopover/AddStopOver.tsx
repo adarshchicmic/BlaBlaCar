@@ -7,6 +7,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import CustomButton from '../../../components/CustomButton/CustomButton';
 
 const AddStopOver = ({navigation}) => {
   const handleBackArrowPress = () => {
@@ -14,6 +15,9 @@ const AddStopOver = ({navigation}) => {
   };
   const handleRightArrowPress = () => {
     navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER});
+  };
+  const handleOnPressAddCity = () => {
+    navigation.navigate('Location', {screen: COMMON_CONSTS.ADD_CITY});
   };
   return (
     <View>
@@ -28,6 +32,14 @@ const AddStopOver = ({navigation}) => {
         <Text style={styles.textStyle}>
           {COMMON_CONSTS.ADD_STOPOVERS_TO_GET_MORE_PASSENGERS}
         </Text>
+      </View>
+      <View>
+        <CustomButton
+          btnText={COMMON_CONSTS.ADD_CITY}
+          styleTxt={styles.btnTextStyle}
+          styleBtn={styles.btnStyle}
+          onPressFunction={() => handleOnPressAddCity()}
+        />
       </View>
       <TouchableOpacity
         style={styles.button}

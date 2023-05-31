@@ -6,7 +6,7 @@ interface Props {
   styleInputText: TextStyle;
   valueTextInput: string | number;
   keyboardTypeTextInput: string;
-  autoCapitalizeTextInput: boolean;
+  autoCapitalizeTextInput: any;
   customInputTextOuterStyle: ViewStyle;
   onFocusInput: any;
   onBlurInput: any;
@@ -51,6 +51,7 @@ const CustomTextInput: React.FC<Props | any> = ({
         maxLength={maxLength}
         secureTextEntry={secureTextEntry}
         multiline={multiline}
+
         // {valueField}
       />
     </View>

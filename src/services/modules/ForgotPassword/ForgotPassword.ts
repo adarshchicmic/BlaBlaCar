@@ -3,7 +3,7 @@ export const userApi = api.injectEndpoints({
   endpoints: build => ({
     forgotPassword: build.mutation({
       query: ({email}) => ({
-        url: 'users/password',
+        url: 'send_otp/',
         method: 'POST',
         body: {
           user: {

@@ -14,6 +14,7 @@ import {
   updateStatsGoingTo,
   updateStatsLeavingFrom,
 } from '../../../store/slices/rideSlice';
+import {updateCity} from '../../../store/slices/publishRideSlice';
 
 const Location = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,6 +74,16 @@ const Location = ({navigation, route}) => {
           }),
         ),
         navigation.navigate('MapScreen'))
+      : null;
+    screen === COMMON_CONSTS.ADD_CITY
+      ? (dispatch(
+          updateCity({
+            city: data?.description,
+            latitude: latitudee,
+            longitude: longitudee,
+          }),
+        ),
+        navigation.navigate('DateComponent'))
       : null;
   };
   const onFail = () => {

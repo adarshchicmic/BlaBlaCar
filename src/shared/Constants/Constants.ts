@@ -75,6 +75,7 @@ export const COMMON_CONSTS = {
     'Find the perfect ride from thousands of destinations, or publish to share your travel costs.',
   ABOUT_YOU: 'About you',
   ACCOUNT: 'Account',
+  ADD_CITY: 'Add city',
   EDIT_PROFILE_PICTURE: 'Edit profile picture',
   EDIT_PERSONAL_DETAILS: 'Edit personal details',
   VERIFY_YOUR_PROFILE: 'Verify your profile',

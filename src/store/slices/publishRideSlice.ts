@@ -9,6 +9,8 @@ interface InitialState {
   destination_latitude: any;
   passengers_count: any;
   add_city: any;
+  add_city_latitude: any;
+  add_city_longitude: any;
   date: any;
   time: any;
   set_price: any;
@@ -23,6 +25,8 @@ interface InitialState {
 }
 export const initialState: Partial<InitialState> = {
   add_city: 'punjab',
+  add_city_latitude: '',
+  add_city_longitude: '',
   date: '',
   estimatedTime: '',
   set_price: 0,
@@ -63,8 +67,10 @@ const publishRideSlice: any = createSlice({
       state.time = time;
     },
     updateCity: (state, action) => {
-      const {city} = action.payload;
+      const {city, latitude, longitude} = action.payload;
       state.add_city = city;
+      state.add_city_latitude = latitude;
+      state.add_city_longitude = longitude;
     },
     updatePrice: (state, action) => {
       const {price} = action.payload;

@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
   svgArrowStyle: {
     alignSelf: 'center',
   },
+  btnTextStyle: {
+    color: '#2dbeff',
+    fontSize: RFValue(15),
+  },
+  btnStyle: {
+    marginTop: hp(4),
+    paddingLeft: wp(5),
+  },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',

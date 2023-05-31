@@ -22,7 +22,7 @@ const ForgotPassword = ({navigation}: any) => {
   const handleForwardArrowButtonPress = async () => {
     if (validEmail) {
       const datat = await forgotPassword({email: email});
-      navigation.navigate('ResetPassword');
+      // navigation.navigate('ResetPassword');
       console.log(datat, 'this is result from datat');
     } else {
       setShowValidationError(true);
@@ -50,6 +50,7 @@ const ForgotPassword = ({navigation}: any) => {
           placeholderTextColor={'#969693'}
           inputTextPlaceholder={COMMON_CONSTS.EMAIL}
           onChangeTextFunction={text => handleTextChange(text)}
+          autoCapitalizeTextInput={false}
         />
         {showValidationError && (
           <Text style={styles.errorTextStyle}>

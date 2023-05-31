@@ -43,6 +43,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-BlaBla.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BlaBla.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BlaBla/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-BlaBla-BlaBlaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlaBla-BlaBlaTests.release.xcconfig"; path = "Target Support Files/Pods-BlaBla-BlaBlaTests/Pods-BlaBla-BlaBlaTests.release.xcconfig"; sourceTree = "<group>"; };
+		9389CF732A274F02001AD3BA /* BlaBla.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BlaBla.entitlements; path = BlaBla/BlaBla.entitlements; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -86,6 +87,7 @@
 		13B07FAE1A68108700A75B9A /* BlaBla */ = {
 			isa = PBXGroup;
 			children = (
+				9389CF732A274F02001AD3BA /* BlaBla.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -485,6 +487,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BlaBla/BlaBla.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BlaBla/Info.plist;
@@ -516,6 +519,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BlaBla/BlaBla.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = BlaBla/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
