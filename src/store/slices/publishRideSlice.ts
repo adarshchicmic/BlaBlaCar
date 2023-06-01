@@ -35,15 +35,7 @@ export const initialState: Partial<InitialState> = {
   time: '12:00',
   bookInstantly: 'true',
   midSeat: true,
-  select_route: {
-    road_name: '',
-    distance: 0,
-    duration: 0,
-    route_deatils: {
-      a: 'a',
-      b: 'b',
-    },
-  },
+  select_route: {},
   maxPrice: 0,
   minPrice: 0,
 };
@@ -94,9 +86,8 @@ const publishRideSlice: any = createSlice({
       state.select_route.road_name = road;
     },
     updateRouteDetail: (state, action) => {
-      const {a, b} = action.payload;
-      state.select_route.route_deatils.a = a;
-      state.select_route.route_deatils.b = b;
+      const {selectRoute} = action.payload;
+      state.select_route = selectRoute;
     },
     updateMidSeat: (state, action) => {
       const {midSeat} = action.payload;

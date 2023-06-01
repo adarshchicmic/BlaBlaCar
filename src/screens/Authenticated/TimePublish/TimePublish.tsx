@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useState, memo} from 'react';
+import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import React, {useState, memo, useEffect} from 'react';
 import styles from './styles';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import CustomButton from '../../../components/CustomButton/CustomButton';
@@ -7,16 +7,34 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import DatePicker from 'react-native-modern-datepicker';
 import {useDispatch} from 'react-redux';
 import {updatePublishTime} from '../../../store/slices/publishRideSlice';
+import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 
 const TimePublish = ({navigation}) => {
   const [time, setTime] = useState('12:00');
   const [showClock, setShowClock] = useState(false);
+  const [vehicleSize, setVehicleSize] = useState<number>(0);
+  const [vehicleData, setVehicleData] = useState<any>({});
+
   const dispatch = useDispatch();
+  const [vehicles, {isLoading, isError}] = useLazyVehiclesQuery();
+
+  useEffect(() => {
+    const fun = async () => {
+      const data = await vehicles();
+      setVehicleData(data?.data?.data);
+      setVehicleSize(data?.data?.data?.length);
+    };
+    fun();
+  }, [vehicles]);
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
   const handleRightArrowButtonPress = () => {
     dispatch(updatePublishTime({time: time}));
+    vehicleSize > 1 || vehicleSize === undefined
+      ? navigation.navigate('WhichCarYouDriving', {vehicleData: vehicleData})
+      : navigation.navigate('MiddleSeatEmpty');
+    isError ? navigation.navigate('MiddleSeatEmpty') : null;
   };
   const handleButtonClick = () => {
     setShowClock(true);
@@ -46,6 +64,7 @@ const TimePublish = ({navigation}) => {
           onPressFunction={() => handleButtonClick()}
         />
       </View>
+      {isLoading && <ActivityIndicator />}
       {showClock && (
         <DatePicker
           mode="time"

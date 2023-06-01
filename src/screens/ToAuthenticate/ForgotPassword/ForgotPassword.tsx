@@ -23,7 +23,9 @@ const ForgotPassword = ({navigation}: any) => {
     if (validEmail) {
       const result: any = await forgotPassword({email: email});
       console.log(result, 'this is result');
-      result?.data?.code === 200 ? navigation.navigate('VerifyOtp') : null;
+      result?.data?.code === 200
+        ? navigation.navigate('VerifyOtp', {email: email})
+        : null;
     } else {
       setShowValidationError(true);
     }
@@ -50,7 +52,6 @@ const ForgotPassword = ({navigation}: any) => {
           placeholderTextColor={'#969693'}
           inputTextPlaceholder={COMMON_CONSTS.EMAIL}
           onChangeTextFunction={text => handleTextChange(text)}
-          autoCapitalizeTextInput={false}
         />
         {showValidationError && (
           <Text style={styles.errorTextStyle}>

@@ -21,6 +21,7 @@ export const userApi = api.injectEndpoints({
         bookInstantly,
         midSeat,
         estimatedTime,
+        selectRoute,
       }) => ({
         url: 'publishes/',
         method: 'POST',
@@ -44,7 +45,7 @@ export const userApi = api.injectEndpoints({
             book_instantly: bookInstantly,
             mid_seat: midSeat,
             estimate_time: estimatedTime,
-            select_route: {},
+            select_route: selectRoute,
           },
         },
       }),

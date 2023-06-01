@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   },
   inputTextStyle: {
     width: wp(90),
+    height: hp(6),
     backgroundColor: '#cccdcf',
     fontSize: RFValue(16),
     color: '#000',

@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React, {useState} from 'react';
 import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
@@ -7,7 +7,8 @@ import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput
 import styles from './styles';
 import {useVerifyOtpMutation} from '../../../services/modules/verifyOtp';
 
-const VerifyOtp = ({navigation}) => {
+const VerifyOtp = ({navigation, route}) => {
+  const email = route?.params?.email;
   const [otp, setOtp] = useState('');
   const [verifyOtp, {isLoading, isError}] = useVerifyOtpMutation();
 
@@ -15,8 +16,9 @@ const VerifyOtp = ({navigation}) => {
     setOtp(value);
   };
   const handleVerifyButtonPress = async () => {
-    const datata: any = await verifyOtp({otp: otp});
-    datata?.data?.code === 200 ? navigation.navigate('ResetPassword') : null;
+    const result: any = await verifyOtp({otp: otp, email: email});
+    console.log(result, 'this is result');
+    result?.data?.code === 200 ? navigation.navigate('ResetPassword') : null;
   };
   return (
     <View>
@@ -31,6 +33,8 @@ const VerifyOtp = ({navigation}) => {
           keyboardTypeTextInput={'numeric'}
         />
       </View>
+      {isLoading && <ActivityIndicator />}
+      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       {otp && (
         <View style={styles.buttonView}>
           <TouchableOpacity

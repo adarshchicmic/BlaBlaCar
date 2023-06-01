@@ -32,6 +32,7 @@ import AddAboutRide from '../screens/Authenticated/AddAboutRide/AddAboutRide';
 import SearchResult from '../screens/Authenticated/SearchResult/SearchResult';
 import VehiclePage from '../screens/Authenticated/VehiclePage/VehiclePage';
 import DeleteACar from '../screens/Authenticated/DeleteACar/DeleteACar';
+import WhichCarYouDriving from '../screens/Authenticated/WhichCarYouDriving/WhichCarYouDriving';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -77,6 +78,7 @@ const AppNavigator = () => {
       <Stack.Screen name="SearchResult" component={SearchResult} />
       <Stack.Screen name="VehiclePage" component={VehiclePage} />
       <Stack.Screen name="DeleteACar" component={DeleteACar} />
+      <Stack.Screen name="WhichCarYouDriving" component={WhichCarYouDriving} />
     </Stack.Navigator>
   );
 };

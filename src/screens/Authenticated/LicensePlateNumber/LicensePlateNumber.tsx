@@ -2,7 +2,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  // ActivityIndicator,
+  ActivityIndicator,
   TextInput,
 } from 'react-native';
 import React, {useState, memo, useEffect} from 'react';
@@ -15,7 +15,7 @@ import styles from './styles';
 // import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {SvgRightArrow} from '../../../assets/svg';
-import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
+import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
 
 const LicensePlateNumber = ({navigation, route}) => {
   const screen = route?.params?.screen;
@@ -29,7 +29,8 @@ const LicensePlateNumber = ({navigation, route}) => {
   useEffect(() => {
     const fun = async () => {
       if (vehicleId) {
-        const data = await vehicle({vehicleId: vehicleId});
+        const data = await vehicle({id: vehicleId});
+        console.log(data, 'this is data guys');
       }
     };
     fun();
@@ -88,8 +89,8 @@ const LicensePlateNumber = ({navigation, route}) => {
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.PLATE_ERROR}</Text>}
-      {/* {isLoading && <ActivityIndicator />} */}
-      {/* {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>} */}
+      {isLoading && <ActivityIndicator />}
+      {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {licensePlateNumber && (
         <View style={styles.buttonView}>
           <TouchableOpacity

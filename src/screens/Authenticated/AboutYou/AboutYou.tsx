@@ -13,7 +13,7 @@ import {
   updateImage,
   updateProfileData,
 } from '../../../store/slices/profileSlice';
-import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
+import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';
 
 const AboutYou = ({navigation}: any) => {
@@ -21,7 +21,7 @@ const AboutYou = ({navigation}: any) => {
   const [vehicleData, setVehicleData] = useState<any>({});
   const [profile, {isLoading, isError}]: any = useLazyProfileQuery();
   const [vehicle, {isLoading: isLadingVehicle, isError: isErrorVehicle}]: any =
-    useLazyVehicleQuery();
+    useLazyVehiclesQuery();
 
   const focus = useIsFocused();
   const dispatch = useDispatch();
@@ -131,7 +131,7 @@ const AboutYou = ({navigation}: any) => {
           <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
           <View style={styles.vehicleView}>
             {vehicleData.isSuccess
-              ? vehicleData?.data.map((vehicle, i) => (
+              ? vehicleData?.data?.data.map((vehicle, i) => (
                   <CustomVehicleComponent
                     navigation={navigation}
                     key={i}

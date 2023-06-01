@@ -6,7 +6,7 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {usePublishRideMutation} from '../../../services/modules/PublishRide';
 import {useSelector, useDispatch} from 'react-redux';
-import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
+import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
 import {updateVehicleId} from '../../../store/slices/publishRideSlice';
 
 const AddAboutRide = ({navigation}) => {
@@ -14,16 +14,16 @@ const AddAboutRide = ({navigation}) => {
   const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
-  const [vehicle, {}] = useLazyVehicleQuery();
+  const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
+    useLazyVehicleQuery();
   const states: any = useSelector(state => state);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     vehicle().then(payload => {
-      console.log(payload, 'this is data guys ');
-      dispatch(updateVehicleId({id: payload.data[0].id}));
-      setVehiclePresent(payload?.data?.length);
+      dispatch(updateVehicleId({id: payload?.data?.data[0].id}));
+      setVehiclePresent(payload?.data?.data?.length);
     });
   }, [vehicle, dispatch]);
   // useEffect(() => {
@@ -54,9 +54,9 @@ const AddAboutRide = ({navigation}) => {
         destinationLatitude: states.rideSlice.statsDropOff.latitude,
         destinationLongitude: states.rideSlice.statsDropOff.longitude,
         passsengerCount: states.rideSlice.numberOfSeats,
-        addCity: 'Punjab',
-        addCityLongitude: 77.102493,
-        addCityLatitude: 28.70406,
+        addCity: states.publishRideSlice.add_city,
+        addCityLongitude: states.publishRideSlice.add_city_latitude,
+        addCityLatitude: states.publishRideSlice.add_city_longitude,
         date: states.publishRideSlice.date,
         time: states.publishRideSlice.time,
         setPrice: states.publishRideSlice.set_price,
@@ -65,9 +65,10 @@ const AddAboutRide = ({navigation}) => {
         bookInstantly: states.publishRideSlice.bookInstantly,
         midSeat: states.publishRideSlice.midSeat,
         estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+        selectRoute: states.publishRideSlice.select_route,
       });
-
-      datata.data.status === 'created' ? navigation.popToTop() : null;
+      console.log(datata, 'this is result guys ');
+      datata.data.code === 201 ? navigation.popToTop() : null;
     } else {
       setShowError(true);
     }
@@ -92,9 +93,13 @@ const AddAboutRide = ({navigation}) => {
           styleInputText={styles.textInputStyle}
         />
       </View>
-      {showError && <Text>{COMMON_CONSTS.VEHICLE_ERROR}</Text>}
-      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
-      {isLoading && <ActivityIndicator />}
+      {showError && (
+        <Text style={styles.errorStyle}>{COMMON_CONSTS.VEHICLE_ERROR}</Text>
+      )}
+      {(isError || isErrorVehicle) && (
+        <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
+      )}
+      {(isLoading || isLoadingVehicle) && <ActivityIndicator />}
       {text && (
         <TouchableOpacity
           style={styles.button}

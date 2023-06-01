@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, memo} from 'react';
 import {
   View,
@@ -7,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import MapView, {Marker, Polyline} from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
+// import Geolocation from '@react-native-community/geolocation';
 import Geocoder from 'react-native-geocoding';
 import styles from './styles';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -20,7 +21,10 @@ import {
   SvgRoute,
   SvgTime,
 } from '../../../assets/svg';
-import {updateRoadDistanceDuration} from '../../../store/slices/publishRideSlice';
+import {
+  updateRoadDistanceDuration,
+  updateRouteDetail,
+} from '../../../store/slices/publishRideSlice';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -65,7 +69,7 @@ const MapScreen = ({navigation}: any) => {
       destLongitude: destLocation?.longitude,
     });
     const data = val?.data;
-
+    dispatch(updateRouteDetail({selectRoute: data}));
     if (data.status === 'OK') {
       const routeCoordinates = data.routes[0].overview_polyline.points;
       const dis = data.routes[0].legs[0].distance.text;

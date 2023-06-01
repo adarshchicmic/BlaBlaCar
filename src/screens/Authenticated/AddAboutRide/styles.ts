@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   },
   errorStyle: {
     color: '#f00',
+    marginLeft: wp(5),
   },
   buttonStyle: {
     width: wp(90),

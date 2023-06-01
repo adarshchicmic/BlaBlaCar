@@ -11,6 +11,7 @@ import {
 } from '../../../assets/svg';
 import {updatePassword} from '../../../store/slices/UserSlice';
 import {useDispatch} from 'react-redux';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const ResetPassword = ({navigation}: any) => {
   const [password, setPassword] = useState<string>('');
@@ -74,63 +75,65 @@ const ResetPassword = ({navigation}: any) => {
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.fullView}>
-        <TouchableOpacity onPress={() => handleBackArrowPress()}>
-          <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
-        </TouchableOpacity>
-        <View style={styles.textView}>
-          <Text style={styles.textStyle}>{COMMON_CONSTS.DEFINE_YOUR}</Text>
-          <Text style={styles.textStyle}>{COMMON_CONSTS.PASSWORDS}</Text>
-        </View>
+      <ScrollView>
+        <View style={styles.fullView}>
+          <TouchableOpacity onPress={() => handleBackArrowPress()}>
+            <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+          </TouchableOpacity>
+          <View style={styles.textView}>
+            <Text style={styles.textStyle}>{COMMON_CONSTS.DEFINE_YOUR}</Text>
+            <Text style={styles.textStyle}>{COMMON_CONSTS.PASSWORDS}</Text>
+          </View>
 
-        <View style={styles.textPasswordMustContainView}>
-          <Text style={styles.textPasswordMustContain}>
-            {COMMON_CONSTS.IT_MUST_HAVE_ATLEAST_EIGHT_CHARACTERS_ONE}
-          </Text>
-          <Text style={styles.textPasswordMustContain}>
-            {COMMON_CONSTS.LETTER_ONE_NUMBER_AND_ONE_SPECIAL_CHARACTER}
-          </Text>
-        </View>
+          <View style={styles.textPasswordMustContainView}>
+            <Text style={styles.textPasswordMustContain}>
+              {COMMON_CONSTS.IT_MUST_HAVE_ATLEAST_EIGHT_CHARACTERS_ONE}
+            </Text>
+            <Text style={styles.textPasswordMustContain}>
+              {COMMON_CONSTS.LETTER_ONE_NUMBER_AND_ONE_SPECIAL_CHARACTER}
+            </Text>
+          </View>
 
-        <View>
           <View>
-            <CustomTextInput
-              styleInputText={styles.textInputStyle}
-              inputTextPlaceholder={COMMON_CONSTS.PASSWORD}
-              placeholderTextColor={'#969693'}
-              secureTextEntry={!openEye}
-              onChangeTextFunction={text => handlePasswordChange(text)}
-            />
-            {showWarning && (
-              <Text style={styles.warningTextStyle}>
-                {COMMON_CONSTS.PASSWORD_IS_NOT_VALID}
-              </Text>
-            )}
+            <View>
+              <CustomTextInput
+                styleInputText={styles.textInputStyle}
+                inputTextPlaceholder={COMMON_CONSTS.PASSWORD}
+                placeholderTextColor={'#969693'}
+                secureTextEntry={!openEye}
+                onChangeTextFunction={text => handlePasswordChange(text)}
+              />
+              {showWarning && (
+                <Text style={styles.warningTextStyle}>
+                  {COMMON_CONSTS.PASSWORD_IS_NOT_VALID}
+                </Text>
+              )}
 
-            {password && (
-              <View style={styles.svgOpenCloseStyle}>
-                <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
-                  {openEye ? (
-                    <SvgOpenEye width={25} height={25} />
-                  ) : (
-                    <SvgCloseEye width={25} height={25} />
-                  )}
-                </TouchableOpacity>
-              </View>
-            )}
+              {password && (
+                <View style={styles.svgOpenCloseStyle}>
+                  <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
+                    {openEye ? (
+                      <SvgOpenEye width={25} height={25} />
+                    ) : (
+                      <SvgCloseEye width={25} height={25} />
+                    )}
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
           </View>
+
+          {password && (
+            <View style={styles.buttonView}>
+              <TouchableOpacity
+                style={styles.buttonStyleArrow}
+                onPress={() => handleForwardArrowButtonPress()}>
+                <SvgRightArrow color="red" />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
-
-        {password && (
-          <View style={styles.buttonView}>
-            <TouchableOpacity
-              style={styles.buttonStyleArrow}
-              onPress={() => handleForwardArrowButtonPress()}>
-              <SvgRightArrow color="red" />
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
