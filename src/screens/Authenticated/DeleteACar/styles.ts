@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     justifyContent: 'center',
-    width: wp(10),
-    height: hp(5),
+    width: wp(12),
+    height: wp(12),
     backgroundColor: '#fff',
-    borderRadius: 60,
+    borderRadius: wp(6),
   },
   deleteVehicleButton: {
     width: wp(40),

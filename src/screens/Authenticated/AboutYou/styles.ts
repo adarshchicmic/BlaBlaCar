@@ -45,9 +45,9 @@ const styles = StyleSheet.create<any>({
     width: wp(35),
   },
   imageStyle: {
-    height: hp(15),
-    width: wp(30),
-    borderRadius: 60,
+    height: wp(12),
+    width: wp(12),
+    borderRadius: wp(6),
   },
   buttonTextStyle: {
     color: '#2dbeff',

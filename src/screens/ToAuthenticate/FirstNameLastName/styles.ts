@@ -67,11 +67,11 @@ const styles = StyleSheet.create<any>({
     fontWeight: '500',
   },
   buttonStyleArrow: {
-    height: hp(7),
+    height: wp(12),
     width: wp(12),
     backgroundColor: '#2dbeff',
     padding: hp(1),
-    borderRadius: 60,
+    borderRadius: wp(6),
   },
 
   buttonView: {

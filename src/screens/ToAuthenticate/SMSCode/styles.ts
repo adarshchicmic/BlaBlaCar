@@ -44,11 +44,11 @@ const styles = StyleSheet.create<any>({
     zIndex: 1,
   },
   buttonStyle: {
-    height: hp(7),
+    height: wp(12),
     width: wp(12),
     backgroundColor: '#2dbeff',
     padding: hp(1),
-    borderRadius: 60,
+    borderRadius: wp(6),
   },
   errorTextStyle: {
     color: '#f00',

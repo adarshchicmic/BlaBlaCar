@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: hp(85),
     right: wp(0.8),
-    height: hp(8),
-    width: wp(16),
+    height: wp(12),
+    width: wp(12),
     backgroundColor: '#2dbeff',
-    borderRadius: 40,
+    borderRadius: wp(6),
     padding: 15,
   },
   svgArrowStyle: {
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: RFValue(15),
   },
   btnStyle: {
-    marginTop: hp(4), 
+    marginTop: hp(4),
     paddingLeft: wp(5),
   },
   buttonText: {
