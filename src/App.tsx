@@ -1,9 +1,13 @@
-import {View} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import React from 'react';
 import StatusBarr from './components/StatusBar/StatusBar';
 import ApplicationNavigator from './navigators/ApplicationNavigator';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 // import AppNavigator from './navigators/AppNavigator';
 
 const App = () => {
@@ -11,7 +15,13 @@ const App = () => {
     <Provider store={store}>
       <View style={{flex: 1}}>
         <StatusBarr backgroundColor="#fff" />
-        <ApplicationNavigator />
+        <SafeAreaView
+          style={{
+            width: widthPercentageToDP(100),
+            height: heightPercentageToDP(100),
+          }}>
+          <ApplicationNavigator />
+        </SafeAreaView>
       </View>
     </Provider>
   );

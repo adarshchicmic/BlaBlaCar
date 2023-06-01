@@ -17,10 +17,6 @@ export const userApi = api.injectEndpoints({
         // `onStart` side-effect
         try {
           const result: any = await queryFulfilled;
-          console.log(
-            result?.meta?.response?.headers?.map?.authorization,
-            'this is response tokne',
-          );
 
           dispatch(
             updateToken({

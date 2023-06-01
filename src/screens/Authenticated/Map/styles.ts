@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: 20,
+    bottom: hp(4),
     right: wp(4),
     backgroundColor: '#2dbeff',
     padding: 10,

@@ -13,6 +13,10 @@ import {
   SvgRides,
   SvgSearch,
 } from '../assets/svg';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 interface Props {
   width: number;
   height: number;
@@ -25,35 +29,60 @@ const TabNavigation = () => {
         name="Search"
         component={Search}
         options={{
-          tabBarIcon: () => <SvgSearch width={20} height={20} />,
+          tabBarIcon: () => (
+            <SvgSearch
+              width={widthPercentageToDP(6)}
+              height={heightPercentageToDP(6)}
+            />
+          ),
         }}
       />
       <Tab.Screen
         name="Publish"
         component={Publish}
         options={{
-          tabBarIcon: () => <SvgPublish width={20} height={20} />,
+          tabBarIcon: () => (
+            <SvgPublish
+              width={widthPercentageToDP(6)}
+              height={heightPercentageToDP(6)}
+            />
+          ),
         }}
       />
       <Tab.Screen
         name="YourRides"
         component={YourRides}
         options={{
-          tabBarIcon: () => <SvgRides width={20} height={20} />,
+          tabBarIcon: () => (
+            <SvgRides
+              width={widthPercentageToDP(6)}
+              height={heightPercentageToDP(6)}
+            />
+          ),
         }}
       />
       <Tab.Screen
         name="Inbox"
         component={Inbox}
         options={{
-          tabBarIcon: () => <SvgChat width={20} height={20} />,
+          tabBarIcon: () => (
+            <SvgChat
+              width={widthPercentageToDP(6)}
+              height={heightPercentageToDP(6)}
+            />
+          ),
         }}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: () => <SvgProfile width={25} height={25} />,
+          tabBarIcon: () => (
+            <SvgProfile
+              width={widthPercentageToDP(6)}
+              height={heightPercentageToDP(6)}
+            />
+          ),
         }}
       />
     </Tab.Navigator>

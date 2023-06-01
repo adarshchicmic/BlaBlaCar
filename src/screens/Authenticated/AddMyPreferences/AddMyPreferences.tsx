@@ -9,7 +9,7 @@ import {useSelector} from 'react-redux';
 const AddMyPreferences = ({navigation}) => {
   const states: any = useSelector(state => state);
   const preferences: any = states?.preferencesSlice;
-  console.log(states, 'this is states');
+
   const handleCrossButtonPress = () => {
     navigation.goBack();
   };

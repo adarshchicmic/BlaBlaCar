@@ -17,9 +17,8 @@ const SMSCode = ({navigation}: any) => {
     setCode(value);
   };
   const states = useSelector(state => state);
-  console.log(states, 'ye states hai ');
+
   const handleBackArrowPress = () => {
-    console.log('go back arrow pressed');
     navigation.goBack();
   };
   const handleForwardArrowButtonPress = () => {};

@@ -9,10 +9,7 @@ import {addPrice, subtractPrice} from '../../../store/slices/publishRideSlice';
 const PricePerSeat = ({navigation, route}: any) => {
   const screen = route.params.screen;
   const numberOfSeat: any = useSelector(state => state);
-  console.log(
-    numberOfSeat?.rideSlice?.numberOfSeats,
-    'this is number of seats',
-  );
+
   const dispatch = useDispatch();
   const handleCrossButtonPress = () => {
     navigation.goBack();
@@ -63,7 +60,7 @@ const PricePerSeat = ({navigation, route}: any) => {
           <SvgPlush width={50} height={50} />
         </TouchableOpacity>
       </View>
-      <Text>
+      <Text style={styles.textMinMax}>
         {COMMON_CONSTS.MIN_PRICE} {numberOfSeat?.publishRideSlice?.minPrice},
         {COMMON_CONSTS.MAX_PRICE} {numberOfSeat?.publishRideSlice?.maxPrice}
       </Text>

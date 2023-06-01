@@ -31,9 +31,8 @@ const ResetPassword = ({navigation}: any) => {
     setOpenEye(!openEye);
   };
   const handleForwardArrowButtonPress = async () => {
-    console.log('button Pressed login ');
     !validPassword ? setShowWarning(true) : setShowWarning(false);
-    console.log(validPassword, 'this is validPassword');
+
     if (validPassword) {
       // const dataa: any = await signUp({
       //   email: states?.userSlice?.user?.email,

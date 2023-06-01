@@ -18,9 +18,8 @@ const AddUpdateBio = ({navigation}) => {
   const bioValue = states?.profileSlice?.profileData?.bio;
   const userDetail = states?.profileSlice?.profileData;
   const handleTextChange = value => {
-    console.log(value);
     value.split(' ').filter(word => word !== '').length > 10
-      ? (setValidBio(true), console.log('true'))
+      ? setValidBio(true)
       : setValidBio(false);
     setBio(value);
   };
@@ -41,7 +40,7 @@ const AddUpdateBio = ({navigation}) => {
         travelPreferences: userDetail?.travel_preferences,
         postalAddress: userDetail?.postal_address,
       });
-      console.log(dataa, 'this is dataa');
+
       if (dataa?.data?.status?.code === 200) {
         dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         navigation.goBack();

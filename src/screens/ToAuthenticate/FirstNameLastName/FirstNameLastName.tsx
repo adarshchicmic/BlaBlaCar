@@ -15,14 +15,12 @@ const FirstNameLastName = ({navigation}: any) => {
   const [showError, setShowError] = useState<boolean>(true);
   const dispatch = useDispatch();
   const handleFirstNameChange = value => {
-    setFirstName(value);
-    setValidFirstName(COMMON_CONSTS.NAME_REGEX.test(value));
-    console.log(COMMON_CONSTS.NAME_REGEX.test(value));
+    setFirstName(value.trim());
+    setValidFirstName(COMMON_CONSTS.NAME_REGEX.test(value.trim()));
   };
   const handleLastNameChange = value => {
-    setLastName(value);
-    setValidLastName(COMMON_CONSTS.NAME_REGEX.test(value));
-    console.log(COMMON_CONSTS.NAME_REGEX.test(value));
+    setLastName(value.trim());
+    setValidLastName(COMMON_CONSTS.NAME_REGEX.test(value.trim()));
   };
   const handleBackArrowPress = () => {
     navigation.goBack();

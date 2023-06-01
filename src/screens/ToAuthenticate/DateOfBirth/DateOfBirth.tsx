@@ -4,7 +4,7 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {updateDob} from '../../../store/slices/UserSlice';
 const DateOfBirth = ({navigation}: any) => {
   const [dob, setDob] = useState<string>('');
@@ -18,17 +18,13 @@ const DateOfBirth = ({navigation}: any) => {
       (dob[5] !== '/' && value.length === 5)
     ) {
       value = value + '/';
-      console.log(value, 'jfsdakljfashlkj');
     }
     COMMON_CONSTS.DMY_REGEX.test(value)
       ? setValidDob(true)
       : setValidDob(false);
-    console.log(value, 'this is value ');
 
     setDob(value);
   };
-  const states = useSelector(state => state);
-  console.log(states, 'ye states hai ');
 
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -37,9 +33,9 @@ const DateOfBirth = ({navigation}: any) => {
     if (validDob) {
       navigation.navigate('LikeToBeAddressed');
       dispatch(updateDob({dob: dob}));
+      setShowError(false);
     } else {
-      null;
-      setShowError(validDob);
+      setShowError(true);
     }
   };
 
@@ -62,7 +58,11 @@ const DateOfBirth = ({navigation}: any) => {
           valueTextInput={dob}
         />
       </View>
-      {showError && <Text>{COMMON_CONSTS.ENTER_VALID_DOB}</Text>}
+      {showError && (
+        <Text style={styles.errorTextStyle}>
+          {COMMON_CONSTS.ENTER_VALID_DOB}
+        </Text>
+      )}
 
       {dob && (
         <View style={styles.buttonView}>

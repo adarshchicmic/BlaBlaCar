@@ -24,7 +24,6 @@ const Search = ({navigation}: any) => {
   const dispatch = useDispatch();
   const [search, {isLoading}] = useSearchMutation();
   const numberOfSeat: any = useSelector(state => state);
-  console.log('number of seat is this', numberOfSeat);
 
   const handleleavingFromPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
@@ -50,7 +49,7 @@ const Search = ({navigation}: any) => {
       passCount: numberOfSeat?.rideSlice?.numberOfSeats,
       date: numberOfSeat?.rideSlice?.date,
     });
-    console.log(cal, 'this is cal');
+
     navigation.navigate('SearchResult');
   };
   return (

@@ -52,7 +52,12 @@ const styles = StyleSheet.create<Style | any>({
     left: wp(2),
     position: 'absolute',
     zIndex: 1,
-    top: hp(1),
+    top: hp(1.5),
+  },
+  errorStyle: {
+    color: '#f00',
+    fontSize: RFValue(14),
+    marginLeft: wp(5),
   },
   svgStyle: {
     width: wp(25),
@@ -71,6 +76,7 @@ const styles = StyleSheet.create<Style | any>({
     alignSelf: 'center',
   },
   textNineOneStyle: {
+    justifyContent: 'center',
     alignSelf: 'center',
     fontSize: RFValue(18),
     fontWeight: '500',
@@ -87,7 +93,6 @@ const styles = StyleSheet.create<Style | any>({
     width: wp(10),
     alignSelf: 'flex-end',
     marginRight: wp(5),
-    marginTop: hp(4),
   },
 });
 

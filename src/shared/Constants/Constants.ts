@@ -75,6 +75,7 @@ export const COMMON_CONSTS = {
     'Find the perfect ride from thousands of destinations, or publish to share your travel costs.',
   ABOUT_YOU: 'About you',
   ACCOUNT: 'Account',
+  ENTER_VALID_MOBILE: 'Enter valid mobile number',
   OTP: 'OTP',
   VERIFY: 'Verify',
   VERIFY_OTP: 'Verify Otp',
@@ -176,7 +177,7 @@ export const COMMON_CONSTS = {
   TAKE_A_PICTURE: 'Take a picture',
   CHOOSE_A_PICTURE: 'Choose a picture',
   PLATE_ERROR: 'should contain atleast 8 charectors and atmost 12',
-  ERROR: 'ERROR',
+  ERROR: 'error',
   THINK_COMFORT_KEEP_THE_MIDDLE_SEAT_EMPTY:
     'Think comfort, keep the middle seat empty!',
   YES_SURE: 'Yes, sure!',

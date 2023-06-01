@@ -9,7 +9,6 @@ const SelectSignUpLogIn = ({navigation}: any) => {
     navigation.navigate('SignUpOptions');
   };
   const onPressLogIn = () => {
-    console.log('login button pressed');
     navigation.navigate('LogInOptions');
   };
   return (

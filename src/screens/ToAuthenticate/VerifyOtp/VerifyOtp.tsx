@@ -12,7 +12,6 @@ const VerifyOtp = ({navigation}) => {
   const [verifyOtp, {isLoading, isError}] = useVerifyOtpMutation();
 
   const handleChangeOtp = value => {
-    console.log(value, 'this is value');
     setOtp(value);
   };
   const handleVerifyButtonPress = async () => {

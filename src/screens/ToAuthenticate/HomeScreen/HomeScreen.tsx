@@ -1,12 +1,12 @@
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import React, {memo} from 'react';
 import TabNavigation from '../../../navigators/TabNavigation';
 
 const HomeScreen = () => {
   return (
-    <View style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1}}>
       <TabNavigation />
-    </View>
+    </SafeAreaView>
   );
 };
 

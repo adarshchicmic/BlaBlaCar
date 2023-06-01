@@ -26,7 +26,6 @@ const Smoking = ({navigation}) => {
     },
   ];
   const handleRadioPress = value => {
-    console.log(value);
     setSelectedButton(value);
   };
   const handleCrossButtonPress = () => {

@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux';
 const EditPersonalDetail = ({navigation}: any) => {
   const states: any = useSelector(state => state);
   const userData = states?.profileSlice?.profileData;
-  console.log(states?.profileSlice?.profileData, 'this is states');
+
   const handleCrossButtonPress = () => {
     navigation.goBack();
   };

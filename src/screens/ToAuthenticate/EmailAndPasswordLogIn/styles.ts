@@ -9,6 +9,7 @@ const styles = StyleSheet.create<any>({
   container: {
     justifyContent: 'center',
     marginLeft: wp(5),
+    flex: 1,
   },
   textStyle: {
     fontSize: RFValue(30),

@@ -19,9 +19,8 @@ const EmailSignUp = ({navigation}: any) => {
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
   };
   const states = useSelector(state => state);
-  console.log(states, 'ye states hai ');
+
   const handleBackArrowPress = () => {
-    console.log('go back arrow pressed');
     navigation.goBack();
   };
   const handleForwardArrowButtonPress = () => {

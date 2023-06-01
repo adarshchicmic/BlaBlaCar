@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     top: hp(85),
-    right: wp(0.8),
+    right: wp(2),
     height: wp(12),
     width: wp(12),
     backgroundColor: '#2dbeff',
     borderRadius: wp(6),
+    justifyContent: 'center',
     padding: 15,
   },
   svgArrowStyle: {

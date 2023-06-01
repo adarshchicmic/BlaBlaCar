@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
   buttonView: {
     position: 'absolute',
-    top: hp(85),
+    top: hp(80),
     right: wp(2),
     width: wp(10),
     alignSelf: 'flex-end',

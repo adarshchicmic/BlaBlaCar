@@ -24,7 +24,6 @@ const Location = ({navigation, route}) => {
   const myRef: any = useRef();
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
-      console.log(info);
       // setLatitude(info?.coords?.latitude);
     });
   }, []);
@@ -35,7 +34,6 @@ const Location = ({navigation, route}) => {
   const preProcessFunction = () => {};
 
   const handlePlaceSelected = (data, details) => {
-    console.log(screen, 'this is screen guys ');
     const {location} = details.geometry;
     const latitudee = location.lat;
     const longitudee = location.lng;

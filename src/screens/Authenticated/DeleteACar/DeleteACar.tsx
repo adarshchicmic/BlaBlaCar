@@ -13,14 +13,14 @@ import {useDeleteVehicleMutation} from '../../../services/modules/deleteVehicle/
 
 const DeleteACar = ({navigation, route}) => {
   const vehicleId = route.params.vehicleId;
-  console.log(vehicleId, 'this is vehicle id ');
+
   const [deleteVehicle, {isLoading, isError}] = useDeleteVehicleMutation();
   const handleCrossButtonPress = () => {
     navigation.goBack();
   };
   const handleDeleteVehiclePress = async () => {
     const data: any = await deleteVehicle({vehicleId: vehicleId});
-    console.log(data?.data?.status?.code, 'this is data ');
+
     data?.data?.status?.code ? navigation.navigate('Profile') : null;
   };
   return (

@@ -4,14 +4,17 @@ import {
   TouchableOpacity,
   Text,
   ActivityIndicator,
+  Platform,
+  Keyboard,
 } from 'react-native';
-import React, {useState, memo} from 'react';
+import React, {useState, memo, useRef, Ref, useEffect} from 'react';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useAddVehicleMutation} from '../../../services/modules/addVehicle';
+import {useTheme} from '@react-navigation/native';
 
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
@@ -21,27 +24,62 @@ const VehicleInformation = ({navigation, route}: any) => {
   const [vehicleColor, setVehicleColor] = useState<string>('');
   const [vehicleModelYear, setVehicleModelYear] = useState<string>('');
   const [addVehicle, {isLoading, isError, isSuccess}] = useAddVehicleMutation();
+  let scrollV: any = useRef();
 
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => {
+        setKeyboardVisible(true);
+      },
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        setKeyboardVisible(false); // or some other action
+      },
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
+
+  // const keyboardDidShow = () => {
+  //   scrollV.scrollTo({y: 220, animated: true});
+  // };
   const handleVehicleBrandChange = value => {
     setVehicleBrand(value);
+    scrollV.current.scrollToEnd();
   };
   const handleVehicleNameChange = value => {
     setVehicleName(value);
+    scrollV.current.scrollToEnd();
   };
   const handleVehicleTypeChange = value => {
     setVehicleType(value);
+    scrollV.current.scrollToEnd();
   };
   const handleVehicleColorChange = value => {
     setVehicleColor(value);
+    scrollV.current.scrollToEnd();
   };
   const handleVehicleModelYearChange = value => {
     setVehicleModelYear(value);
+    scrollV.current.scrollToEnd();
   };
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
+
+  // useEffect(() => {
+
+  // }, [])
+
   const handleForwardArrowButtonPress = async () => {
-    console.log('pressed');
     if (screen === COMMON_CONSTS.ABOUT_YOU) {
       const dataa = await addVehicle({
         country: 'India',
@@ -52,15 +90,21 @@ const VehicleInformation = ({navigation, route}: any) => {
         vehicleColor: vehicleColor,
         vehicleModelYear: vehicleModelYear,
       });
-      console.log(dataa, 'thsi is sfdjhkfdsahjkfh');
     }
     // if (screen === COMMON_CONSTS.EDIT_INFO) {
 
     // }
   };
   return (
-    <KeyboardAvoidingView>
-      <ScrollView>
+    <KeyboardAvoidingView
+      style={{flex: 1, flexDirection: 'column', justifyContent: 'center'}}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={50}
+      enabled>
+      <ScrollView
+        ref={scrollV}
+        // contentContainerStyle={{flex: 1}}
+        bounces={false}>
         <View>
           <TouchableOpacity
             onPress={() => handleBackArrowPress()}

@@ -12,17 +12,14 @@ const LikeToBeAddressed = ({navigation}: any) => {
     navigation.goBack();
   };
   const missOrMadamPress = () => {
-    console.log('missOrMadam');
     dispatch(updateTitle({title: 'Miss / Madam'}));
     navigation.navigate('DefineYourPassword');
   };
   const sirPress = () => {
-    console.log('sir');
     dispatch(updateTitle({title: 'Sir'}));
     navigation.navigate('DefineYourPassword');
   };
   const ratherNotToSayPress = () => {
-    console.log('reather not to say');
     dispatch(updateTitle({title: COMMON_CONSTS.RATHER_NOT_TO_SAY}));
     navigation.navigate('DefineYourPassword');
   };

@@ -28,7 +28,6 @@ const WhatIsYourFirstName = ({navigation}: any) => {
   const handleFirstNameChange = value => {
     setFirstName(value);
     setValidFirstName(COMMON_CONSTS.NAME_REGEX.test(value));
-    console.log(COMMON_CONSTS.NAME_REGEX.test(value));
   };
 
   const handleBackArrowPress = () => {
@@ -48,7 +47,7 @@ const WhatIsYourFirstName = ({navigation}: any) => {
         travelPreferences: userDetail?.travel_preferences,
         postalAddress: userDetail?.postal_address,
       });
-      console.log(dataa, 'this is dataa');
+
       if (dataa?.data?.status?.code === 200) {
         dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         navigation.goBack();

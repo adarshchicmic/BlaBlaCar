@@ -16,7 +16,7 @@ const AddAboutRide = ({navigation}) => {
   const [publish, {isLoading, isError}] = usePublishRideMutation();
   const [vehicle, {}] = useLazyVehicleQuery();
   const states: any = useSelector(state => state);
-  console.log(states, 'this is statesjhdsjkahkjh');
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,7 +45,6 @@ const AddAboutRide = ({navigation}) => {
     setText(value);
   };
   const handlePublishRide = async () => {
-    console.log('hkdshkjlsd');
     if (vehiclePresent) {
       const datata: any = await publish({
         source: states.rideSlice.pickUp,
@@ -67,7 +66,7 @@ const AddAboutRide = ({navigation}) => {
         midSeat: states.publishRideSlice.midSeat,
         estimatedTime: states.publishRideSlice.select_route.estimatedTime,
       });
-      console.log(datata, 'jkldshkjhfjkshkj');
+
       datata.data.status === 'created' ? navigation.popToTop() : null;
     } else {
       setShowError(true);

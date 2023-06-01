@@ -22,7 +22,6 @@ const Chattiness = ({navigation}) => {
     },
   ];
   const handleRadioPress = value => {
-    console.log(value);
     setSelectedButton(value);
   };
   const handleCrossButtonPress = () => {

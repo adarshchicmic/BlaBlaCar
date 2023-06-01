@@ -49,12 +49,18 @@ const styles = StyleSheet.create({
 
   buttonView: {
     position: 'absolute',
-    top: hp(85),
+    top: hp(80),
     right: wp(2),
     width: wp(10),
     alignSelf: 'flex-end',
     marginRight: wp(5),
     marginTop: hp(4),
+  },
+  textMinMax: {
+    color: '#1055',
+    marginLeft: wp(5),
+    marginTop: hp(2),
+    fontWeight: '600',
   },
 });
 

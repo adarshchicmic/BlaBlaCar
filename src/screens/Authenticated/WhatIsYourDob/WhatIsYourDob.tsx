@@ -33,12 +33,10 @@ const WhatIsYourDob = ({navigation}: any) => {
       (dob[5] !== '/' && value.length === 5)
     ) {
       value = value + '/';
-      console.log(value, 'jfsdakljfashlkj');
     }
     COMMON_CONSTS.DMY_REGEX.test(value)
       ? setValidDob(true)
       : setValidDob(false);
-    console.log(value, 'this is value ');
 
     setDob(value);
   };
@@ -47,7 +45,6 @@ const WhatIsYourDob = ({navigation}: any) => {
     navigation.goBack();
   };
   const handleSaveButtonPress = async () => {
-    console.log('button pressed ');
     if (validDob) {
       const dataa: any = await updateProfile({
         email: userDetail?.email,
@@ -60,7 +57,7 @@ const WhatIsYourDob = ({navigation}: any) => {
         travelPreferences: userDetail?.travel_preferences,
         postalAddress: userDetail?.postal_address,
       });
-      console.log(dataa, 'this is dataa');
+
       if (dataa?.data?.status?.code === 200) {
         dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         navigation.goBack();

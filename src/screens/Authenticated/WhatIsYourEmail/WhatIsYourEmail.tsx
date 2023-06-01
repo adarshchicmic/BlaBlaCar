@@ -39,7 +39,6 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
   };
 
   const handleBackArrowPress = () => {
-    console.log('go back arrow pressed');
     navigation.goBack();
   };
   const handleSaveButtonPress = async () => {
@@ -48,7 +47,7 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
         const dataa: any = await confirmEmail({
           email: email,
         });
-        console.log(dataa, 'this is dataa');
+
         // if (dataa?.data?.status?.code === 200) {
         //   dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         //   navigation.goBack();
@@ -65,7 +64,7 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
           travelPreferences: userDetail?.travel_preferences,
           postalAddress: userDetail?.postal_address,
         });
-        console.log(dataa, 'this is dataa');
+
         if (dataa?.data?.status?.code === 200) {
           dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
           navigation.goBack();

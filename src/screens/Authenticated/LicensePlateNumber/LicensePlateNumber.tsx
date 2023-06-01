@@ -30,7 +30,6 @@ const LicensePlateNumber = ({navigation, route}) => {
     const fun = async () => {
       if (vehicleId) {
         const data = await vehicle({vehicleId: vehicleId});
-        console.log(data, 'thisis data from vehicle');
       }
     };
     fun();

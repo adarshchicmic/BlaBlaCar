@@ -6,7 +6,7 @@ import AppNavigator from './AppNavigator';
 
 const ApplicationNavigator = () => {
   const states: any = useSelector(state => state);
-  console.log(states, 'thiss is states m');
+
   return (
     <NavigationContainer>
       {states?.userSlice?.token ? <AppNavigator /> : <AuthNavigator />}

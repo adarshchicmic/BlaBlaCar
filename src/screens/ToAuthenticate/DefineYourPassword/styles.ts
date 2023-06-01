@@ -69,7 +69,7 @@ const styles = StyleSheet.create<any>({
     marginTop: hp(4),
   },
   buttonStyleArrow: {
-    height: hp(12),
+    height: wp(12),
     width: wp(12),
     backgroundColor: '#2dbeff',
     padding: hp(1),

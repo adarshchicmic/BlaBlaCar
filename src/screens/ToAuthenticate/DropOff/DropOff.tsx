@@ -9,7 +9,6 @@ const DropOff = ({navigation}: any) => {
   //     navigation.goBack();
   //   };
   const handleButtonPress = () => {
-    console.log(navigation, 'this is navigation');
     navigation.navigate('Location', {screen: COMMON_CONSTS.DROP_OFF});
   };
   return (

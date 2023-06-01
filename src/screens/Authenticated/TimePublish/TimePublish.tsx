@@ -17,10 +17,6 @@ const TimePublish = ({navigation}) => {
   };
   const handleRightArrowButtonPress = () => {
     dispatch(updatePublishTime({time: time}));
-    navigation.navigate('MiddleSeatEmpty');
-    console.log('====================================');
-    console.log('dfkjsahlkjh');
-    console.log('====================================');
   };
   const handleButtonClick = () => {
     setShowClock(true);

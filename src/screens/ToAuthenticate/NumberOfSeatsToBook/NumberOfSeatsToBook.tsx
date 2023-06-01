@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import React, {memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -9,10 +9,7 @@ import {addSeats, subtractSeats} from '../../../store/slices/rideSlice';
 const NumberOfSeatsToBook = ({navigation, route}: any) => {
   const screen = route.params.screen;
   const numberOfSeat: any = useSelector(state => state);
-  console.log(
-    numberOfSeat?.rideSlice?.numberOfSeats,
-    'this is number of seats',
-  );
+
   const dispatch = useDispatch();
   const handleCrossButtonPress = () => {
     navigation.goBack();
@@ -29,7 +26,7 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
       : navigation.goBack();
   };
   return (
-    <View>
+    <SafeAreaView>
       <CustomButton
         onPressFunction={() => handleCrossButtonPress()}
         btnText={COMMON_CONSTS.X}
@@ -62,7 +59,7 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
           <SvgRightArrow color="red" />
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -20,10 +20,7 @@ export const userApi = api.injectEndpoints({
       async onQueryStarted(id, {dispatch, queryFulfilled}) {
         try {
           const result: any = await queryFulfilled;
-          console.log(
-            result?.meta?.response?.headers?.map?.authorization,
-            'this is response tokne',
-          );
+
           dispatch(
             updateToken({
               token: result?.meta?.response?.headers?.map?.authorization,

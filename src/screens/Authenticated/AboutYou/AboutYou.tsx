@@ -1,4 +1,4 @@
-import {View, Text, ActivityIndicator, Image} from 'react-native';
+import {View, Text, ActivityIndicator, Image, SafeAreaView} from 'react-native';
 import React, {useEffect, useState, memo} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SvgProfile} from '../../../assets/svg';
@@ -9,7 +9,10 @@ import SvgTextButton from '../../../components/SvgTextButton/SvgTextButton';
 import {useLazyProfileQuery} from '../../../services/modules/profile';
 import {useIsFocused} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateProfileData} from '../../../store/slices/profileSlice';
+import {
+  updateImage,
+  updateProfileData,
+} from '../../../store/slices/profileSlice';
 import {useLazyVehicleQuery} from '../../../services/modules/GetAllVehicles';
 import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';
 
@@ -27,16 +30,15 @@ const AboutYou = ({navigation}: any) => {
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await profile();
+
       userData?.data?.status?.data
         ? (setUserDetail(userData?.data?.status?.data),
           dispatch(
             updateProfileData({profileData: userData?.data?.status?.data}),
-          ))
+          ),
+          dispatch(updateImage({image: userData?.data?.status?.image_url})))
         : null;
       const vehiclesData = await vehicle();
-      console.log('====================================');
-      console.log(vehicleData);
-      console.log('====================================');
       setVehicleData(vehiclesData);
     };
     fetchUserData();
@@ -63,89 +65,91 @@ const AboutYou = ({navigation}: any) => {
     navigation.navigate('EditProfilePicture');
   };
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.profileDetailContainer}>
-        <View style={styles.nameSvgStyle}>
-          <View style={styles.nameView}>
-            <Text style={styles.nameStyle}>{userDetail?.first_name}</Text>
-            <Text style={styles.nameBesideTextStyle}>
-              {COMMON_CONSTS.NEWCOMER}
+    <SafeAreaView>
+      <ScrollView style={styles.container}>
+        <View style={styles.profileDetailContainer}>
+          <View style={styles.nameSvgStyle}>
+            <View style={styles.nameView}>
+              <Text style={styles.nameStyle}>{userDetail?.first_name}</Text>
+              <Text style={styles.nameBesideTextStyle}>
+                {COMMON_CONSTS.NEWCOMER}
+              </Text>
+            </View>
+            <View style={styles.svgArrowStyle}>
+              {imageUri ? (
+                <View>
+                  <Image style={styles.imageStyle} source={{uri: imageUri}} />
+                </View>
+              ) : (
+                <SvgProfile width={'100'} height={'100'} />
+              )}
+              <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+            </View>
+          </View>
+          <CustomButton
+            btnText={COMMON_CONSTS.EDIT_PROFILE_PICTURE}
+            styleTxt={styles.buttonTextStyle}
+            onPressFunction={() => handleEditProfilePicturePress()}
+          />
+          <CustomButton
+            btnText={COMMON_CONSTS.EDIT_PERSONAL_DETAILS}
+            styleTxt={styles.buttonTextStyle}
+            onPressFunction={() => handleEditProfileDetail()}
+          />
+        </View>
+        <View style={styles.verifyYourProfileViewMain}>
+          <View style={styles.verifyYourProfileView}>
+            <Text style={styles.titleStyle}>
+              {COMMON_CONSTS.VERIFY_YOUR_PROFILE}
             </Text>
-          </View>
-          <View style={styles.svgArrowStyle}>
-            {imageUri ? (
-              <View>
-                <Image style={styles.imageStyle} source={{uri: imageUri}} />
-              </View>
-            ) : (
-              <SvgProfile width={'100'} height={'100'} />
-            )}
-            <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+            <SvgTextButton text={COMMON_CONSTS.VERIFY_MY_ID} />
+            <SvgTextButton
+              text={COMMON_CONSTS.CONFIRM_EMAIL}
+              extra={userDetail?.email}
+              onPress={() => handleConfirmEmail()}
+            />
+            <SvgTextButton
+              text={COMMON_CONSTS.CONFIRM_PHONE_NUMBER}
+              extra={userDetail?.phone_number}
+            />
           </View>
         </View>
-        <CustomButton
-          btnText={COMMON_CONSTS.EDIT_PROFILE_PICTURE}
-          styleTxt={styles.buttonTextStyle}
-          onPressFunction={() => handleEditProfilePicturePress()}
-        />
-        <CustomButton
-          btnText={COMMON_CONSTS.EDIT_PERSONAL_DETAILS}
-          styleTxt={styles.buttonTextStyle}
-          onPressFunction={() => handleEditProfileDetail()}
-        />
-      </View>
-      <View style={styles.verifyYourProfileViewMain}>
-        <View style={styles.verifyYourProfileView}>
-          <Text style={styles.titleStyle}>
-            {COMMON_CONSTS.VERIFY_YOUR_PROFILE}
-          </Text>
-          <SvgTextButton text={COMMON_CONSTS.VERIFY_MY_ID} />
+        {(isLoading || isLadingVehicle) && <ActivityIndicator />}
+        {(isError || isErrorVehicle) && <Text>{COMMON_CONSTS.ERROR}</Text>}
+        <View style={styles.profileDetailContainer}>
+          <Text style={styles.titleStyle}>{COMMON_CONSTS.ABOUT_YOU}</Text>
           <SvgTextButton
-            text={COMMON_CONSTS.CONFIRM_EMAIL}
-            extra={userDetail?.email}
-            onPress={() => handleConfirmEmail()}
+            text={COMMON_CONSTS.ADD_MINI_BIO}
+            onPress={() => handleAddMiniBio()}
           />
           <SvgTextButton
-            text={COMMON_CONSTS.CONFIRM_PHONE_NUMBER}
-            extra={userDetail?.phone_number}
+            text={COMMON_CONSTS.ADD_MY_PREFERENCES}
+            onPress={() => handleAddMyPreferences()}
           />
         </View>
-      </View>
-      {isLoading && <ActivityIndicator />}
-      {/* {isError && alert('error while loading your personal data')} */}
-      <View style={styles.profileDetailContainer}>
-        <Text style={styles.titleStyle}>{COMMON_CONSTS.ABOUT_YOU}</Text>
-        <SvgTextButton
-          text={COMMON_CONSTS.ADD_MINI_BIO}
-          onPress={() => handleAddMiniBio()}
-        />
-        <SvgTextButton
-          text={COMMON_CONSTS.ADD_MY_PREFERENCES}
-          onPress={() => handleAddMyPreferences()}
-        />
-      </View>
-      <View style={styles.profileDetailContainer}>
-        <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
-        <View style={styles.vehicleView}>
-          {vehicleData.isSuccess
-            ? vehicleData?.data.map((vehicle, i) => (
-                <CustomVehicleComponent
-                  navigation={navigation}
-                  key={i}
-                  vehicleName={vehicle?.vehicle_name}
-                  vehicleColor={vehicle?.vehicle_color}
-                  show={true}
-                  vehicleId={vehicle?.id}
-                />
-              ))
-            : null}
+        <View style={styles.profileDetailContainer}>
+          <Text style={styles.titleStyle}> {COMMON_CONSTS.VEHICLES}</Text>
+          <View style={styles.vehicleView}>
+            {vehicleData.isSuccess
+              ? vehicleData?.data.map((vehicle, i) => (
+                  <CustomVehicleComponent
+                    navigation={navigation}
+                    key={i}
+                    vehicleName={vehicle?.vehicle_name}
+                    vehicleColor={vehicle?.vehicle_color}
+                    show={true}
+                    vehicleId={vehicle?.id}
+                  />
+                ))
+              : null}
+          </View>
+          <SvgTextButton
+            text={COMMON_CONSTS.ADD_VEHICLE}
+            onPress={() => handleOnPressAddVehicle()}
+          />
         </View>
-        <SvgTextButton
-          text={COMMON_CONSTS.ADD_VEHICLE}
-          onPress={() => handleOnPressAddVehicle()}
-        />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

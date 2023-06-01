@@ -4,6 +4,8 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
   TouchableOpacity,
+  ScrollView,
+  Platform,
 } from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -19,8 +21,7 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [password, setPassword] = useState<string>('');
   const [openEye, setOpenEye] = useState<boolean>(false);
   const [validEmail, setValidEmail] = useState<boolean>(true);
-  const [logIn, {data, isLoading, isSuccess, isError, isUninitialized}] =
-    useLogInMutation();
+  const [logIn, {isLoading, isError}] = useLogInMutation();
 
   const states = useSelector(state => state);
   const handleTextChange = value => {
@@ -41,73 +42,73 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   };
   const handelLoginButtonPress = async () => {
     if (validEmail) {
-      console.log(password, 'this is password');
       const res: any = await logIn({
         email: email,
         password: password,
       });
-      console.log(res, 'this is result ');
+
       if (res?.data?.status?.code === 200) {
         // navigation.navigate('HomeScreen');
-        console.log(res?.data?.status, 'this is result guys');
-        console.log(states, 'this is state value in pafd');
       }
-      console.log(data, isLoading, isSuccess, isUninitialized, 'jla;ksdfsj');
     }
   };
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
-      </TouchableOpacity>
-      <View style={styles.textView}>
-        <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAIL}</Text>
-        <Text style={styles.textStyle}>{COMMON_CONSTS.AND_PASSWORDQ}</Text>
-      </View>
-      <View>
-        <CustomTextInput
-          styleInputText={styles.textInputStyle}
-          placeholderTextColor={'#969693'}
-          inputTextPlaceholder={COMMON_CONSTS.EMAIL}
-          onChangeTextFunction={text => handleTextChange(text)}
-        />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : ''}>
+      <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
+        <TouchableOpacity onPress={() => handleBackArrowPress()}>
+          <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        </TouchableOpacity>
+        <View style={styles.textView}>
+          <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAIL}</Text>
+          <Text style={styles.textStyle}>{COMMON_CONSTS.AND_PASSWORDQ}</Text>
+        </View>
         <View>
           <CustomTextInput
             styleInputText={styles.textInputStyle}
-            inputTextPlaceholder={COMMON_CONSTS.PASSWORD}
             placeholderTextColor={'#969693'}
-            secureTextEntry={!openEye}
-            onChangeTextFunction={text => handlePasswordChange(text)}
+            inputTextPlaceholder={COMMON_CONSTS.EMAIL}
+            onChangeTextFunction={text => handleTextChange(text)}
           />
-          {isError && <Text style={styles.errorStyle}>error</Text>}
-          {password && (
-            <View style={styles.svgOpenCloseStyle}>
-              <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
-                {openEye ? (
-                  <SvgOpenEye width={25} height={25} />
-                ) : (
-                  <SvgCloseEye width={25} height={25} />
-                )}
-              </TouchableOpacity>
-            </View>
-          )}
+          <View>
+            <CustomTextInput
+              styleInputText={styles.textInputStyle}
+              inputTextPlaceholder={COMMON_CONSTS.PASSWORD}
+              placeholderTextColor={'#969693'}
+              secureTextEntry={!openEye}
+              onChangeTextFunction={text => handlePasswordChange(text)}
+            />
+            {isError && <Text style={styles.errorStyle}>error</Text>}
+            {password && (
+              <View style={styles.svgOpenCloseStyle}>
+                <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
+                  {openEye ? (
+                    <SvgOpenEye width={25} height={25} />
+                  ) : (
+                    <SvgCloseEye width={25} height={25} />
+                  )}
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         </View>
-      </View>
-      <CustomButton
-        btnText={COMMON_CONSTS.FORGOT_PASSWORD}
-        styleBtn={styles.forgotPasswordButtonStyle}
-        styleTxt={styles.forgotPasswordTextStyle}
-        onPressFunction={() => handleForgotPasswordButtonPress()}
-      />
-      {email && password && (
         <CustomButton
-          btnText={COMMON_CONSTS.LOG_IN}
-          styleBtn={styles.buttonStyle}
-          styleTxt={styles.buttonTextStyle}
-          onPressFunction={() => handelLoginButtonPress()}
+          btnText={COMMON_CONSTS.FORGOT_PASSWORD}
+          styleBtn={styles.forgotPasswordButtonStyle}
+          styleTxt={styles.forgotPasswordTextStyle}
+          onPressFunction={() => handleForgotPasswordButtonPress()}
         />
-      )}
-      {isLoading && <ActivityIndicator />}
+        {email && password && (
+          <CustomButton
+            btnText={COMMON_CONSTS.LOG_IN}
+            styleBtn={styles.buttonStyle}
+            styleTxt={styles.buttonTextStyle}
+            onPressFunction={() => handelLoginButtonPress()}
+          />
+        )}
+        {isLoading && <ActivityIndicator />}
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };

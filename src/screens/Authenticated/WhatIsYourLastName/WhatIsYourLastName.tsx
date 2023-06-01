@@ -27,7 +27,6 @@ const WhatIsYourLastName = ({navigation}: any) => {
   const handleLastNameChange = value => {
     setLastName(value);
     setValidLastName(COMMON_CONSTS.NAME_REGEX.test(value));
-    console.log(COMMON_CONSTS.NAME_REGEX.test(value));
   };
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -46,7 +45,7 @@ const WhatIsYourLastName = ({navigation}: any) => {
         travelPreferences: userDetail?.travel_preferences,
         postalAddress: userDetail?.postal_address,
       });
-      console.log(dataa, 'this is dataa');
+
       if (dataa?.data?.status?.code === 200) {
         dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         navigation.goBack();

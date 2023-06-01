@@ -41,11 +41,10 @@ const MapScreen = ({navigation}: any) => {
   const dispatch = useDispatch();
 
   const states: any = useSelector(state => state);
-  console.log(states, 'this is states in map');
 
   const currLocation: any = states.rideSlice.statsPickUp;
   const destLocation: any = states.rideSlice.statsDropOff;
-  console.log(currLocation, destLocation);
+
   useEffect(() => {
     // Get the current device location
     // Geolocation.getCurrentPosition(
@@ -59,7 +58,6 @@ const MapScreen = ({navigation}: any) => {
   }, []);
 
   const handleCalculateRoute = async () => {
-    console.log('handleCalculateRoute pressed');
     const val: any = await google({
       currentLatitude: currLocation?.latitude,
       currentLongitude: currLocation?.longitude,
@@ -67,7 +65,7 @@ const MapScreen = ({navigation}: any) => {
       destLongitude: destLocation?.longitude,
     });
     const data = val?.data;
-    console.log(data, 'this is data guys ');
+
     if (data.status === 'OK') {
       const routeCoordinates = data.routes[0].overview_polyline.points;
       const dis = data.routes[0].legs[0].distance.text;
