@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: RFValue(15),
   },
   btnStyle: {
-    marginTop: hp(4),
+    marginTop: hp(4), 
     paddingLeft: wp(5),
   },
   buttonText: {
