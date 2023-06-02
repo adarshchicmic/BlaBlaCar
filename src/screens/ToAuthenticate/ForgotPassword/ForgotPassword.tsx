@@ -37,7 +37,7 @@ const ForgotPassword = ({navigation}: any) => {
         onPress={() => handleBackArrowPress()}>
         <SvgLeftArrow height={25} width={25} />
       </TouchableOpacity>
-      <View>
+      <View style={styles.textView}>
         <Text style={styles.textStyle(1)}>
           {COMMON_CONSTS.PLEASE_ENTER_THE}
         </Text>
@@ -52,6 +52,7 @@ const ForgotPassword = ({navigation}: any) => {
           placeholderTextColor={'#969693'}
           inputTextPlaceholder={COMMON_CONSTS.EMAIL}
           onChangeTextFunction={text => handleTextChange(text)}
+          autoCapitalizeTextInput={false}
         />
         {showValidationError && (
           <Text style={styles.errorTextStyle}>

@@ -14,7 +14,11 @@ import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgCloseEye, SvgLeftArrow, SvgOpenEye} from '../../../assets/svg';
 import {useLogInMutation} from '../../../services/modules/login';
-import {useSelector} from 'react-redux';
+
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -23,7 +27,6 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [validEmail, setValidEmail] = useState<boolean>(true);
   const [logIn, {isLoading, isError}] = useLogInMutation();
 
-  const states = useSelector(state => state);
   const handleTextChange = value => {
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
@@ -84,9 +87,15 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
               <View style={styles.svgOpenCloseStyle}>
                 <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
                   {openEye ? (
-                    <SvgOpenEye width={25} height={25} />
+                    <SvgOpenEye
+                      width={widthPercentageToDP(7)}
+                      height={heightPercentageToDP(4)}
+                    />
                   ) : (
-                    <SvgCloseEye width={25} height={25} />
+                    <SvgCloseEye
+                      width={widthPercentageToDP(7)}
+                      height={heightPercentageToDP(4)}
+                    />
                   )}
                 </TouchableOpacity>
               </View>

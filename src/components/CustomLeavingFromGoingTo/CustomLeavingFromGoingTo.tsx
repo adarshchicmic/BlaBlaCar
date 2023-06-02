@@ -30,13 +30,13 @@ const CustomLeavingFromGoingTo: React.FC<Props> = ({
       />
       <View>
         <View style={styles.textViewStyle}>
-          <Text style={styles.textStyle}>{leavingFrom.slice(0, 20)}</Text>
+          <Text style={styles.textStyle}>{leavingFrom.slice(0, 25)}</Text>
           <SvgBlackRightArrow
             width={widthPercentageToDP(5)}
             height={heightPercentageToDP(5)}
             style={styles.svgArrowStyle}
           />
-          <Text style={styles.textStyle}>{goingTo.slice(0, 20)}</Text>
+          <Text style={styles.textStyle}>{goingTo.slice(0, 25)}</Text>
         </View>
         <Text style={styles.passengerTextStyle}>
           {passengerCount} {COMMON_CONSTS.PASSENGER}

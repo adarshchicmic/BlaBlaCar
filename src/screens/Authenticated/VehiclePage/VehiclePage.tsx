@@ -5,7 +5,7 @@ import CustomCrossComponent from '../../../components/CustomCrossComponent/Custo
 import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
-import DeleteACar from '../DeleteACar/DeleteACar';
+
 // import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
 // simport CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 

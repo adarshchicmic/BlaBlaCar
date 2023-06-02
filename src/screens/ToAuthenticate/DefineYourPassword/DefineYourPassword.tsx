@@ -38,42 +38,9 @@ const DefineYourPassword = ({navigation}: any) => {
     !validPassword ? setShowWarning(true) : setShowWarning(false);
 
     if (validPassword) {
-      // const dataa: any = await signUp({
-      //   email: states?.userSlice?.user?.email,
-      //   password: password,
-      //   first_name: states?.userSlice?.user?.firstName,
-      //   last_name: states?.userSlice?.user?.lastName,
-      //   dob: states?.userSlice?.user?.dob,
-      //   title: states?.userSlice?.user?.title,
-      //   // mobile_number: '9984703591',
-      // });
-      // console.log(dataa, 'this is result from signup');
       dispatch(updatePassword({password: password}));
       navigation.navigate('VerifyMobileNumber', {password: password});
-      // console.log(dataa, 'this is result');
     }
-    // console.log(
-    //   'email:',
-    //   states?.userSlice?.user?.email,
-    //   'password: ',
-    //   password,
-    //   'first_name:',
-    //   states?.userSlice?.user?.firstName,
-    //   'last_name:',
-    //   states?.userSlice?.user?.lastName,
-    //   'dob:',
-    //   states?.userSlice?.user?.dob,
-    //   'title:',
-    //   states?.userSlice?.user?.title,
-    // );
-    // console.log(
-    //   data,
-    //   isLoading,
-    //   isError,
-    //   isSuccess,
-    //   isUninitialized,
-    //   'data from api ',
-    // );
   };
   return (
     <KeyboardAvoidingView style={styles.container}>

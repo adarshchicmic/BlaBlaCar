@@ -56,9 +56,15 @@ const rideSlice: any = createSlice({
       state.date = date;
     },
     swapLocation: state => {
-      const temp = state.leavingFrom;
+      const temp1 = state.leavingFrom;
       state.leavingFrom = state.goingTo;
-      state.goingTo = temp;
+      state.goingTo = temp1;
+      const temp2: any = state.statsLeavingFrom;
+      console.log(temp2);
+      state.statsLeavingFrom.latitude = state.statsGoingTo.latitude;
+      state.statsLeavingFrom.longitude = state.statsGoingTo.longitude;
+      state.statsGoingTo.latitude = temp2.latitude;
+      state.statsGoingTo.longitude = temp2.longitude;
     },
     updateLeavingFrom: (state, action) => {
       const {leavingFrom} = action.payload;

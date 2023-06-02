@@ -38,6 +38,7 @@ const Location = ({navigation, route}) => {
     const latitudee = location.lat;
     const longitudee = location.lng;
     myRef.current.setAddressText('');
+    console.log(location, 'this is location ');
 
     screen === COMMON_CONSTS.LEAVING_FROM
       ? (dispatch(updateLeavingFrom({leavingFrom: data?.description})),

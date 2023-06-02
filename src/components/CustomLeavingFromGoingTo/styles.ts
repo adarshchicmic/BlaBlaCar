@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
     fontSize: RFValue(15),
     alignSelf: 'center',
     color: '#000',
+    fontWeight: '600',
   },
   svgArrowStyle: {
-    marginHorizontal: wp(1),
+    marginHorizontal: wp(2),
     alignSelf: 'center',
   },
   svgTimeStyle: {

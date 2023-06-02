@@ -20,12 +20,12 @@ const AddAboutRide = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    vehicle().then(payload => {
-      dispatch(updateVehicleId({id: payload?.data?.data[0].id}));
-      setVehiclePresent(payload?.data?.data?.length);
-    });
-  }, [vehicle, dispatch]);
+  // useEffect(() => {
+  //   vehicle().then(payload => {
+  //     dispatch(updateVehicleId({id: payload?.data?.data[0].id}));
+  //     setVehiclePresent(payload?.data?.data?.length);
+  //   });
+  // }, [vehicle, dispatch]);
   // useEffect(() => {
   //   const fun: any = async () => {
   //     const payload: any = await vehicle();
@@ -45,33 +45,33 @@ const AddAboutRide = ({navigation}) => {
     setText(value);
   };
   const handlePublishRide = async () => {
-    if (vehiclePresent) {
-      const datata: any = await publish({
-        source: states.rideSlice.pickUp,
-        destination: states.rideSlice.dropOff,
-        sourceLongitude: states.rideSlice.statsPickUp.longitude,
-        sourceLatitude: states.rideSlice.statsPickUp.latitude,
-        destinationLatitude: states.rideSlice.statsDropOff.latitude,
-        destinationLongitude: states.rideSlice.statsDropOff.longitude,
-        passsengerCount: states.rideSlice.numberOfSeats,
-        addCity: states.publishRideSlice.add_city,
-        addCityLongitude: states.publishRideSlice.add_city_latitude,
-        addCityLatitude: states.publishRideSlice.add_city_longitude,
-        date: states.publishRideSlice.date,
-        time: states.publishRideSlice.time,
-        setPrice: states.publishRideSlice.set_price,
-        aboutRide: text,
-        vehicleId: states.publishRideSlice.vehicle_id,
-        bookInstantly: states.publishRideSlice.bookInstantly,
-        midSeat: states.publishRideSlice.midSeat,
-        estimatedTime: states.publishRideSlice.select_route.estimatedTime,
-        selectRoute: states.publishRideSlice.select_route,
-      });
-      console.log(datata, 'this is result guys ');
-      datata.data.code === 201 ? navigation.popToTop() : null;
-    } else {
-      setShowError(true);
-    }
+    // if (vehiclePresent) {
+    const datata: any = await publish({
+      source: states.rideSlice.pickUp,
+      destination: states.rideSlice.dropOff,
+      sourceLongitude: states.rideSlice.statsPickUp.longitude,
+      sourceLatitude: states.rideSlice.statsPickUp.latitude,
+      destinationLatitude: states.rideSlice.statsDropOff.latitude,
+      destinationLongitude: states.rideSlice.statsDropOff.longitude,
+      passsengerCount: states.rideSlice.numberOfSeats,
+      addCity: states.publishRideSlice.add_city,
+      addCityLongitude: states.publishRideSlice.add_city_latitude,
+      addCityLatitude: states.publishRideSlice.add_city_longitude,
+      date: states.publishRideSlice.date,
+      time: states.publishRideSlice.time,
+      setPrice: states.publishRideSlice.set_price,
+      aboutRide: text,
+      vehicleId: states.publishRideSlice.vehicle_id,
+      bookInstantly: states.publishRideSlice.bookInstantly,
+      midSeat: states.publishRideSlice.midSeat,
+      estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+      selectRoute: states.publishRideSlice.select_route,
+    });
+    console.log(datata, 'this is result guys ');
+    datata.data.code === 201 ? navigation.popToTop() : null;
+    // } else {
+    //   setShowError(true);
+    // }
   };
   return (
     <View>

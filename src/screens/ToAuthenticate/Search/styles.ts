@@ -7,7 +7,6 @@ import {
 const width = Dimensions.get('window').width;
 const styles = StyleSheet.create<any>({
   container: {
-    // justifyContent: 'center',
     flex: 1,
   },
   imageBackgroundStyle: {
@@ -38,7 +37,7 @@ const styles = StyleSheet.create<any>({
     shadowOpacity: 0.8,
   },
   addressView: {
-    marginTop: hp(15),
+    marginTop: hp(12),
   },
   buttonStyle: {
     position: 'absolute',

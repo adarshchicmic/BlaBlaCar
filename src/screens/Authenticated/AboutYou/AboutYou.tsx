@@ -1,4 +1,12 @@
-import {View, Text, ActivityIndicator, Image, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  ToastAndroid,
+  Platform,
+} from 'react-native';
 import React, {useEffect, useState, memo} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SvgProfile} from '../../../assets/svg';
@@ -42,7 +50,11 @@ const AboutYou = ({navigation}: any) => {
       setVehicleData(vehiclesData);
     };
     fetchUserData();
-  }, [profile, focus, dispatch, vehicle]);
+    isError &&
+      Platform.OS === 'android' &&
+      ToastAndroid.show('Error while fetching data', ToastAndroid.SHORT);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus]);
 
   const handleEditProfileDetail = () => {
     navigation.navigate('EditPersonalDetail');
@@ -64,6 +76,13 @@ const AboutYou = ({navigation}: any) => {
   const handleEditProfilePicturePress = () => {
     navigation.navigate('EditProfilePicture');
   };
+  // const showToast = () => {
+  //   let val = false;
+  //   val === false
+  //     ? ((val = true), ToastAndroid.show('Error while fetching data', 1))
+  //     : null;
+  //   console.log('render');
+  // };
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
@@ -115,7 +134,7 @@ const AboutYou = ({navigation}: any) => {
           </View>
         </View>
         {(isLoading || isLadingVehicle) && <ActivityIndicator />}
-        {(isError || isErrorVehicle) && <Text>{COMMON_CONSTS.ERROR}</Text>}
+        {/* {isError && showToast()} */}
         <View style={styles.profileDetailContainer}>
           <Text style={styles.titleStyle}>{COMMON_CONSTS.ABOUT_YOU}</Text>
           <SvgTextButton

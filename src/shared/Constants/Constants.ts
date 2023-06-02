@@ -174,6 +174,7 @@ export const COMMON_CONSTS = {
   SUBMIT: 'Submit',
   CHOOSE_PROFILE_PICTURE: 'Choose your profile',
   PICTURE: 'picture',
+  RESET_PASSWORD: 'Reset Password',
   WHICH_CAR_ARE_YOU_DRIVING: 'Which car are you driving?',
   TAKE_A_PICTURE: 'Take a picture',
   CHOOSE_A_PICTURE: 'Choose a picture',

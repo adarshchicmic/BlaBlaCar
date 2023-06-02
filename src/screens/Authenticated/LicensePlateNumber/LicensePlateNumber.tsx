@@ -25,12 +25,14 @@ const LicensePlateNumber = ({navigation, route}) => {
   const [validLicensePlate, setValidLicensePlate] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [vehicle, {isLoading, isError}] = useLazyVehicleQuery();
+  const [vehicleData, setVehicleData] = useState<any>('');
 
   useEffect(() => {
     const fun = async () => {
       if (vehicleId) {
         const data = await vehicle({id: vehicleId});
         console.log(data, 'this is data guys');
+        setVehicleData(data?.data);
       }
     };
     fun();
@@ -46,12 +48,18 @@ const LicensePlateNumber = ({navigation, route}) => {
     navigation.goBack();
   };
   const handleDoNotKnowLicensePlateOnPress = () => {
-    navigation.navigate('VehicleInformation', {screen: screen});
+    navigation.navigate('VehicleInformation', {
+      screen: screen,
+      vehicleData: vehicleData,
+    });
   };
   const handleSaveButtonPress = async () => {
     if (validLicensePlate) {
       setShowError(false);
-      navigation.navigate('VehicleInformation', {screen: screen});
+      navigation.navigate('VehicleInformation', {
+        screen: screen,
+        vehicleData: vehicleData,
+      });
       // navigation.goBack();
     } else {
       setShowError(true);
@@ -80,6 +88,7 @@ const LicensePlateNumber = ({navigation, route}) => {
           style={styles.inputTextStyle}
           placeholder={COMMON_CONSTS.NUMBER_PLATE}
           onChangeText={value => handleTextChange(value)}
+          defaultValue={vehicleData?.vehicle_number}
         />
       </View>
       <View style={styles.nameArrowButtonView}>

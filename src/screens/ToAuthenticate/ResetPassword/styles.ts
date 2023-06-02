@@ -8,7 +8,7 @@ import {
 const styles = StyleSheet.create<any>({
   container: {
     justifyContent: 'center',
-    marginLeft: wp(5),
+    marginHorizontal: wp(5),
   },
   fullView: {
     flex: 1,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create<any>({
   },
   svgOpenCloseStyle: {
     marginTop: hp(2),
-    marginRight: wp(7.5),
+    marginRight: wp(5),
     position: 'absolute',
     right: 0,
     zIndex: 1,
@@ -65,6 +65,10 @@ const styles = StyleSheet.create<any>({
     textAlign: 'center',
     color: '#fff',
     fontWeight: '500',
+  },
+  errorStyle: {
+    color: '#f00',
+    fontSize: RFValue(13),
   },
   buttonView: {
     width: wp(10),

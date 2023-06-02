@@ -68,13 +68,14 @@ const MapScreen = ({navigation}: any) => {
       destLatitude: destLocation?.latitude,
       destLongitude: destLocation?.longitude,
     });
+    console.log(val, 'this is data guys ');
     const data = val?.data;
-    dispatch(updateRouteDetail({selectRoute: data}));
+    dispatch(updateRouteDetail({selectRoute: val}));
     if (data.status === 'OK') {
       const routeCoordinates = data.routes[0].overview_polyline.points;
       const dis = data.routes[0].legs[0].distance.text;
       const dur = data.routes[0].legs[0].duration.text;
-
+      console.log(dis, 'this is distance guys ');
       dispatch(
         updateRoadDistanceDuration({
           road: data.routes[0].summary,

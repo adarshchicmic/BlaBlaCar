@@ -17,14 +17,13 @@ import {useIsFocused} from '@react-navigation/native';
 import {swapLocation} from '../../../store/slices/rideSlice';
 import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
 import {updateSearch} from '../../../store/slices/searchSlice';
-import {useSearchMutation} from '../../../services/modules/Search';
+import {useLazySearchQuery} from '../../../services/modules/Search';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  const [search, {isLoading}] = useSearchMutation();
+  const [search, {isLoading}] = useLazySearchQuery();
   const numberOfSeat: any = useSelector(state => state);
-
   const handleleavingFromPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
   };
@@ -41,16 +40,21 @@ const Search = ({navigation}: any) => {
         },
       }),
     );
-    const cal = await search({
-      sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.latitude,
-      destinationLatitude: numberOfSeat?.rideSlice?.statsGointTo?.latitude,
-      sourceLongitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
-      destinationLongitude: numberOfSeat?.rideSlice?.statsGointTo?.longitude,
+    console.log(
+      numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
+      numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
+      'destination latitude',
+    );
+    const result = await search({
+      sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
+      destinationLatitude: numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
+      sourceLongitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.latitude,
+      destinationLongitude: numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
       passCount: numberOfSeat?.rideSlice?.numberOfSeats,
       date: numberOfSeat?.rideSlice?.date,
     });
-
-    navigation.navigate('SearchResult');
+    console.log(result, 'this is result');
+    // navigation.navigate('SearchResult');
   };
   return (
     <ScrollView style={styles.container}>

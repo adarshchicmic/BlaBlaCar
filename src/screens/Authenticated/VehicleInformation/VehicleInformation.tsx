@@ -81,7 +81,7 @@ const VehicleInformation = ({navigation, route}: any) => {
 
   const handleForwardArrowButtonPress = async () => {
     if (screen === COMMON_CONSTS.ABOUT_YOU) {
-      const dataa = await addVehicle({
+      const result: any = await addVehicle({
         country: 'India',
         vehicleNumber: null,
         vehicleBrand: vehicleBrand,
@@ -90,6 +90,7 @@ const VehicleInformation = ({navigation, route}: any) => {
         vehicleColor: vehicleColor,
         vehicleModelYear: vehicleModelYear,
       });
+      console.log(result, 'this is result');
     }
     // if (screen === COMMON_CONSTS.EDIT_INFO) {
 

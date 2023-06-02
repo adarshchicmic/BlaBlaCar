@@ -1,4 +1,10 @@
-import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -9,16 +15,20 @@ import {
   SvgOpenEye,
   SvgRightArrow,
 } from '../../../assets/svg';
-import {updatePassword} from '../../../store/slices/UserSlice';
-import {useDispatch} from 'react-redux';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useResetPasswordMutation} from '../../../services/modules/resetPassword/resetPassword';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
-const ResetPassword = ({navigation}: any) => {
+const ResetPassword = ({navigation, route}: any) => {
+  const email = route.params.email;
   const [password, setPassword] = useState<string>('');
   const [validPassword, setValidPassword] = useState<boolean>(true);
   const [openEye, setOpenEye] = useState<boolean>(false);
   const [showWarning, setShowWarning] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const [resetPassword, {isLoading, isError}] = useResetPasswordMutation();
 
   const handlePasswordChange = value => {
     setPassword(value);
@@ -35,43 +45,15 @@ const ResetPassword = ({navigation}: any) => {
     !validPassword ? setShowWarning(true) : setShowWarning(false);
 
     if (validPassword) {
-      // const dataa: any = await signUp({
-      //   email: states?.userSlice?.user?.email,
-      //   password: password,
-      //   first_name: states?.userSlice?.user?.firstName,
-      //   last_name: states?.userSlice?.user?.lastName,
-      //   dob: states?.userSlice?.user?.dob,
-      //   title: states?.userSlice?.user?.title,
-      //   // mobile_number: '9984703591',
-      // });
-      // console.log(dataa, 'this is result from signup');
-      dispatch(updatePassword({password: password}));
-      navigation.navigate('VerifyMobileNumber', {password: password});
-      // console.log(dataa, 'this is result');
+      const result: any = await resetPassword({
+        email: email,
+        password: password,
+      });
+      result?.data?.code === 200
+        ? navigation.navigate('EmailAndPasswordLogIn')
+        : null;
+      console.log(result, 'this is result');
     }
-    // console.log(
-    //   'email:',
-    //   states?.userSlice?.user?.email,
-    //   'password: ',
-    //   password,
-    //   'first_name:',
-    //   states?.userSlice?.user?.firstName,
-    //   'last_name:',
-    //   states?.userSlice?.user?.lastName,
-    //   'dob:',
-    //   states?.userSlice?.user?.dob,
-    //   'title:',
-    //   states?.userSlice?.user?.title,
-    // );
-    // console.log(
-    //   data,
-    //   isLoading,
-    //   isError,
-    //   isSuccess,
-    //   isUninitialized,
-    //   'data from api ',
-    // );
-    console.log(validPassword, showWarning);
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -81,10 +63,8 @@ const ResetPassword = ({navigation}: any) => {
             <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
           </TouchableOpacity>
           <View style={styles.textView}>
-            <Text style={styles.textStyle}>{COMMON_CONSTS.DEFINE_YOUR}</Text>
-            <Text style={styles.textStyle}>{COMMON_CONSTS.PASSWORDS}</Text>
+            <Text style={styles.textStyle}>{COMMON_CONSTS.RESET_PASSWORD}</Text>
           </View>
-
           <View style={styles.textPasswordMustContainView}>
             <Text style={styles.textPasswordMustContain}>
               {COMMON_CONSTS.IT_MUST_HAVE_ATLEAST_EIGHT_CHARACTERS_ONE}
@@ -113,16 +93,27 @@ const ResetPassword = ({navigation}: any) => {
                 <View style={styles.svgOpenCloseStyle}>
                   <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
                     {openEye ? (
-                      <SvgOpenEye width={25} height={25} />
+                      <SvgOpenEye
+                        width={widthPercentageToDP(7)}
+                        height={heightPercentageToDP(4)}
+                      />
                     ) : (
-                      <SvgCloseEye width={25} height={25} />
+                      <SvgCloseEye
+                        width={widthPercentageToDP(7)}
+                        height={heightPercentageToDP(4)}
+                      />
                     )}
                   </TouchableOpacity>
                 </View>
               )}
             </View>
           </View>
-
+          {isLoading && <ActivityIndicator />}
+          {isError && (
+            <Text style={styles.errorStyle}>
+              {COMMON_CONSTS.ERROR} {}
+            </Text>
+          )}
           {password && (
             <View style={styles.buttonView}>
               <TouchableOpacity
