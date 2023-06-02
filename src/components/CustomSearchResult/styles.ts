@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     marginTop: hp(3),
     width: wp(85),
     borderRadius: 20,
-    padding: 30,
+    padding: wp(3),
     shadowColor: '#fff',
     shadowOpacity: 0.5,
     backgroundColor: '#fff',
@@ -20,6 +20,12 @@ const styles = StyleSheet.create({
   textGoingFrom: {
     fontSize: RFValue(16),
     fontWeight: '600',
+  },
+  imageStyle: {
+    width: wp(12),
+    height: wp(12),
+    borderRadius: wp(6),
+    margin: wp(2),
   },
   textGoingToStyle: {
     fontSize: RFValue(16),
@@ -42,13 +48,17 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   textView: {
-    width: wp(20),
+    width: wp(16),
     borderRightWidth: 5,
     marginRight: wp(4),
     justifyContent: 'space-between',
   },
   timeLocationView: {
     flexDirection: 'row',
+  },
+  nameSvgView: {
+    flexDirection: 'row',
+    marginTop: hp(3),
   },
   priceText: {
     fontSize: RFValue(18),

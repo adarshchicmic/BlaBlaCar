@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {SvgLeftArrowWithout} from '../../assets/svg';
 import {
@@ -8,16 +8,47 @@ import {
 import CustomButton from '../CustomButton/CustomButton';
 import styles from './styles';
 
-const CustomArrowButtonFilter = () => {
+import CustomLeavingFromGoingTo from '../CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
+
+interface Props {
+  goingFrom: any;
+  goingTo: any;
+  passengerCount: any;
+  navigation: any;
+}
+
+const CustomArrowButtonFilter = ({
+  goingFrom,
+  goingTo,
+  passengerCount,
+  navigation,
+}: Props) => {
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
   return (
     <View style={styles.container}>
-      <SvgLeftArrowWithout
-        width={widthPercentageToDP(5)}
-        height={heightPercentageToDP(5)}
-      />
-      <Text>CustomArrowButtonFilters</Text>
+      <TouchableOpacity onPress={() => handleGoBack()}>
+        <SvgLeftArrowWithout
+          width={widthPercentageToDP(5)}
+          height={heightPercentageToDP(5)}
+        />
+      </TouchableOpacity>
+      <View>
+        <CustomLeavingFromGoingTo
+          leavingFrom={goingFrom}
+          goingTo={goingTo}
+          passengerCount={passengerCount}
+          moreStyle={{
+            width: widthPercentageToDP(50),
+            marginVertical: heightPercentageToDP(0),
+            marginLeft: widthPercentageToDP(5),
+          }}
+        />
+      </View>
+
       <CustomButton
-        btnText="filter"
+        btnText="Filter"
         styleTxt={styles.filterStyle}
         styleBtn={styles.filterButtonStyle}
       />

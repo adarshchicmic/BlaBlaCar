@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {
+  heightPercentageToDP as hp,
   // heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
@@ -10,16 +11,27 @@ const styles = StyleSheet.create({
     width: wp(90),
     padding: 10,
     flexDirection: 'row',
-    borderWidth: 4,
+    justifyContent: 'space-between',
+
+    alignSelf: 'center',
   },
   filterStyle: {
     color: '#2dbeff',
+    textAlign: 'center',
+    justifyContent: 'center',
+    padding: hp(1.3),
+    fontWeight: '600',
   },
   filterButtonStyle: {
-    width: wp(15),
+    width: wp(20),
     position: 'absolute',
-    right: 0,
-    borderWidth: 3,
+    right: wp(6),
+
+    alignSelf: 'flex-end',
+  },
+  textView: {
+    width: wp(50),
+    marginLeft: wp(4),
   },
 });
 export default styles;

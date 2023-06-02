@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
+  // heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     width: wp(86),
     flexDirection: 'row',
     alignSelf: 'center',
-    marginVertical: hp(2),
+    // marginVertical: hp(2),
   },
   arrowStyle: {
     fontSize: RFValue(25),

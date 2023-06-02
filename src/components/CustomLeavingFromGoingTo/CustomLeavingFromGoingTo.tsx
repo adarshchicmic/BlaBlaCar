@@ -13,36 +13,42 @@ interface Props {
   goingTo: string;
   passengerCount: number;
   onPress?: any;
+  show?: any;
+  moreStyle?: any;
 }
 
 const CustomLeavingFromGoingTo: React.FC<Props> = ({
   leavingFrom,
   goingTo,
+  show,
   passengerCount,
+  moreStyle,
   onPress = () => {},
 }) => {
   return (
     <TouchableOpacity style={styles.svgTextView} onPress={onPress}>
-      <SvgTimes
-        width={widthPercentageToDP(6)}
-        height={heightPercentageToDP(5)}
-        style={styles.svgTimeStyle}
-      />
+      {show && (
+        <SvgTimes
+          width={widthPercentageToDP(6)}
+          height={heightPercentageToDP(5)}
+          style={styles.svgTimeStyle}
+        />
+      )}
       <View>
-        <View style={styles.textViewStyle}>
-          <Text style={styles.textStyle}>{leavingFrom.slice(0, 25)}</Text>
+        <View style={[styles.textViewStyle, moreStyle]}>
+          <Text style={styles.textStyle}>{leavingFrom?.slice(0, 25)}</Text>
           <SvgBlackRightArrow
             width={widthPercentageToDP(5)}
             height={heightPercentageToDP(5)}
             style={styles.svgArrowStyle}
           />
-          <Text style={styles.textStyle}>{goingTo.slice(0, 25)}</Text>
+          <Text style={styles.textStyle}>{goingTo?.slice(0, 25)}</Text>
         </View>
-        <Text style={styles.passengerTextStyle}>
+        <Text style={[styles.passengerTextStyle, moreStyle]}>
           {passengerCount} {COMMON_CONSTS.PASSENGER}
         </Text>
       </View>
-      <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+      {show && <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>}
     </TouchableOpacity>
   );
 };

@@ -54,6 +54,9 @@ const Search = ({navigation}: any) => {
       date: numberOfSeat?.rideSlice?.date,
     });
     console.log(result, 'this is result');
+    result?.data?.code === 200
+      ? navigation.navigate('SearchResult', {object: result?.data})
+      : null;
     // navigation.navigate('SearchResult');
   };
   return (
@@ -137,6 +140,7 @@ const Search = ({navigation}: any) => {
             leavingFrom={val.leavingFrom}
             goingTo={val.goingTo}
             passengerCount={val?.passengerCount}
+            show={true}
           />
         ))}
       </View>
