@@ -7,18 +7,22 @@ import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput
 import {usePublishRideMutation} from '../../../services/modules/PublishRide';
 import {useSelector, useDispatch} from 'react-redux';
 import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
-import {updateVehicleId} from '../../../store/slices/publishRideSlice';
+// import {updateVehicleId} from '../../../store/slices/publishRideSlice';
 
 const AddAboutRide = ({navigation}) => {
   const [text, setText] = useState('');
-  const [vehiclePresent, setVehiclePresent] = useState(null);
+  // const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
   const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
     useLazyVehicleQuery();
   const states: any = useSelector(state => state);
+  console.log(
+    states.publishRideSlice.select_route.estimatedTime,
+    'this is estimated time',
+  );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   vehicle().then(payload => {
@@ -67,6 +71,7 @@ const AddAboutRide = ({navigation}) => {
       estimatedTime: states.publishRideSlice.select_route.estimatedTime,
       selectRoute: states.publishRideSlice.select_route,
     });
+
     console.log(datata, 'this is result guys ');
     datata.data.code === 201 ? navigation.popToTop() : null;
     // } else {

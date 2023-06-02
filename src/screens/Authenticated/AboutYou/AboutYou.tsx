@@ -28,8 +28,7 @@ const AboutYou = ({navigation}: any) => {
   const [userDetail, setUserDetail] = useState<any>({});
   const [vehicleData, setVehicleData] = useState<any>({});
   const [profile, {isLoading, isError}]: any = useLazyProfileQuery();
-  const [vehicle, {isLoading: isLadingVehicle, isError: isErrorVehicle}]: any =
-    useLazyVehiclesQuery();
+  const [vehicle, {isLoading: isLadingVehicle}]: any = useLazyVehiclesQuery();
 
   const focus = useIsFocused();
   const dispatch = useDispatch();
