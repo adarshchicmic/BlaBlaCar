@@ -9,29 +9,34 @@ import {
 const styles = StyleSheet.create({
   container: {
     width: wp(90),
-    padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-
+    borderWidth: wp(0.5),
+    borderRadius: wp(5),
     alignSelf: 'center',
   },
   filterStyle: {
     color: '#2dbeff',
+    padding: wp(1),
     textAlign: 'center',
     justifyContent: 'center',
-    padding: hp(1.3),
     fontWeight: '600',
   },
   filterButtonStyle: {
     width: wp(20),
     position: 'absolute',
-    right: wp(6),
-
+    top: hp(2),
+    right: wp(1),
+    justifyContent: 'center',
     alignSelf: 'flex-end',
   },
   textView: {
     width: wp(50),
     marginLeft: wp(4),
+  },
+  backArrowStyle: {
+    justifyContent: 'center',
+    alignContent: 'center',
   },
 });
 export default styles;

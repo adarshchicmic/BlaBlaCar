@@ -39,6 +39,9 @@ const styles = StyleSheet.create<any>({
   addressView: {
     marginTop: hp(12),
   },
+  leavingFromGoingToStyle: {
+    marginVertical: hp(2),
+  },
   buttonStyle: {
     position: 'absolute',
     top: 0,

@@ -45,6 +45,10 @@ const Search = ({navigation}: any) => {
       numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
       'destination latitude',
     );
+    console.log(
+      typeof numberOfSeat?.rideSlice?.numberOfSeats,
+      'this is numberOf seat',
+    );
     const result = await search({
       sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
       destinationLatitude: numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
@@ -135,13 +139,15 @@ const Search = ({navigation}: any) => {
       {isLoading && <ActivityIndicator />}
       <View style={styles.addressView}>
         {numberOfSeat?.searchSlice?.search?.map((val, id) => (
-          <CustomLeavingFromGoingTo
-            key={id}
-            leavingFrom={val.leavingFrom}
-            goingTo={val.goingTo}
-            passengerCount={val?.passengerCount}
-            show={true}
-          />
+          <View style={styles.leavingFromGoingToStyle} key={id}>
+            <CustomLeavingFromGoingTo
+              key={id}
+              leavingFrom={val.leavingFrom}
+              goingTo={val.goingTo}
+              passengerCount={val?.passengerCount}
+              show={true}
+            />
+          </View>
         ))}
       </View>
     </ScrollView>

@@ -22,23 +22,22 @@ const Location = ({navigation, route}) => {
   const screen = route.params.screen;
   const dispatch = useDispatch();
   const myRef: any = useRef();
-  useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      // setLatitude(info?.coords?.latitude);
-    });
-  }, []);
+  // useEffect(() => {
+  //   Geolocation.getCurrentPosition(info => {
+  //     // setLatitude(info?.coords?.latitude);
+  //   });
+  // }, []);
 
   const arrowButtonPress = () => {
     navigation.goBack();
   };
-  const preProcessFunction = () => {};
+  // const preProcessFunction = () => {};
 
   const handlePlaceSelected = (data, details) => {
     const {location} = details.geometry;
     const latitudee = location.lat;
     const longitudee = location.lng;
     myRef.current.setAddressText('');
-    console.log(location, 'this is location ');
 
     screen === COMMON_CONSTS.LEAVING_FROM
       ? (dispatch(updateLeavingFrom({leavingFrom: data?.description})),
@@ -108,13 +107,16 @@ const Location = ({navigation, route}) => {
           query={{
             key: 'AIzaSyDUzn63K64-sXadyIwRJExCfMaicagwGq4',
             language: 'en',
+            components: 'country:ind',
           }}
           fetchDetails={true}
           onFail={() => onFail()}
           nearbyPlacesAPI="GooglePlacesSearch"
           // currentLocation={true}
-          // currentLocationLabel="current location"
+          currentLocationLabel="current location"
           // preProcess={(index) => preProcessFunction(index)}
+          autoFillOnNotFound={true}
+          timeout={2000}
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.NETWORK_ERROR}</Text>}

@@ -70,12 +70,23 @@ const MapScreen = ({navigation}: any) => {
     });
     console.log(val, 'this is data guys ');
     const data = val?.data;
-    dispatch(updateRouteDetail({selectRoute: val}));
     if (data.status === 'OK') {
       const routeCoordinates = data.routes[0].overview_polyline.points;
       const dis = data.routes[0].legs[0].distance.text;
       const dur = data.routes[0].legs[0].duration.text;
       console.log(dis, 'this is distance guys ');
+      const legs: any = [
+        {
+          distance: data.routes[0].legs[0].distance,
+          duration: data.routes[0].legs[0].duration,
+        },
+      ];
+      const overview_polyline = {points: routeCoordinates};
+      const route: any = [];
+      route.push({legs, overview_polyline});
+      console.log({route}, ':this is route');
+
+      dispatch(updateRouteDetail({select_route: {route}}));
       dispatch(
         updateRoadDistanceDuration({
           road: data.routes[0].summary,

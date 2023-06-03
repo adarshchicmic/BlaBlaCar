@@ -12,13 +12,15 @@ const styles = StyleSheet.create({
     width: wp(85),
     borderRadius: 20,
     padding: wp(3),
-    shadowColor: '#fff',
     shadowOpacity: 0.5,
     backgroundColor: '#fff',
     alignSelf: 'center',
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowRadius: 3,
   },
   textGoingFrom: {
-    fontSize: RFValue(16),
+    fontSize: RFValue(14),
     fontWeight: '600',
   },
   imageStyle: {
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
   },
   textGoingToStyle: {
     fontSize: RFValue(16),
-    fontWeight: '600',
+    fontWeight: '500',
   },
   textGoingTo: {
     color: '#000',
@@ -43,22 +45,22 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16),
   },
   leavingAndGoingFromStyle: {
-    height: hp(20),
+    height: hp(15),
     width: wp(40),
     padding: 4,
   },
   textView: {
-    width: wp(16),
-    borderRightWidth: 5,
-    marginRight: wp(4),
+    width: wp(13),
+    // marginTop: hp(1),
     justifyContent: 'space-between',
   },
   timeLocationView: {
+    height: hp(12),
     flexDirection: 'row',
   },
   nameSvgView: {
     flexDirection: 'row',
-    marginTop: hp(3),
+    marginTop: hp(6),
   },
   priceText: {
     fontSize: RFValue(18),
@@ -69,6 +71,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     color: '#000',
+  },
+  pipeViewStyle: {
+    height: hp(8),
+    alignSelf: 'center',
+    width: wp(1.5),
+    backgroundColor: '#000',
+  },
+  pipeMainView: {
+    alignSelf: 'flex-end',
+    marginTop: hp(5),
+    width: wp(2),
+    marginHorizontal: wp(3),
+  },
+  oStyle: {
+    width: wp(4),
+    height: wp(4),
+    borderRadius: wp(2),
+    alignSelf: 'center',
+    borderWidth: wp(1),
+    borderColor: '#000',
   },
 });
 export default styles;

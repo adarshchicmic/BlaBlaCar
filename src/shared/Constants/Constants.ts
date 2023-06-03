@@ -195,6 +195,9 @@ export const COMMON_CONSTS = {
   MAX_PRICE: 'max price',
   ANYTHING_TO_ADD_ABOUT_YOUR_RIDE: 'Anything to add about your ride?',
   PUBLISH: 'Publish',
+  TOTAL_PRICE_FOR_ONE_PASSENGER: 'Total price for 1 passenger',
+  O: 'o',
+  pipe: '|',
   EXAMPLE:
     'Example: "I\'m a student at Delhi University, and I often visit friends in Jaipur. I love photography and rock music."',
 };

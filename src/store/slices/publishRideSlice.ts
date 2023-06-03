@@ -80,14 +80,14 @@ const publishRideSlice: any = createSlice({
       const {road, distance, duration} = action.payload;
       state.select_route.distance = distance;
       state.set_price = parseInt(distance.replace(/[^\d+]/g, '')) * 2;
-      state.minPrice = parseInt(distance.replace(/[^\d+]/g, '')) * 2;
-      state.maxPrice = parseInt(distance.replace(/[^\d+]/g, '')) * 3;
+      state.minPrice = parseInt(distance.replace(/[^\d+]/g, '')) * 1.75;
+      state.maxPrice = parseInt(distance.replace(/[^\d+]/g, '')) * 2.25;
       state.select_route.estimatedTime = duration;
       state.select_route.road_name = road;
     },
     updateRouteDetail: (state, action) => {
       const {selectRoute} = action.payload;
-      state.select_route = selectRoute;
+      state.select_route = {selectRoute};
     },
     updateMidSeat: (state, action) => {
       const {midSeat} = action.payload;

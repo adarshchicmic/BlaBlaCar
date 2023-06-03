@@ -16,7 +16,7 @@ export const userApi = api.injectEndpoints({
           source_latitude: sourceLatitude,
           destination_longitude: destinationLongitude,
           destination_latitude: destinationLatitude,
-          pass_count: passCount,
+          passengers_count: passCount,
           date: date,
         },
       }),

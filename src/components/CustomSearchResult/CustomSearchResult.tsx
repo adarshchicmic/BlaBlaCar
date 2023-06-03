@@ -1,6 +1,11 @@
-import {View, Text, Image} from 'react-native';
-import React, {useEffect} from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {memo} from 'react';
 import styles from './styles';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 
 interface Props {
   timeStart: any;
@@ -8,9 +13,12 @@ interface Props {
   time: any;
   leavingFrom: any;
   goingTo: any;
-  price: any;
+  price?: any;
   name: any;
   imageUri: any;
+  data?: any;
+  navigation?: any;
+  show: boolean;
 }
 
 const CustomSearchResult = ({
@@ -22,10 +30,18 @@ const CustomSearchResult = ({
   price,
   name,
   imageUri,
+  data,
+  navigation,
+  show,
 }: Props) => {
-  useEffect(() => {}, []);
+  const handleOnPress = () => {
+    navigation.navigate('RideDetail', {data: data});
+  };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      disabled={!show}
+      onPress={() => handleOnPress()}>
       <View style={styles.timeLocationView}>
         <View style={styles.textView}>
           <Text style={styles.timeStyle}>
@@ -40,10 +56,15 @@ const CustomSearchResult = ({
               'm'}
           </Text>
           <Text style={styles.timeStyle}>
-            {(timeEnd.getHours() - 5).toString().padStart(2, '0') +
+            {(timeEnd.getHours() - 5 + 12).toString().padStart(2, '0') +
               ':' +
               (timeEnd.getMinutes() - 30).toString().padStart(2, '0')}
           </Text>
+        </View>
+        <View style={styles.pipeMainView}>
+          <View style={styles.oStyle} />
+          <View style={styles.pipeViewStyle} />
+          <View style={styles.oStyle} />
         </View>
         <View style={styles.leavingAndGoingFromStyle}>
           <Text style={styles.textGoingFrom}>
@@ -55,24 +76,28 @@ const CustomSearchResult = ({
             </Text>
           </View>
         </View>
-        <View style={styles.priceStyle}>
-          <Text style={styles.priceText}>₹{price}</Text>
-        </View>
+        {show && (
+          <View style={styles.priceStyle}>
+            <Text style={styles.priceText}>₹{price}</Text>
+          </View>
+        )}
       </View>
-      <View style={styles.nameSvgView}>
-        <View>
-          <Image style={styles.imageStyle} source={{uri: imageUri}} />
+      {show && (
+        <View style={styles.nameSvgView}>
+          <View>
+            <Image style={styles.imageStyle} source={{uri: imageUri}} />
+          </View>
+          <View>
+            <Text style={styles.textGoingFrom}>{name}</Text>
+            <Text>star</Text>
+          </View>
+          <View style={styles.priceStyle}>
+            <Text>svg</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.textGoingFrom}>{name}</Text>
-          <Text>star</Text>
-        </View>
-        <View style={styles.priceStyle}>
-          <Text>svg</Text>
-        </View>
-      </View>
-    </View>
+      )}
+    </TouchableOpacity>
   );
 };
 
-export default CustomSearchResult;
+export default memo(CustomSearchResult);

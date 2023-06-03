@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {SvgBlackRightArrow, SvgTimes} from '../../assets/svg';
 import {
   heightPercentageToDP,
@@ -53,4 +53,4 @@ const CustomLeavingFromGoingTo: React.FC<Props> = ({
   );
 };
 
-export default CustomLeavingFromGoingTo;
+export default memo(CustomLeavingFromGoingTo);

@@ -28,7 +28,9 @@ const CustomArrowButtonFilter = ({
   };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => handleGoBack()}>
+      <TouchableOpacity
+        style={styles.backArrowStyle}
+        onPress={() => handleGoBack()}>
         <SvgLeftArrowWithout
           width={widthPercentageToDP(5)}
           height={heightPercentageToDP(5)}

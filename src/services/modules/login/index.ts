@@ -14,10 +14,8 @@ export const userApi = api.injectEndpoints({
         },
       }),
       async onQueryStarted(id, {dispatch, queryFulfilled}) {
-        // `onStart` side-effect
         try {
           const result: any = await queryFulfilled;
-
           dispatch(
             updateToken({
               token: result?.meta?.response?.headers?.map?.authorization,
@@ -25,9 +23,6 @@ export const userApi = api.injectEndpoints({
           );
         } catch (err) {
           console.log(err, 'Error over here');
-
-          // `onError` side-effect
-          // dispatch(messageCreated('Error fetching post!'))
         }
       },
     }),

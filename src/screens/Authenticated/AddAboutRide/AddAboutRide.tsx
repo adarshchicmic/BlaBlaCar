@@ -21,6 +21,7 @@ const AddAboutRide = ({navigation}) => {
     states.publishRideSlice.select_route.estimatedTime,
     'this is estimated time',
   );
+  console.log(states.publishRideSlice.set_price, 'This is price');
 
   // const dispatch = useDispatch();
 
