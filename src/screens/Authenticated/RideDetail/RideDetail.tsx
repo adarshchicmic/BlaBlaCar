@@ -14,6 +14,11 @@ import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
 import styles from './styles';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {useBookMutation} from '../../../services/modules/BookRide';
+import {SvgElectricity, SvgTwo} from '../../../assets/svg';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
   'January',
@@ -106,6 +111,29 @@ const RideDetail = ({navigation, route}) => {
             <Image source={{uri: val?.image_url}} style={styles.imageStyle} />
             <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
           </TouchableOpacity>
+        </View>
+        <View>
+          <CustomButton
+            btnText={COMMON_CONSTS.CONTACT + ' ' + val?.name}
+            styleTxt={styles.buttonTextStyle}
+            styleBtn={styles.buttonStyle}
+          />
+        </View>
+        <View style={styles.instantStyle}>
+          <SvgTwo
+            width={widthPercentageToDP(5)}
+            height={heightPercentageToDP(5)}
+          />
+          <Text style={styles.textStyle}>
+            {COMMON_CONSTS?.MAX_TWO_IN_THE_BACK_SEATS}
+          </Text>
+        </View>
+        <View style={styles.instantStyle}>
+          <SvgElectricity
+            width={widthPercentageToDP(5)}
+            height={heightPercentageToDP(5)}
+          />
+          <Text style={styles.textStyle}>{COMMON_CONSTS?.INSTANT_BOOKING}</Text>
         </View>
         <View style={styles.vehicleView}>
           <Text style={styles.vehicleNameStyle}>

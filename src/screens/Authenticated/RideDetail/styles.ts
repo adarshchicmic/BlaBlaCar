@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   dateAndSearchView: {
-    borderBottomWidth: hp(1),
+    borderBottomWidth: hp(0.6),
     borderBottomColor: '#c2c1c0',
     paddingBottom: hp(4),
   },
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   priceViewMain: {
-    borderBottomWidth: hp(1),
+    borderBottomWidth: hp(0.6),
     borderBottomColor: '#c2c1c0',
   },
   priceView: {
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: wp(5),
+
     paddingVertical: hp(1),
   },
   arrowStyle: {
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
   nameStyle: {
     fontSize: RFValue(15),
     fontWeight: '600',
+    alignSelf: 'center',
   },
   vehicleView: {
     marginHorizontal: wp(5),
@@ -85,6 +87,27 @@ const styles = StyleSheet.create({
     color: '#f00',
     marginHorizontal: wp(5),
     fontSize: RFValue(12),
+  },
+  instantStyle: {
+    flexDirection: 'row',
+    marginHorizontal: wp(5),
+  },
+  textStyle: {
+    alignSelf: 'center',
+    marginLeft: wp(3),
+    fontSize: RFValue(14),
+    fontWeight: '500',
+  },
+  buttonTextStyle: {
+    color: '#2dbeff',
+    fontSize: RFValue(15),
+    fontWeight: '500',
+  },
+  buttonStyle: {
+    marginHorizontal: wp(5),
+    borderTopWidth: 0.4,
+    borderBottomWidth: 0.4,
+    paddingVertical: hp(2),
   },
 });
 export default styles;

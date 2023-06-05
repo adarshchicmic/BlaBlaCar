@@ -201,6 +201,9 @@ export const COMMON_CONSTS = {
   BOOKC: 'Book',
   YOUR_RIDES: 'Your Rides',
   ADD_ABOUT_RIDE: 'Add about ride',
+  MAX_TWO_IN_THE_BACK_SEATS: 'Max. 2 in the back seats',
+  INSTANT_BOOKING: 'Instant Booking',
+  CONTACT: 'Contact',
   O: 'o',
   pipe: '|',
   EXAMPLE:
