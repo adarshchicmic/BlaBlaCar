@@ -7,9 +7,6 @@ import {useSelector} from 'react-redux';
 const SearchResult = ({navigation, route}) => {
   const obj = route?.params?.object?.data;
   const state: any = useSelector(state => state);
-  console.log(state, 'tjhis is state ');
-  console.log(navigation, 'this is navigation');
-
   return (
     <View>
       <CustomArrowButtonFilter

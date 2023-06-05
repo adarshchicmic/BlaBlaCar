@@ -31,15 +31,15 @@ const LicensePlateNumber = ({navigation, route}) => {
     const fun = async () => {
       if (vehicleId) {
         const data = await vehicle({id: vehicleId});
-        console.log(data, 'this is data guys');
         setVehicleData(data?.data);
       }
     };
     fun();
-  }, [vehicleId, vehicle]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleTextChange = value => {
-    value.length > 8 && value.length < 12
+    value.replace(/ /g, '').length > 8 && value.replace(/ /g, '').length < 12
       ? setValidLicensePlate(true)
       : setValidLicensePlate(false);
     setLicensePlateNumber(value);

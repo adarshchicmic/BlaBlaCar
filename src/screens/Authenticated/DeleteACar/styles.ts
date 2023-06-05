@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   crossDeleteView: {
     position: 'absolute',
-    bottom: hp(2),
+    bottom: hp(5),
     width: wp(90),
     flexDirection: 'row',
     justifyContent: 'space-between',

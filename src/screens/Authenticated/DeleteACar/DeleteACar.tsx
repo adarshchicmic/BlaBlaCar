@@ -1,4 +1,10 @@
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+  SafeAreaView,
+} from 'react-native';
 import React from 'react';
 import {SvgDanger} from '../../../assets/svg';
 import {
@@ -20,11 +26,10 @@ const DeleteACar = ({navigation, route}) => {
   };
   const handleDeleteVehiclePress = async () => {
     const data: any = await deleteVehicle({vehicleId: vehicleId});
-
-    data?.data?.status?.code ? navigation.navigate('Profile') : null;
+    data?.data?.status?.code ? navigation.navigate('HomeScreen') : null;
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.svgView}>
         <SvgDanger
           width={widthPercentageToDP(20)}
@@ -58,7 +63,7 @@ const DeleteACar = ({navigation, route}) => {
       </View>
       {isLoading && <ActivityIndicator />}
       {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
-    </View>
+    </SafeAreaView>
   );
 };
 

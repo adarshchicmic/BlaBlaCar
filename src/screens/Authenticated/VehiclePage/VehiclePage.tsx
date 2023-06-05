@@ -1,5 +1,5 @@
-import {View, Text} from 'react-native';
-import React, {useState, memo} from 'react';
+import {View} from 'react-native';
+import React, {memo} from 'react';
 import styles from './styles';
 import CustomCrossComponent from '../../../components/CustomCrossComponent/CustomCrossComponent';
 import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';

@@ -1,10 +1,6 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {memo} from 'react';
 import styles from './styles';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
 import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 
 interface Props {
@@ -19,6 +15,7 @@ interface Props {
   data?: any;
   navigation?: any;
   show: boolean;
+  ordinates?: any;
 }
 
 const CustomSearchResult = ({
@@ -33,9 +30,15 @@ const CustomSearchResult = ({
   data,
   navigation,
   show,
+  ordinates,
 }: Props) => {
   const handleOnPress = () => {
-    navigation.navigate('RideDetail', {data: data});
+    show
+      ? navigation.navigate('RideDetail', {data: data})
+      : navigation.navigate('Map', {
+          screen: COMMON_CONSTS.BOOK,
+          ordinates: ordinates,
+        });
   };
   return (
     <TouchableOpacity
@@ -45,20 +48,20 @@ const CustomSearchResult = ({
       <View style={styles.timeLocationView}>
         <View style={styles.textView}>
           <Text style={styles.timeStyle}>
-            {(timeStart?.getHours() - 5).toString().padStart(2, '0') +
+            {timeStart?.getUTCHours().toString().padStart(2, '0') +
               ':' +
-              (timeStart?.getMinutes() - 30).toString().padStart(2, '0')}
+              timeStart?.getUTCMinutes().toString().padStart(2, '0')}
           </Text>
           <Text>
-            {(time?.getHours() - 5).toString().padStart(2, '0') +
+            {time?.getUTCHours().toString().padStart(2, '0') +
               'h' +
-              (time?.getMinutes() - 30).toString().padStart(2, '0') +
+              time?.getUTCMinutes().toString().padStart(2, '0') +
               'm'}
           </Text>
           <Text style={styles.timeStyle}>
-            {(timeEnd.getHours() - 5 + 12).toString().padStart(2, '0') +
+            {timeEnd.getUTCHours().toString().padStart(2, '0') +
               ':' +
-              (timeEnd.getMinutes() - 30).toString().padStart(2, '0')}
+              timeEnd.getMinutes().toString().padStart(2, '0')}
           </Text>
         </View>
         <View style={styles.pipeMainView}>

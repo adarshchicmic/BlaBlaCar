@@ -1,4 +1,4 @@
-import {View, SafeAreaView, Text} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import React from 'react';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
 import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
@@ -12,7 +12,8 @@ const WhichCarYouDriving = ({navigation, route}) => {
   const vehicleData = route?.params?.vehicleData;
   const dispatch = useDispatch();
   const handleButtonPress = val => {
-    dispatch(updateVehicleId({id: val?.id}));
+    console.log(val?.id, 'this is val.id guys ');
+    dispatch(updateVehicleId({vehicleId: val?.id}));
     navigation.navigate('MiddleSeatEmpty');
   };
   return (

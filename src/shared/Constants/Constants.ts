@@ -195,7 +195,11 @@ export const COMMON_CONSTS = {
   MAX_PRICE: 'max price',
   ANYTHING_TO_ADD_ABOUT_YOUR_RIDE: 'Anything to add about your ride?',
   PUBLISH: 'Publish',
-  TOTAL_PRICE_FOR_ONE_PASSENGER: 'Total price for 1 passenger',
+  TOTAL_PRICE_FOR_ONE_PASSENGER: 'Total price for',
+  PASSEnGER: 'passenger',
+  CONTINUE: 'Continue',
+  BOOKC: 'Book',
+  YOUR_RIDES: 'Your Rides',
   O: 'o',
   pipe: '|',
   EXAMPLE:

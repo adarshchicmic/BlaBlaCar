@@ -43,6 +43,9 @@ const EditProfilePicture = ({navigation}: any) => {
 
       const imageUri: any = await updateProfilePic({image: dataa});
       dispatch(updateImage({image: imageUri?.data?.status?.image_url}));
+      imageUri?.data?.status?.code === 200
+        ? navigation.reset({index: 1, routes: [{name: 'HomeScreen'}]})
+        : null;
     } catch (error) {
       console.log(error, 'this is an error');
     }

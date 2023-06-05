@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
   timeStyle: {
     fontWeight: '600',
     color: '#000',
-    fontSize: RFValue(16),
+    fontSize: RFValue(15),
   },
   leavingAndGoingFromStyle: {
-    height: hp(15),
+    height: hp(12),
     width: wp(40),
-    padding: 4,
+    // padding: 4,
   },
   textView: {
     width: wp(13),
@@ -73,16 +73,16 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   pipeViewStyle: {
-    height: hp(8),
+    height: hp(6),
     alignSelf: 'center',
     width: wp(1.5),
     backgroundColor: '#000',
   },
   pipeMainView: {
-    alignSelf: 'flex-end',
-    marginTop: hp(5),
+    alignSelf: 'center',
+    // marginTop: hp(5),
     width: wp(2),
-    marginHorizontal: wp(3),
+    marginHorizontal: wp(2),
   },
   oStyle: {
     width: wp(4),

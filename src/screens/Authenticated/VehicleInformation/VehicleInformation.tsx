@@ -7,14 +7,13 @@ import {
   Platform,
   Keyboard,
 } from 'react-native';
-import React, {useState, memo, useRef, Ref, useEffect} from 'react';
+import React, {useState, memo, useRef, useEffect} from 'react';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useAddVehicleMutation} from '../../../services/modules/addVehicle';
-import {useTheme} from '@react-navigation/native';
 
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
@@ -26,6 +25,7 @@ const VehicleInformation = ({navigation, route}: any) => {
   const [addVehicle, {isLoading, isError, isSuccess}] = useAddVehicleMutation();
   let scrollV: any = useRef();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   useEffect(() => {
@@ -74,10 +74,6 @@ const VehicleInformation = ({navigation, route}: any) => {
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
-
-  // useEffect(() => {
-
-  // }, [])
 
   const handleForwardArrowButtonPress = async () => {
     if (screen === COMMON_CONSTS.ABOUT_YOU) {

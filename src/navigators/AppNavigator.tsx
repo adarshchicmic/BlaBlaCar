@@ -34,6 +34,7 @@ import VehiclePage from '../screens/Authenticated/VehiclePage/VehiclePage';
 import DeleteACar from '../screens/Authenticated/DeleteACar/DeleteACar';
 import WhichCarYouDriving from '../screens/Authenticated/WhichCarYouDriving/WhichCarYouDriving';
 import RideDetail from '../screens/Authenticated/RideDetail/RideDetail';
+import CheckDetailAndBook from '../screens/Authenticated/CheckDetailAndBook/CheckDetailAndBook';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -81,6 +82,7 @@ const AppNavigator = () => {
       <Stack.Screen name="DeleteACar" component={DeleteACar} />
       <Stack.Screen name="WhichCarYouDriving" component={WhichCarYouDriving} />
       <Stack.Screen name="RideDetail" component={RideDetail} />
+      <Stack.Screen name="CheckDetailAndBook" component={CheckDetailAndBook} />
     </Stack.Navigator>
   );
 };

@@ -86,7 +86,7 @@ const MapScreen = ({navigation}: any) => {
       route.push({legs, overview_polyline});
       console.log({route}, ':this is route');
 
-      dispatch(updateRouteDetail({select_route: {route}}));
+      dispatch(updateRouteDetail({selectRoute: {route}}));
       dispatch(
         updateRoadDistanceDuration({
           road: data.routes[0].summary,

@@ -5,42 +5,37 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {usePublishRideMutation} from '../../../services/modules/PublishRide';
-import {useSelector, useDispatch} from 'react-redux';
-import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
-// import {updateVehicleId} from '../../../store/slices/publishRideSlice';
+import {useSelector} from 'react-redux';
+import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 
 const AddAboutRide = ({navigation}) => {
   const [text, setText] = useState('');
-  // const [vehiclePresent, setVehiclePresent] = useState(null);
+  const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
   const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
-    useLazyVehicleQuery();
+    useLazyVehiclesQuery();
   const states: any = useSelector(state => state);
-  console.log(
-    states.publishRideSlice.select_route.estimatedTime,
-    'this is estimated time',
-  );
-  console.log(states.publishRideSlice.set_price, 'This is price');
 
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   vehicle().then(payload => {
-  //     dispatch(updateVehicleId({id: payload?.data?.data[0].id}));
-  //     setVehiclePresent(payload?.data?.data?.length);
-  //   });
-  // }, [vehicle, dispatch]);
+  useEffect(() => {
+    vehicle().then(payload => {
+      // console.log(payload?.data?.data[0].id, 'this is also vehicle id ');
+      // dispatch(updateVehicleId({id: payload?.data?.data[0].id}));
+      setVehiclePresent(payload?.data?.data?.length);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // useEffect(() => {
   //   const fun: any = async () => {
   //     const payload: any = await vehicle();
   //     console.log('fulfilled', payload?.data[0]?.id);
   //     // dispatch(updateVehicleId({id: payload.data[0].id}));
-  //     // setVehiclePresent(payload?.data?.length);
+  //     setVehiclePresent(payload?.data?.length);
   //     // console.log(payload?.data?.length);
   //   };
   //   fun();
-  // }, [vehicle, dispatch]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -50,34 +45,34 @@ const AddAboutRide = ({navigation}) => {
     setText(value);
   };
   const handlePublishRide = async () => {
-    // if (vehiclePresent) {
-    const datata: any = await publish({
-      source: states.rideSlice.pickUp,
-      destination: states.rideSlice.dropOff,
-      sourceLongitude: states.rideSlice.statsPickUp.longitude,
-      sourceLatitude: states.rideSlice.statsPickUp.latitude,
-      destinationLatitude: states.rideSlice.statsDropOff.latitude,
-      destinationLongitude: states.rideSlice.statsDropOff.longitude,
-      passsengerCount: states.rideSlice.numberOfSeats,
-      addCity: states.publishRideSlice.add_city,
-      addCityLongitude: states.publishRideSlice.add_city_latitude,
-      addCityLatitude: states.publishRideSlice.add_city_longitude,
-      date: states.publishRideSlice.date,
-      time: states.publishRideSlice.time,
-      setPrice: states.publishRideSlice.set_price,
-      aboutRide: text,
-      vehicleId: states.publishRideSlice.vehicle_id,
-      bookInstantly: states.publishRideSlice.bookInstantly,
-      midSeat: states.publishRideSlice.midSeat,
-      estimatedTime: states.publishRideSlice.select_route.estimatedTime,
-      selectRoute: states.publishRideSlice.select_route,
-    });
+    if (vehiclePresent) {
+      const datata: any = await publish({
+        source: states.rideSlice.pickUp,
+        destination: states.rideSlice.dropOff,
+        sourceLongitude: states.rideSlice.statsPickUp.longitude,
+        sourceLatitude: states.rideSlice.statsPickUp.latitude,
+        destinationLatitude: states.rideSlice.statsDropOff.latitude,
+        destinationLongitude: states.rideSlice.statsDropOff.longitude,
+        passsengerCount: states.rideSlice.numberOfSeats,
+        addCity: states.publishRideSlice.add_city,
+        addCityLongitude: states.publishRideSlice.add_city_latitude,
+        addCityLatitude: states.publishRideSlice.add_city_longitude,
+        date: states.publishRideSlice.date,
+        time: states.publishRideSlice.time,
+        setPrice: states.publishRideSlice.set_price,
+        aboutRide: text,
+        vehicleId: states.publishRideSlice.vehicle_id,
+        bookInstantly: states.publishRideSlice.bookInstantly,
+        midSeat: states.publishRideSlice.midSeat,
+        estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+        selectRoute: states.publishRideSlice.select_route,
+      });
 
-    console.log(datata, 'this is result guys ');
-    datata.data.code === 201 ? navigation.popToTop() : null;
-    // } else {
-    //   setShowError(true);
-    // }
+      console.log(datata, 'this is result guys ');
+      datata.data.code === 201 ? navigation.popToTop() : null;
+    } else {
+      setShowError(true);
+    }
   };
   return (
     <View>
