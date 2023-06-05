@@ -14,6 +14,7 @@ type Style = {
 const styles = StyleSheet.create<Style | any>({
   container: {
     justifyContent: 'center',
+    flex: 1,
   },
   imageStyle: {
     width: wp(100),
@@ -25,9 +26,13 @@ const styles = StyleSheet.create<Style | any>({
   pickYourRideStyle: {
     fontSize: RFValue(20),
     textAlign: 'center',
-    fontWeight: '600',
+    fontWeight: '700',
+    color: '#000',
+    // height: hp(15),
   },
   buttonView: {
+    position: 'absolute',
+    bottom: hp(5),
     alignSelf: 'center',
     marginTop: hp(2),
   },
@@ -42,5 +47,8 @@ const styles = StyleSheet.create<Style | any>({
     color: value === 'LogIn' ? '#2dbeff' : '#fff',
     textAlign: 'center',
   }),
+  textButtonViewStyle: {
+    height: hp(30),
+  },
 });
 export default styles;

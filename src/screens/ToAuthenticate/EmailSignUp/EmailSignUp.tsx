@@ -1,12 +1,12 @@
-import {View, Text, KeyboardAvoidingView} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateEmail} from '../../../store/slices/UserSlice';
+
 const EmailSignUp = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
   const [validEmail, setValidEmail] = useState<boolean>(false);
@@ -19,7 +19,7 @@ const EmailSignUp = ({navigation}: any) => {
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
   };
   const states = useSelector(state => state);
-  console.log(states, 'ye states hai ');
+
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
@@ -34,7 +34,7 @@ const EmailSignUp = ({navigation}: any) => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <TouchableOpacity onPress={() => handleBackArrowPress()}>
+      <TouchableOpacity onPress={handleBackArrowPress}>
         <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
       </TouchableOpacity>
       <View style={styles.textView}>
@@ -67,4 +67,4 @@ const EmailSignUp = ({navigation}: any) => {
   );
 };
 
-export default EmailSignUp;
+export default memo(EmailSignUp);

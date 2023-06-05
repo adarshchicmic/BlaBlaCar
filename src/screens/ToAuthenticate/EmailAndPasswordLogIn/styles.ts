@@ -9,10 +9,12 @@ const styles = StyleSheet.create<any>({
   container: {
     justifyContent: 'center',
     marginLeft: wp(5),
+    flex: 1,
   },
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   textView: {
     marginVertical: hp(4),
@@ -33,10 +35,10 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
     paddingLeft: wp(4),
     paddingRight: wp(10),
+    color: '#000',
   },
   forgotPasswordButtonStyle: {
     marginTop: hp(2),
-    width: wp(35),
   },
   forgotPasswordTextStyle: {
     color: '#2dbeff',
@@ -51,7 +53,7 @@ const styles = StyleSheet.create<any>({
     zIndex: 1,
   },
   buttonStyle: {
-    width: wp(20),
+    // width: wp(0),
     backgroundColor: '#2dbeff',
     padding: hp(2),
     borderRadius: 10,
@@ -63,6 +65,9 @@ const styles = StyleSheet.create<any>({
     textAlign: 'center',
     color: '#fff',
     fontWeight: '500',
+  },
+  errorStyle: {
+    color: '#f00',
   },
 });
 

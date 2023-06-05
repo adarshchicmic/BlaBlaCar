@@ -5,8 +5,9 @@ import {
   ImageBackground,
   TouchableOpacity,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import styles from './styles';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomButton from '../../../components/CustomButton/CustomButton';
@@ -14,14 +15,56 @@ import {SvgCalender, SvgCircle, SvgSwap, SvgUser} from '../../../assets/svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import {swapLocation} from '../../../store/slices/rideSlice';
+import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
+import {updateSearch} from '../../../store/slices/searchSlice';
+import {useLazySearchQuery} from '../../../services/modules/Search';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
+  const [search, {isLoading}] = useLazySearchQuery();
   const numberOfSeat: any = useSelector(state => state);
-  console.log(numberOfSeat?.rideSlice, 'this is number of seats ');
+  const handleleavingFromPress = () => {
+    navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
+  };
+  const handleGoingToPress = () => {
+    navigation.navigate('Location', {screen: COMMON_CONSTS.GOING_TO});
+  };
+  const handleSearchButtonPress = async () => {
+    dispatch(
+      updateSearch({
+        search: {
+          leavingFrom: numberOfSeat?.rideSlice?.leavingFrom,
+          goingTo: numberOfSeat?.rideSlice?.goingTo,
+          passengerCount: numberOfSeat?.rideSlice?.numberOfSeats,
+        },
+      }),
+    );
+    console.log(
+      numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
+      numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
+      'destination latitude',
+    );
+    console.log(
+      typeof numberOfSeat?.rideSlice?.numberOfSeats,
+      'this is numberOf seat',
+    );
+    const result = await search({
+      sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
+      destinationLatitude: numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
+      sourceLongitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.latitude,
+      destinationLongitude: numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
+      passCount: numberOfSeat?.rideSlice?.numberOfSeats,
+      date: numberOfSeat?.rideSlice?.date,
+    });
+    console.log(result, 'this is result');
+    result?.data?.code === 200
+      ? navigation.navigate('SearchResult', {object: result?.data})
+      : null;
+    // navigation.navigate('SearchResult');
+  };
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.imageBackgroundStyle}
         source={require('../../../assets/images/search.jpg')}>
@@ -29,7 +72,7 @@ const Search = ({navigation}: any) => {
           <Text style={styles.textUpperStyle}>
             {COMMON_CONSTS.YOUR_PICK_OF_RIDES_AT}
           </Text>
-          <Text style={styles.textUpperStyle}>{COMMON_CONSTS.LOW_PRICES}</Text>
+          {/* <Text style={styles.textUpperStyle}>{COMMON_CONSTS.LOW_PRICES}</Text> */}
         </View>
       </ImageBackground>
       {isFocused && (
@@ -43,16 +86,20 @@ const Search = ({navigation}: any) => {
                 <SvgSwap width={25} height={25} />
               </TouchableOpacity>
             )}
-          <Pressable style={styles.continueWithEmailView(0)}>
+          <Pressable
+            style={styles.continueWithEmailView(0)}
+            onPress={handleleavingFromPress}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {numberOfSeat?.rideSlice?.leavingFrom}
+              {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 20)}
             </Text>
           </Pressable>
-          <Pressable style={styles.continueWithEmailView(0)}>
+          <Pressable
+            style={styles.continueWithEmailView(0)}
+            onPress={() => handleGoingToPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {numberOfSeat?.rideSlice?.goingTo}
+              {(numberOfSeat?.rideSlice?.goingTo).slice(0, 25)}
             </Text>
           </Pressable>
           <View style={styles.dateAndUserView}>
@@ -65,7 +112,12 @@ const Search = ({navigation}: any) => {
               </Text>
             </Pressable>
             <View style={styles.userViewStyle}>
-              <Pressable onPress={() => navigation.navigate('NumberOfSeats')}>
+              <Pressable
+                onPress={() =>
+                  navigation.navigate('NumberOfSeats', {
+                    screen: COMMON_CONSTS.SEARCH,
+                  })
+                }>
                 <View style={styles.profileNumberStyle}>
                   <SvgUser width={15} height={15} style={styles.svgStyle} />
                   <Text style={styles.numberStyle}>
@@ -80,73 +132,26 @@ const Search = ({navigation}: any) => {
             btnText={COMMON_CONSTS.SEARCH}
             styleBtn={styles.buttonStyle}
             styleTxt={styles.buttonTextStyle}
+            onPressFunction={() => handleSearchButtonPress()}
           />
         </View>
       )}
+      {isLoading && <ActivityIndicator />}
       <View style={styles.addressView}>
-        <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum. It is a long established fact that
-          a reader will be distracted by the readable content of a page when
-          looking at its layout. The point of using Lorem Ipsum is that it has a
-          more-or-less normal distribution of letters, as opposed to using
-          'Content here, content here', making it look like readable English.
-          Many desktop publishing packages and web page editors now use Lorem
-          Ipsum as their default model text, and a search for 'lorem ipsum' will
-          uncover many web sites still in their infancy. Various versions have
-          evolved over the years, sometimes by accident, sometimes on purpose
-          (injected humour and the like).
-        </Text>
-        <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum. It is a long established fact that
-          a reader will be distracted by the readable content of a page when
-          looking at its layout. The point of using Lorem Ipsum is that it has a
-          more-or-less normal distribution of letters, as opposed to using
-          'Content here, content here', making it look like readable English.
-          Many desktop publishing packages and web page editors now use Lorem
-          Ipsum as their default model text, and a search for 'lorem ipsum' will
-          uncover many web sites still in their infancy. Various versions have
-          evolved over the years, sometimes by accident, sometimes on purpose
-          (injected humour and the like).
-        </Text>
-        <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum. It is a long established fact that
-          a reader will be distracted by the readable content of a page when
-          looking at its layout. The point of using Lorem Ipsum is that it has a
-          more-or-less normal distribution of letters, as opposed to using
-          'Content here, content here', making it look like readable English.
-          Many desktop publishing packages and web page editors now use Lorem
-          Ipsum as their default model text, and a search for 'lorem ipsum' will
-          uncover many web sites still in their infancy. Various versions have
-          evolved over the years, sometimes by accident, sometimes on purpose
-          (injected humour and the like).
-        </Text>
+        {numberOfSeat?.searchSlice?.search?.map((val, id) => (
+          <View style={styles.leavingFromGoingToStyle} key={id}>
+            <CustomLeavingFromGoingTo
+              key={id}
+              leavingFrom={val.leavingFrom}
+              goingTo={val.goingTo}
+              passengerCount={val?.passengerCount}
+              show={true}
+            />
+          </View>
+        ))}
       </View>
     </ScrollView>
   );
 };
 
-export default Search;
+export default memo(Search);

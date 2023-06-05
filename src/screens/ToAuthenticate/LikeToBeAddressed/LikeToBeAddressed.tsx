@@ -1,27 +1,25 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import {SvgLeftArrow} from '../../../assets/svg';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {updateTitle} from '../../../store/slices/UserSlice';
+
 const LikeToBeAddressed = ({navigation}: any) => {
   const dispatch = useDispatch();
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
   const missOrMadamPress = () => {
-    console.log('missOrMadam');
     dispatch(updateTitle({title: 'Miss / Madam'}));
     navigation.navigate('DefineYourPassword');
   };
   const sirPress = () => {
-    console.log('sir');
     dispatch(updateTitle({title: 'Sir'}));
     navigation.navigate('DefineYourPassword');
   };
   const ratherNotToSayPress = () => {
-    console.log('reather not to say');
     dispatch(updateTitle({title: COMMON_CONSTS.RATHER_NOT_TO_SAY}));
     navigation.navigate('DefineYourPassword');
   };
@@ -66,4 +64,4 @@ const LikeToBeAddressed = ({navigation}: any) => {
   );
 };
 
-export default LikeToBeAddressed;
+export default memo(LikeToBeAddressed);

@@ -1,30 +1,33 @@
-import {View, Text, KeyboardAvoidingView} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch} from 'react-redux';
 import {updateName} from '../../../store/slices/UserSlice';
 
 const FirstNameLastName = ({navigation}: any) => {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
-
+  const [validFirstName, setValidFirstName] = useState<boolean>(false);
+  const [validLastName, setValidLastName] = useState<boolean>(false);
+  const [showError, setShowError] = useState<boolean>(true);
   const dispatch = useDispatch();
   const handleFirstNameChange = value => {
-    setFirstName(value);
+    setFirstName(value.trim());
+    setValidFirstName(COMMON_CONSTS.NAME_REGEX.test(value.trim()));
   };
   const handleLastNameChange = value => {
-    setLastName(value);
+    setLastName(value.trim());
+    setValidLastName(COMMON_CONSTS.NAME_REGEX.test(value.trim()));
   };
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
   const handleForwardArrowButtonPress = () => {
-    console.log('button pressed');
-    firstName && lastName
+    setShowError(validFirstName && validLastName);
+    firstName && lastName && validFirstName && validLastName
       ? (dispatch(updateName({firstName: firstName, lastName: lastName})),
         navigation.navigate('DateOfBirth'))
       : null;
@@ -54,7 +57,7 @@ const FirstNameLastName = ({navigation}: any) => {
           />
         </View>
       </View>
-
+      {!showError && <Text>{COMMON_CONSTS.NAME_WARN}</Text>}
       {firstName && lastName && (
         <View style={styles.buttonView}>
           <TouchableOpacity
@@ -68,4 +71,4 @@ const FirstNameLastName = ({navigation}: any) => {
   );
 };
 
-export default FirstNameLastName;
+export default memo(FirstNameLastName);

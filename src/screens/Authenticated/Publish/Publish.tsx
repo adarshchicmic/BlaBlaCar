@@ -1,12 +1,13 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {View} from 'react-native';
+import React, {memo} from 'react';
+import PickUp from '../PickUp/PickUp';
 
-const Publish = () => {
+const Publish = ({navigation}: any) => {
   return (
     <View>
-      <Text>Publish</Text>
+      <PickUp navigation={navigation} />
     </View>
   );
 };
 
-export default Publish;
+export default memo(Publish);

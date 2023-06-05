@@ -13,6 +13,7 @@ const styles = StyleSheet.create<any>({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   textView: {
     marginVertical: hp(4),
@@ -28,6 +29,7 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
     paddingLeft: wp(4),
     paddingRight: wp(10),
+    color: '#000',
   },
   textPasswordMustContain: {
     color: '#969693',
@@ -38,9 +40,10 @@ const styles = StyleSheet.create<any>({
     width: wp(90),
     marginVertical: hp(2),
   },
+
   svgOpenCloseStyle: {
-    marginTop: hp(2),
-    marginRight: wp(7.5),
+    marginTop: hp(1.5),
+    marginRight: wp(8),
     position: 'absolute',
     right: 0,
     zIndex: 1,
@@ -66,11 +69,11 @@ const styles = StyleSheet.create<any>({
     marginTop: hp(4),
   },
   buttonStyleArrow: {
-    height: hp(7),
+    height: wp(12),
     width: wp(12),
     backgroundColor: '#2dbeff',
     padding: hp(1),
-    borderRadius: 60,
+    borderRadius: wp(6),
   },
   warningTextStyle: {
     color: '#f00',

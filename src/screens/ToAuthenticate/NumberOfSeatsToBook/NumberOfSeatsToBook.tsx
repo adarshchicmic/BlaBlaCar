@@ -1,18 +1,15 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import React, {memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SvgMinus, SvgPlush, SvgRightArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
 import {addSeats, subtractSeats} from '../../../store/slices/rideSlice';
-const NumberOfSeatsToBook = ({navigation}: any) => {
+const NumberOfSeatsToBook = ({navigation, route}: any) => {
+  const screen = route.params.screen;
   const numberOfSeat: any = useSelector(state => state);
-  console.log(
-    numberOfSeat?.rideSlice?.numberOfSeats,
-    'this is number of seats',
-  );
+
   const dispatch = useDispatch();
   const handleCrossButtonPress = () => {
     navigation.goBack();
@@ -24,10 +21,12 @@ const NumberOfSeatsToBook = ({navigation}: any) => {
     dispatch(addSeats());
   };
   const handleForwardArrowButtonPress = () => {
-    navigation.goBack();
+    screen === COMMON_CONSTS.BOOK
+      ? navigation.navigate('BookInstantly')
+      : navigation.goBack();
   };
   return (
-    <View>
+    <SafeAreaView>
       <CustomButton
         onPressFunction={() => handleCrossButtonPress()}
         btnText={COMMON_CONSTS.X}
@@ -60,8 +59,8 @@ const NumberOfSeatsToBook = ({navigation}: any) => {
           <SvgRightArrow color="red" />
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
-export default NumberOfSeatsToBook;
+export default memo(NumberOfSeatsToBook);

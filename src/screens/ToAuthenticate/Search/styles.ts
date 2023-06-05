@@ -1,17 +1,18 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
+const width = Dimensions.get('window').width;
 const styles = StyleSheet.create<any>({
   container: {
-    justifyContent: 'center',
+    flex: 1,
   },
   imageBackgroundStyle: {
     height: hp(50),
-    width: wp(100),
+    width: width,
+    resizeMode: 'contain',
   },
   textUpperViewStyle: {
     marginTop: hp(5),
@@ -36,7 +37,10 @@ const styles = StyleSheet.create<any>({
     shadowOpacity: 0.8,
   },
   addressView: {
-    marginTop: hp(19),
+    marginTop: hp(12),
+  },
+  leavingFromGoingToStyle: {
+    marginVertical: hp(2),
   },
   buttonStyle: {
     position: 'absolute',
@@ -53,13 +57,13 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
   },
   continueWithEmailView: (value: number) => ({
+    height: hp(6),
     alignSelf: 'center',
     width: value === 0 ? wp(75) : wp(53),
     marginTop: hp(1),
     flexDirection: 'row',
     borderBottomWidth: value === 0 ? 1 : 0,
     borderColor: '#adaca8',
-    paddingVertical: hp(2),
     paddingRight: wp(2),
   }),
   arrowStyle: {
@@ -82,15 +86,15 @@ const styles = StyleSheet.create<any>({
     position: 'absolute',
     right: wp(2),
     top: hp(3),
-
-    borderWidth: 3,
   },
   dateAndUserView: {
+    height: hp(5),
     flexDirection: 'row',
     alignSelf: 'center',
+    marginBottom: hp(1),
   },
   userViewStyle: {
-    height: hp(6),
+    height: hp(5),
     alignSelf: 'center',
     justifyContent: 'center',
     borderLeftWidth: 2,
@@ -100,11 +104,14 @@ const styles = StyleSheet.create<any>({
   profileNumberStyle: {
     flexDirection: 'row',
     width: wp(15),
+    height: hp(10),
   },
   numberStyle: {
     fontSize: RFValue(15),
     fontWeight: '600',
     marginLeft: wp(3),
+    alignSelf: 'center',
+    color: '#000',
   },
 });
 

@@ -16,9 +16,7 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
   warning,
   navigation,
 }: Props) => {
-  console.log(navigation);
   const onLogInSignUpPress = () => {
-    console.log(logInOrSignUp, 'button pressed');
     if (logInOrSignUp === COMMON_CONSTS.SIGN_UP) {
       navigation.navigate('SignUpOptions');
     } else {
@@ -26,12 +24,14 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
     }
   };
   const onContinueWithEmailPress = () => {
-    console.log(logInOrSignUp, 'jkldfdfkl');
     if (logInOrSignUp === COMMON_CONSTS.SIGN_UP) {
       navigation.navigate('EmailAndPasswordLogIn');
     } else {
       navigation.navigate('EmailSignUp');
     }
+  };
+  const handleCrossButtonPress = () => {
+    navigation.goBack();
   };
   return (
     <View style={styles.container}>
@@ -39,6 +39,7 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
         btnText={COMMON_CONSTS.X}
         styleTxt={styles.crossStyle}
         styleBtn={styles.crossButtonStyle}
+        onPressFunction={() => handleCrossButtonPress()}
       />
       <View style={styles.textView}>
         <Text style={styles.textStyle(1)}>
@@ -46,15 +47,17 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
         </Text>
         <Text style={styles.textStyle(1)}>{logInOrSignUpQ}</Text>
       </View>
-      <TouchableOpacity
-        style={styles.continueWithEmailView}
-        onPress={() => onContinueWithEmailPress()}>
-        <SvgMail style={styles.svgStyle} />
-        <Text style={styles.continueWithEmail}>
-          {COMMON_CONSTS.CONTINUE_WITH_EMAIL}
-        </Text>
-        <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
-      </TouchableOpacity>
+      <View style={styles.continueWithEmailView}>
+        <TouchableOpacity
+          style={styles.continueWithEmailView}
+          onPress={() => onContinueWithEmailPress()}>
+          <SvgMail style={styles.svgStyle} />
+          <Text style={styles.continueWithEmail}>
+            {COMMON_CONSTS.CONTINUE_WITH_EMAIL}
+          </Text>
+          <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.bottomTextView}>
         <Text style={styles.textStyle(2)}>{warning}</Text>
         <CustomButton

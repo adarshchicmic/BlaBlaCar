@@ -1,5 +1,5 @@
-import {View, Text, KeyboardAvoidingView} from 'react-native';
-import React, {useState} from 'react';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
@@ -9,18 +9,20 @@ import {
   SvgOpenEye,
   SvgRightArrow,
 } from '../../../assets/svg';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
-import {useSignUpMutation} from '../../../services/modules/signUp';
+import {updatePassword} from '../../../store/slices/UserSlice';
+import {useDispatch} from 'react-redux';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+
 const DefineYourPassword = ({navigation}: any) => {
   const [password, setPassword] = useState<string>('');
   const [validPassword, setValidPassword] = useState<boolean>(true);
   const [openEye, setOpenEye] = useState<boolean>(false);
   const [showWarning, setShowWarning] = useState<boolean>(false);
-  const [signUp, {data, isLoading, isError, isSuccess, isUninitialized}] =
-    useSignUpMutation();
-  const states: any = useSelector(state => state);
-  console.log(states.userSlice.user, 'Yes states hai ');
+  const dispatch = useDispatch();
+
   const handlePasswordChange = value => {
     setPassword(value);
     setValidPassword(COMMON_CONSTS.PASSWORD_REGEX.test(value));
@@ -33,44 +35,12 @@ const DefineYourPassword = ({navigation}: any) => {
     setOpenEye(!openEye);
   };
   const handleForwardArrowButtonPress = async () => {
-    console.log('button Pressed login ');
     !validPassword ? setShowWarning(true) : setShowWarning(false);
-    console.log(validPassword, 'this is validPassword');
+
     if (validPassword) {
-      const dataa: any = await signUp({
-        email: states?.userSlice?.user?.email,
-        password: password,
-        first_name: states?.userSlice?.user?.firstName,
-        last_name: states?.userSlice?.user?.lastName,
-        dob: states?.userSlice?.user?.dob,
-        title: states?.userSlice?.user?.title,
-        mobile_number: '9984703591',
-      });
-      console.log(dataa, 'this is result');
+      dispatch(updatePassword({password: password}));
+      navigation.navigate('VerifyMobileNumber', {password: password});
     }
-    console.log(
-      'email:',
-      states?.userSlice?.user?.email,
-      'password: ',
-      password,
-      'first_name:',
-      states?.userSlice?.user?.firstName,
-      'last_name:',
-      states?.userSlice?.user?.lastName,
-      'dob:',
-      states?.userSlice?.user?.dob,
-      'title:',
-      states?.userSlice?.user?.title,
-    );
-    console.log(
-      data,
-      isLoading,
-      isError,
-      isSuccess,
-      isUninitialized,
-      'data from api ',
-    );
-    console.log(validPassword, showWarning);
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -108,9 +78,15 @@ const DefineYourPassword = ({navigation}: any) => {
             <View style={styles.svgOpenCloseStyle}>
               <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
                 {openEye ? (
-                  <SvgOpenEye width={25} height={25} />
+                  <SvgOpenEye
+                    width={widthPercentageToDP(7)}
+                    height={heightPercentageToDP(5)}
+                  />
                 ) : (
-                  <SvgCloseEye width={25} height={25} />
+                  <SvgCloseEye
+                    width={widthPercentageToDP(7)}
+                    height={heightPercentageToDP(5)}
+                  />
                 )}
               </TouchableOpacity>
             </View>
@@ -131,4 +107,4 @@ const DefineYourPassword = ({navigation}: any) => {
   );
 };
 
-export default DefineYourPassword;
+export default memo(DefineYourPassword);

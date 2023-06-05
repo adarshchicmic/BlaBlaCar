@@ -13,12 +13,13 @@ const styles = StyleSheet.create<any>({
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
+    color: '#000',
   },
   textView: {
     marginVertical: hp(4),
   },
   arrowStyle: {
-    marginTop: hp(1),
+    marginTop: hp(2),
     fontSize: RFValue(20),
     color: '#2dbeff',
   },
@@ -33,6 +34,7 @@ const styles = StyleSheet.create<any>({
     fontWeight: '600',
     paddingLeft: wp(4),
     paddingRight: wp(10),
+    color: '#000',
   },
   svgOpenCloseStyle: {
     marginTop: hp(2),
@@ -42,11 +44,11 @@ const styles = StyleSheet.create<any>({
     zIndex: 1,
   },
   buttonStyle: {
-    height: hp(7),
+    height: wp(12),
     width: wp(12),
     backgroundColor: '#2dbeff',
     padding: hp(1),
-    borderRadius: 60,
+    borderRadius: wp(6),
   },
   errorTextStyle: {
     color: '#f00',

@@ -17,38 +17,40 @@ const styles = StyleSheet.create<Style | any>({
   textStyle: (value: number) => ({
     fontSize: value === 1 ? RFValue(30) : RFValue(20),
     fontWeight: '600',
+    color: '#000',
   }),
   textView: {
-    marginTop: hp(2),
+    marginVertical: hp(3),
   },
   bottomTextView: {
     alignSelf: 'flex-start',
   },
   continueWithEmailView: {
     width: wp(85),
-    marginVertical: hp(5),
+    marginBottom: hp(5),
     flexDirection: 'row',
     borderBottomWidth: 1,
-    paddingBottom: hp(3),
+    paddingBottom: hp(1),
   },
-
   arrowStyle: {
     right: 0,
     position: 'absolute',
     // marginLeft: wp(25),
     fontSize: RFValue(20),
     fontWeight: '500',
+    color: '#000',
   },
   continueWithEmail: {
     fontSize: RFValue(18),
     alignSelf: 'center',
     fontWeight: '500',
+    color: '#000',
   },
   buttonTextStyle: {
     color: '#2dbeff',
   },
   buttonStyle: {
-    marginTop: hp(2),
+    marginTop: hp(1),
     width: wp(20),
   },
   buttonGoBackStyle: {

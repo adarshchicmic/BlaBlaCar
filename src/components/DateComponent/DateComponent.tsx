@@ -6,18 +6,38 @@ import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {updateDate} from '../../store/slices/rideSlice';
+import {updatePublishDate} from '../../store/slices/publishRideSlice';
 
-const DateComponent = ({navigation}: any) => {
+const DateComponent = ({navigation, route}: any) => {
+  const screen = route?.params?.screen;
+
   const dispatch: any = useDispatch();
 
   const handleCrossButtonPress = () => {
     navigation.goBack();
   };
   const handleDateChange = date => {
-    dispatch(updateDate({date: date}));
-    navigation.goBack();
+    screen === COMMON_CONSTS.STOPOVER
+      ? (dispatch(updatePublishDate({date: date})),
+        navigation.navigate('TimePublish'))
+      : (dispatch(updateDate({date: date})), navigation.goBack());
   };
+  const today: Date = new Date();
+  const formatDate = (value: Date) => {
+    var d = new Date(value),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (day.length < 2) {
+      day = '0' + day;
+    }
+
+    return [year, month, day].join('/');
+  };
   return (
     <View>
       <CustomButton
@@ -33,6 +53,7 @@ const DateComponent = ({navigation}: any) => {
       <DatePicker
         onSelectedChange={(date: any) => handleDateChange(date)}
         mode="date"
+        minimumDate={formatDate(today)}
       />
     </View>
   );

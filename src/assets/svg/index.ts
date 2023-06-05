@@ -15,8 +15,29 @@ const SvgCalender: any = require('./calender.svg').default;
 const SvgUser: any = require('./user.svg').default;
 const SvgMinus: any = require('./minus.svg').default;
 const SvgPlush: any = require('./plush.svg').default;
-
+const SvgFlag: any = require('./flag.svg').default;
+const SvgDownArrow: any = require('./downArrow.svg').default;
+const SvgTime: any = require('./time.svg').default;
+const SvgDistance: any = require('./distance.svg').default;
+const SvgRoute: any = require('./route.svg').default;
+const SvgTimes: any = require('./times.svg').default;
+const SvgBlackRightArrow: any = require('./rightBlackArrow.svg').default;
+const SvgLeftArrowWithout: any = require('./leftArrowWithout.svg').default;
+const SvgDanger: any = require('./svgDanger.svg').default;
+const SvgElectricity: any = require('./electricity.svg').default;
+const SvgTwo: any = require('./two.svg').default;
 export {
+  SvgElectricity,
+  SvgTwo,
+  SvgDanger,
+  SvgLeftArrowWithout,
+  SvgBlackRightArrow,
+  SvgTimes,
+  SvgTime,
+  SvgDistance,
+  SvgRoute,
+  SvgDownArrow,
+  SvgFlag,
   SvgUser,
   SvgMinus,
   SvgPlush,
