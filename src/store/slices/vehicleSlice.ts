@@ -40,5 +40,5 @@ const vehicleSlice: any = createSlice({
     },
   },
 });
-export const {updateProfileData} = vehicleSlice.actions;
+export const {updateProfileData, updateVehicleNumber} = vehicleSlice.actions;
 export default vehicleSlice;

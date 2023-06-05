@@ -3,12 +3,14 @@ import React, {memo} from 'react';
 import CustomSearchResult from '../../../components/CustomSearchResult/CustomSearchResult';
 import CustomArrowButtonFilter from '../../../components/CustomArrowButtonFilter/CustomArrowButtonFilter';
 import {useSelector} from 'react-redux';
+import styles from './styles';
 
 const SearchResult = ({navigation, route}) => {
   const obj = route?.params?.object?.data;
   const state: any = useSelector(state => state);
+  console.log(obj, 'this is obj');
   return (
-    <View>
+    <View style={styles.container}>
       <CustomArrowButtonFilter
         goingFrom={state?.rideSlice?.leavingFrom?.slice(0, 3)}
         goingTo={(state?.rideSlice?.goingTo).slice(0, 15)}
@@ -30,6 +32,8 @@ const SearchResult = ({navigation, route}) => {
             imageUri={val?.image_url}
             price={val?.publish?.set_price}
             show={true}
+            bookInstantly={val?.publish?.book_instantly}
+            midSeat={val?.publish?.mid_seat}
           />
         ))}
       </ScrollView>

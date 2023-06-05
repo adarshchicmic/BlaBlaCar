@@ -14,6 +14,7 @@ import styles from './styles';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useAddVehicleMutation} from '../../../services/modules/addVehicle';
+import {useSelector} from 'react-redux';
 
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
@@ -22,9 +23,10 @@ const VehicleInformation = ({navigation, route}: any) => {
   const [vehicleType, setVehicleType] = useState<string>('');
   const [vehicleColor, setVehicleColor] = useState<string>('');
   const [vehicleModelYear, setVehicleModelYear] = useState<string>('');
+  const states: any = useSelector(state => state);
   const [addVehicle, {isLoading, isError, isSuccess}] = useAddVehicleMutation();
   let scrollV: any = useRef();
-
+  console.log(states, 'this is states');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
@@ -76,18 +78,32 @@ const VehicleInformation = ({navigation, route}: any) => {
   };
 
   const handleForwardArrowButtonPress = async () => {
+    const result: any = await addVehicle({
+      country: 'India',
+      vehicleNumber: states?.vehicleSlice?.vehicle?.vehicleNumber,
+      vehicleBrand: vehicleBrand,
+      vehicleName: vehicleName,
+      vehicleType: vehicleType,
+      vehicleColor: vehicleColor,
+      vehicleModelYear: vehicleModelYear,
+    });
+    console.log(result, 'this is data from vehicle addd');
     if (screen === COMMON_CONSTS.ABOUT_YOU) {
-      const result: any = await addVehicle({
-        country: 'India',
-        vehicleNumber: null,
-        vehicleBrand: vehicleBrand,
-        vehicleName: vehicleName,
-        vehicleType: vehicleType,
-        vehicleColor: vehicleColor,
-        vehicleModelYear: vehicleModelYear,
-      });
-      console.log(result, 'this is result');
+      result?.data?.status?.code === 201
+        ? navigation.navigate('HomeScreen')
+        : null;
     }
+    if (screen === COMMON_CONSTS.ADD_ABOUT_RIDE) {
+      result?.data?.status?.code === 201
+        ? navigation.navigate('AddAboutRide')
+        : null;
+    }
+    if (screen === COMMON_CONSTS.EDIT_INFO) {
+      result?.data?.status?.code === 201
+        ? navigation.navigate('HomeScreen')
+        : null;
+    }
+
     // if (screen === COMMON_CONSTS.EDIT_INFO) {
 
     // }
@@ -143,7 +159,6 @@ const VehicleInformation = ({navigation, route}: any) => {
         </View>
         {isError && <Text> {COMMON_CONSTS.ERROR}</Text>}
         {isLoading && <ActivityIndicator />}
-        {isSuccess && navigation.navigate('Profile')}
         {vehicleBrand &&
           vehicleColor &&
           vehicleModelYear &&

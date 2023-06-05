@@ -5,8 +5,9 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {usePublishRideMutation} from '../../../services/modules/PublishRide';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
+import {updateVehicleId} from '../../../store/slices/publishRideSlice';
 
 const AddAboutRide = ({navigation}) => {
   const [text, setText] = useState('');
@@ -16,11 +17,15 @@ const AddAboutRide = ({navigation}) => {
   const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
     useLazyVehiclesQuery();
   const states: any = useSelector(state => state);
+  console.log(states, 'this is states');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     vehicle().then(payload => {
       // console.log(payload?.data?.data[0].id, 'this is also vehicle id ');
-      // dispatch(updateVehicleId({id: payload?.data?.data[0].id}));
+      states?.publishRideSlice?.vehicle_id === 0
+        ? dispatch(updateVehicleId({vehicleId: payload?.data?.data[0].id}))
+        : null;
       setVehiclePresent(payload?.data?.data?.length);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -67,11 +72,13 @@ const AddAboutRide = ({navigation}) => {
         estimatedTime: states.publishRideSlice.select_route.estimatedTime,
         selectRoute: states.publishRideSlice.select_route,
       });
-
       console.log(datata, 'this is result guys ');
-      datata.data.code === 201 ? navigation.popToTop() : null;
+      datata?.data?.code === 201 ? navigation.popToTop() : null;
     } else {
       setShowError(true);
+      navigation.navigate('LicensePlateNumber', {
+        screen: COMMON_CONSTS.ADD_ABOUT_RIDE,
+      });
     }
   };
   return (

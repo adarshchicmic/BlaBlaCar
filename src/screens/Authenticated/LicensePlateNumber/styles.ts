@@ -55,16 +55,15 @@ const styles = StyleSheet.create({
     marginTop: hp(4),
   },
   buttonTextStyle: {
-    fontSize: RFValue(16),
-    color: '#fff',
-    textAlign: 'center',
+    alignSelf: 'center',
   },
   buttonStyle: {
-    width: wp(15),
+    width: wp(12),
+    height: wp(12),
     backgroundColor: '#2dbeff',
-    padding: 15,
-    borderRadius: 60,
+    borderRadius: wp(6),
     alignSelf: 'flex-end',
+    justifyContent: 'center',
   },
 });
 

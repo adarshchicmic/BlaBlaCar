@@ -2,6 +2,11 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {memo} from 'react';
 import styles from './styles';
 import {COMMON_CONSTS} from '../../shared/Constants/Constants';
+import {SvgElectricity, SvgTwo} from '../../assets/svg';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 interface Props {
   timeStart: any;
@@ -16,6 +21,8 @@ interface Props {
   navigation?: any;
   show: boolean;
   ordinates?: any;
+  bookInstantly?: any;
+  midSeat?: any;
 }
 
 const CustomSearchResult = ({
@@ -31,6 +38,8 @@ const CustomSearchResult = ({
   navigation,
   show,
   ordinates,
+  bookInstantly,
+  midSeat,
 }: Props) => {
   const handleOnPress = () => {
     show
@@ -94,8 +103,19 @@ const CustomSearchResult = ({
             <Text style={styles.textGoingFrom}>{name}</Text>
             <Text>star</Text>
           </View>
-          <View style={styles.priceStyle}>
-            <Text>svg</Text>
+          <View style={styles.svgStyle}>
+            {bookInstantly === 't' && (
+              <SvgElectricity
+                width={widthPercentageToDP(5)}
+                height={heightPercentageToDP(5)}
+              />
+            )}
+            {midSeat === 't' && (
+              <SvgTwo
+                width={widthPercentageToDP(5)}
+                height={heightPercentageToDP(5)}
+              />
+            )}
           </View>
         </View>
       )}

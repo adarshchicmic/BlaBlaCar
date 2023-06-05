@@ -92,5 +92,12 @@ const styles = StyleSheet.create({
     borderWidth: wp(1),
     borderColor: '#000',
   },
+  svgStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 0,
+    color: '#000',
+  },
 });
 export default styles;

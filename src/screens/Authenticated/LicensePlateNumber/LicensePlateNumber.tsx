@@ -16,11 +16,11 @@ import styles from './styles';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {SvgRightArrow} from '../../../assets/svg';
 import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
+import {updateVehicleNumber} from '../../../store/slices/vehicleSlice';
 
 const LicensePlateNumber = ({navigation, route}) => {
   const screen = route?.params?.screen;
   const vehicleId = route?.params?.vehicleId;
-  console.log(vehicleId, 'this is vehicle id ');
   const [licensePlateNumber, setLicensePlateNumber] = useState<string>('');
   const [validLicensePlate, setValidLicensePlate] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
@@ -55,6 +55,7 @@ const LicensePlateNumber = ({navigation, route}) => {
   };
   const handleSaveButtonPress = async () => {
     if (validLicensePlate) {
+      updateVehicleNumber({vehicleNumber: licensePlateNumber});
       setShowError(false);
       navigation.navigate('VehicleInformation', {
         screen: screen,

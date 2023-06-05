@@ -48,12 +48,13 @@ const RideDetail = ({navigation, route}) => {
   }, []);
   const handleOnContinuePress = async () => {
     // navigation.navigate('CheckDetailAndBook');
-    const result = await book({
+    const result: any = await book({
       publishId: val?.publish?.id,
       seat: val?.publish?.passengers_count,
     });
     console.log(result, 'this is result ');
     setBookResult(result);
+    result?.data?.code === 201 ? navigation.navigate('HomeScreen') : null;
   };
   return (
     <View style={styles.container}>
@@ -79,6 +80,9 @@ const RideDetail = ({navigation, route}) => {
           imageUri={val?.image_url}
           price={val?.publish?.set_price}
           show={false}
+          ordinates={
+            val?.publish?.select_route?.selectRoute?.route[0]?.overview_polyline
+          }
         />
       </View>
       <View style={styles.priceViewMain}>

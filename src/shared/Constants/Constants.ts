@@ -200,6 +200,7 @@ export const COMMON_CONSTS = {
   CONTINUE: 'Continue',
   BOOKC: 'Book',
   YOUR_RIDES: 'Your Rides',
+  ADD_ABOUT_RIDE: 'Add about ride',
   O: 'o',
   pipe: '|',
   EXAMPLE:
