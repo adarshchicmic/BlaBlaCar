@@ -85,6 +85,7 @@ const RideDetail = ({navigation, route}) => {
           imageUri={val?.image_url}
           price={val?.publish?.set_price}
           show={false}
+          data={val}
           ordinates={
             val?.publish?.select_route?.selectRoute?.route[0]?.overview_polyline
           }
@@ -140,6 +141,9 @@ const RideDetail = ({navigation, route}) => {
             {vehicleDetail?.data?.vehicle_name}
           </Text>
           <Text>{vehicleDetail?.data?.vehicle_color?.toLowerCase()}</Text>
+        </View>
+        <View>
+          <Text>{COMMON_CONSTS.PASSENGERS}</Text>
         </View>
         {isLoading && <ActivityIndicator />}
         {isError && (

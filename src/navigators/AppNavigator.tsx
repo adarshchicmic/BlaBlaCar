@@ -35,8 +35,10 @@ import DeleteACar from '../screens/Authenticated/DeleteACar/DeleteACar';
 import WhichCarYouDriving from '../screens/Authenticated/WhichCarYouDriving/WhichCarYouDriving';
 import RideDetail from '../screens/Authenticated/RideDetail/RideDetail';
 import CheckDetailAndBook from '../screens/Authenticated/CheckDetailAndBook/CheckDetailAndBook';
+import ChangePassword from '../screens/Authenticated/ChangePassword/ChangePassword';
+import SearchMap from '../screens/Authenticated/SearchMap/SearchMap';
 
-const Stack = createNativeStackNavigator();
+const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -45,6 +47,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Publish" component={Publish} />
       <Stack.Screen name="Location" component={Location} />
       <Stack.Screen name="Profile" component={Profile} />
+
       <Stack.Screen name="DatePicker" component={DateComponent} />
       <Stack.Screen name="NumberOfSeats" component={NumberOfSeatsToBook} />
       <Stack.Screen name="EditPersonalDetail" component={EditPersonalDetail} />
@@ -83,6 +86,8 @@ const AppNavigator = () => {
       <Stack.Screen name="WhichCarYouDriving" component={WhichCarYouDriving} />
       <Stack.Screen name="RideDetail" component={RideDetail} />
       <Stack.Screen name="CheckDetailAndBook" component={CheckDetailAndBook} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="SearchMap" component={SearchMap} />
     </Stack.Navigator>
   );
 };

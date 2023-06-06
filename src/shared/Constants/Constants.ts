@@ -52,6 +52,9 @@ export const COMMON_CONSTS = {
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
   PASSWORD_IS_NOT_VALID: 'Password is not valid',
   SEARCH: 'Search',
+  CURRENT_PASSWORD: 'Current password',
+  NEW_PASSWORD: 'New password',
+  CONFIRM_NEW_PASSWORD: 'Confirm new password',
   WHEN_ARE_YOU_GOING: 'When are you',
   GOING: 'going?',
   NUMBER_OF_SEATS: 'Number of seats to',
@@ -59,6 +62,10 @@ export const COMMON_CONSTS = {
   EDIT_INFO: 'Edit info',
   DELETE_VEHICLE: 'Delete Vehicle',
   INBOX: 'Inbox',
+  UPDATE_VEHICLE: 'Update Vehicle',
+  PASSENGERS: 'Passengers',
+  NEW_PASSWORD_AND_CONFIRM_NEW_PASSWORD_DID_NOT_MATCH:
+    'New password and confirm password did not match',
   DELETING_A_CAR_FROM_YOUR_PROFILE_MIGHT_MAKE_IT_HARDER:
     'Deleting a car from your profile might make it harder for passengers to find you at the meeting point.',
   LEAVING_FROM: 'Leaving from',
@@ -200,6 +207,7 @@ export const COMMON_CONSTS = {
   CONTINUE: 'Continue',
   BOOKC: 'Book',
   YOUR_RIDES: 'Your Rides',
+
   ADD_ABOUT_RIDE: 'Add about ride',
   MAX_TWO_IN_THE_BACK_SEATS: 'Max. 2 in the back seats',
   INSTANT_BOOKING: 'Instant Booking',

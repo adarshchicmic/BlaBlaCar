@@ -9,8 +9,9 @@ import React, {useState, memo, useEffect} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
+
 // import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
-// import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 // import {updateProfileData} from '../../../store/slices/profileSlice';
 // import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
@@ -26,12 +27,14 @@ const LicensePlateNumber = ({navigation, route}) => {
   const [showError, setShowError] = useState<boolean>(false);
   const [vehicle, {isLoading, isError}] = useLazyVehicleQuery();
   const [vehicleData, setVehicleData] = useState<any>('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fun = async () => {
       if (vehicleId) {
         const data = await vehicle({id: vehicleId});
         setVehicleData(data?.data);
+        console.log(data, 'This is data of vehicle');
       }
     };
     fun();
@@ -55,7 +58,7 @@ const LicensePlateNumber = ({navigation, route}) => {
   };
   const handleSaveButtonPress = async () => {
     if (validLicensePlate) {
-      updateVehicleNumber({vehicleNumber: licensePlateNumber});
+      dispatch(updateVehicleNumber({vehicleNumber: licensePlateNumber}));
       setShowError(false);
       navigation.navigate('VehicleInformation', {
         screen: screen,
@@ -89,7 +92,7 @@ const LicensePlateNumber = ({navigation, route}) => {
           style={styles.inputTextStyle}
           placeholder={COMMON_CONSTS.NUMBER_PLATE}
           onChangeText={value => handleTextChange(value)}
-          defaultValue={vehicleData?.vehicle_number}
+          defaultValue={vehicleData?.vehicle_number?.toString()}
         />
       </View>
       <View style={styles.nameArrowButtonView}>

@@ -9,7 +9,7 @@ import {useIsFocused} from '@react-navigation/native';
 import DateToFrom from '../../../components/dateToFrom/dateToFrom';
 
 const YourRides = () => {
-  const [result, setResult] = useState<any>();
+  const [result, setResult] = useState<any>([]);
   const [getRide, {isLoading, isError}] = useLazyGetRideQuery();
   const focus = useIsFocused();
   useEffect(() => {
@@ -23,7 +23,7 @@ const YourRides = () => {
   }, [focus]);
   return (
     <ScrollView>
-      {result?.lenght && (
+      {result?.length === 0 ? (
         <View>
           <CustomTitleText
             text={COMMON_CONSTS.YOUR_FUTURE_TRAVEL_PLANS_WILL_APPEAR_HERE}
@@ -32,9 +32,11 @@ const YourRides = () => {
             <Text>{COMMON_CONSTS.FIND_THE_PERFECT_RIDE_FROM}</Text>
           </View>
         </View>
-      )}
-      {result?.length && <CustomTitleText text={COMMON_CONSTS.YOUR_RIDES} />}
-      {isLoading && <ActivityIndicator />}
+      ) : null}
+      {result?.length ? (
+        <CustomTitleText text={COMMON_CONSTS.YOUR_RIDES} />
+      ) : null}
+      {isLoading ? <ActivityIndicator /> : null}
       {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       {result?.map(val => (
         <DateToFrom

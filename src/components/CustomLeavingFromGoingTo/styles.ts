@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textStyle: {
-    fontSize: RFValue(15),
+    fontSize: RFValue(14),
     alignSelf: 'center',
     color: '#000',
     fontWeight: '600',
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
   },
   passengerTextStyle: {
     fontSize: RFValue(12),
+    color: '#a3a0a0',
   },
 });
 

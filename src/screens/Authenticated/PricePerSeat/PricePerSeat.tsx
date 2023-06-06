@@ -56,7 +56,10 @@ const PricePerSeat = ({navigation, route}: any) => {
 
         <TouchableOpacity
           onPress={() => handlePlusButton()}
-          disabled={numberOfSeat?.rideSlice?.numberOfSeats === 8}>
+          disabled={
+            numberOfSeat?.publishRideSlice?.set_price ===
+            numberOfSeat?.publishRideSlice?.maxPrice
+          }>
           <SvgPlush width={50} height={50} />
         </TouchableOpacity>
       </View>

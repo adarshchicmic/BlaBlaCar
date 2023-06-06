@@ -9,7 +9,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 import {updateVehicleId} from '../../../store/slices/publishRideSlice';
 
-const AddAboutRide = ({navigation}) => {
+const AddAboutRide = ({navigation, route}) => {
+  const screen = route?.params?.screen;
   const [text, setText] = useState('');
   const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -24,12 +25,12 @@ const AddAboutRide = ({navigation}) => {
     vehicle().then(payload => {
       // console.log(payload?.data?.data[0].id, 'this is also vehicle id ');
       states?.publishRideSlice?.vehicle_id === 0
-        ? dispatch(updateVehicleId({vehicleId: payload?.data?.data[0].id}))
+        ? dispatch(updateVehicleId({vehicleId: payload?.data?.data[0]?.id}))
         : null;
       setVehiclePresent(payload?.data?.data?.length);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [screen]);
   // useEffect(() => {
   //   const fun: any = async () => {
   //     const payload: any = await vehicle();
@@ -101,9 +102,9 @@ const AddAboutRide = ({navigation}) => {
           styleInputText={styles.textInputStyle}
         />
       </View>
-      {showError && (
+      {showError && screen !== COMMON_CONSTS.UPDATE_VEHICLE ? (
         <Text style={styles.errorStyle}>{COMMON_CONSTS.VEHICLE_ERROR}</Text>
-      )}
+      ) : null}
       {(isError || isErrorVehicle) && (
         <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
       )}

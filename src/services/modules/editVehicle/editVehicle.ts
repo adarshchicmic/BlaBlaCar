@@ -1,7 +1,7 @@
 import {api} from '../../api';
 export const addVehicleApi = api.injectEndpoints({
   endpoints: build => ({
-    addVehicle: build.mutation({
+    updateVehicle: build.mutation({
       query: ({
         country,
         vehicleNumber,
@@ -10,8 +10,9 @@ export const addVehicleApi = api.injectEndpoints({
         vehicleType,
         vehicleColor,
         vehicleModelYear,
+        vehicleId,
       }) => ({
-        url: 'vehicles/',
+        url: `vehicles/${vehicleId}`,
         method: 'PUT',
         body: {
           vehicle: {
@@ -30,4 +31,4 @@ export const addVehicleApi = api.injectEndpoints({
 
   overrideExisting: true,
 });
-export const {useAddVehicleMutation} = addVehicleApi;
+export const {useUpdateVehicleMutation} = addVehicleApi;

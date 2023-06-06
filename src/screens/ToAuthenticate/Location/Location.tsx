@@ -1,9 +1,9 @@
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useEffect, useRef, useState, memo} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import React, {useRef, useState, memo} from 'react';
 import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
-import Geolocation from '@react-native-community/geolocation';
+// import Geolocation from '@react-native-community/geolocation';
 import {useDispatch} from 'react-redux';
 
 import {
@@ -17,7 +17,7 @@ import {
 import {updateCity} from '../../../store/slices/publishRideSlice';
 
 const Location = ({navigation, route}) => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(false);
   const screen = route.params.screen;
   const dispatch = useDispatch();
@@ -120,7 +120,7 @@ const Location = ({navigation, route}) => {
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.NETWORK_ERROR}</Text>}
-      {isLoading && <ActivityIndicator />}
+      {/* {isLoading && <ActivityIndicator />} */}
     </View>
   );
 };

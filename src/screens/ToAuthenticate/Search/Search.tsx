@@ -40,15 +40,7 @@ const Search = ({navigation}: any) => {
         },
       }),
     );
-    console.log(
-      numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
-      numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
-      'destination latitude',
-    );
-    console.log(
-      typeof numberOfSeat?.rideSlice?.numberOfSeats,
-      'this is numberOf seat',
-    );
+
     const result = await search({
       sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
       destinationLatitude: numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
@@ -59,7 +51,10 @@ const Search = ({navigation}: any) => {
     });
     console.log(result, 'this is result');
     result?.data?.code === 200
-      ? navigation.navigate('SearchResult', {object: result?.data})
+      ? navigation.navigate('SearchResult', {
+          object: result?.data,
+          routeDetail: result,
+        })
       : null;
     // navigation.navigate('SearchResult');
   };

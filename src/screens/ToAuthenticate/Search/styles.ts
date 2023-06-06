@@ -73,7 +73,7 @@ const styles = StyleSheet.create<any>({
     fontWeight: '500',
   },
   continueWithEmail: {
-    fontSize: RFValue(18),
+    fontSize: RFValue(17),
     alignSelf: 'center',
     fontWeight: '700',
     marginLeft: wp(2),

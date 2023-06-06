@@ -8,7 +8,7 @@ import {useSignOutMutation} from '../../../services/modules/signOut';
 import {useDispatch} from 'react-redux';
 import {updateToken} from '../../../store/slices/UserSlice';
 
-const Account = () => {
+const Account = ({navigation}) => {
   const dispatch = useDispatch();
   const [signOut, {isLoading: isLoadingSignOut}]: any = useSignOutMutation();
 
@@ -18,6 +18,9 @@ const Account = () => {
 
     // dispatch(updateToken({token: ''}));
   };
+  const handleChangePasswordPress = () => {
+    navigation.navigate('ChangePassword');
+  };
   return (
     <SafeAreaView>
       <ScrollView>
@@ -26,7 +29,10 @@ const Account = () => {
         </View>
         <View style={styles.buttonContainer}>
           <NameArrowButton name={COMMON_CONSTS.NOTIFICATION_EMAIL_AND_SMS} />
-          <NameArrowButton name={COMMON_CONSTS.CHANGE_PASSWORD} />
+          <NameArrowButton
+            name={COMMON_CONSTS.CHANGE_PASSWORD}
+            onPressFunction={() => handleChangePasswordPress()}
+          />
           <NameArrowButton name={COMMON_CONSTS.POSTAL_ADDRESS} />
         </View>
         <View style={styles.buttonContainer}>
