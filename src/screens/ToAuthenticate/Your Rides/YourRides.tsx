@@ -38,8 +38,9 @@ const YourRides = () => {
       ) : null}
       {isLoading ? <ActivityIndicator /> : null}
       {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
-      {result?.map(val => (
+      {result?.map((val, index) => (
         <DateToFrom
+          key={index}
           leavingFrom={val?.source}
           goingTo={val?.destination}
           date={new Date(val?.date)}

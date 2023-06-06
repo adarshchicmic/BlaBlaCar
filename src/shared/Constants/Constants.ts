@@ -63,7 +63,9 @@ export const COMMON_CONSTS = {
   DELETE_VEHICLE: 'Delete Vehicle',
   INBOX: 'Inbox',
   UPDATE_VEHICLE: 'Update Vehicle',
+  EDIT_YOUR_PUBLICATION: 'Edit your publication',
   PASSENGERS: 'Passengers',
+  RIDE_PLANS: 'Ride plan',
   NEW_PASSWORD_AND_CONFIRM_NEW_PASSWORD_DID_NOT_MATCH:
     'New password and confirm password did not match',
   DELETING_A_CAR_FROM_YOUR_PROFILE_MIGHT_MAKE_IT_HARDER:
