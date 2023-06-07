@@ -8,7 +8,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 const styles = StyleSheet.create({
   textViewStyle: {
     // width: wp(70),
-    width: wp(72),
+    width: wp(70),
     flexDirection: 'row',
     alignSelf: 'flex-start',
     flexWrap: 'wrap',

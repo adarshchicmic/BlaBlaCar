@@ -1,6 +1,7 @@
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, TextStyle, ViewStyle} from 'react-native';
 import React from 'react';
 import styles from './styles';
+import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 
 interface Props {
   first: string;
@@ -8,6 +9,9 @@ interface Props {
   disabled?: boolean;
   onPressFunction?: any;
   textColor?: string;
+  firstStyle?: TextStyle;
+  secondStyle?: TextStyle;
+  containerStyle?: ViewStyle;
 }
 
 const CustomButtonEdit: React.FC<Props> = ({
@@ -16,15 +20,23 @@ const CustomButtonEdit: React.FC<Props> = ({
   disabled,
   onPressFunction = () => {},
   textColor,
+  firstStyle,
+  secondStyle,
+  containerStyle,
 }: Props) => {
   return (
     <View>
       <TouchableOpacity
         onPress={onPressFunction}
-        style={styles.buttonStyle}
+        style={[styles.container, containerStyle]}
         disabled={disabled}>
-        <Text style={styles.firstNameStyle}>{first}</Text>
-        <Text style={styles.secondNameStyle(textColor)}>{second} </Text>
+        <View style={styles.buttonStyle}>
+          <Text style={[styles.firstNameStyle, firstStyle]}>{first}</Text>
+          <Text style={[styles.secondNameStyle(textColor), secondStyle]}>
+            {second}
+          </Text>
+        </View>
+        <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
       </TouchableOpacity>
     </View>
   );

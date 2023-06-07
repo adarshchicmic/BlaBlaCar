@@ -39,6 +39,8 @@ import ChangePassword from '../screens/Authenticated/ChangePassword/ChangePasswo
 import SearchMap from '../screens/Authenticated/SearchMap/SearchMap';
 import RidePlan from '../screens/Authenticated/RidePlan/RidePlan';
 import ComingBackAsWell from '../screens/Authenticated/ComingBackAsWell/ComingBackAsWell';
+import EditYourPublication from '../screens/Authenticated/EditYourPublication/EditYourPublication';
+import ItineraryDetails from '../screens/Authenticated/ItineraryDetails/ItineraryDetails';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -92,6 +94,11 @@ const AppNavigator = () => {
       <Stack.Screen name="SearchMap" component={SearchMap} />
       <Stack.Screen name="RidePlan" component={RidePlan} />
       <Stack.Screen name="ComingBackAsWell" component={ComingBackAsWell} />
+      <Stack.Screen
+        name="EditYourPublication"
+        component={EditYourPublication}
+      />
+      <Stack.Screen name="ItineraryDetails" component={ItineraryDetails} />
     </Stack.Navigator>
   );
 };

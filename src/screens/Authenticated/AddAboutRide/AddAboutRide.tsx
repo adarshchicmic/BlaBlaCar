@@ -68,12 +68,12 @@ const AddAboutRide = ({navigation, route}) => {
 
       if (screen === COMMON_CONSTS.RETURN) {
         result = await publish({
-          source: states.rideSlice.pickUp,
-          destination: states.rideSlice.dropOff,
-          sourceLongitude: states.rideSlice.statsPickUp.longitude,
-          sourceLatitude: states.rideSlice.statsPickUp.latitude,
-          destinationLatitude: states.rideSlice.statsDropOff.latitude,
-          destinationLongitude: states.rideSlice.statsDropOff.longitude,
+          source: states.rideSlice.dropOff,
+          destination: states.rideSlice.pickUp,
+          sourceLongitude: states.rideSlice.statsDropOff.longitude,
+          sourceLatitude: states.rideSlice.statsDropOff.latitude,
+          destinationLatitude: states.rideSlice.statsPickUp.latitude,
+          destinationLongitude: states.rideSlice.statsPickUp.longitude,
           passsengerCount: states.rideSlice.numberOfSeats,
           addCity: states.publishRideSlice.add_city,
           addCityLongitude: states.publishRideSlice.add_city_latitude,
