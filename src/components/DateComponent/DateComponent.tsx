@@ -52,7 +52,7 @@ const DateComponent = ({navigation, route}: any) => {
       </View>
       <DatePicker
         onSelectedChange={(date: any) => handleDateChange(date)}
-        mode="date"
+        mode="calendar"
         minimumDate={formatDate(today)}
       />
     </View>

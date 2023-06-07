@@ -8,7 +8,7 @@ import {useLazyGetRideQuery} from '../../../services/modules/PublishedRideGet';
 import {useIsFocused} from '@react-navigation/native';
 import DateToFrom from '../../../components/dateToFrom/dateToFrom';
 
-const YourRides = () => {
+const YourRides = ({navigation}) => {
   const [result, setResult] = useState<any>([]);
   const [getRide, {isLoading, isError}] = useLazyGetRideQuery();
   const focus = useIsFocused();
@@ -41,6 +41,7 @@ const YourRides = () => {
       {result?.map((val, index) => (
         <DateToFrom
           key={index}
+          navigation={navigation}
           leavingFrom={val?.source}
           goingTo={val?.destination}
           date={new Date(val?.date)}

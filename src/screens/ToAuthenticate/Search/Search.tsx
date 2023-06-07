@@ -141,6 +141,7 @@ const Search = ({navigation}: any) => {
               goingTo={val.goingTo}
               passengerCount={val?.passengerCount}
               show={true}
+              navigation={navigation}
             />
           </View>
         ))}

@@ -7,6 +7,7 @@ interface Props {
   goingTo: string;
   date: any;
   time: any;
+  navigation: any;
 }
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
@@ -23,9 +24,18 @@ const monthNames = [
   'November',
   'December',
 ];
-const DateToFrom: React.FC<Props> = ({leavingFrom, goingTo, date, time}) => {
+const DateToFrom: React.FC<Props> = ({
+  leavingFrom,
+  goingTo,
+  date,
+  time,
+  navigation,
+}) => {
+  const handleOnPress = () => {
+    navigation.navigate('RidePlan');
+  };
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => handleOnPress()}>
       <View>
         <Text style={styles.dateTextStyle}>
           {days[date.getDay()] +
