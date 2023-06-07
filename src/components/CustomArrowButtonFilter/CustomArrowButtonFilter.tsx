@@ -41,6 +41,7 @@ const CustomArrowButtonFilter = ({
           leavingFrom={goingFrom}
           goingTo={goingTo}
           passengerCount={passengerCount}
+          navigation={navigation}
           moreStyle={{
             width: widthPercentageToDP(50),
             marginVertical: heightPercentageToDP(0),

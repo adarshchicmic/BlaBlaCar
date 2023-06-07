@@ -50,7 +50,7 @@ const Search = ({navigation}: any) => {
       date: numberOfSeat?.rideSlice?.date,
     });
     console.log(result, 'this is result');
-    result?.data?.code === 200
+    result?.data?.data?.length > 0 && result?.data?.code === 200
       ? navigation.navigate('SearchResult', {
           object: result?.data,
           routeDetail: result,

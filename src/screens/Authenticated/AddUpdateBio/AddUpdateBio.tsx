@@ -73,9 +73,15 @@ const AddUpdateBio = ({navigation}) => {
           defaultValue={bioValue}
         />
       </View>
-      {showError && <Text>{COMMON_CONSTS.ERROR_BIO}</Text>}
+      {showError && (
+        <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR_BIO}</Text>
+      )}
       {isLoading && <ActivityIndicator />}
-      {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
+      {isError && (
+        <Text style={styles.errorTextStyle}>
+          {COMMON_CONSTS.ERROR_WHILE_UPDATING}
+        </Text>
+      )}
       {bio && (
         <View style={styles.buttonView}>
           <TouchableOpacity

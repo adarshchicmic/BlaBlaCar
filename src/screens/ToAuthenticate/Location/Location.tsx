@@ -77,8 +77,8 @@ const Location = ({navigation, route}) => {
       ? (dispatch(
           updateCity({
             city: data?.description,
-            latitude: latitudee,
-            longitude: longitudee,
+            latitude: longitudee,
+            longitude: latitudee,
           }),
         ),
         navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER}))

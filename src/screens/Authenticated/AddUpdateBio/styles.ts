@@ -64,6 +64,10 @@ const styles = StyleSheet.create({
     padding: hp(1),
     borderRadius: 10,
   },
+  errorTextStyle: {
+    color: '#f00',
+    marginHorizontal: hp(5),
+  },
 });
 
 export default styles;

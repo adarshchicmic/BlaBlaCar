@@ -11,9 +11,12 @@ const styles = StyleSheet.create({
     width: wp(90),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: wp(0.5),
+    borderWidth: wp(0.2),
     borderRadius: wp(5),
     alignSelf: 'center',
+    borderColor: '#91908d',
+    paddingBottom: hp(0.5),
+    marginVertical: hp(1.5),
   },
   filterStyle: {
     color: '#2dbeff',
