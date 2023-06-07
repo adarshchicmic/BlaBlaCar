@@ -62,9 +62,13 @@ export const COMMON_CONSTS = {
   EDIT_INFO: 'Edit info',
   DELETE_VEHICLE: 'Delete Vehicle',
   INBOX: 'Inbox',
+  COMING_BACK_AS_WELL: 'Coming back as well? Publish your return ride now!',
   UPDATE_VEHICLE: 'Update Vehicle',
   EDIT_YOUR_PUBLICATION: 'Edit your publication',
+  SO_HOW_MANY_PASSENGERS_YOU_CAN_TAKE: 'So how many passengers can you take?',
   PASSENGERS: 'Passengers',
+  NO_THANKS: 'No, thanks',
+  RETURN: 'Return',
   RIDE_PLANS: 'Ride plan',
   NEW_PASSWORD_AND_CONFIRM_NEW_PASSWORD_DID_NOT_MATCH:
     'New password and confirm password did not match',

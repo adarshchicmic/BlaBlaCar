@@ -6,7 +6,10 @@ import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {updateDate} from '../../store/slices/rideSlice';
-import {updatePublishDate} from '../../store/slices/publishRideSlice';
+import {
+  updatePublishDate,
+  updatePublishDateReturn,
+} from '../../store/slices/publishRideSlice';
 
 const DateComponent = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
@@ -17,9 +20,12 @@ const DateComponent = ({navigation, route}: any) => {
     navigation.goBack();
   };
   const handleDateChange = date => {
-    screen === COMMON_CONSTS.STOPOVER
-      ? (dispatch(updatePublishDate({date: date})),
-        navigation.navigate('TimePublish'))
+    screen === COMMON_CONSTS.STOPOVER || screen === COMMON_CONSTS.RETURN
+      ? screen === COMMON_CONSTS.RETURN
+        ? (dispatch(updatePublishDateReturn({publishDateReturn: date})),
+          navigation.navigate('TimePublish', {screen: COMMON_CONSTS.RETURN}))
+        : (dispatch(updatePublishDate({date: date})),
+          navigation.navigate('TimePublish'))
       : (dispatch(updateDate({date: date})), navigation.goBack());
   };
   const today: Date = new Date();

@@ -23,7 +23,7 @@ const WhichCarYouDriving = ({navigation, route}) => {
         <CustomTitleText text={COMMON_CONSTS.WHICH_CAR_ARE_YOU_DRIVING} />
       </View>
       <View style={styles.mapView}>
-        {vehicleData.map((data, index) => (
+        {vehicleData?.map((data, index) => (
           <NameArrowButton
             key={index}
             name={data?.vehicle_name}

@@ -6,10 +6,14 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import DatePicker from 'react-native-modern-datepicker';
 import {useDispatch} from 'react-redux';
-import {updatePublishTime} from '../../../store/slices/publishRideSlice';
+import {
+  updatePublishTime,
+  updatePublishTimeReturn,
+} from '../../../store/slices/publishRideSlice';
 import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 
-const TimePublish = ({navigation}) => {
+const TimePublish = ({navigation, route}) => {
+  const screen = route?.params?.screen;
   const [time, setTime] = useState('12:00');
   const [showClock, setShowClock] = useState(false);
   const [vehicleSize, setVehicleSize] = useState<number>(0);
@@ -30,11 +34,16 @@ const TimePublish = ({navigation}) => {
     navigation.goBack();
   };
   const handleRightArrowButtonPress = () => {
-    dispatch(updatePublishTime({time: time}));
-    vehicleSize > 1 || vehicleSize === undefined
-      ? navigation.navigate('WhichCarYouDriving', {vehicleData: vehicleData})
-      : navigation.navigate('MiddleSeatEmpty');
-    isError ? navigation.navigate('MiddleSeatEmpty') : null;
+    if (screen === COMMON_CONSTS.RETURN) {
+      dispatch(updatePublishTimeReturn({returnTime: time}));
+      navigation.navigate('PricePerSeat', {screen: COMMON_CONSTS.RETURN});
+    } else {
+      dispatch(updatePublishTime({time: time}));
+      vehicleSize > 0 || vehicleSize === undefined
+        ? navigation.navigate('WhichCarYouDriving', {vehicleData: vehicleData})
+        : navigation.navigate('MiddleSeatEmpty');
+      isError ? navigation.navigate('MiddleSeatEmpty') : null;
+    }
   };
   const handleButtonClick = () => {
     setShowClock(true);

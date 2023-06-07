@@ -117,6 +117,7 @@ const VehicleInformation = ({navigation, route}: any) => {
         vehicleColor: vehicleColor,
         vehicleModelYear: vehicleModelYear,
       });
+      console.log(result, 'thisis result ');
       result?.data?.status?.code === 201
         ? navigation.navigate('AddAboutRide', {
             screen: COMMON_CONSTS.UPDATE_VEHICLE,

@@ -15,33 +15,24 @@ const AddAboutRide = ({navigation, route}) => {
   const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
-  const [vehicle, {isLoading: isLoadingVehicle, isError: isErrorVehicle}]: any =
+  const [vehicle, {isLoading: isLoadingVehicle, isSuccess}]: any =
     useLazyVehiclesQuery();
+  const [vehicleId, setVehicleId] = useState('');
   const states: any = useSelector(state => state);
   console.log(states, 'this is states');
   const dispatch = useDispatch();
 
   useEffect(() => {
     vehicle().then(payload => {
-      // console.log(payload?.data?.data[0].id, 'this is also vehicle id ');
-      states?.publishRideSlice?.vehicle_id === 0
+      console.log(payload?.data?.data[0]?.id, 'this is also vehicle id ');
+      setVehicleId(payload?.data?.data[0]?.id);
+      states?.publishRideSlice?.vehicle_id === null
         ? dispatch(updateVehicleId({vehicleId: payload?.data?.data[0]?.id}))
         : null;
       setVehiclePresent(payload?.data?.data?.length);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screen]);
-  // useEffect(() => {
-  //   const fun: any = async () => {
-  //     const payload: any = await vehicle();
-  //     console.log('fulfilled', payload?.data[0]?.id);
-  //     // dispatch(updateVehicleId({id: payload.data[0].id}));
-  //     setVehiclePresent(payload?.data?.length);
-  //     // console.log(payload?.data?.length);
-  //   };
-  //   fun();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -51,7 +42,8 @@ const AddAboutRide = ({navigation, route}) => {
     setText(value);
   };
   const handlePublishRide = async () => {
-    if (vehiclePresent) {
+    let result;
+    if (vehiclePresent && isSuccess) {
       const datata: any = await publish({
         source: states.rideSlice.pickUp,
         destination: states.rideSlice.dropOff,
@@ -67,19 +59,51 @@ const AddAboutRide = ({navigation, route}) => {
         time: states.publishRideSlice.time,
         setPrice: states.publishRideSlice.set_price,
         aboutRide: text,
-        vehicleId: states.publishRideSlice.vehicle_id,
+        vehicleId: vehicleId,
         bookInstantly: states.publishRideSlice.bookInstantly,
         midSeat: states.publishRideSlice.midSeat,
         estimatedTime: states.publishRideSlice.select_route.estimatedTime,
         selectRoute: states.publishRideSlice.select_route,
       });
-      console.log(datata, 'this is result guys ');
-      datata?.data?.code === 201 ? navigation.popToTop() : null;
+
+      if (screen === COMMON_CONSTS.RETURN) {
+        result = await publish({
+          source: states.rideSlice.pickUp,
+          destination: states.rideSlice.dropOff,
+          sourceLongitude: states.rideSlice.statsPickUp.longitude,
+          sourceLatitude: states.rideSlice.statsPickUp.latitude,
+          destinationLatitude: states.rideSlice.statsDropOff.latitude,
+          destinationLongitude: states.rideSlice.statsDropOff.longitude,
+          passsengerCount: states.rideSlice.numberOfSeats,
+          addCity: states.publishRideSlice.add_city,
+          addCityLongitude: states.publishRideSlice.add_city_latitude,
+          addCityLatitude: states.publishRideSlice.add_city_longitude,
+          date: states.publishRideSlice.dateR,
+          time: states.publishRideSlice.timeR,
+          setPrice: states.publishRideSlice.set_priceR,
+          aboutRide: text,
+          vehicleId: vehicleId,
+          bookInstantly: states.publishRideSlice.bookInstantly,
+          midSeat: states.publishRideSlice.midSeat,
+          estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+          selectRoute: states.publishRideSlice.select_route,
+        });
+      }
+
+      if (screen === COMMON_CONSTS.RETURN) {
+        result?.data?.code === 201 && datata?.data?.code === 201
+          ? navigation.popToTop()
+          : null;
+      } else {
+        datata?.data?.code === 201 ? navigation.popToTop() : null;
+      }
     } else {
       setShowError(true);
-      navigation.navigate('LicensePlateNumber', {
-        screen: COMMON_CONSTS.ADD_ABOUT_RIDE,
-      });
+      setTimeout(() => {
+        navigation.navigate('LicensePlateNumber', {
+          screen: COMMON_CONSTS.ADD_ABOUT_RIDE,
+        });
+      }, 1500);
     }
   };
   return (
@@ -105,9 +129,7 @@ const AddAboutRide = ({navigation, route}) => {
       {showError && screen !== COMMON_CONSTS.UPDATE_VEHICLE ? (
         <Text style={styles.errorStyle}>{COMMON_CONSTS.VEHICLE_ERROR}</Text>
       ) : null}
-      {(isError || isErrorVehicle) && (
-        <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
-      )}
+      {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
       {(isLoading || isLoadingVehicle) && <ActivityIndicator />}
       {text && (
         <TouchableOpacity
