@@ -43,8 +43,9 @@ const AddAboutRide = ({navigation, route}) => {
   };
   const handlePublishRide = async () => {
     let result;
+    let datata;
     if (vehiclePresent && isSuccess) {
-      const datata: any = await publish({
+      datata = await publish({
         source: states.rideSlice.pickUp,
         destination: states.rideSlice.dropOff,
         sourceLongitude: states.rideSlice.statsPickUp.longitude,
@@ -89,7 +90,7 @@ const AddAboutRide = ({navigation, route}) => {
           selectRoute: states.publishRideSlice.select_route,
         });
       }
-
+      console.log(result, datata);
       if (screen === COMMON_CONSTS.RETURN) {
         result?.data?.code === 201 && datata?.data?.code === 201
           ? navigation.popToTop()

@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ToastAndroid,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState, memo} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -82,6 +83,12 @@ const AboutYou = ({navigation}: any) => {
   //     : null;
   //   console.log('render');
   // };
+  const handleProfilePicturePress = () => {
+    navigation.navigate('YourProfile', {
+      name: userDetail?.first_name,
+      imageUri: imageUri,
+    });
+  };
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
@@ -93,7 +100,9 @@ const AboutYou = ({navigation}: any) => {
                 {COMMON_CONSTS.NEWCOMER}
               </Text>
             </View>
-            <View style={styles.svgArrowStyle}>
+            <TouchableOpacity
+              style={styles.svgArrowStyle}
+              onPress={() => handleProfilePicturePress()}>
               {imageUri ? (
                 <View>
                   <Image style={styles.imageStyle} source={{uri: imageUri}} />
@@ -102,7 +111,7 @@ const AboutYou = ({navigation}: any) => {
                 <SvgProfile width={'100'} height={'100'} />
               )}
               <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <CustomButton
             btnText={COMMON_CONSTS.EDIT_PROFILE_PICTURE}

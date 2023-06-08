@@ -53,15 +53,7 @@ const CustomSearchResult = ({
   //       longitude: data?.publish?.source_latitude,
   //     }),
   //   );
-  console.log(
-    data,
-    'pickUp:',
-    data?.publish?.source,
-    'latitude:',
-    data?.publish?.source_latitude,
-    'longitude:',
-    data?.publish?.source_longitude,
-  );
+
   //   dispatch(
   //     updateDropOff({
   //       dropOff: data?.publish?.destination,

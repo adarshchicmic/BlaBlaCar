@@ -41,6 +41,7 @@ import RidePlan from '../screens/Authenticated/RidePlan/RidePlan';
 import ComingBackAsWell from '../screens/Authenticated/ComingBackAsWell/ComingBackAsWell';
 import EditYourPublication from '../screens/Authenticated/EditYourPublication/EditYourPublication';
 import ItineraryDetails from '../screens/Authenticated/ItineraryDetails/ItineraryDetails';
+import YourProfile from '../screens/Authenticated/YourProfile/YourProfile';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -99,6 +100,7 @@ const AppNavigator = () => {
         component={EditYourPublication}
       />
       <Stack.Screen name="ItineraryDetails" component={ItineraryDetails} />
+      <Stack.Screen name="YourProfile" component={YourProfile} />
     </Stack.Navigator>
   );
 };

@@ -37,16 +37,19 @@ const monthNames = [
 const RideDetail = ({navigation, route}) => {
   const [vehicleDetail, setVehicleDetail] = useState<any>({});
   const val = route?.params?.data;
-  console.log(val, 'this is data');
   const [bookResult, setBookResult] = useState<any>({});
-  const [vehicle, {isLoading, isError}] = useLazyVehicleQuery();
+  const [vehicle, {isLoading}] = useLazyVehicleQuery();
   const [book, {isLoading: isLoadingBook, isError: isErrorBook}] =
     useBookMutation();
-  console.log(bookResult, 'this is bookResult');
   useEffect(() => {
+    console.log(val?.publish?.vehicle_id, 'this is vehicle id ');
+    vehicle({id: val?.publish?.vehicle_id}).then(val =>
+      console.log(val, 'valjdlskk hjkdsfhkl dsfjkhk'),
+    );
     const fun = async () => {
       const res = await vehicle({id: val?.publish?.vehicle_id});
       setVehicleDetail(res);
+      console.log(res, 'this is vehicle result ');
     };
     fun();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,6 +63,12 @@ const RideDetail = ({navigation, route}) => {
     console.log(result, 'this is result ');
     setBookResult(result);
     result?.data?.code === 201 ? navigation.navigate('HomeScreen') : null;
+  };
+  const handleImagePress = () => {
+    navigation.navigate('YourProfile', {
+      name: val?.name,
+      imageUri: val?.image_url,
+    });
   };
   return (
     <View style={styles.container}>
@@ -108,7 +117,9 @@ const RideDetail = ({navigation, route}) => {
             <Text style={styles.nameStyle}>{val?.name}</Text>
             <Text>{'rating'}</Text>
           </View>
-          <TouchableOpacity style={styles.imageArrowView}>
+          <TouchableOpacity
+            style={styles.imageArrowView}
+            onPress={() => handleImagePress()}>
             <Image source={{uri: val?.image_url}} style={styles.imageStyle} />
             <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
           </TouchableOpacity>
@@ -142,13 +153,13 @@ const RideDetail = ({navigation, route}) => {
           </Text>
           <Text>{vehicleDetail?.data?.vehicle_color?.toLowerCase()}</Text>
         </View>
-        <View>
+        {/* <View>
           <Text>{COMMON_CONSTS.PASSENGERS}</Text>
-        </View>
+        </View> */}
         {isLoading && <ActivityIndicator />}
-        {isError && (
+        {/* {isError && (
           <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
-        )}
+        )} */}
         {isLoadingBook && <ActivityIndicator />}
         {isErrorBook && (
           <Text style={styles.errorStyle}>

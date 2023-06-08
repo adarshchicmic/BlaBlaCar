@@ -6,11 +6,13 @@ import styles from './styles';
 const CustomLeavingFromGoingToButton = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>CustomLeavingFromGoingToButton</Text>
+      <View style={styles.dateStyle}>
+        <Text style={styles.textStyle}>CustomLeavingFromGoingToButton</Text>
+      </View>
       <View style={styles.timePipeButtonView}>
         <View style={styles.timeViewStyle}>
           <Text style={styles.textStyle}>08:00</Text>
-          <Text style={styles.textStyle}> jsdlfjl</Text>
+          <Text style={styles.textStyle}>09:00</Text>
         </View>
         <View style={styles.pipeMainView}>
           <View style={styles.oStyle} />

@@ -49,8 +49,10 @@ const Search = ({navigation}: any) => {
       passCount: numberOfSeat?.rideSlice?.numberOfSeats,
       date: numberOfSeat?.rideSlice?.date,
     });
-    console.log(result, 'this is result');
-    result?.data?.data?.length > 0 && result?.data?.code === 200
+
+    numberOfSeat?.rideSlice?.leavingFrom !== COMMON_CONSTS.LEAVING_FROM &&
+    numberOfSeat?.rideSlice?.goingTo !== COMMON_CONSTS.GOING_TO &&
+    result?.data?.code === 200
       ? navigation.navigate('SearchResult', {
           object: result?.data,
           routeDetail: result,
@@ -86,7 +88,7 @@ const Search = ({navigation}: any) => {
             onPress={handleleavingFromPress}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 20)}
+              {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 25)}
             </Text>
           </Pressable>
           <Pressable
@@ -94,7 +96,7 @@ const Search = ({navigation}: any) => {
             onPress={() => handleGoingToPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {(numberOfSeat?.rideSlice?.goingTo).slice(0, 25)}
+              {(numberOfSeat?.rideSlice?.goingTo).slice(0, 30)}
             </Text>
           </Pressable>
           <View style={styles.dateAndUserView}>

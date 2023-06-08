@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '600',
   },
+  dateStyle: {
+    marginVertical: wp(2),
+  },
   secondStyle: {
     color: '#000a',
   },
@@ -23,6 +26,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: RFValue(15),
     fontWeight: '600',
+    color: '#000',
   },
   pipeViewStyle: {
     height: hp(6),
@@ -47,7 +51,6 @@ const styles = StyleSheet.create({
   timeViewStyle: {
     justifyContent: 'space-between',
     width: wp(10),
-    marginRight: wp(1),
   },
   butoonViewStyle: {
     justifyContent: 'space-between',

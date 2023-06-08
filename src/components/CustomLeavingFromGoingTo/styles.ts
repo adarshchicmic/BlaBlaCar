@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
-  // heightPercentageToDP as hp,
+  heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   textArrowText: {
     width: wp(80),
     marginLeft: wp(2),
+    alignSelf: 'center',
+    justifyContent: 'center',
     // alignSelf: 'flex-start',
   },
   svgTextView: {
@@ -30,10 +32,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textStyle: {
-    fontSize: RFValue(14),
+    fontSize: RFValue(16),
     alignSelf: 'center',
     color: '#000',
     fontWeight: '600',
+    // fontFamily: 'sans-serif',
+    marginBottom: hp(0),
+    letterSpacing: wp(0.1),
   },
   svgArrowStyle: {
     marginHorizontal: wp(2),

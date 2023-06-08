@@ -49,7 +49,7 @@ const CustomLeavingFromGoingTo: React.FC<Props> = ({
           <Text style={styles.textStyle}>{leavingFrom?.slice(0, 25)}</Text>
           <SvgBlackRightArrow
             width={widthPercentageToDP(5)}
-            height={heightPercentageToDP(5)}
+            height={heightPercentageToDP(2)}
             style={styles.svgArrowStyle}
           />
           <Text style={styles.textStyle}>{goingTo?.slice(0, 25)}</Text>
