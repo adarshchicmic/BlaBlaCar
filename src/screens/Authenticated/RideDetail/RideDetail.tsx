@@ -19,6 +19,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {chat} from '../../../store/chat';
+
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
   'January',
@@ -69,6 +71,38 @@ const RideDetail = ({navigation, route}) => {
       name: val?.name,
       imageUri: val?.image_url,
     });
+  };
+  const handleContactNamePress = () => {
+    if (chat.some(element => element === val?.name)) {
+      // navigation.navigate('Inbox', {
+      //   name: val?.name,
+      //   imageUri: val?.image_url,
+      //   leavingFrom: val?.publish?.source,
+      //   goingTo: val?.publish?.destination,
+      //   time: val?.publish?.time,
+      // });
+    } else {
+      let name = {
+        name: val?.name,
+        imageUri: val?.image_url,
+        leavingFrom: val?.publish?.source,
+        goingTo: val?.publish?.destination,
+        time: val?.publish?.time,
+        data: [],
+      };
+
+      chat.push(name);
+      // const index = chat.indexOf(val?.name);
+      // chat[index].push
+      // chat.push(val?.name.)
+      // navigation.navigate('Inbox', {
+      //   name: val?.name,
+      //   imageUri: val?.image_url,
+      //   leavingFrom: val?.publish?.source,
+      //   goingTo: val?.publish?.destination,
+      //   time: val?.publish?.time,
+      // });
+    }
   };
   return (
     <View style={styles.container}>
@@ -129,6 +163,7 @@ const RideDetail = ({navigation, route}) => {
             btnText={COMMON_CONSTS.CONTACT + ' ' + val?.name}
             styleTxt={styles.buttonTextStyle}
             styleBtn={styles.buttonStyle}
+            onPressFunction={() => handleContactNamePress()}
           />
         </View>
         <View style={styles.instantStyle}>

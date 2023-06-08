@@ -61,7 +61,9 @@ const ForgotPassword = ({navigation}: any) => {
         )}
       </View>
       {isLoading ? <ActivityIndicator /> : null}
-      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
+      {isError && (
+        <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR}</Text>
+      )}
       {email && (
         <View style={styles.buttonView}>
           <TouchableOpacity

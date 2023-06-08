@@ -71,6 +71,7 @@ export const COMMON_CONSTS = {
   PUBLISH_YOUR_RETURN_RIDE: 'Publish your return ride',
   DATE: 'Date',
   TIMES: 'Time',
+  YOUR_MESSAGE: 'Your message',
   OK: 'OK',
   NO_RIDE_FOR_THIS_DAY: 'No rides for this day',
   ABOUT: 'About',

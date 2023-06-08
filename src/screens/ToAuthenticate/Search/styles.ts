@@ -96,7 +96,7 @@ const styles = StyleSheet.create<any>({
     height: hp(7),
     flexDirection: 'row',
     alignSelf: 'center',
-    marginBottom: hp(1),
+    // marginBottom: hp(1),
   },
   userViewStyle: {
     height: hp(5),

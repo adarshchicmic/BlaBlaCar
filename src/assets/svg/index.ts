@@ -26,7 +26,9 @@ const SvgLeftArrowWithout: any = require('./leftArrowWithout.svg').default;
 const SvgDanger: any = require('./svgDanger.svg').default;
 const SvgElectricity: any = require('./electricity.svg').default;
 const SvgTwo: any = require('./two.svg').default;
+const SvgSend: any = require('./send.svg').default;
 export {
+  SvgSend,
   SvgElectricity,
   SvgTwo,
   SvgDanger,

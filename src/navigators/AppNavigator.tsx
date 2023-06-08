@@ -42,6 +42,7 @@ import ComingBackAsWell from '../screens/Authenticated/ComingBackAsWell/ComingBa
 import EditYourPublication from '../screens/Authenticated/EditYourPublication/EditYourPublication';
 import ItineraryDetails from '../screens/Authenticated/ItineraryDetails/ItineraryDetails';
 import YourProfile from '../screens/Authenticated/YourProfile/YourProfile';
+import ChatScreen from '../screens/Authenticated/ChatScreen/ChatScreen';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -101,6 +102,7 @@ const AppNavigator = () => {
       />
       <Stack.Screen name="ItineraryDetails" component={ItineraryDetails} />
       <Stack.Screen name="YourProfile" component={YourProfile} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
     </Stack.Navigator>
   );
 };

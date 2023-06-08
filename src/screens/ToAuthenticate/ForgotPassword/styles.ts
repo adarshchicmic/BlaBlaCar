@@ -81,6 +81,9 @@ const styles = StyleSheet.create<Style | any>({
     padding: 10,
     borderRadius: 10,
   },
+  errorTextStyle: {
+    color: '#f00',
+  },
 });
 
 export default styles;
