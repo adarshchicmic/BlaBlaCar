@@ -9,6 +9,7 @@ export const userApi = api.injectEndpoints({
         destinationLongitude,
         passCount,
         date,
+        orderBy,
       }) => ({
         url: 'search/',
         params: {
@@ -18,6 +19,7 @@ export const userApi = api.injectEndpoints({
           destination_latitude: destinationLatitude,
           passengers_count: passCount,
           date: date,
+          order_by: orderBy,
         },
       }),
     }),

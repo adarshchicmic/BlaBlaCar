@@ -8,6 +8,8 @@ interface Props {
   date: any;
   time: any;
   navigation: any;
+  data: any;
+  booked: any;
 }
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
@@ -30,9 +32,11 @@ const DateToFrom: React.FC<Props> = ({
   date,
   time,
   navigation,
+  data,
+  booked,
 }) => {
   const handleOnPress = () => {
-    navigation.navigate('RidePlan');
+    navigation.navigate('RidePlan', {data: data, booked: booked});
   };
   return (
     <TouchableOpacity style={styles.container} onPress={() => handleOnPress()}>

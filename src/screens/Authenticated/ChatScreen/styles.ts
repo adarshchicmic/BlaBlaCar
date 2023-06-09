@@ -11,12 +11,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textInputView: {
+    height: hp(7),
     width: wp(90),
     position: 'absolute',
     bottom: hp(5),
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#000',
+    marginVertical: 'auto',
   },
   textInputStyle: {
     width: wp(90),

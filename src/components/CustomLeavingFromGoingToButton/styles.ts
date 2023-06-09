@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
   },
   secondStyle: {
     color: '#000a',
+    fontSize: RFValue(12),
+    width: wp(60),
   },
   timePipeButtonView: {
     flexDirection: 'row',

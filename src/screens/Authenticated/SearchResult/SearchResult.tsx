@@ -19,14 +19,15 @@ const SearchResult = ({navigation, route}) => {
         goingTo={(state?.rideSlice?.goingTo).slice(0, 15)}
         passengerCount={state?.rideSlice?.numberOfSeats}
         navigation={navigation}
+        data={obj}
       />
-      {obj.length === 0 ? (
+      {obj?.length === 0 ? (
         <Text style={styles.textStyle}>
           {COMMON_CONSTS.NO_RIDE_FOR_THIS_DAY}
         </Text>
       ) : (
         <ScrollView>
-          {obj.map((val, index) => (
+          {obj?.map((val, index) => (
             <CustomSearchResult
               navigation={navigation}
               data={val}

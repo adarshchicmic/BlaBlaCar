@@ -1,9 +1,9 @@
 import {api} from '../../api';
 export const userApi = api.injectEndpoints({
   endpoints: build => ({
-    signOut: build.mutation({
+    cancelRide: build.mutation({
       query: ({publishId}) => ({
-        url: 'cancel_publish',
+        url: 'cancel_booking',
         method: 'POST',
         body: {id: publishId},
       }),
@@ -11,4 +11,4 @@ export const userApi = api.injectEndpoints({
   }),
   overrideExisting: false,
 });
-export const {useSignOutMutation} = userApi;
+export const {useCancelRideMutation} = userApi;

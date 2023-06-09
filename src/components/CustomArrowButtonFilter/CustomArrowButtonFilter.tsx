@@ -15,6 +15,7 @@ interface Props {
   goingTo: any;
   passengerCount: any;
   navigation: any;
+  data: any;
 }
 
 const CustomArrowButtonFilter = ({
@@ -22,9 +23,13 @@ const CustomArrowButtonFilter = ({
   goingTo,
   passengerCount,
   navigation,
+  data,
 }: Props) => {
   const handleGoBack = () => {
     navigation.goBack();
+  };
+  const handleFilterClick = () => {
+    navigation.navigate('Filter', {data: data});
   };
   return (
     <View style={styles.container}>
@@ -54,6 +59,7 @@ const CustomArrowButtonFilter = ({
         btnText="Filter"
         styleTxt={styles.filterStyle}
         styleBtn={styles.filterButtonStyle}
+        onPressFunction={() => handleFilterClick()}
       />
     </View>
   );

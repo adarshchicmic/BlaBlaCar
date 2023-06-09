@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React, {useState, memo} from 'react';
+import {View, TextInput, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState, memo, useRef} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import {SvgSend} from '../../../assets/svg';
 import {
@@ -19,31 +13,33 @@ import CustomMessage from '../../../components/CustomMessage/CustomMessage';
 
 const ChatScreen = ({navigation, route}) => {
   //   const navigation = route?.params?.navigation;
+  const [messages, setMessages] = useState<Array<string>>([]);
   const data = route?.params?.data;
   let chat = data;
-  const name = 'Adarsh';
+  console.log(chat);
+  // const name = 'Adarsh';
   const [currMessage, setCurrMessage] = useState<string>('');
+  const ref: any = useRef();
+
   const handleChangeText = text => {
     setCurrMessage(text);
   };
   const handleSendMessage = () => {
     if (currMessage) {
-      const index = chat?.indexOf(name);
-      index
-        ? chat[index]?.push({
-            name: name,
-            message: currMessage,
-            sendAt: new Date(),
-          })
-        : null;
+      setMessages([...messages, currMessage]);
+      ref.current.clear();
     }
   };
+  console.log(messages, 'this is messages');
   return (
     <View style={styles.container}>
       <CustomBackArrowButton navigation={navigation} />
       <ScrollView>
         {chat?.map((val, index) => (
-          <CustomMessage key={index} name={val?.message} />
+          <CustomMessage key={index} name={val?.message} side={0} />
+        ))}
+        {messages?.map((val, index) => (
+          <CustomMessage key={index} name={val} side={1} />
         ))}
       </ScrollView>
       <View style={styles.textInputView}>
@@ -56,6 +52,7 @@ const ChatScreen = ({navigation, route}) => {
           />
         </TouchableOpacity>
         <TextInput
+          ref={ref}
           onChangeText={text => handleChangeText(text)}
           placeholder={COMMON_CONSTS.YOUR_MESSAGE}
           style={styles.textInputStyle}
