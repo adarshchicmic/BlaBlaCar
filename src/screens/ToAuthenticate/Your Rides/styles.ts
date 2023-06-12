@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     width: wp(90),
     alignSelf: 'center',
   },
+  errorStyle: {
+    color: '#f00',
+    paddingLeft: wp(5),
+  },
 });
 
 export default styles;

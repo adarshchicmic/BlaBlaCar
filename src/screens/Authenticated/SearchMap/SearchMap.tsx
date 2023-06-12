@@ -1,10 +1,11 @@
 import React, {memo} from 'react';
-import {View, TouchableOpacity, Dimensions} from 'react-native';
+import {View, TouchableOpacity, Dimensions, Text} from 'react-native';
 import MapView, {Marker, Polyline} from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 import styles from './styles';
 import {useSelector} from 'react-redux';
 import {SvgLeftArrow} from '../../../assets/svg';
+import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -30,8 +31,8 @@ const SearchMap = ({navigation, route}: any) => {
   );
   const states: any = useSelector(state => state);
 
-  const currLocation: any = states.rideSlice.statsPickUp;
-  const destLocation: any = states.rideSlice.statsDropOff;
+  const currLocation: any = states?.rideSlice?.statsPickUp;
+  const destLocation: any = states?.rideSlice?.statsDropOff;
   console.log(
     currLocation,
     destLocation,
@@ -50,24 +51,30 @@ const SearchMap = ({navigation, route}: any) => {
           <SvgLeftArrow width={35} height={35} />
         </TouchableOpacity>
       </View>
+      {ordinates && (
+        <MapView
+          style={styles.map}
+          initialRegion={{
+            latitude: currLocation.latitude,
+            longitude: currLocation.longitude,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}>
+          <Marker coordinate={currLocation} />
+          {destLocation && <Marker coordinate={destLocation} />}
 
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: currLocation.latitude,
-          longitude: currLocation.longitude,
-          latitudeDelta: LATITUDE_DELTA,
-          longitudeDelta: LONGITUDE_DELTA,
-        }}>
-        <Marker coordinate={currLocation} />
-        {destLocation && <Marker coordinate={destLocation} />}
-
-        <Polyline
-          coordinates={decodePolyline(ordinates?.points)}
-          strokeWidth={18}
-          strokeColor="#2dbeff"
-        />
-      </MapView>
+          <Polyline
+            coordinates={decodePolyline(ordinates?.points)}
+            strokeWidth={18}
+            strokeColor="#2dbeff"
+          />
+        </MapView>
+      )}
+      {ordinates === undefined && (
+        <Text style={styles.errorStyle}>
+          {COMMON_CONSTS.ERROR_WHILE_LOADING_DATA}
+        </Text>
+      )}
     </View>
   );
 };
@@ -76,7 +83,7 @@ const SearchMap = ({navigation, route}: any) => {
 function decodePolyline(encoded) {
   const poly: any = [];
   let index = 0;
-  const len = encoded.length;
+  const len = encoded?.length;
   let lat = 0;
   let lng = 0;
 
@@ -85,7 +92,7 @@ function decodePolyline(encoded) {
     let shift = 0;
     let result = 0;
     do {
-      b = encoded.charCodeAt(index++) - 63;
+      b = encoded?.charCodeAt(index++) - 63;
       result |= (b & 0x1f) << shift;
       shift += 5;
     } while (b >= 0x20);
@@ -96,7 +103,7 @@ function decodePolyline(encoded) {
     shift = 0;
     result = 0;
     do {
-      b = encoded.charCodeAt(index++) - 63;
+      b = encoded?.charCodeAt(index++) - 63;
       result |= (b & 0x1f) << shift;
       shift += 5;
     } while (b >= 0x20);
@@ -108,7 +115,7 @@ function decodePolyline(encoded) {
       latitude: lat / 1e5,
       longitude: lng / 1e5,
     };
-    poly.push(point);
+    poly?.push(point);
   }
   return poly;
 }

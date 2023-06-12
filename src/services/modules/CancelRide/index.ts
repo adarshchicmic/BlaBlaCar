@@ -3,7 +3,7 @@ export const userApi = api.injectEndpoints({
   endpoints: build => ({
     cancelRide: build.mutation({
       query: ({publishId}) => ({
-        url: 'cancel_booking',
+        url: 'cancel_booking/',
         method: 'POST',
         body: {id: publishId},
       }),

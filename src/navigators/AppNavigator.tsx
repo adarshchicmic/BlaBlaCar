@@ -44,6 +44,8 @@ import ItineraryDetails from '../screens/Authenticated/ItineraryDetails/Itinerar
 import YourProfile from '../screens/Authenticated/YourProfile/YourProfile';
 import ChatScreen from '../screens/Authenticated/ChatScreen/ChatScreen';
 import Filter from '../screens/Authenticated/FilterPage/Filter';
+import BookedScreen from '../screens/Authenticated/BookedScreen/BookedScreen';
+import PublishOnline from '../screens/Authenticated/publishOnline/PublishOnline';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -105,6 +107,8 @@ const AppNavigator = () => {
       <Stack.Screen name="YourProfile" component={YourProfile} />
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
       <Stack.Screen name="Filter" component={Filter} />
+      <Stack.Screen name="BookedScreen" component={BookedScreen} />
+      <Stack.Screen name="PublishOnline" component={PublishOnline} />
     </Stack.Navigator>
   );
 };

@@ -19,7 +19,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import {chat} from '../../../store/chat';
+
+import {useCreateChatMutation} from '../../../services/modules/createChat';
 
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
@@ -39,10 +40,15 @@ const monthNames = [
 const RideDetail = ({navigation, route}) => {
   const [vehicleDetail, setVehicleDetail] = useState<any>({});
   const val = route?.params?.data;
+  console.log(val, 'this is value guys ');
   const [bookResult, setBookResult] = useState<any>({});
   const [vehicle, {isLoading}] = useLazyVehicleQuery();
   const [book, {isLoading: isLoadingBook, isError: isErrorBook}] =
     useBookMutation();
+  const [
+    createChat,
+    {isLoading: isLoadingCreateChat, isError: isErrorCreateChat},
+  ] = useCreateChatMutation();
   useEffect(() => {
     console.log(val?.publish?.vehicle_id, 'this is vehicle id ');
     vehicle({id: val?.publish?.vehicle_id}).then(val =>
@@ -64,7 +70,7 @@ const RideDetail = ({navigation, route}) => {
     });
     console.log(result, 'this is result ');
     setBookResult(result);
-    result?.data?.code === 201 ? navigation.navigate('HomeScreen') : null;
+    result?.data?.code === 201 ? navigation.navigate('BookedScreen') : null;
   };
   const handleImagePress = () => {
     navigation.navigate('YourProfile', {
@@ -72,37 +78,12 @@ const RideDetail = ({navigation, route}) => {
       imageUri: val?.image_url,
     });
   };
-  const handleContactNamePress = () => {
-    if (chat.some(element => element === val?.name)) {
-      // navigation.navigate('Inbox', {
-      //   name: val?.name,
-      //   imageUri: val?.image_url,
-      //   leavingFrom: val?.publish?.source,
-      //   goingTo: val?.publish?.destination,
-      //   time: val?.publish?.time,
-      // });
-    } else {
-      let name = {
-        name: val?.name,
-        imageUri: val?.image_url,
-        leavingFrom: val?.publish?.source,
-        goingTo: val?.publish?.destination,
-        time: val?.publish?.time,
-        data: [],
-      };
-
-      chat.push(name);
-      // const index = chat.indexOf(val?.name);
-      // chat[index].push
-      // chat.push(val?.name.)
-      // navigation.navigate('Inbox', {
-      //   name: val?.name,
-      //   imageUri: val?.image_url,
-      //   leavingFrom: val?.publish?.source,
-      //   goingTo: val?.publish?.destination,
-      //   time: val?.publish?.time,
-      // });
-    }
+  const handleContactNamePress = async () => {
+    const result: any = await createChat({id: val?.publish?.user_id});
+    console.log(result, 'this is result from create chat ');
+    result?.data?.code === 201
+      ? navigation.navigate('ChatScreen', {id: result?.data?.chat?.id})
+      : null;
   };
   return (
     <View style={styles.container}>
@@ -195,6 +176,8 @@ const RideDetail = ({navigation, route}) => {
         {/* {isError && (
           <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
         )} */}
+        {isLoadingCreateChat && <ActivityIndicator />}
+        {isErrorCreateChat && <Text>{COMMON_CONSTS.ERROR}</Text>}
         {isLoadingBook && <ActivityIndicator />}
         {isErrorBook && (
           <Text style={styles.errorStyle}>

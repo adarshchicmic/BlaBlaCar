@@ -25,6 +25,8 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [password, setPassword] = useState<string>('');
   const [openEye, setOpenEye] = useState<boolean>(false);
   const [validEmail, setValidEmail] = useState<boolean>(true);
+  const [response, setResponse] = useState<any>();
+  const [showError, setShowError] = useState<boolean>(false);
   const [logIn, {isLoading, isError}] = useLogInMutation();
 
   const handleTextChange = value => {
@@ -49,10 +51,10 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
         email: email,
         password: password,
       });
-
-      if (res?.data?.status?.code === 200) {
-        // navigation.navigate('HomeScreen');
-      }
+      setResponse(res);
+      setShowError(false);
+    } else {
+      setShowError(true);
     }
   };
   return (
@@ -83,6 +85,11 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
               onChangeTextFunction={text => handlePasswordChange(text)}
             />
             {isError && <Text style={styles.errorStyle}>error</Text>}
+            {showError && (
+              <Text style={styles.errorStyle}>
+                {COMMON_CONSTS.ENTER_VALID_EMAIL}
+              </Text>
+            )}
             {password && (
               <View style={styles.svgOpenCloseStyle}>
                 <TouchableOpacity onPress={handleShowOpenOrCloseEye}>

@@ -6,7 +6,7 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import styles from './styles';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
-import {useCancelRideMutation} from '../../../services/modules/CancelRide';
+import {useCancelPublishMutation} from '../../../services/modules/cancelPublish';
 import {useDispatch, useSelector} from 'react-redux';
 import {updatePublishDate} from '../../../store/slices/publishRideSlice';
 import {updatePublishTime} from '../../../store/slices/publishRideSlice';
@@ -24,16 +24,17 @@ const EditYourPublication = ({navigation, route}) => {
   const data = route?.params?.data;
   const states = useSelector(state => state);
   console.log(states, 'this is states');
+  console.log(data, 'this is data');
   const dispatch = useDispatch();
-
-  const [cancelRide, {isLoading, isError}] = useCancelRideMutation();
+  const [cancelPublish, {isLoading, isError}] = useCancelPublishMutation();
   const handleEditYourPublicationPress = () => {
     navigation.navigate('ItineraryDetails');
   };
   const handleCancelButtonPress = async () => {
-    const result: any = await cancelRide({publishId: data?.id});
-    console.log(result);
-    result?.data?.code === 200 ? navigation.popBack() : null;
+    console.log(data?.id);
+    const result: any = await cancelPublish({publishId: data?.id});
+    console.log(result, 'this is result of cancel ride');
+    result?.data?.code === 200 ? navigation.popToTop() : null;
   };
   const handleDuplicateYourPublication = () => {
     dispatch(
@@ -142,7 +143,7 @@ const EditYourPublication = ({navigation, route}) => {
         onPressFunction={() => handlePublishYourReturnRide()}
       />
       {isLoading && <ActivityIndicator />}
-      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
+      {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
     </View>
   );
 };

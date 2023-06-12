@@ -1,9 +1,10 @@
 import {View, Text} from 'react-native';
-import React, {memo} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomGroup from '../../../components/CustomGroup/CustomGroup';
+import {useLazyGetChatQuery} from '../../../services/modules/getChatRoom';
 const chat = [
   {
     name: 'Adarsh',
@@ -54,6 +55,17 @@ const Inbox = ({navigation}) => {
   // const leavingFrom = route?.params?.leavingFrom;
   // const goingTo = route?.params?.goingTo;
   // const time = route?.params?.time;
+  const [chats, setChats] = useState<any>([]);
+  const [getChat, {isLoading, isError}] = useLazyGetChatQuery();
+  useEffect(() => {
+    const fun = async () => {
+      const result = await getChat();
+      setChats(result?.data?.chats);
+      console.log(result, 'this is result in chat ');
+    };
+    fun();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <View>
       {chat?.length === 0 ? (

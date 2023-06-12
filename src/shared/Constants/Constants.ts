@@ -70,6 +70,10 @@ export const COMMON_CONSTS = {
   DUPLICATE_YOUR_PUBLICATION: 'Duplicate your publication',
   PUBLISH_YOUR_RETURN_RIDE: 'Publish your return ride',
   DATE: 'Date',
+  ERROR_WHILE_LOADING_DATA: 'Error while loading data',
+  BOOKED_ENJOY_YOUR_RIDE: 'Booked! Enjoy your ride',
+  YOUR_RIDE_IS_ONLINE:
+    'Your ride is online! Passengers can now book and travel with you!',
   CLEAR_ALL: 'Clear all',
   FILTER: 'Filter',
   CANCEL_YOUR_BOOKING: 'Cancel your booking',

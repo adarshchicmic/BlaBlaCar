@@ -36,7 +36,7 @@ const YourRides = ({navigation}) => {
   }, [focus]);
   return (
     <ScrollView>
-      {result?.length === 0 ? (
+      {result?.length === 0 || isError === true ? (
         <View>
           <CustomTitleText
             text={COMMON_CONSTS.YOUR_FUTURE_TRAVEL_PLANS_WILL_APPEAR_HERE}
@@ -50,32 +50,44 @@ const YourRides = ({navigation}) => {
         <CustomTitleText text={COMMON_CONSTS.YOUR_RIDES} />
       ) : null}
       {isLoading ? <ActivityIndicator /> : null}
-      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
+      {isError && (
+        <Text style={styles.errorStyle}>
+          {COMMON_CONSTS.ERROR_WHILE_LOADING_DATA}
+        </Text>
+      )}
       {result?.map((val, index) => (
-        <DateToFrom
-          key={index}
-          data={val}
-          navigation={navigation}
-          leavingFrom={val?.source}
-          goingTo={val?.destination}
-          date={new Date(val?.date)}
-          time={new Date(val?.time)}
-        />
+        <View key={index}>
+          {val?.status === 'pending' && (
+            <DateToFrom
+              data={val}
+              navigation={navigation}
+              leavingFrom={val?.source}
+              goingTo={val?.destination}
+              date={new Date(val?.date)}
+              time={new Date(val?.time)}
+            />
+          )}
+        </View>
       ))}
       {result?.length ? (
         <CustomTitleText text={COMMON_CONSTS.BOOKED_RIDES} />
       ) : null}
       {response?.map((val, index) => (
-        <DateToFrom
-          booked={true}
-          key={index}
-          data={val?.ride}
-          navigation={navigation}
-          leavingFrom={val?.ride?.source}
-          goingTo={val?.ride?.destination}
-          date={new Date(val?.ride?.date)}
-          time={new Date(val?.ride?.time)}
-        />
+        <View key={index}>
+          {val?.ride?.status === 'pending' && (
+            <DateToFrom
+              booked={true}
+              key={index}
+              bookingId={val?.booking_id}
+              data={val?.ride}
+              navigation={navigation}
+              leavingFrom={val?.ride?.source}
+              goingTo={val?.ride?.destination}
+              date={new Date(val?.ride?.date)}
+              time={new Date(val?.ride?.time)}
+            />
+          )}
+        </View>
       ))}
     </ScrollView>
   );

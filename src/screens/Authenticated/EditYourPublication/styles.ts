@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: wp(0.4),
     borderColor: '#91908d',
   },
+  errorStyle: {
+    color: '#f00',
+    paddingLeft: wp(5),
+  },
 });
 
 export default styles;

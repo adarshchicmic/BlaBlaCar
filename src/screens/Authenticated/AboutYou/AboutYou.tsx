@@ -38,7 +38,7 @@ const AboutYou = ({navigation}: any) => {
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await profile();
-
+      console.log(userData, 'this is userData');
       userData?.data?.status?.data
         ? (setUserDetail(userData?.data?.status?.data),
           dispatch(

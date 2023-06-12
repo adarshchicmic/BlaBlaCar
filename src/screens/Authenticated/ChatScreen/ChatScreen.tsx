@@ -32,7 +32,7 @@ const ChatScreen = ({navigation, route}) => {
   };
   console.log(messages, 'this is messages');
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <CustomBackArrowButton navigation={navigation} />
       <ScrollView>
         {chat?.map((val, index) => (
@@ -59,7 +59,7 @@ const ChatScreen = ({navigation, route}) => {
           multiline={true}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

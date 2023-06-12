@@ -10,18 +10,21 @@ import CustomLeavingFromGoingToButton from '../../../components/CustomLeavingFro
 import {useCancelRideMutation} from '../../../services/modules/CancelRide';
 
 const RidePlan = ({navigation, route}) => {
+  const bookingId = route?.params?.bookingId;
+  console.log(bookingId, 'this is booking id ');
   const data = route.params.data;
   const booked = route.params.booked;
-  console.log(data);
+  console.log(data, 'this is data from ride plan ');
   const [cancelRide, {isLoading, isError}] = useCancelRideMutation();
 
   const handleEditYourPublicationPress = () => {
     navigation.navigate('EditYourPublication', {data: data});
   };
   const handleCancelBookingPress = async () => {
-    const result: any = await cancelRide({id: data?.id});
+    console.log(data?.user_id);
+    const result: any = await cancelRide({publishId: bookingId});
     console.log(result, 'this is result');
-    result?.data?.status?.code === 200 ? navigation.popBack() : null;
+    result?.data?.code === 200 ? navigation.popBack() : null;
   };
   return (
     <View>

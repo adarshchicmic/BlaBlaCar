@@ -7,6 +7,7 @@ import CustomButton from '../../../components/CustomButton/CustomButton';
 import {useSignOutMutation} from '../../../services/modules/signOut';
 import {useDispatch} from 'react-redux';
 import {updateToken} from '../../../store/slices/UserSlice';
+import {destroy} from '../../../store/slices/searchSlice';
 
 const Account = ({navigation}) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Account = ({navigation}) => {
     const dataa = await signOut();
     dataa?.data?.status === 200 ? dispatch(updateToken({token: ''})) : null;
     dispatch(updateToken({token: ''}));
+    dispatch(destroy());
   };
   const handleChangePasswordPress = () => {
     navigation.navigate('ChangePassword');

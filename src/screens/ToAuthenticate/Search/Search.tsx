@@ -22,7 +22,7 @@ import {useLazySearchQuery} from '../../../services/modules/Search';
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  const [search, {isLoading}] = useLazySearchQuery();
+  const [search, {isLoading, isError}] = useLazySearchQuery();
   const numberOfSeat: any = useSelector(state => state);
   const handleleavingFromPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
@@ -49,7 +49,7 @@ const Search = ({navigation}: any) => {
       passCount: numberOfSeat?.rideSlice?.numberOfSeats,
       date: numberOfSeat?.rideSlice?.date,
     });
-
+    console.log(result, 'this i s result ');
     numberOfSeat?.rideSlice?.leavingFrom !== COMMON_CONSTS.LEAVING_FROM &&
     numberOfSeat?.rideSlice?.goingTo !== COMMON_CONSTS.GOING_TO &&
     result?.data?.code === 200
@@ -133,6 +133,7 @@ const Search = ({navigation}: any) => {
           />
         </View>
       )}
+      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       {isLoading && <ActivityIndicator />}
       <View style={styles.addressView}>
         {numberOfSeat?.searchSlice?.search?.map((val, id) => (

@@ -132,10 +132,12 @@ const AddAboutRide = ({navigation, route}) => {
       console.log(result, datata);
       if (screen === COMMON_CONSTS.RETURN) {
         result?.data?.code === 201 && datata?.data?.code === 201
-          ? navigation.popToTop()
+          ? navigation.navigate('PublishOnline')
           : null;
       } else {
-        datata?.data?.code === 201 ? navigation.popToTop() : null;
+        datata?.data?.code === 201
+          ? navigation.navigate('PublishOnline')
+          : null;
       }
     } else {
       setShowError(true);

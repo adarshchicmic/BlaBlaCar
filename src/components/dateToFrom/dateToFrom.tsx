@@ -10,6 +10,7 @@ interface Props {
   navigation: any;
   data: any;
   booked: any;
+  bookingId: number;
 }
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
@@ -27,6 +28,7 @@ const monthNames = [
   'December',
 ];
 const DateToFrom: React.FC<Props> = ({
+  bookingId,
   leavingFrom,
   goingTo,
   date,
@@ -36,7 +38,11 @@ const DateToFrom: React.FC<Props> = ({
   booked,
 }) => {
   const handleOnPress = () => {
-    navigation.navigate('RidePlan', {data: data, booked: booked});
+    navigation.navigate('RidePlan', {
+      data: data,
+      booked: booked,
+      bookingId: bookingId,
+    });
   };
   return (
     <TouchableOpacity style={styles.container} onPress={() => handleOnPress()}>

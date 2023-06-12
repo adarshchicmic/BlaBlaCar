@@ -28,7 +28,10 @@ const searchSlice: any = createSlice({
         ? state.search.unshift(search)
         : null;
     },
+    destroy: state => {
+      state.search = undefined;
+    },
   },
 });
-export const {updateSearch} = searchSlice.actions;
+export const {updateSearch, destroy} = searchSlice.actions;
 export default searchSlice;
