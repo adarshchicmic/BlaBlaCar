@@ -1,5 +1,5 @@
 import {View, ScrollView, ActivityIndicator, SafeAreaView} from 'react-native';
-import React, {memo} from 'react';
+import React, {memo, useState} from 'react';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -9,21 +9,31 @@ import {useDispatch} from 'react-redux';
 import {updateToken} from '../../../store/slices/UserSlice';
 import {destroy} from '../../../store/slices/searchSlice';
 
+import CustomModal from '../../../components/CustomModal/CustomModal';
+
 const Account = ({navigation}) => {
+  const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
   const [signOut, {isLoading: isLoadingSignOut}]: any = useSignOutMutation();
 
-  const handleLogoutPress = async () => {
+  const handleLogoutPress = () => {
+    setModalIsVisible(true);
+  };
+  const handleModalClickYes = async () => {
     const dataa = await signOut();
     dataa?.data?.status === 200 ? dispatch(updateToken({token: ''})) : null;
     dispatch(updateToken({token: ''}));
     dispatch(destroy());
+    setModalIsVisible(false);
+  };
+  const handleModalClickNo = () => {
+    setModalIsVisible(false);
   };
   const handleChangePasswordPress = () => {
     navigation.navigate('ChangePassword');
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         <View style={styles.buttonContainer}>
           <NameArrowButton name={COMMON_CONSTS.RATING} />
@@ -54,6 +64,19 @@ const Account = ({navigation}) => {
           onPressFunction={() => handleLogoutPress()}
         />
       </ScrollView>
+      <CustomModal
+        isVisible={modalIsVisible}
+        onPressYes={() => handleModalClickYes()}
+        onPressNo={() => handleModalClickNo()}
+      />
+      {/* <Modal isVisible={modalIsVisible}>
+        <View style={styles.modalViewStyle}>
+          <Text style={styles.modalTextStyle}> klfdsjlk;j;l</Text>
+          <TouchableOpacity>
+            <Text>{COMMON_CONSTS.CONTINUE}</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal> */}
     </SafeAreaView>
   );
 };

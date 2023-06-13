@@ -8,7 +8,7 @@ export const initialState: Partial<InitialState> = {
 };
 
 function isObjectUnique(array, object) {
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0; i < array?.length; i++) {
     if (JSON.stringify(array[i]) === JSON.stringify(object)) {
       return false; // Object already exists in the array
     }
@@ -29,7 +29,7 @@ const searchSlice: any = createSlice({
         : null;
     },
     destroy: state => {
-      state.search = undefined;
+      state.search = [];
     },
   },
 });

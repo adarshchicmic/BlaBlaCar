@@ -6,10 +6,12 @@ import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateEmail} from '../../../store/slices/UserSlice';
+import {useEmailExistMutation} from '../../../services/modules/checkEmailExist';
 
 const EmailSignUp = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
   const [validEmail, setValidEmail] = useState<boolean>(false);
+  const [emailExist, {isLoading, isError}] = useEmailExistMutation();
   const [showValidationError, setShowValidationError] =
     useState<boolean>(false);
   const dispatch = useDispatch();
@@ -23,7 +25,9 @@ const EmailSignUp = ({navigation}: any) => {
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
-  const handleForwardArrowButtonPress = () => {
+  const handleForwardArrowButtonPress = async () => {
+    // const res = await emailExist({email: email});
+    // console.log(res, 'this is res ');
     if (validEmail) {
       navigation.navigate('FirstNameLastName');
       dispatch(updateEmail({email: email}));

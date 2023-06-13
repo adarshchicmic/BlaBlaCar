@@ -15,5 +15,4 @@ const SignUpOption = ({navigation}: any) => {
     </View>
   );
 };
-
 export default memo(SignUpOption);

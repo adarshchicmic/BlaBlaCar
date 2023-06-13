@@ -49,7 +49,6 @@ const Search = ({navigation}: any) => {
       passCount: numberOfSeat?.rideSlice?.numberOfSeats,
       date: numberOfSeat?.rideSlice?.date,
     });
-    console.log(result, 'this i s result ');
     numberOfSeat?.rideSlice?.leavingFrom !== COMMON_CONSTS.LEAVING_FROM &&
     numberOfSeat?.rideSlice?.goingTo !== COMMON_CONSTS.GOING_TO &&
     result?.data?.code === 200
