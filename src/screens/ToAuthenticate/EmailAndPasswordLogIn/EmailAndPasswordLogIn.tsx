@@ -64,7 +64,11 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
       behavior={Platform.OS === 'ios' ? 'padding' : ''}>
       <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
         <TouchableOpacity onPress={() => handleBackArrowPress()}>
-          <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(5)}
+            style={styles.arrowStyle}
+          />
         </TouchableOpacity>
         <View style={styles.textView}>
           <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAIL}</Text>

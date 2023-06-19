@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginTop: hp(2),
   },
   crossStyle: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(22),
     color: '#2dbeff',
   },
   textView: {

@@ -10,13 +10,16 @@ const styles = StyleSheet.create<any>({
     justifyContent: 'center',
     marginLeft: wp(5),
   },
+  arrowStyle: {
+    paddingTop: hp(2),
+  },
   textStyle: {
     fontSize: RFValue(30),
     fontWeight: '600',
     color: '#000',
   },
   textView: {
-    marginVertical: hp(4),
+    marginVertical: hp(2),
   },
   textInputStyle: {
     width: wp(90),

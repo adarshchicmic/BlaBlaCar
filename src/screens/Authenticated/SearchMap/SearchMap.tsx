@@ -6,6 +6,10 @@ import styles from './styles';
 import {useSelector} from 'react-redux';
 import {SvgLeftArrow} from '../../../assets/svg';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -48,7 +52,10 @@ const SearchMap = ({navigation, route}: any) => {
         <TouchableOpacity
           onPress={() => handleBackArrowPress()}
           style={styles.arrowStyle}>
-          <SvgLeftArrow width={35} height={35} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(6)}
+          />
         </TouchableOpacity>
       </View>
       {ordinates && (

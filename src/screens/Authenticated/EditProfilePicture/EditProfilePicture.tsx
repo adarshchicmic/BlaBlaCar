@@ -53,7 +53,11 @@ const EditProfilePicture = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.buttonView}>
         <Text style={styles.textStyle}>

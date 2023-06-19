@@ -8,10 +8,11 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   crossStyle: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(22),
     color: '#2dbeff',
     marginTop: hp(2),
     marginHorizontal: wp(5),
+    // padding: wp(2),
   },
   crossButtonStyle: {
     width: wp(20),

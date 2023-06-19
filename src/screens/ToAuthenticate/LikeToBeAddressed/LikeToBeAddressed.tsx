@@ -5,6 +5,10 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {updateTitle} from '../../../store/slices/UserSlice';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const LikeToBeAddressed = ({navigation}: any) => {
   const dispatch = useDispatch();
@@ -28,7 +32,10 @@ const LikeToBeAddressed = ({navigation}: any) => {
       <TouchableOpacity
         style={styles.buttonGoBackStyle}
         onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow height={25} width={25} />
+        <SvgLeftArrow
+          height={heightPercentageToDP(5)}
+          width={widthPercentageToDP(8)}
+        />
       </TouchableOpacity>
 
       <View style={styles.textView}>

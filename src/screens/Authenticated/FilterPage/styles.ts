@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   buttonTextStyle: {
     color: '#2dbeff',
-    fontSize: RFValue(20),
+    fontSize: RFValue(22),
     fontWeight: '600',
   },
   headerViewStyle: {

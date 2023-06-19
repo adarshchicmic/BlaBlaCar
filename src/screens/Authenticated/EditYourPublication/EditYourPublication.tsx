@@ -112,7 +112,7 @@ const EditYourPublication = ({navigation, route}) => {
     dispatch(updateRouteDetail({selectRoute: data?.select_route?.selectRoute}));
     dispatch(updateMidSeat({midSeat: data?.mid_seat}));
     dispatch(updateBookInstantly({instant: data?.book_instantly}));
-    navigation.navigate('DatePicker', {screen: COMMON_CONSTS.RETURN});
+    navigation.navigate('WhenAreYouComing', {screen: COMMON_CONSTS.RETURN});
   };
   return (
     <View>

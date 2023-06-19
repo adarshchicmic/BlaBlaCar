@@ -13,6 +13,10 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import {updateProfileData} from '../../../store/slices/profileSlice';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const WhatIsYourLastName = ({navigation}: any) => {
   const [lastName, setLastName] = useState<string>('');
@@ -55,7 +59,11 @@ const WhatIsYourLastName = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
 
       <View style={styles.textView}>

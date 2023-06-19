@@ -7,6 +7,10 @@ import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateEmail} from '../../../store/slices/UserSlice';
 import {useEmailExistMutation} from '../../../services/modules/checkEmailExist';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const EmailSignUp = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -41,7 +45,11 @@ const EmailSignUp = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={handleBackArrowPress}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(5)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAILQ}</Text>

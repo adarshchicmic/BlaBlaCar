@@ -70,7 +70,7 @@ const RidePlan = ({navigation, route}) => {
         />
       </View>
       <View style={styles.passengerView}>
-        {passenger.length > 0 ? (
+        {passenger?.length > 0 ? (
           <View>
             <Text style={styles.passengerTextStyle}>
               {COMMON_CONSTS.PASSENGERS}
@@ -111,7 +111,9 @@ const RidePlan = ({navigation, route}) => {
       )}
       {isLoadingCancelRide && <ActivityIndicator />}
       {isLoading && <ActivityIndicator />}
-      {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
+      {(isError || isErrorCancelRide) && (
+        <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
+      )}
     </View>
   );
 };

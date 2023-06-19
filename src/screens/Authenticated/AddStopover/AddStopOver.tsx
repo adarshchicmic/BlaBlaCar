@@ -25,7 +25,10 @@ const AddStopOver = ({navigation}) => {
         <TouchableOpacity
           onPress={() => handleBackArrowPress()}
           style={styles.arrowStyle}>
-          <SvgLeftArrow width={35} height={35} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(6)}
+          />
         </TouchableOpacity>
       </View>
       <View>

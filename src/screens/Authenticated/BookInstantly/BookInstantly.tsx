@@ -6,6 +6,10 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {useDispatch} from 'react-redux';
 import {updateBookInstantly} from '../../../store/slices/publishRideSlice';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const BookInstantly = ({navigation}) => {
   const dispatch = useDispatch();
@@ -30,7 +34,10 @@ const BookInstantly = ({navigation}) => {
         <TouchableOpacity
           onPress={() => handleBackArrowPress()}
           style={styles.arrowStyle}>
-          <SvgLeftArrow width={35} height={35} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(6)}
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.textView}>

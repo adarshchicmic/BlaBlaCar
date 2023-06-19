@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   crossButtonStyle: {
-    width: wp(20),
+    width: wp(22),
     marginLeft: wp(5),
     marginTop: hp(2),
   },

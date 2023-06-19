@@ -77,7 +77,7 @@ const ChatScreen = ({navigation, route}) => {
           onPress={() => handleSendMessage()}>
           <SvgSend
             width={widthPercentageToDP(8)}
-            height={heightPercentageToDP(4)}
+            height={heightPercentageToDP(6)}
           />
         </TouchableOpacity>
         <TextInput

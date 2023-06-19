@@ -16,6 +16,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {useAddVehicleMutation} from '../../../services/modules/addVehicle';
 import {useUpdateVehicleMutation} from '../../../services/modules/editVehicle/editVehicle';
 import {useSelector} from 'react-redux';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
@@ -159,7 +163,10 @@ const VehicleInformation = ({navigation, route}: any) => {
           <TouchableOpacity
             onPress={() => handleBackArrowPress()}
             style={styles.arrowStyle}>
-            <SvgLeftArrow width={25} height={25} />
+            <SvgLeftArrow
+              width={widthPercentageToDP(8)}
+              height={heightPercentageToDP(6)}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.textView}>

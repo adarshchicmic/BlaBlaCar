@@ -13,6 +13,10 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateProfileData} from '../../../store/slices/profileSlice';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const WhatIsYourDob = ({navigation}: any) => {
   const [dob, setDob] = useState<string>('');
@@ -70,7 +74,11 @@ const WhatIsYourDob = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_DATE_OF}</Text>
