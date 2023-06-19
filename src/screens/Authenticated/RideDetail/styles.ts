@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
 
     paddingVertical: hp(1),
   },
+
   arrowStyle: {
     fontSize: RFValue(15),
     alignSelf: 'center',
@@ -108,6 +109,22 @@ const styles = StyleSheet.create({
     borderTopWidth: 0.4,
     borderBottomWidth: 0.4,
     paddingVertical: hp(2),
+  },
+  passengerView: {
+    borderTopWidth: wp(1.5),
+    borderBottomWidth: wp(1.5),
+    width: wp(100),
+    alignSelf: 'center',
+    borderColor: '#c2c1c0',
+  },
+  passengerTextStyle: {
+    paddingVertical: hp(1),
+    fontSize: RFValue(15),
+    fontWeight: '600',
+    paddingHorizontal: wp(5),
+  },
+  errorView: {
+    marginTop: hp(1),
   },
 });
 export default styles;

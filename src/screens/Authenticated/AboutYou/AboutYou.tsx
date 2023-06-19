@@ -110,7 +110,7 @@ const AboutYou = ({navigation}: any) => {
               ) : (
                 <SvgProfile width={'100'} height={'100'} />
               )}
-              <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+              {/* <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text> */}
             </TouchableOpacity>
           </View>
           <CustomButton

@@ -2,11 +2,14 @@ import {api} from '../../api';
 export const userApi = api.injectEndpoints({
   endpoints: build => ({
     createChat: build.mutation({
-      query: ({id}) => ({
+      query: ({receiverId, publishId}) => ({
         url: 'chats/',
         method: 'POST',
         body: {
-          receiver_id: id,
+          chat: {
+            receiver_id: receiverId,
+            publish_id: publishId,
+          },
         },
       }),
     }),

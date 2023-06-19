@@ -7,7 +7,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 // console.log(dispatch, 'this is dispatch');
 // import {store} from '../store/store';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://762b-112-196-113-2.ngrok-free.app/',
+  baseUrl: 'https://5858-112-196-113-2.ngrok-free.app/',
   prepareHeaders: (headers, {getState}) => {
     const {userSlice}: any = getState();
     const {token}: any = userSlice;

@@ -50,5 +50,11 @@ const styles = StyleSheet.create<Style | any>({
   textButtonViewStyle: {
     height: hp(30),
   },
+  chicmicLogoStyle: {
+    marginTop: hp(1.5),
+    position: 'absolute',
+    zIndex: 1,
+    alignSelf: 'center',
+  },
 });
 export default styles;

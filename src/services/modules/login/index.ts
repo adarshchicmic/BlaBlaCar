@@ -21,8 +21,8 @@ export const userApi = api.injectEndpoints({
               token: result?.meta?.response?.headers?.map?.authorization,
             }),
           );
-        } catch (err) {
-          console.log(err, 'Error over here');
+        } catch (error) {
+          console.log(error);
         }
       },
     }),

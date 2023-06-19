@@ -29,6 +29,8 @@ const EmailSignUp = ({navigation}: any) => {
     // const res = await emailExist({email: email});
     // console.log(res, 'this is res ');
     if (validEmail) {
+      const result = emailExist({email: email});
+      console.log(result, 'this is result');
       navigation.navigate('FirstNameLastName');
       dispatch(updateEmail({email: email}));
     } else {

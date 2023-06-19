@@ -5,7 +5,7 @@ export const userApi = api.injectEndpoints({
     emailExist: build.mutation({
       query: ({email}) => ({
         url: 'users/',
-        method: 'POST',
+        method: 'GET',
         body: {
           user: {
             email: email,

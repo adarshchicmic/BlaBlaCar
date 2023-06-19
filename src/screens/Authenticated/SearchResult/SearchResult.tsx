@@ -8,10 +8,8 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 
 const SearchResult = ({navigation, route}) => {
   const obj = route?.params?.object?.data;
-  console.log(obj, 'this is data data');
   const state: any = useSelector(state => state);
 
-  console.log(obj, 'this is obj');
   return (
     <View style={styles.container}>
       <CustomArrowButtonFilter

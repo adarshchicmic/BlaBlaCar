@@ -7,7 +7,12 @@ import {
 } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {
+    flex: 1,
+  },
+  // backArrowView: {
+  //   position: 'absolute',
+  // },
   textInputView: {
     height: hp(7),
     width: wp(90),

@@ -2,6 +2,7 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   ImageBackground,
   TouchableOpacity,
   Pressable,
@@ -65,9 +66,13 @@ const Search = ({navigation}: any) => {
         style={styles.imageBackgroundStyle}
         source={require('../../../assets/images/search.jpg')}>
         <View style={styles.textUpperViewStyle}>
-          <Text style={styles.textUpperStyle}>
+          {/* <Text style={styles.textUpperStyle}>
             {COMMON_CONSTS.YOUR_PICK_OF_RIDES_AT}
-          </Text>
+          </Text> */}
+          <Image
+            style={styles.chicmicLogoStyle}
+            source={require('../../../assets/images/chicmic.png')}
+          />
           {/* <Text style={styles.textUpperStyle}>{COMMON_CONSTS.LOW_PRICES}</Text> */}
         </View>
       </ImageBackground>

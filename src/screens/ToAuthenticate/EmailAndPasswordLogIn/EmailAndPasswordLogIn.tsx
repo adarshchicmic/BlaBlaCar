@@ -52,6 +52,7 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
         password: password,
       });
       setResponse(res);
+
       setShowError(false);
     } else {
       setShowError(true);
@@ -84,7 +85,11 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
               secureTextEntry={!openEye}
               onChangeTextFunction={text => handlePasswordChange(text)}
             />
-            {isError && <Text style={styles.errorStyle}>error</Text>}
+            {isError && (
+              <Text style={styles.errorStyle}>
+                {response?.error?.data?.status?.error}
+              </Text>
+            )}
             {showError && (
               <Text style={styles.errorStyle}>
                 {COMMON_CONSTS.ENTER_VALID_EMAIL}

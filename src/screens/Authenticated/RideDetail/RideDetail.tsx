@@ -4,6 +4,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
@@ -19,7 +20,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-
+import {useLazyRideWithPassengerQuery} from '../../../services/modules/rideWithPassenger';
 import {useCreateChatMutation} from '../../../services/modules/createChat';
 
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
@@ -39,6 +40,7 @@ const monthNames = [
 ];
 const RideDetail = ({navigation, route}) => {
   const [vehicleDetail, setVehicleDetail] = useState<any>({});
+  const [passenger, setPassenger] = useState<any>([]);
   const val = route?.params?.data;
   console.log(val, 'this is value guys ');
   const [bookResult, setBookResult] = useState<any>({});
@@ -49,15 +51,16 @@ const RideDetail = ({navigation, route}) => {
     createChat,
     {isLoading: isLoadingCreateChat, isError: isErrorCreateChat},
   ] = useCreateChatMutation();
+  const [rideWithPassenger, {isLoading: isLoadingRide, isError: isErrorRide}] =
+    useLazyRideWithPassengerQuery();
   useEffect(() => {
-    console.log(val?.publish?.vehicle_id, 'this is vehicle id ');
-    vehicle({id: val?.publish?.vehicle_id}).then(val =>
-      console.log(val, 'valjdlskk hjkdsfhkl dsfjkhk'),
-    );
     const fun = async () => {
       const res = await vehicle({id: val?.publish?.vehicle_id});
+      const result: any = await rideWithPassenger({
+        publishId: val?.publish?.id,
+      });
+      setPassenger(result?.data?.passengers);
       setVehicleDetail(res);
-      console.log(res, 'this is vehicle result ');
     };
     fun();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,7 +71,7 @@ const RideDetail = ({navigation, route}) => {
       publishId: val?.publish?.id,
       seat: val?.publish?.passengers_count,
     });
-    console.log(result, 'this is result ');
+
     setBookResult(result);
     result?.data?.code === 201 ? navigation.navigate('BookedScreen') : null;
   };
@@ -79,14 +82,17 @@ const RideDetail = ({navigation, route}) => {
     });
   };
   const handleContactNamePress = async () => {
-    const result: any = await createChat({id: val?.publish?.user_id});
-    console.log(result, 'this is result from create chat ');
+    const result: any = await createChat({
+      receiverId: val?.publish?.user_id,
+      publishId: val?.publish?.id,
+    });
+
     result?.data?.code === 201
-      ? navigation.navigate('ChatScreen', {id: result?.data?.chat?.id})
+      ? navigation.navigate('ChatScreen', {chat: result?.data?.chat})
       : null;
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <CustomBackArrowButton navigation={navigation} />
       <View style={styles.dateAndSearchView}>
         <CustomTitleText
@@ -114,7 +120,20 @@ const RideDetail = ({navigation, route}) => {
             val?.publish?.select_route?.selectRoute?.route[0]?.overview_polyline
           }
         />
+        <View style={styles.errorView}>
+          {isLoadingCreateChat || (isLoadingRide && <ActivityIndicator />)}
+          {(isErrorCreateChat || isErrorRide) && (
+            <Text>{COMMON_CONSTS.ERROR}</Text>
+          )}
+          {isLoadingBook && <ActivityIndicator />}
+          {isErrorBook && (
+            <Text style={styles.errorStyle}>
+              {bookResult?.error?.data?.error}
+            </Text>
+          )}
+        </View>
       </View>
+
       <View style={styles.priceViewMain}>
         <View style={styles.priceViewStyle}>
           <Text style={styles.priceText}>
@@ -136,7 +155,7 @@ const RideDetail = ({navigation, route}) => {
             style={styles.imageArrowView}
             onPress={() => handleImagePress()}>
             <Image source={{uri: val?.image_url}} style={styles.imageStyle} />
-            <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
+            {/* <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text> */}
           </TouchableOpacity>
         </View>
         <View>
@@ -163,12 +182,39 @@ const RideDetail = ({navigation, route}) => {
           />
           <Text style={styles.textStyle}>{COMMON_CONSTS?.INSTANT_BOOKING}</Text>
         </View>
+        <View style={styles.passengerView}>
+          {passenger?.length > 0 ? (
+            <View>
+              <Text style={styles.passengerTextStyle}>
+                {COMMON_CONSTS.PASSENGERS}
+              </Text>
+              {passenger.map(val => (
+                <View style={styles.userViewStyle}>
+                  <View>
+                    <Text style={styles.nameStyle}>{val?.first_name}</Text>
+                    {/* <Text>{'rating'}</Text> */}
+                  </View>
+                  <TouchableOpacity
+                    style={styles.imageArrowView}
+                    onPress={() => handleImagePress()}>
+                    <Image
+                      source={{uri: val?.image}}
+                      style={styles.imageStyle}
+                    />
+                    {/* <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text> */}
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
+          ) : null}
+        </View>
         <View style={styles.vehicleView}>
           <Text style={styles.vehicleNameStyle}>
             {vehicleDetail?.data?.vehicle_name}
           </Text>
           <Text>{vehicleDetail?.data?.vehicle_color?.toLowerCase()}</Text>
         </View>
+        <View />
         {/* <View>
           <Text>{COMMON_CONSTS.PASSENGERS}</Text>
         </View> */}
@@ -176,14 +222,7 @@ const RideDetail = ({navigation, route}) => {
         {/* {isError && (
           <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
         )} */}
-        {isLoadingCreateChat && <ActivityIndicator />}
-        {isErrorCreateChat && <Text>{COMMON_CONSTS.ERROR}</Text>}
-        {isLoadingBook && <ActivityIndicator />}
-        {isErrorBook && (
-          <Text style={styles.errorStyle}>
-            {bookResult?.error?.data?.error}
-          </Text>
-        )}
+
         {/* <Text> { }</Text> */}
         <View style={styles.btnView}>
           <CustomButton
@@ -194,7 +233,7 @@ const RideDetail = ({navigation, route}) => {
           />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

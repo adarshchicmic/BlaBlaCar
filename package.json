@@ -12,6 +12,7 @@
     "clean:ios": "cd ios && xcodebuild clean && cd ../"
   },
   "dependencies": {
+    "@react-native-community/cli-platform-android": "^11.3.2",
     "@react-native-community/datetimepicker": "^7.1.0",
     "@react-native-community/geolocation": "^3.0.6",
     "@react-navigation/bottom-tabs": "^6.5.7",

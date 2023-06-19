@@ -118,6 +118,10 @@ const styles = StyleSheet.create<any>({
     alignSelf: 'center',
     color: '#000',
   },
+  chicmicLogoStyle: {
+    position: 'absolute',
+    alignSelf: 'center',
+  },
 });
 
 export default styles;

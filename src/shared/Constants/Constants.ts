@@ -75,6 +75,7 @@ export const COMMON_CONSTS = {
   YOUR_RIDE_IS_ONLINE:
     'Your ride is online! Passengers can now book and travel with you!',
   CLEAR_ALL: 'Clear all',
+  NO_PASSENGERS_FOR_THIS_RIDE: 'No passengers for this ride',
   ARE_YOU_SURE: 'Are you sure?',
   YES: 'Yes',
   NO: 'No',
