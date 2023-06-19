@@ -1,5 +1,11 @@
-import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
-import React, {useState, memo} from 'react';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useState, memo, useRef} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
@@ -18,9 +24,17 @@ const EmailSignUp = ({navigation}: any) => {
   const [emailExist, {isLoading, isError}] = useEmailExistMutation();
   const [showValidationError, setShowValidationError] =
     useState<boolean>(false);
+  const [emailAlreadyExist, setEmailAlreadyExist] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const refInput: any = useRef();
 
   const handleTextChange = value => {
+    if (emailAlreadyExist) {
+      setEmailAlreadyExist(false);
+    }
+    if (showValidationError) {
+      setShowValidationError(!COMMON_CONSTS.EMAIL_REGEX.test(value));
+    }
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
   };
@@ -32,10 +46,14 @@ const EmailSignUp = ({navigation}: any) => {
   const handleForwardArrowButtonPress = async () => {
     // const res = await emailExist({email: email});
     // console.log(res, 'this is res ');
+    // console.log(refInput, 'this is refInput ');
+    refInput?.current?.blur();
     if (validEmail) {
-      const result = emailExist({email: email});
+      const result = await emailExist({email: email});
       console.log(result, 'this is result');
-      navigation.navigate('FirstNameLastName');
+      result?.error?.data?.status?.code === 422
+        ? setEmailAlreadyExist(true)
+        : navigation.navigate('FirstNameLastName');
       dispatch(updateEmail({email: email}));
     } else {
       setShowValidationError(true);
@@ -56,6 +74,8 @@ const EmailSignUp = ({navigation}: any) => {
       </View>
       <View>
         <CustomTextInput
+          autoCapitalizeTextInput={'none'}
+          refInput={refInput}
           styleInputText={styles.textInputStyle}
           placeholderTextColor={'#969693'}
           inputTextPlaceholder={COMMON_CONSTS.EMAIL}
@@ -67,7 +87,15 @@ const EmailSignUp = ({navigation}: any) => {
           </Text>
         )}
       </View>
-
+      {isLoading && <ActivityIndicator />}
+      {isError && (
+        <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR}</Text>
+      )}
+      {emailAlreadyExist && (
+        <Text style={styles.errorTextStyle}>
+          {COMMON_CONSTS.EMAIL_ALREADY_EXIST}
+        </Text>
+      )}
       {email && (
         <View style={styles.buttonView}>
           <TouchableOpacity

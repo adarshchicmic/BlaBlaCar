@@ -16,6 +16,7 @@ import {
 import AboutYou from '../screens/Authenticated/AboutYou/AboutYou';
 import {COMMON_CONSTS} from '../shared/Constants/Constants';
 import Account from '../screens/Authenticated/Account/Account';
+import {RFValue} from 'react-native-responsive-fontsize';
 interface Props {
   width: number;
   height: number;
@@ -23,8 +24,16 @@ interface Props {
 const Tab: any = createMaterialTopTabNavigator();
 const ProfileNavigation = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
-      <Tab.Screen name={COMMON_CONSTS.ABOUT_YOU} component={AboutYou} />
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarLabelStyle: {fontSize: RFValue(15), fontWeight: '600'},
+      }}>
+      <Tab.Screen
+        options={{tabBarLabel: 'About you'}}
+        name={'About You'}
+        component={AboutYou}
+      />
       <Tab.Screen name={COMMON_CONSTS.ACCOUNT} component={Account} />
     </Tab.Navigator>
   );

@@ -28,6 +28,9 @@ const DateOfBirth = ({navigation}: any) => {
       : setValidDob(false);
 
     setDob(value);
+    if (showError) {
+      setShowError(false);
+    }
   };
 
   const handleBackArrowPress = () => {

@@ -32,6 +32,9 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   const handleTextChange = value => {
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
+    if (showError) {
+      setShowError(COMMON_CONSTS.EMAIL_REGEX.test(value));
+    }
   };
   const handlePasswordChange = value => {
     setPassword(value);

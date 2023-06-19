@@ -26,6 +26,9 @@ const DefineYourPassword = ({navigation}: any) => {
   const handlePasswordChange = value => {
     setPassword(value);
     setValidPassword(COMMON_CONSTS.PASSWORD_REGEX.test(value));
+    if (showWarning) {
+      setShowWarning(COMMON_CONSTS.PASSWORD_REGEX.test(value));
+    }
   };
   const handleBackArrowPress = () => {
     navigation.goBack();

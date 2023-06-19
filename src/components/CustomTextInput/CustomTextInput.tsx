@@ -14,6 +14,7 @@ interface Props {
   onEndEditing: any;
   maxLength: number;
   secureTextEntry: boolean;
+  refInput: any;
 }
 const CustomTextInput: React.FC<Props | any> = ({
   onChangeTextFunction = () => {},
@@ -32,10 +33,12 @@ const CustomTextInput: React.FC<Props | any> = ({
   inputMode,
   defaultValue,
   multiline,
+  refInput,
 }: Props | any) => {
   return (
     <View style={customInputTextOuterStyle}>
       <TextInput
+        ref={refInput}
         defaultValue={defaultValue}
         style={styleInputText}
         placeholder={inputTextPlaceholder}

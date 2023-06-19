@@ -58,6 +58,7 @@ export const COMMON_CONSTS = {
   WHEN_ARE_YOU_GOING: 'When are you',
   WHEN_ARE_YOU_COMING: 'When are you coming?',
   GOING: 'going?',
+  EMAIL_ALREADY_EXIST: 'Email already exist',
   NUMBER_OF_SEATS: 'Number of seats to',
   BOOK: 'book',
   EDIT_INFO: 'Edit info',

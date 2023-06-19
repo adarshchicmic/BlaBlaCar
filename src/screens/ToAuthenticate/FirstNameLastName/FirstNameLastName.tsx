@@ -21,10 +21,16 @@ const FirstNameLastName = ({navigation}: any) => {
   const handleFirstNameChange = value => {
     setFirstName(value.trim());
     setValidFirstName(COMMON_CONSTS.NAME_REGEX.test(value.trim()));
+    if (!showError) {
+      setShowError(true);
+    }
   };
   const handleLastNameChange = value => {
     setLastName(value.trim());
     setValidLastName(COMMON_CONSTS.NAME_REGEX.test(value.trim()));
+    if (!showError) {
+      setShowError(true);
+    }
   };
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -41,7 +47,7 @@ const FirstNameLastName = ({navigation}: any) => {
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
         <SvgLeftArrow
           width={widthPercentageToDP(8)}
-          height={heightPercentageToDP(5)}
+          height={heightPercentageToDP(6)}
           style={styles.arrowStyle}
         />
       </TouchableOpacity>
@@ -65,7 +71,9 @@ const FirstNameLastName = ({navigation}: any) => {
           />
         </View>
       </View>
-      {!showError && <Text>{COMMON_CONSTS.NAME_WARN}</Text>}
+      {!showError && (
+        <Text style={styles.errorStyle}>{COMMON_CONSTS.NAME_WARN}</Text>
+      )}
       {firstName && lastName && (
         <View style={styles.buttonView}>
           <TouchableOpacity
