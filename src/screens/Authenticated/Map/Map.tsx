@@ -68,13 +68,13 @@ const MapScreen = ({navigation}: any) => {
       destLatitude: destLocation?.latitude,
       destLongitude: destLocation?.longitude,
     });
-    console.log(val, 'this is data guys ');
+
     const data = val?.data;
     if (data.status === 'OK') {
       const routeCoordinates = data.routes[0].overview_polyline.points;
       const dis = data.routes[0].legs[0].distance.text;
       const dur = data.routes[0].legs[0].duration.text;
-      console.log(dis, 'this is distance guys ');
+
       const legs: any = [
         {
           distance: data.routes[0].legs[0].distance,
@@ -84,7 +84,6 @@ const MapScreen = ({navigation}: any) => {
       const overview_polyline = {points: routeCoordinates};
       const route: any = [];
       route.push({legs, overview_polyline});
-      console.log({route}, ':this is route');
 
       dispatch(updateRouteDetail({selectRoute: {route}}));
       dispatch(

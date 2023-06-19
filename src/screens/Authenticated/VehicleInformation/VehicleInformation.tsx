@@ -200,7 +200,9 @@ const VehicleInformation = ({navigation, route}: any) => {
             defaultValue={vehicleData?.vehicle_model_year?.toString()}
           />
         </View>
-        {isError || isErrorUpdate ? <Text>{COMMON_CONSTS.ERROR}</Text> : null}
+        {isError || isErrorUpdate ? (
+          <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
+        ) : null}
 
         {isLoading || isLoadingUpdate ? <ActivityIndicator /> : null}
         {(vehicleBrand &&

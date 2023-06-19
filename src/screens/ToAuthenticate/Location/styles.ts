@@ -13,11 +13,11 @@ const styles = StyleSheet.create<any>({
   },
   styleTextInput: {
     textInputContainer: {
-      width: wp(80),
+      width: wp(90),
       alignSelf: 'center',
     },
     textInput: {
-      paddingLeft: wp(4),
+      paddingLeft: wp(10),
       color: '#000000',
       fontSize: RFValue(18),
       backgroundColor: '#d7d8de',
@@ -45,10 +45,15 @@ const styles = StyleSheet.create<any>({
   },
   leftArrowViewStyle: {
     fontSize: RFValue(20),
+    position: 'absolute',
+    zIndex: 1,
+    alignSelf: 'flex-start',
   },
   leftArrowStyle: {
-    fontSize: RFValue(23),
+    fontSize: RFValue(26),
     color: '#9fa0a6',
+    alignSelf: 'center',
+    paddingHorizontal: wp(3),
   },
   nameArrowButtonViewStyle: {
     position: 'absolute',

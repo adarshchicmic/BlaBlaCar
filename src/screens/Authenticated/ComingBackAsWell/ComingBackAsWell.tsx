@@ -12,7 +12,7 @@ const ComingBackAsWell = ({navigation}) => {
   const dispatch = useDispatch();
   const handleYesSurePress = () => {
     dispatch(updateReturnRide({returnRide: 1}));
-    navigation.navigate('DatePicker', {screen: COMMON_CONSTS.RETURN});
+    navigation.navigate('WhenAreYouComing', {screen: COMMON_CONSTS.RETURN});
   };
   const handleNoPress = () => {
     dispatch(updateReturnRide({returnRide: 0}));

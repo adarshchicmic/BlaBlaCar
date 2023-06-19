@@ -56,6 +56,7 @@ export const COMMON_CONSTS = {
   NEW_PASSWORD: 'New password',
   CONFIRM_NEW_PASSWORD: 'Confirm new password',
   WHEN_ARE_YOU_GOING: 'When are you',
+  WHEN_ARE_YOU_COMING: 'When are you coming?',
   GOING: 'going?',
   NUMBER_OF_SEATS: 'Number of seats to',
   BOOK: 'book',

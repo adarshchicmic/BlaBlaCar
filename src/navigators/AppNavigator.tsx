@@ -46,6 +46,11 @@ import ChatScreen from '../screens/Authenticated/ChatScreen/ChatScreen';
 import Filter from '../screens/Authenticated/FilterPage/Filter';
 import BookedScreen from '../screens/Authenticated/BookedScreen/BookedScreen';
 import PublishOnline from '../screens/Authenticated/publishOnline/PublishOnline';
+import DropOffSearch from '../screens/ToAuthenticate/DropOffSearch/DropOffSearch';
+import AddStopOverSearch from '../screens/Authenticated/AddStopOverSearch/AddStopOverSearch';
+import WhenAreYouComing from '../screens/Authenticated/WhenAreYouComing/WhenAreYouComing';
+import ReturnTime from '../screens/Authenticated/ReturnTime/ReturnTime';
+import ReturnPrice from '../screens/Authenticated/ReturnPrice/ReturnPrice';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -108,7 +113,12 @@ const AppNavigator = () => {
       <Stack.Screen name="ChatScreen" component={ChatScreen} />
       <Stack.Screen name="Filter" component={Filter} />
       <Stack.Screen name="BookedScreen" component={BookedScreen} />
+      <Stack.Screen name="DropOffSearch" component={DropOffSearch} />
       <Stack.Screen name="PublishOnline" component={PublishOnline} />
+      <Stack.Screen name="AddStopOverSearch" component={AddStopOverSearch} />
+      <Stack.Screen name="WhenAreYouComing" component={WhenAreYouComing} />
+      <Stack.Screen name="ReturnTime" component={ReturnTime} />
+      <Stack.Screen name="ReturnPrice" component={ReturnPrice} />
     </Stack.Navigator>
   );
 };

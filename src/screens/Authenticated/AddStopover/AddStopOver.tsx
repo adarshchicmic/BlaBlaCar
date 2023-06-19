@@ -17,7 +17,7 @@ const AddStopOver = ({navigation}) => {
     navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER});
   };
   const handleOnPressAddCity = () => {
-    navigation.navigate('Location', {screen: COMMON_CONSTS.ADD_CITY});
+    navigation.navigate('AddStopOverSearch', {screen: COMMON_CONSTS.ADD_CITY});
   };
   return (
     <View>
