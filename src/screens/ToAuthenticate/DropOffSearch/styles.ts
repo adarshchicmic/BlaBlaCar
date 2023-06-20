@@ -47,7 +47,9 @@ const styles = StyleSheet.create<any>({
     fontSize: RFValue(20),
     position: 'absolute',
     zIndex: 1,
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    paddingBottom: hp(1),
   },
   leftArrowStyle: {
     fontSize: RFValue(26),

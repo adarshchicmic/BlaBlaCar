@@ -67,10 +67,10 @@ const DateToFrom: React.FC<Props> = ({
         </View>
         <View style={styles.leavingFromGoingToView}>
           <Text style={styles.leavingFromGoingToText}>
-            {leavingFrom.slice(0, 35)}
+            {leavingFrom?.slice(0, 35)}
           </Text>
           <Text style={styles.leavingFromGoingToText}>
-            {goingTo.slice(0, 35)}
+            {goingTo?.slice(0, 35)}
           </Text>
         </View>
       </View>

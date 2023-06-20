@@ -6,18 +6,20 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<any>({
   container: {
-    flex: 1,
+    height: hp(89),
   },
-  // backArrowView: {
-  //   position: 'absolute',
-  // },
+  backArrowView: val => ({
+    top: val === true ? hp(32) : hp(0),
+    position: 'absolute',
+    left: 0,
+  }),
   textInputView: {
     height: hp(7),
     width: wp(90),
     position: 'absolute',
-    bottom: hp(5),
+    bottom: hp(1),
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#000',
@@ -38,6 +40,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: wp(2),
     zIndex: 1,
+  },
+  flatListView: {
+    height: hp(80),
+  },
+  errorStyle: {
+    color: '#f00',
+    fontSize: RFValue(12),
   },
 });
 

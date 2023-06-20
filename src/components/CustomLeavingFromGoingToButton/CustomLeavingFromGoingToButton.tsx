@@ -18,12 +18,28 @@ const monthNames = [
   'December',
 ];
 const CustomLeavingFromGoingToButton = ({
+  data,
   date,
   leavingFrom,
   goingTo,
   timeFrom,
   timeTo,
+  navigation,
 }) => {
+  const onClickLeavingFrom = () => {
+    console.log(data);
+    navigation.navigate('LocationMap', {
+      latitude: data?.source_latitude,
+      longitude: data?.source_longitude,
+    });
+  };
+  const onClickGoingTo = () => {
+    console.log(data);
+    navigation.navigate('LocationMap', {
+      latitude: data?.destination_longitude,
+      longitude: data?.destination_latitude,
+    });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.dateStyle}>
@@ -55,18 +71,20 @@ const CustomLeavingFromGoingToButton = ({
         </View>
         <View style={styles.butoonViewStyle}>
           <CustomButtonEdit
-            first={leavingFrom.slice(0, 20)}
-            second={leavingFrom.slice(0, 50)}
+            first={leavingFrom?.slice(0, 20)}
+            second={leavingFrom?.slice(0, 50)}
             firstStyle={styles.firstStyle}
             secondStyle={styles.secondStyle}
             containerStyle={styles.containerStyle}
+            onPressFunction={() => onClickLeavingFrom()}
           />
           <CustomButtonEdit
-            first={goingTo.slice(0, 20)}
-            second={goingTo.slice(0, 50)}
+            first={goingTo?.slice(0, 20)}
+            second={goingTo?.slice(0, 50)}
             firstStyle={styles.firstStyle}
             secondStyle={styles.secondStyle}
             containerStyle={styles.containerStyle}
+            onPressFunction={() => onClickGoingTo()}
           />
         </View>
       </View>

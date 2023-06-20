@@ -4,8 +4,8 @@ import MapView, {Marker} from 'react-native-maps';
 import {SvgRightArrow} from '../../../assets/svg';
 import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 import styles from './styles';
-import {useDispatch} from 'react-redux';
-import {updatePickUp} from '../../../store/slices/rideSlice';
+// import {useDispatch} from 'react-redux';
+// import {updatePickUp} from '../../../store/slices/rideSlice';
 
 const SelectPickUpMap = ({navigation, route}) => {
   const latitude = route?.params?.latitude;
@@ -14,7 +14,7 @@ const SelectPickUpMap = ({navigation, route}) => {
     latitude: 37.78825,
     longitude: -122.4324,
   });
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
     setMarkerPosition({latitude: latitude, longitude: longitude});
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -23,7 +23,7 @@ const SelectPickUpMap = ({navigation, route}) => {
   const handleMarkerDragEnd = e => {
     const {latitude, longitude} = e.nativeEvent.coordinate;
     setMarkerPosition({latitude, longitude});
-    dispatch(updatePickUp({latitude: latitude, longitude: longitude}));
+    // dispatch(updatePickUp({latitude: latitude, longitude: longitude}));
   };
   const handleForwardArrowButtonPress = () => {
     navigation.navigate('DropOff');

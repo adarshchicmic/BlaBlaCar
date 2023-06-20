@@ -62,6 +62,8 @@ const RidePlan = ({navigation, route}) => {
       {/* <CustomSearchResult /> */}
       <View style={styles.ridePlanView}>
         <CustomLeavingFromGoingToButton
+          navigation={navigation}
+          data={data}
           leavingFrom={data?.source}
           goingTo={data?.destination}
           timeFrom={new Date(data?.time)}

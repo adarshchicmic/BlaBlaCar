@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textStyle: {
-    fontSize: RFValue(15),
+    fontSize: RFValue(14),
     fontWeight: '600',
     color: '#000',
   },
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   timeViewStyle: {
     justifyContent: 'space-between',
-    width: wp(10),
+    width: wp(12),
   },
   butoonViewStyle: {
     justifyContent: 'space-between',

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-import {SvgRightArrow} from '../../../assets/svg';
-import styles from './styles';
+
 // import {useDispatch} from 'react-redux';
 // import {updatePickUp} from '../../../store/slices/rideSlice';
 
-const SelectDropOffMap = ({navigation, route}) => {
+const LocationMap = ({route}) => {
   const latitude = route?.params?.latitude;
   const longitude = route?.params?.longitude;
+  console.log(latitude, longitude, 'this is latitude and longitude ');
   const [markerPosition, setMarkerPosition] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
@@ -23,9 +23,7 @@ const SelectDropOffMap = ({navigation, route}) => {
     setMarkerPosition({latitude, longitude});
     // dispatch(updatePickUp({latitude: latitude, longitude: longitude}));
   };
-  const handleForwardArrowButtonPress = () => {
-    navigation.navigate('MapScreen');
-  };
+
   return (
     <View style={{flex: 1}}>
       <MapView
@@ -42,15 +40,8 @@ const SelectDropOffMap = ({navigation, route}) => {
           onDragEnd={handleMarkerDragEnd}
         />
       </MapView>
-      <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => handleForwardArrowButtonPress()}>
-          <SvgRightArrow />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
 
-export default SelectDropOffMap;
+export default LocationMap;

@@ -80,10 +80,10 @@ const Inbox = ({navigation}) => {
       ) : (
         <CustomTitleText text={COMMON_CONSTS.INBOX} />
       )}
-      {chat?.map((val, index) => (
+      {chats?.map((val, index) => (
         <CustomGroup
           key={index}
-          data={val?.data}
+          data={val}
           navigation={navigation}
           name={val?.name}
           leavingFrom={val?.leavingFrom}
