@@ -51,6 +51,9 @@ import AddStopOverSearch from '../screens/Authenticated/AddStopOverSearch/AddSto
 import WhenAreYouComing from '../screens/Authenticated/WhenAreYouComing/WhenAreYouComing';
 import ReturnTime from '../screens/Authenticated/ReturnTime/ReturnTime';
 import ReturnPrice from '../screens/Authenticated/ReturnPrice/ReturnPrice';
+import SelectPickUpMap from '../screens/Authenticated/SelectPickUpMap/SelectPickUpMap';
+import SelectDropOffMap from '../screens/Authenticated/SelectDropOffMap/SelectDropOffMap';
+import AddCityMap from '../screens/Authenticated/AddCityMap/AddCityMap';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -119,6 +122,9 @@ const AppNavigator = () => {
       <Stack.Screen name="WhenAreYouComing" component={WhenAreYouComing} />
       <Stack.Screen name="ReturnTime" component={ReturnTime} />
       <Stack.Screen name="ReturnPrice" component={ReturnPrice} />
+      <Stack.Screen name="SelectDropOffMap" component={SelectDropOffMap} />
+      <Stack.Screen name="SelectPickUpMap" component={SelectPickUpMap} />
+      <Stack.Screen name="AddCityMap" component={AddCityMap} />
     </Stack.Navigator>
   );
 };

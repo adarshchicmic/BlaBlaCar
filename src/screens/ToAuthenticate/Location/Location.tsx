@@ -61,7 +61,11 @@ const Location = ({navigation, route}) => {
             longitude: longitudee,
           }),
         ),
-        navigation.navigate('DropOff'))
+        // navigation.navigate('DropOff'))
+        navigation.navigate('SelectPickUpMap', {
+          latitude: latitudee,
+          longitude: longitudee,
+        }))
       : null;
     screen === COMMON_CONSTS.DROP_OFF
       ? (dispatch(

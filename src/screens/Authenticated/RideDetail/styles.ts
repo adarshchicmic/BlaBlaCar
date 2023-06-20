@@ -6,9 +6,7 @@ import {
 import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   dateAndSearchView: {
     borderBottomWidth: hp(0.6),
     borderBottomColor: '#c2c1c0',
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
   },
   btnView: {
     position: 'absolute',
-    top: hp(40),
+    bottom: hp(0),
     alignSelf: 'center',
   },
   btnStyle: {

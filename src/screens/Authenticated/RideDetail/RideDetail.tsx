@@ -92,7 +92,7 @@ const RideDetail = ({navigation, route}) => {
       : null;
   };
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       <CustomBackArrowButton navigation={navigation} />
       <View style={styles.dateAndSearchView}>
         <CustomTitleText
@@ -145,7 +145,7 @@ const RideDetail = ({navigation, route}) => {
           </Text>
         </View>
       </View>
-      <View>
+      <View style={{height: heightPercentageToDP(48)}}>
         <View style={styles.userViewStyle}>
           <View>
             <Text style={styles.nameStyle}>{val?.name}</Text>

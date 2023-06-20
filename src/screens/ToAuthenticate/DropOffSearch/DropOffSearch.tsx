@@ -71,7 +71,10 @@ const Location = ({navigation, route}) => {
             longitude: longitudee,
           }),
         ),
-        navigation.navigate('MapScreen'))
+        navigation.navigate('SelectDropOffMap', {
+          latitude: latitudee,
+          longitude: longitudee,
+        }))
       : null;
     screen === COMMON_CONSTS.ADD_CITY
       ? (dispatch(

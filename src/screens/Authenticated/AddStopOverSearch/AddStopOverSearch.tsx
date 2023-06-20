@@ -81,7 +81,10 @@ const AddStopOverSearch = ({navigation, route}) => {
             longitude: latitudee,
           }),
         ),
-        navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER}))
+        navigation.navigate('AddCityMap', {
+          latitude: latitudee,
+          longitude: longitudee,
+        }))
       : null;
   };
   const onFail = () => {

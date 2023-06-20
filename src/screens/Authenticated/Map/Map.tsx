@@ -132,7 +132,7 @@ const MapScreen = ({navigation}: any) => {
           latitudeDelta: LATITUDE_DELTA,
           longitudeDelta: LONGITUDE_DELTA,
         }}>
-        <Marker coordinate={currLocation} />
+        {/* <Marker coordinate={currLocation} /> */}
         {destLocation && <Marker coordinate={destLocation} />}
         {route && (
           <Polyline
