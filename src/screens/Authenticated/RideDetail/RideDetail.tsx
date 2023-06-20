@@ -188,8 +188,8 @@ const RideDetail = ({navigation, route}) => {
               <Text style={styles.passengerTextStyle}>
                 {COMMON_CONSTS.PASSENGERS}
               </Text>
-              {passenger.map(val => (
-                <View style={styles.userViewStyle}>
+              {passenger.map((val, index) => (
+                <View style={styles.userViewStyle} key={index}>
                   <View>
                     <Text style={styles.nameStyle}>{val?.first_name}</Text>
                     {/* <Text>{'rating'}</Text> */}
