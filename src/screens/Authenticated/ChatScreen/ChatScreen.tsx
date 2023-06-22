@@ -24,6 +24,7 @@ import {useSendMessageMutation} from '../../../services/modules/sendMessage';
 import {useLazyGetMessagesQuery} from '../../../services/modules/getMessages';
 import {hasProxies} from 'immer/dist/internal';
 import CustomLeavingFromGoingToArrow from '../../../components/CustomLeavingFromGoingToArrow/CustomLeavingFromGoingToArrow';
+import {useLazyProfileQuery} from '../../../services/modules/profile';
 
 const ChatScreen = ({navigation, route}) => {
   //   const navigation = route?.params?.navigation;
@@ -35,12 +36,15 @@ const ChatScreen = ({navigation, route}) => {
   console.log(rideData, userData, chat, 'user datat', 'this is ride data abc');
   // const name = 'Adarsh';
   const [currMessage, setCurrMessage] = useState<any>('');
+  const [user, setUser] = useState();
   const [sendMessage, {isLoading, isError}] = useSendMessageMutation();
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [
     getMessages,
     {isLoading: isLoadingGetMessages, isError: isErrorGetMessages, isSuccess},
   ] = useLazyGetMessagesQuery();
+  const [profile, {isLoading: isLoadingUser, isError: isErrorLoading}] =
+    useLazyProfileQuery();
   const refTextInput: any = useRef();
   console.log(refTextInput, 'this is ref');
   console.log(refTextInput?.current?.isFocused(), 'this ref');
@@ -50,10 +54,17 @@ const ChatScreen = ({navigation, route}) => {
     const fun = async () => {
       console.log(chat?.id, 'this is chat id ');
       const result = await getMessages({chatId: chat?.id ?? chats?.id});
+
       setMessages(result?.data?.messages);
       console.log(result?.data?.messages, 'this is result for messages');
     };
     fun();
+    const fun2 = async () => {
+      const response = await profile();
+      console.log(response?.data?.status?.data?.id, 'this is response guys ');
+      setUser(response?.data?.status?.data?.id);
+    };
+    fun2();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -62,23 +73,34 @@ const ChatScreen = ({navigation, route}) => {
     setCurrMessage(text);
   };
   const handleSendMessage = async () => {
+    console.log(
+      userData,
+      chat,
+      user,
+      'this is userdata and chat in react natiegv ',
+    );
     if (currMessage) {
       setMessages([
         ...messages,
         {
           content: currMessage.trim(),
           id: Math.random(),
-          receiver_id: userData?.user?.id ?? chat?.receiver?.id,
+          receiver_id:
+            user === userData?.user?.id || user === chat?.receiver?.id
+              ? chat?.sender?.id
+              : userData?.user?.id ?? chat?.receiver?.id,
         },
       ]);
 
       const result = await sendMessage({
         chatId: chat?.id,
         content: currMessage.trim(),
-        receiverId: chat?.receiver_id,
+        receiverId:
+          user === userData?.user?.id || user === chat?.receiver?.id
+            ? chat?.sender?.id
+            : userData?.user?.id ?? chat?.receiver?.id,
       });
-      console.log(chat?.receiver_id, 'this is receiver id ');
-      console.log(result, chat, 'this is result for chatId');
+      console.log(result, 'this is result from sending messages');
       refTextInput.current.clear();
       flatRef?.current?.scrollToEnd();
     }
@@ -112,11 +134,10 @@ const ChatScreen = ({navigation, route}) => {
                 <CustomMessage
                   name={item?.content}
                   side={
-                    // item?.receiver_id === userData?.user?.id ??
-                    // chat?.receiver?.id
-                    //   ? 1
-                    //   : 0
-                    1
+                    item?.receiver_id === userData?.user?.id ||
+                    item?.receiver_id === chat?.receiver?.id
+                      ? 1
+                      : 0
                   }
                   // time={item?.}
                 />

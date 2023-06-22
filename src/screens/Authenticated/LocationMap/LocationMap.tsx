@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
+import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
+import styles from './styles';
 
 // import {useDispatch} from 'react-redux';
 // import {updatePickUp} from '../../../store/slices/rideSlice';
 
-const LocationMap = ({route}) => {
+const LocationMap = ({navigation, route}) => {
   const latitude = route?.params?.latitude;
   const longitude = route?.params?.longitude;
   console.log(latitude, longitude, 'this is latitude and longitude ');
@@ -26,6 +28,9 @@ const LocationMap = ({route}) => {
 
   return (
     <View style={{flex: 1}}>
+      <View style={styles.customBackArrowButton}>
+        <CustomBackArrowButton navigation={navigation} />
+      </View>
       <MapView
         style={{flex: 1}}
         initialRegion={{
