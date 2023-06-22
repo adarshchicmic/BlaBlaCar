@@ -17,6 +17,13 @@ const styles = StyleSheet.create<any>({
     borderTopEndRadius: hp(1),
     marginTop: hp(0.5),
   }),
+  mainContainer: side => ({
+    left: side === 0 ? wp(5) : null,
+    right: side === 1 ? wp(5) : null,
+    // backgroundColor: side === 1 ? '#0f0e0e' : '#c9c9c9',
+    justifyContent: 'flex-start',
+    alignSelf: side === 1 ? 'flex-end' : 'flex-start',
+  }),
   textStyle: side => ({
     padding: hp(1),
     textAlign: 'left',
@@ -25,6 +32,9 @@ const styles = StyleSheet.create<any>({
     fontSize: RFValue(15),
     fontWeight: '500',
   }),
+  timeStyle: {
+    textAlign: 'right',
+  },
 });
 
 export default styles;

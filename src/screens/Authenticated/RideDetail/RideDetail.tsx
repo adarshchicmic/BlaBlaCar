@@ -71,9 +71,9 @@ const RideDetail = ({navigation, route}) => {
       publishId: val?.publish?.id,
       seat: val?.publish?.passengers_count,
     });
-
+    console.log(result, 'this is result from book press ');
     setBookResult(result);
-    result?.data?.code === 201 ? navigation.navigate('BookedScreen') : null;
+    result?.data?.code === 200 ? navigation.navigate('BookedScreen') : null;
   };
   const handleImagePress = () => {
     navigation.navigate('YourProfile', {
@@ -86,9 +86,12 @@ const RideDetail = ({navigation, route}) => {
       receiverId: val?.publish?.user_id,
       publishId: val?.publish?.id,
     });
-
+    console.log(result, 'this is result from create chat');
     result?.data?.code === 201
-      ? navigation.navigate('ChatScreen', {chat: result?.data?.chat})
+      ? navigation.navigate('ChatScreen', {
+          chat: result?.data?.chat,
+          screen: COMMON_CONSTS.YOUR_RIDES,
+        })
       : null;
   };
   return (

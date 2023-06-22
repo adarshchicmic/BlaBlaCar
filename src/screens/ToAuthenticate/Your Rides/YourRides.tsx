@@ -74,7 +74,7 @@ const YourRides = ({navigation}) => {
       ) : null}
       {response?.map((val, index) => (
         <View key={index}>
-          {val?.ride?.status === 'pending' && (
+          {val?.status === 'confirm booking' && (
             <DateToFrom
               booked={true}
               key={index}

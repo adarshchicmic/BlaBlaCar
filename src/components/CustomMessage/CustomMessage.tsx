@@ -5,18 +5,25 @@ import styles from './styles';
 interface Props {
   name: string;
   side: number;
+  time: any;
 }
 
-const CustomMessage: React.FC<Props> = ({name, side}) => {
+const CustomMessage: React.FC<Props> = ({name, side, time}) => {
   return (
     <View>
-      {side === 0 ? (
-        <View style={styles.container(side)}>
-          <Text style={styles.textStyle(side)}>{name}</Text>
+      {side === 1 ? (
+        <View style={styles.mainContainer(side)}>
+          <View style={styles.container(side)}>
+            <Text style={styles.textStyle(side)}>{name}</Text>
+          </View>
+          <Text style={styles.timeStyle}>{time}</Text>
         </View>
       ) : (
-        <View style={styles.container(side)}>
-          <Text style={styles.textStyle(side)}>{name}</Text>
+        <View style={styles.mainContainer(side)}>
+          <View style={styles.container(side)}>
+            <Text style={styles.textStyle(side)}>{name}</Text>
+          </View>
+          <Text style={styles.timeStyle}>{time}</Text>
         </View>
       )}
     </View>

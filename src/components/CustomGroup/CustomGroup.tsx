@@ -31,7 +31,12 @@ const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleOnPress = () => {
-    navigation.navigate('ChatScreen', {navigation: navigation, data: data});
+    navigation.navigate('ChatScreen', {
+      navigation: navigation,
+      data: data,
+      userData: userData,
+      rideData: rideData,
+    });
   };
   return (
     <Pressable style={styles.container} onPress={() => handleOnPress()}>

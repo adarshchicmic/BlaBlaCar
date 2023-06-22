@@ -4,6 +4,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
+  widthPercentageToDP,
 } from 'react-native-responsive-screen';
 
 const styles = StyleSheet.create<any>({
@@ -16,17 +17,19 @@ const styles = StyleSheet.create<any>({
     left: 0,
   }),
   textInputView: {
-    height: hp(7),
+    height: hp(8),
     width: wp(90),
     position: 'absolute',
-    bottom: hp(1),
+    bottom: hp(7),
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#000',
     marginVertical: 'auto',
+    // marginBottom: hp(1),
   },
   textInputStyle: {
     width: wp(90),
+    // height: hp(6),
     paddingTop: hp(2),
     paddingBottom: hp(2),
     alignSelf: 'center',
@@ -39,14 +42,31 @@ const styles = StyleSheet.create<any>({
   svgSendStyle: {
     position: 'absolute',
     right: wp(2),
+    top: hp(2.5),
     zIndex: 1,
   },
   flatListView: {
-    height: hp(80),
+    height: hp(70),
   },
   errorStyle: {
     color: '#f00',
     fontSize: RFValue(12),
+  },
+  headerView: {
+    height: hp(10),
+    zIndex: 1,
+    backgroundColor: '#fff',
+  },
+  dangerView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: widthPercentageToDP(90),
+  },
+  dangerText: {
+    color: '#f00',
+    fontSize: RFValue(10),
+    alignSelf: 'center',
+    marginLeft: wp(3),
   },
 });
 

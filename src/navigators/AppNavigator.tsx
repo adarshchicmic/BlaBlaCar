@@ -55,6 +55,7 @@ import SelectPickUpMap from '../screens/Authenticated/SelectPickUpMap/SelectPick
 import SelectDropOffMap from '../screens/Authenticated/SelectDropOffMap/SelectDropOffMap';
 import AddCityMap from '../screens/Authenticated/AddCityMap/AddCityMap';
 import LocationMap from '../screens/Authenticated/LocationMap/LocationMap';
+import Chat from '../screens/Authenticated/Chat/Chat';
 
 const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -127,6 +128,7 @@ const AppNavigator = () => {
       <Stack.Screen name="SelectPickUpMap" component={SelectPickUpMap} />
       <Stack.Screen name="AddCityMap" component={AddCityMap} />
       <Stack.Screen name="LocationMap" component={LocationMap} />
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   );
 };

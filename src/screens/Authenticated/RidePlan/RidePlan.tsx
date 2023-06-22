@@ -17,6 +17,7 @@ import {useCancelRideMutation} from '../../../services/modules/CancelRide';
 import {useLazyRideWithPassengerQuery} from '../../../services/modules/rideWithPassenger';
 
 const RidePlan = ({navigation, route}) => {
+  const [cancelRideData, setCancelRideData] = useState<any>(null);
   const bookingId = route?.params?.bookingId;
   console.log(bookingId, 'this is booking id ');
   const data = route.params.data;
@@ -31,7 +32,7 @@ const RidePlan = ({navigation, route}) => {
 
   useEffect(() => {
     const fun = async () => {
-      const result = await rideWithPassenger({publishId: 286});
+      const result = await rideWithPassenger({publishId: data?.id});
       setPassenger(result?.data?.passengers);
       console.log(result?.data?.passengers, 'this is data ok');
     };
@@ -43,10 +44,10 @@ const RidePlan = ({navigation, route}) => {
     navigation.navigate('EditYourPublication', {data: data});
   };
   const handleCancelBookingPress = async () => {
-    console.log(data?.user_id);
     const result: any = await cancelRide({publishId: bookingId});
     console.log(result, 'this is result');
-    result?.data?.code === 200 ? navigation.popBack() : null;
+    setCancelRideData(result);
+    result?.data?.code === 200 ? navigation.popToTop() : null;
   };
   const handleImagePress = () => {
     navigation.navigate('YourProfile', {
@@ -113,8 +114,11 @@ const RidePlan = ({navigation, route}) => {
       )}
       {isLoadingCancelRide && <ActivityIndicator />}
       {isLoading && <ActivityIndicator />}
+
       {(isError || isErrorCancelRide) && (
-        <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
+        <Text style={styles.errorStyle}>
+          {COMMON_CONSTS.ERROR} {cancelRideData?.error?.data?.error}
+        </Text>
       )}
     </View>
   );
