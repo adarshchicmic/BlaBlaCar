@@ -71,7 +71,6 @@ const RideDetail = ({navigation, route}) => {
       publishId: val?.publish?.id,
       seat: val?.publish?.passengers_count,
     });
-    console.log(result, 'this is result from book press ');
     setBookResult(result);
     result?.data?.code === 200 ? navigation.navigate('BookedScreen') : null;
   };
