@@ -21,8 +21,12 @@ const styles = StyleSheet.create<any>({
     left: side === 0 ? wp(5) : null,
     right: side === 1 ? wp(5) : null,
     // backgroundColor: side === 1 ? '#0f0e0e' : '#c9c9c9',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-start',
     alignSelf: side === 1 ? 'flex-end' : 'flex-start',
+    borderBottomStartRadius: hp(1),
+    borderBottomEndRadius: hp(1),
+    borderTopEndRadius: hp(1),
+    marginTop: hp(0.5),
   }),
   textStyle: side => ({
     padding: hp(1),
@@ -33,7 +37,14 @@ const styles = StyleSheet.create<any>({
     fontWeight: '500',
   }),
   timeStyle: {
-    textAlign: 'right',
+    padding: hp(1),
+    textAlign: 'left',
+    alignSelf: 'flex-start',
+    fontSize: RFValue(12),
+    fontWeight: '500',
+  },
+  dateStyle: {
+    textAlign: 'center',
   },
 });
 

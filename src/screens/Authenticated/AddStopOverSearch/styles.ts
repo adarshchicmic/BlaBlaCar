@@ -46,14 +46,14 @@ const styles = StyleSheet.create<any>({
   leftArrowViewStyle: {
     position: 'absolute',
     zIndex: 1,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    // alignSelf: 'center',
+    // justifyContent: 'center',
     paddingBottom: hp(1),
   },
   leftArrowStyle: {
     fontSize: RFValue(26),
     color: '#9fa0a6',
-    alignSelf: 'center',
+    // alignSelf: 'center',
     paddingHorizontal: wp(3),
   },
   nameArrowButtonViewStyle: {

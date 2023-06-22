@@ -25,6 +25,7 @@ import {useLazyGetMessagesQuery} from '../../../services/modules/getMessages';
 import {hasProxies} from 'immer/dist/internal';
 import CustomLeavingFromGoingToArrow from '../../../components/CustomLeavingFromGoingToArrow/CustomLeavingFromGoingToArrow';
 import {useLazyProfileQuery} from '../../../services/modules/profile';
+import {checkMessage, fun} from './utils/checkPrevious';
 
 const ChatScreen = ({navigation, route}) => {
   //   const navigation = route?.params?.navigation;
@@ -130,8 +131,9 @@ const ChatScreen = ({navigation, route}) => {
               onContentSizeChange={() => handleContentSizeChange()}
               ref={flatRef}
               data={messages}
-              renderItem={({item}) => (
+              renderItem={({item, index}) => (
                 <CustomMessage
+                  index={index}
                   name={item?.content}
                   side={
                     item?.receiver_id === userData?.user?.id ||
@@ -139,7 +141,12 @@ const ChatScreen = ({navigation, route}) => {
                       ? 1
                       : 0
                   }
-                  // time={item?.}
+                  date={fun(
+                    new Date(item?.created_at).getMonth() +
+                      ':' +
+                      new Date(item?.created_at).getDate(),
+                  )}
+                  time={new Date(item?.created_at)}
                 />
               )}
               keyExtractor={item => item.id}

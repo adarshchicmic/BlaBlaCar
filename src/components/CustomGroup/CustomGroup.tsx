@@ -9,15 +9,21 @@ import {
 import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 import {useLazyGetUserByIdQuery} from '../../services/modules/getUserById';
 import {useLazyRideWithPassengerQuery} from '../../services/modules/rideWithPassenger';
+import {useLazyProfileQuery} from '../../services/modules/profile';
 
 const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
   const [userData, setUserData] = useState<any>('');
   const [rideData, setRideData] = useState<any>({});
+  const [user, setUser] = useState(null);
   const [getUser, {isError}] = useLazyGetUserByIdQuery();
+
   const [
     rideWithPassenger,
     {isLoading: isLoadingRideWithPassenger, isError: isErrorRideWithPassenger},
   ] = useLazyRideWithPassengerQuery();
+
+  const [profile, {isLoading: isLoadingProfile, isError: isErrorProfile}] =
+    useLazyProfileQuery();
 
   useEffect(() => {
     const fun = async () => {
@@ -26,8 +32,12 @@ const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
       console.log(result?.data, response?.data?.data, 'this is result');
       setUserData(result?.data);
       setRideData(response?.data?.data);
+      const profileData = await profile();
+      setUser(profileData?.data?.status?.data?.id);
+      console.log(profileData?.data?.status?.data?.id, 'this is profile data');
     };
     fun();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleOnPress = () => {
@@ -38,10 +48,15 @@ const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
       rideData: rideData,
     });
   };
+  console.log(data, 'this is data data data data ');
   return (
     <Pressable style={styles.container} onPress={() => handleOnPress()}>
       {/* {(isLoading || isLoadingRideWithPassenger) && <ActivityIndicator />} */}
-      <Text style={styles.nameTextStyle}>{userData?.user?.first_name}</Text>
+      <Text style={styles.nameTextStyle}>
+        {userData?.user?.id === user
+          ? data?.sender?.first_name
+          : userData?.user?.first_name}
+      </Text>
       <View style={styles.textSvgStyle}>
         <View>
           <View style={styles.goingFromLeavingToStyle}>
@@ -63,7 +78,12 @@ const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
         <View style={styles.svgArrowStyle}>
           {userData?.image_url ? (
             <Image
-              source={{uri: userData?.image_url}}
+              source={{
+                uri:
+                  userData?.user?.id === user
+                    ? data?.sender_image
+                    : data?.receiver_image,
+              }}
               style={styles.imageStyle}
             />
           ) : (
