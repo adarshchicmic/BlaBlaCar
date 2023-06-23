@@ -18,6 +18,7 @@ const AddAboutRide = ({navigation, route}) => {
   const [text, setText] = useState('');
   const [vehiclePresent, setVehiclePresent] = useState(null);
   const [showError, setShowError] = useState(false);
+  const [unprocessableError, setUnprocessableError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
   const [vehicle, {isLoading: isLoadingVehicle, isSuccess}]: any =
     useLazyVehiclesQuery();
@@ -151,6 +152,9 @@ const AddAboutRide = ({navigation, route}) => {
         });
       }, 1500);
     }
+    result?.data?.code === 422 || datata?.data?.code === 422
+      ? setUnprocessableError(true)
+      : setUnprocessableError(false);
   };
   return (
     <View>
@@ -180,6 +184,11 @@ const AddAboutRide = ({navigation, route}) => {
       ) : null}
       {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
       {(isLoading || isLoadingVehicle) && <ActivityIndicator />}
+      {unprocessableError && (
+        <Text style={styles.errorStyle}>
+          {COMMON_CONSTS.UNPROCESSABLE_ERROR}
+        </Text>
+      )}
       {text && (
         <TouchableOpacity
           style={styles.button}

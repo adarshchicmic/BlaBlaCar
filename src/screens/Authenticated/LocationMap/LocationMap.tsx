@@ -8,16 +8,16 @@ import styles from './styles';
 // import {updatePickUp} from '../../../store/slices/rideSlice';
 
 const LocationMap = ({navigation, route}) => {
-  const latitude = route?.params?.latitude;
-  const longitude = route?.params?.longitude;
-  console.log(latitude, longitude, 'this is latitude and longitude ');
+  const latitudee = route?.params?.latitude;
+  const longitudee = route?.params?.longitude;
+
   const [markerPosition, setMarkerPosition] = useState({
     latitude: 37.78825,
     longitude: -122.4324,
   });
   // const dispatch = useDispatch();
   useEffect(() => {
-    setMarkerPosition({latitude: latitude, longitude: longitude});
+    setMarkerPosition({latitude: longitudee, longitude: latitudee});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleMarkerDragEnd = e => {

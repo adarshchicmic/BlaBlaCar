@@ -19,11 +19,11 @@ import {useLazyRideWithPassengerQuery} from '../../../services/modules/rideWithP
 const RidePlan = ({navigation, route}) => {
   const [cancelRideData, setCancelRideData] = useState<any>(null);
   const bookingId = route?.params?.bookingId;
-  console.log(bookingId, 'this is booking id ');
+
   const data = route.params.data;
   const booked = route.params.booked;
   const [passenger, setPassenger] = useState<any>([]);
-  console.log(data, 'this is data from ride plan ');
+
   const [cancelRide, {isLoading, isError}] = useCancelRideMutation();
   const [
     rideWithPassenger,
@@ -34,7 +34,6 @@ const RidePlan = ({navigation, route}) => {
     const fun = async () => {
       const result = await rideWithPassenger({publishId: data?.id});
       setPassenger(result?.data?.passengers);
-      console.log(result?.data?.passengers, 'this is data ok');
     };
     fun();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,7 +44,7 @@ const RidePlan = ({navigation, route}) => {
   };
   const handleCancelBookingPress = async () => {
     const result: any = await cancelRide({publishId: bookingId});
-    console.log(result, 'this is result');
+
     setCancelRideData(result);
     result?.data?.code === 200 ? navigation.popToTop() : null;
   };
@@ -55,7 +54,7 @@ const RidePlan = ({navigation, route}) => {
       imageUri: data?.image_url,
     });
   };
-  console.log(passenger, 'this is passenger');
+
   return (
     <View>
       <CustomBackArrowButton navigation={navigation} />

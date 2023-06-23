@@ -24,14 +24,18 @@ const CustomLeavingFromGoingToArrow: React.FC<Props> = ({
       />
       <View style={styles.container}>
         <View style={styles.leavingFromGoingToView}>
-          <Text style={styles.textLeavingFromGoingTo}>{leavingFrom} </Text>
+          <Text style={styles.textLeavingFromGoingTo}>
+            {leavingFrom.slice(0, 30)}
+          </Text>
           <SvgBlackRightArrow
             width={widthPercentageToDP(4)}
             height={heightPercentageToDP(3)}
           />
-          <Text style={styles.textLeavingFromGoingTo}> {goingTo}</Text>
         </View>
-        <Text>time</Text>
+        <Text style={styles.textLeavingFromGoingTo}>
+          {' '}
+          {goingTo?.slice(0, 30)}
+        </Text>
       </View>
     </TouchableOpacity>
   );

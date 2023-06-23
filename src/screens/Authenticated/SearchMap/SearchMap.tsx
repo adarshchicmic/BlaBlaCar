@@ -25,23 +25,11 @@ const SearchMap = ({navigation, route}: any) => {
   const sourceLatitude = route?.params?.sourceLatitude;
   const sourceLongitude = route?.params?.sourceLongitude;
 
-  console.log(
-    ordinates,
-    destinationLatitude,
-    destinationLongitude,
-    sourceLatitude,
-    sourceLongitude,
-    'this is ordinates',
-  );
   const states: any = useSelector(state => state);
 
   const currLocation: any = states?.rideSlice?.statsPickUp;
   const destLocation: any = states?.rideSlice?.statsDropOff;
-  console.log(
-    currLocation,
-    destLocation,
-    'this is current location, destlocation',
-  );
+
   const handleBackArrowPress = () => {
     navigation.goBack();
   };

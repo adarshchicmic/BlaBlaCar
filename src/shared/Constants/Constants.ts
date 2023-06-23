@@ -251,6 +251,7 @@ export const COMMON_CONSTS = {
   pipe: '|',
   IF_DRIVER_ASK_FOR_DIRECT_MONEY_TRANSFER:
     'If driver ask for direct monery transfer or send you a link to pay, please ignore it.',
+  UNPROCESSABLE_ERROR: 'Unprocessable error',
   EXAMPLE:
     'Example: "I\'m a student at Delhi University, and I often visit friends in Jaipur. I love photography and rock music."',
 };

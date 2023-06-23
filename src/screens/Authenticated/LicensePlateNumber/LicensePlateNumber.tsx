@@ -34,7 +34,6 @@ const LicensePlateNumber = ({navigation, route}) => {
       if (vehicleId) {
         const data = await vehicle({id: vehicleId});
         setVehicleData(data?.data);
-        console.log(data, 'This is data of vehicle');
       }
     };
     fun();

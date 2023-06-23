@@ -10,14 +10,14 @@ import {useSelector} from 'react-redux';
 
 const Filter = ({navigation, route}) => {
   const data = route.params.data;
-  console.log(data, 'this is data');
+
   const [selectedValue, setSelectedValue] = useState('');
   //   const [initialValue, setInitialValue] = useState();
   const state: any = useSelector(state => state);
-  console.log(state, 'this is state');
+
   const ref: any = useRef();
   const [search, {isLoading, isError}] = useLazySearchQuery();
-  console.log(ref);
+
   const options = [
     {
       label: COMMON_CONSTS.EARLIEST_DEPARTURE,
@@ -54,7 +54,7 @@ const Filter = ({navigation, route}) => {
       date: state?.rideSlice?.date,
       orderBy: selectedValue === COMMON_CONSTS.EARLIEST_DEPARTURE ? 1 : 2,
     });
-    console.log(result, 'this is result from button clickk filter');
+
     if (result?.data?.code === 200) {
       navigation.navigate('SearchResult', {object: result?.data});
     }

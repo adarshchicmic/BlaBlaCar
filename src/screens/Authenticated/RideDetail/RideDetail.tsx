@@ -42,7 +42,7 @@ const RideDetail = ({navigation, route}) => {
   const [vehicleDetail, setVehicleDetail] = useState<any>({});
   const [passenger, setPassenger] = useState<any>([]);
   const val = route?.params?.data;
-  console.log(val, 'this is value guys ');
+
   const [bookResult, setBookResult] = useState<any>({});
   const [vehicle, {isLoading}] = useLazyVehicleQuery();
   const [book, {isLoading: isLoadingBook, isError: isErrorBook}] =
@@ -85,7 +85,7 @@ const RideDetail = ({navigation, route}) => {
       receiverId: val?.publish?.user_id,
       publishId: val?.publish?.id,
     });
-    console.log(result, 'this is result from create chat');
+
     result?.data?.code === 201
       ? navigation.navigate('ChatScreen', {
           chat: result?.data?.chat,

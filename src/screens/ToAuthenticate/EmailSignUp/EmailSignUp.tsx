@@ -45,12 +45,11 @@ const EmailSignUp = ({navigation}: any) => {
   };
   const handleForwardArrowButtonPress = async () => {
     // const res = await emailExist({email: email});
-    // console.log(res, 'this is res ');
-    // console.log(refInput, 'this is refInput ');
+
     refInput?.current?.blur();
     if (validEmail) {
       const result = await emailExist({email: email});
-      console.log(result, 'this is result');
+
       result?.error?.data?.status?.code === 422
         ? setEmailAlreadyExist(true)
         : navigation.navigate('FirstNameLastName');

@@ -24,7 +24,7 @@ import {
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
   const vehicleData = route?.params?.vehicleData;
-  // console.log(vehicleData, 'this is vehicle data guys ');
+
   const [vehicleBrand, setVehicleBrand] = useState<string>('');
   const [vehicleName, setVehicleName] = useState<string>('');
   const [vehicleType, setVehicleType] = useState<string>('');
@@ -37,7 +37,6 @@ const VehicleInformation = ({navigation, route}: any) => {
   let scrollV: any = useRef();
 
   useEffect(() => {
-    console.log(vehicleData, 'UseEffect hai ye ');
     setVehicleColor(vehicleData?.vehicle_color);
     setVehicleBrand(vehicleData?.vehicle_brand);
     setVehicleType(vehicleData?.vehicle_type);
@@ -45,7 +44,7 @@ const VehicleInformation = ({navigation, route}: any) => {
     setVehicleName(vehicleData?.vehicle_name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // console.log(vehicleData?.vehicle_model_year);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
@@ -121,7 +120,7 @@ const VehicleInformation = ({navigation, route}: any) => {
         vehicleColor: vehicleColor,
         vehicleModelYear: vehicleModelYear,
       });
-      console.log(result, 'thisis result ');
+
       result?.data?.status?.code === 201
         ? navigation.navigate('AddAboutRide', {
             screen: COMMON_CONSTS.UPDATE_VEHICLE,
@@ -139,7 +138,7 @@ const VehicleInformation = ({navigation, route}: any) => {
         vehicleModelYear: vehicleModelYear,
         vehicleId: vehicleData?.id,
       });
-      console.log(result, 'this is result from updateVehicle');
+
       result?.data?.status?.code === 200
         ? navigation.navigate('HomeScreen')
         : null;

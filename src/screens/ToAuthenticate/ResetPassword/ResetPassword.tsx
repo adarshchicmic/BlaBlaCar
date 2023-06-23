@@ -52,7 +52,6 @@ const ResetPassword = ({navigation, route}: any) => {
       result?.data?.code === 200
         ? navigation.navigate('EmailAndPasswordLogIn')
         : null;
-      console.log(result, 'this is result');
     }
   };
   return (

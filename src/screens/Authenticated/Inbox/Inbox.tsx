@@ -20,8 +20,6 @@ const Inbox = ({navigation}) => {
     const fun = async () => {
       const result = await getChat();
       setChats(result?.data?.chats);
-
-      console.log(result?.data?.chats, 'this is result in chat ');
     };
     fun();
     // eslint-disable-next-line react-hooks/exhaustive-deps

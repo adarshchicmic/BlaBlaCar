@@ -1,6 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import styles from './styles';
+import {CheckPrevios} from './CheckPrevios';
 
 interface Props {
   name: string;
@@ -26,16 +27,15 @@ const mS = [
 const CustomMessage: React.FC<Props> = ({name, side, time, date, index}) => {
   return (
     <View>
-      {!date ||
-        (index === 0 && (
-          <Text style={styles.dateStyle}>
-            {time?.getDate().toString()?.padStart(2, '0') +
-              ' ' +
-              mS[time?.getMonth()] +
-              ' ' +
-              time?.getFullYear()}
-          </Text>
-        ))}
+      {(CheckPrevios(time?.getDate()) || index === 0) && (
+        <Text style={styles.dateStyle}>
+          {time?.getDate().toString()?.padStart(2, '0') +
+            ' ' +
+            mS[time?.getMonth()] +
+            ' ' +
+            time?.getFullYear()}
+        </Text>
+      )}
       {side === 1 ? (
         <View style={styles.mainContainer(side)}>
           <View style={styles.container(side)}>

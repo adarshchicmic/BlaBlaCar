@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import {SvgRightArrow} from '../../../assets/svg';
+import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 import styles from './styles';
 // import {useDispatch} from 'react-redux';
 // import {updatePickUp} from '../../../store/slices/rideSlice';
@@ -28,6 +29,9 @@ const SelectDropOffMap = ({navigation, route}) => {
   };
   return (
     <View style={{flex: 1}}>
+      <View style={styles.backArrowButtonStyle}>
+        <CustomBackArrowButton navigation={navigation} />
+      </View>
       <MapView
         style={{flex: 1}}
         initialRegion={{

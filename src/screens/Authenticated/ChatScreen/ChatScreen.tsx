@@ -34,7 +34,7 @@ const ChatScreen = ({navigation, route}) => {
   const chat = route?.params?.data;
   const userData = route?.params?.userData;
   const rideData = route?.params?.rideData;
-  console.log(rideData, userData, chat, 'user datat', 'this is ride data abc');
+
   // const name = 'Adarsh';
   const [currMessage, setCurrMessage] = useState<any>('');
   const [user, setUser] = useState();
@@ -47,22 +47,19 @@ const ChatScreen = ({navigation, route}) => {
   const [profile, {isLoading: isLoadingUser, isError: isErrorLoading}] =
     useLazyProfileQuery();
   const refTextInput: any = useRef();
-  console.log(refTextInput, 'this is ref');
-  console.log(refTextInput?.current?.isFocused(), 'this ref');
+
   const flatRef: any = useRef();
 
   useEffect(() => {
     const fun = async () => {
-      console.log(chat?.id, 'this is chat id ');
       const result = await getMessages({chatId: chat?.id ?? chats?.id});
 
       setMessages(result?.data?.messages);
-      console.log(result?.data?.messages, 'this is result for messages');
     };
     fun();
     const fun2 = async () => {
       const response = await profile();
-      console.log(response?.data?.status?.data?.id, 'this is response guys ');
+
       setUser(response?.data?.status?.data?.id);
     };
     fun2();
@@ -74,18 +71,13 @@ const ChatScreen = ({navigation, route}) => {
     setCurrMessage(text);
   };
   const handleSendMessage = async () => {
-    console.log(
-      userData,
-      chat,
-      user,
-      'this is userdata and chat in react natiegv ',
-    );
     if (currMessage) {
       setMessages([
         ...messages,
         {
           content: currMessage.trim(),
           id: Math.random(),
+          created_at: new Date(),
           receiver_id:
             user === userData?.user?.id || user === chat?.receiver?.id
               ? chat?.sender?.id
@@ -101,7 +93,7 @@ const ChatScreen = ({navigation, route}) => {
             ? chat?.sender?.id
             : userData?.user?.id ?? chat?.receiver?.id,
       });
-      console.log(result, 'this is result from sending messages');
+
       refTextInput.current.clear();
       flatRef?.current?.scrollToEnd();
     }
@@ -120,7 +112,12 @@ const ChatScreen = ({navigation, route}) => {
     <View>
       <View style={styles.headerView}>
         <CustomBackArrowButton navigation={navigation} />
+        <CustomLeavingFromGoingToArrow
+          leavingFrom={rideData?.source}
+          goingTo={rideData?.destination}
+        />
       </View>
+
       <KeyboardAvoidingView
         behavior="position"
         keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>

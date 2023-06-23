@@ -3,9 +3,8 @@ import {View, TouchableOpacity} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import {SvgRightArrow} from '../../../assets/svg';
 import styles from './styles';
-import {useDispatch} from 'react-redux';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
-import {updateCity} from '../../../store/slices/publishRideSlice';
+import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 
 const AddCityMap = ({navigation, route}) => {
   const latitude = route?.params?.latitude;
@@ -14,7 +13,7 @@ const AddCityMap = ({navigation, route}) => {
     latitude: 37.78825,
     longitude: -122.4324,
   });
-  const dispatch = useDispatch();
+
   useEffect(() => {
     setMarkerPosition({latitude: latitude, longitude: longitude});
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -22,13 +21,15 @@ const AddCityMap = ({navigation, route}) => {
   const handleMarkerDragEnd = e => {
     const {latitude, longitude} = e.nativeEvent.coordinate;
     setMarkerPosition({latitude, longitude});
-    dispatch(updateCity({latitude: latitude, longitude: longitude}));
   };
   const handleForwardArrowButtonPress = () => {
     navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER});
   };
   return (
     <View style={{flex: 1}}>
+      <View style={styles.backArrowButtonView}>
+        <CustomBackArrowButton navigation={navigation} />
+      </View>
       <MapView
         style={{flex: 1}}
         initialRegion={{

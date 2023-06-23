@@ -128,7 +128,7 @@ const Search = ({navigation}: any) => {
               </Pressable>
             </View>
           </View>
-          {/* <DatePicker onPress={date => console.log('date', date)} /> */}
+
           <CustomButton
             btnText={COMMON_CONSTS.SEARCH}
             styleBtn={styles.buttonStyle}

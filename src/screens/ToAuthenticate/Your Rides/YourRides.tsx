@@ -22,14 +22,11 @@ const YourRides = ({navigation}) => {
     const fun = async () => {
       const result = await getRide();
       setResult(result?.data?.data);
-
-      console.log(result, 'This is result');
     };
     fun();
     const fun2 = async () => {
       const response = await bookedGet();
       setResponse(response?.data?.rides);
-      console.log(response, 'this is response');
     };
     fun2();
     // eslint-disable-next-line react-hooks/exhaustive-deps

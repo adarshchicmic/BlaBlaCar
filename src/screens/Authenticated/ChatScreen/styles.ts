@@ -53,9 +53,11 @@ const styles = StyleSheet.create<any>({
     fontSize: RFValue(12),
   },
   headerView: {
-    height: hp(10),
+    height: hp(14),
     zIndex: 1,
     backgroundColor: '#fff',
+    // flexDirection: 'row',
+    justifyContent: 'center',
   },
   dangerView: {
     flexDirection: 'row',

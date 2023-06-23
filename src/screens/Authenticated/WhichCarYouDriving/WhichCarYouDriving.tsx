@@ -12,7 +12,6 @@ const WhichCarYouDriving = ({navigation, route}) => {
   const vehicleData = route?.params?.vehicleData;
   const dispatch = useDispatch();
   const handleButtonPress = val => {
-    console.log(val?.id, 'this is val.id guys ');
     dispatch(updateVehicleId({vehicleId: val?.id}));
     navigation.navigate('MiddleSeatEmpty');
   };

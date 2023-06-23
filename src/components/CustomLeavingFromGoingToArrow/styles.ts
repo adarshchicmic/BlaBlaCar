@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    width: widthPercentageToDP(90),
   },
   container: {
     alignSelf: 'center',
@@ -18,10 +19,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   leavingFromGoingToView: {
+    width: widthPercentageToDP(80),
     flexDirection: 'row',
   },
   textLeavingFromGoingTo: {
-    fontSize: RFValue(16),
+    fontSize: RFValue(15),
     fontWeight: '500',
   },
   svgStyle: {

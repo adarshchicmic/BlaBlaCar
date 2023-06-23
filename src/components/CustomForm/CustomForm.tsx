@@ -6,18 +6,12 @@ import styles from './styles';
 import CustomTextInput from '../CustomTextInput/CustomTextInput';
 
 const EmailAndPasswordLogIn = ({navigation}: any) => {
-  const handleTextChange = value => {
-    console.log(value, 'this is email text input ');
-  };
-  const handlePasswordChange = value => {
-    console.log(value, 'this is email text input ');
-  };
+  const handleTextChange = value => {};
+  const handlePasswordChange = value => {};
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
-  const handleForgotPasswordButtonPress = () => {
-    console.log('forgot Password Pressed');
-  };
+  const handleForgotPasswordButtonPress = () => {};
   return (
     <View style={styles.container}>
       <CustomButton

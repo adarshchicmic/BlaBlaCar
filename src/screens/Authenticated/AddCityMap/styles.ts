@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     marginRight: wp(5),
     marginTop: hp(4),
   },
+  backArrowButtonView: {
+    position: 'absolute',
+    zIndex: 1,
+  },
 });
 
 export default styles;
