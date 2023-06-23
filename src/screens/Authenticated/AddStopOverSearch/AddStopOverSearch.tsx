@@ -4,7 +4,7 @@ import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 // import Geolocation from '@react-native-community/geolocation';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {
   updateDropOff,
@@ -22,6 +22,8 @@ const AddStopOverSearch = ({navigation, route}) => {
   const screen = route.params.screen;
   const dispatch = useDispatch();
   const myRef: any = useRef();
+  const state = useSelector(state => state);
+  console.log(state, 'this is states');
   // useEffect(() => {
   //   Geolocation.getCurrentPosition(info => {
   //     // setLatitude(info?.coords?.latitude);

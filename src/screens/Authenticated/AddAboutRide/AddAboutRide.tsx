@@ -49,7 +49,7 @@ const AddAboutRide = ({navigation, route}) => {
   const handlePublishRide = async () => {
     let result;
     let datata;
-    if (vehiclePresent && isSuccess) {
+    if (vehiclePresent) {
       datata = await publish({
         source: states.rideSlice.pickUp,
         destination: states.rideSlice.dropOff,
