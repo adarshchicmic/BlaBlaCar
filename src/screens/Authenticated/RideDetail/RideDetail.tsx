@@ -22,6 +22,8 @@ import {
 } from 'react-native-responsive-screen';
 import {useLazyRideWithPassengerQuery} from '../../../services/modules/rideWithPassenger';
 import {useCreateChatMutation} from '../../../services/modules/createChat';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
@@ -41,6 +43,7 @@ const monthNames = [
 const RideDetail = ({navigation, route}) => {
   const [vehicleDetail, setVehicleDetail] = useState<any>({});
   const [passenger, setPassenger] = useState<any>([]);
+  const [rideData, setRideData] = useState<any>({});
   const val = route?.params?.data;
 
   const [bookResult, setBookResult] = useState<any>({});
@@ -60,6 +63,7 @@ const RideDetail = ({navigation, route}) => {
         publishId: val?.publish?.id,
       });
       setPassenger(result?.data?.passengers);
+      setRideData(result?.data?.data);
       setVehicleDetail(res);
     };
     fun();
@@ -72,7 +76,8 @@ const RideDetail = ({navigation, route}) => {
       seat: val?.publish?.passengers_count,
     });
     setBookResult(result);
-    result?.data?.code === 200 ? navigation.navigate('BookedScreen') : null;
+
+    result?.data?.code === 201 ? navigation.navigate('BookedScreen') : null;
   };
   const handleImagePress = () => {
     navigation.navigate('YourProfile', {
@@ -90,6 +95,7 @@ const RideDetail = ({navigation, route}) => {
       ? navigation.navigate('ChatScreen', {
           chat: result?.data?.chat,
           screen: COMMON_CONSTS.YOUR_RIDES,
+          rideData: rideData,
         })
       : null;
   };
@@ -127,7 +133,6 @@ const RideDetail = ({navigation, route}) => {
           {(isErrorCreateChat || isErrorRide) && (
             <Text>{COMMON_CONSTS.ERROR}</Text>
           )}
-          {isLoadingBook && <ActivityIndicator />}
           {isErrorBook && (
             <Text style={styles.errorStyle}>
               {bookResult?.error?.data?.error}
@@ -220,7 +225,7 @@ const RideDetail = ({navigation, route}) => {
         {/* <View>
           <Text>{COMMON_CONSTS.PASSENGERS}</Text>
         </View> */}
-        {isLoading && <ActivityIndicator />}
+
         {/* {isError && (
           <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
         )} */}
@@ -235,6 +240,12 @@ const RideDetail = ({navigation, route}) => {
           />
         </View>
       </View>
+      {(isLoading || isLoadingBook || isLoadingCreateChat || isLoadingRide) && (
+        <BlurViews />
+      )}
+      {(isLoading || isLoadingBook || isLoadingCreateChat || isLoadingRide) && (
+        <LoadingIndicator />
+      )}
     </ScrollView>
   );
 };

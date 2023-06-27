@@ -22,6 +22,7 @@ import {
   SvgTime,
 } from '../../../assets/svg';
 import {
+  updateEstimatedTime,
   updateRoadDistanceDuration,
   updateRouteDetail,
 } from '../../../store/slices/publishRideSlice';
@@ -97,6 +98,7 @@ const MapScreen = ({navigation}: any) => {
           duration: dur,
         }),
       );
+      dispatch(updateEstimatedTime({estimatedTime: dur}));
       setRouteName(data.routes[0].summary);
       setDistance(dis);
       setDuration(dur);

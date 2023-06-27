@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  ActivityIndicator,
   Image,
   SafeAreaView,
   ToastAndroid,
@@ -24,6 +23,8 @@ import {
 } from '../../../store/slices/profileSlice';
 import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
+import BlurViews from '../../../components/BlurView/BlurView';
 
 const AboutYou = ({navigation}: any) => {
   const [userDetail, setUserDetail] = useState<any>({});
@@ -49,7 +50,7 @@ const AboutYou = ({navigation}: any) => {
       const vehiclesData = await vehicle();
       setVehicleData(vehiclesData);
     };
-    fetchUserData();
+    focus ? fetchUserData() : null;
     isError &&
       Platform.OS === 'android' &&
       ToastAndroid.show('Error while fetching data', ToastAndroid.SHORT);
@@ -141,7 +142,7 @@ const AboutYou = ({navigation}: any) => {
             />
           </View>
         </View>
-        {(isLoading || isLadingVehicle) && <ActivityIndicator />}
+
         {/* {isError && showToast()} */}
         <View style={styles.profileDetailContainer}>
           <Text style={styles.titleStyle}>{COMMON_CONSTS.ABOUT_YOU}</Text>
@@ -176,6 +177,8 @@ const AboutYou = ({navigation}: any) => {
           />
         </View>
       </ScrollView>
+      {isLoading && <BlurViews />}
+      {(isLoading || isLadingVehicle) && <LoadingIndicator />}
     </SafeAreaView>
   );
 };

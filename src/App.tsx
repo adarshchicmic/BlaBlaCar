@@ -1,5 +1,5 @@
 import {View, SafeAreaView, Alert} from 'react-native';
-import React, {memo, useEffect} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import StatusBarr from './components/StatusBar/StatusBar';
 import ApplicationNavigator from './navigators/ApplicationNavigator';
 import {Provider} from 'react-redux';
@@ -9,34 +9,41 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 // import AppNavigator from './navigators/AppNavigator';
-import {useNetInfo} from '@react-native-community/netinfo';
-import Toast from 'react-native-simple-toast';
-import messaging from '@react-native-firebase/messaging';
+import NetInfo from '@react-native-community/netinfo';
+import Toast from 'react-native-toast-message';
+// import messaging from '@react-native-firebase/messaging';
 
 const App = () => {
+  const [isConnected, setIsConnected] = useState<any>(null);
   useEffect(() => {
     // Register the device with FCM
     // Save the token
-    getToken();
-    const unsubscribe = messaging().onMessage(async remoteMessage => {
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
-    });
-
-    return unsubscribe;
+    // getToken();
+    // const unsubscribe = messaging().onMessage(async remoteMessage => {
+    //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    // });
+    // return unsubscribe;
   }, []);
-  const getToken = async () => {
-    await messaging().registerDeviceForRemoteMessages();
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+  }, []);
+  // const getToken = async () => {
+  //   await messaging().registerDeviceForRemoteMessages();
+  //   // Get the token
+  //   const token = await messaging().getToken();
+  //   console.log(token, 'this is token');
+  // };
 
-    // Get the token
-    const token = await messaging().getToken();
-    console.log(token, 'this is token');
-  };
-  const netInfo = useNetInfo();
+  // NetInfo.addEventListener(state => {
+  //   setIsConnected(state.isConnected);
+  // });
 
-  if (netInfo?.isConnected) {
-    Toast.showWithGravity('Connected to internet', Toast.SHORT, Toast.BOTTOM);
+  if (isConnected) {
+    Toast.show({type: 'success', text1: 'Connected to internet'});
   } else {
-    Toast.showWithGravity('No internet', Toast.SHORT, Toast.BOTTOM);
+    Toast.show({type: 'fail', text1: 'No internet'});
   }
   return (
     <Provider store={store}>

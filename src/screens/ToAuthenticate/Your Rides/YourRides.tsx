@@ -1,4 +1,4 @@
-import {View, ScrollView, Text, ActivityIndicator} from 'react-native';
+import {View, ScrollView, Text} from 'react-native';
 import React, {memo, useEffect, useState} from 'react';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -7,6 +7,8 @@ import {useLazyGetRideQuery} from '../../../services/modules/PublishedRideGet';
 import {useLazyBookedGetQuery} from '../../../services/modules/getRides';
 import {useIsFocused} from '@react-navigation/native';
 import DateToFrom from '../../../components/dateToFrom/dateToFrom';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const YourRides = ({navigation}) => {
   const [result, setResult] = useState<any>([]);
@@ -33,7 +35,7 @@ const YourRides = ({navigation}) => {
   }, [focus]);
   return (
     <ScrollView>
-      {result?.length === 0 || isError === true ? (
+      {(result?.length === 0 && response?.length === 0) || isError === true ? (
         <View>
           <CustomTitleText
             text={COMMON_CONSTS.YOUR_FUTURE_TRAVEL_PLANS_WILL_APPEAR_HERE}
@@ -46,12 +48,7 @@ const YourRides = ({navigation}) => {
       {result?.length ? (
         <CustomTitleText text={COMMON_CONSTS.YOUR_RIDES} />
       ) : null}
-      {isLoading ? <ActivityIndicator /> : null}
-      {isError && (
-        <Text style={styles.errorStyle}>
-          {COMMON_CONSTS.ERROR_WHILE_LOADING_DATA}
-        </Text>
-      )}
+
       {result?.map((val, index) => (
         <View key={index}>
           {val?.status === 'pending' && (
@@ -66,7 +63,7 @@ const YourRides = ({navigation}) => {
           )}
         </View>
       ))}
-      {result?.length ? (
+      {response?.length ? (
         <CustomTitleText text={COMMON_CONSTS.BOOKED_RIDES} />
       ) : null}
       {response?.map((val, index) => (
@@ -86,6 +83,13 @@ const YourRides = ({navigation}) => {
           )}
         </View>
       ))}
+      {isLoading || isLoadingBookedGet ? <BlurViews /> : null}
+      {isLoading || isLoadingBookedGet ? <LoadingIndicator /> : null}
+      {isError && isErrorBookedGet ? (
+        <Text style={styles.errorStyle}>
+          {COMMON_CONSTS.ERROR_WHILE_LOADING_DATA}
+        </Text>
+      ) : null}
     </ScrollView>
   );
 };

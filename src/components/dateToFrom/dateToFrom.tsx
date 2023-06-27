@@ -3,14 +3,14 @@ import React from 'react';
 import styles from './styles';
 
 interface Props {
-  leavingFrom: string;
-  goingTo: string;
-  date: any;
-  time: any;
-  navigation: any;
-  data: any;
-  booked: any;
-  bookingId: number;
+  leavingFrom?: string;
+  goingTo?: string;
+  date?: any;
+  time?: any;
+  navigation?: any;
+  data?: any;
+  booked?: any;
+  bookingId?: number;
 }
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [

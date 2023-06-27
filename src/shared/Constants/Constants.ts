@@ -133,6 +133,7 @@ export const COMMON_CONSTS = {
   VEHICLES: 'Vehicles',
   ADD_VEHICLE: 'Add Vehicle',
   RATING: 'Rating',
+
   NOTIFICATION_EMAIL_AND_SMS: 'Notifications, email & SMS',
   CHANGE_PASSWORD: 'Change password',
   POSTAL_ADDRESS: 'Postal address',

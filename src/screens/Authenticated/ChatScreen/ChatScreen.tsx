@@ -2,12 +2,11 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   KeyboardAvoidingView,
   Text,
   FlatList,
-  ActivityIndicator,
   Platform,
+  SafeAreaView,
 } from 'react-native';
 import React, {useState, memo, useRef, useEffect} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -22,10 +21,12 @@ import CustomBackArrowButton from '../../../components/CustomBackArrowButton/Cus
 import CustomMessage from '../../../components/CustomMessage/CustomMessage';
 import {useSendMessageMutation} from '../../../services/modules/sendMessage';
 import {useLazyGetMessagesQuery} from '../../../services/modules/getMessages';
-import {hasProxies} from 'immer/dist/internal';
+
 import CustomLeavingFromGoingToArrow from '../../../components/CustomLeavingFromGoingToArrow/CustomLeavingFromGoingToArrow';
 import {useLazyProfileQuery} from '../../../services/modules/profile';
-import {checkMessage, fun} from './utils/checkPrevious';
+
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const ChatScreen = ({navigation, route}) => {
   //   const navigation = route?.params?.navigation;
@@ -39,31 +40,32 @@ const ChatScreen = ({navigation, route}) => {
   const [currMessage, setCurrMessage] = useState<any>('');
   const [user, setUser] = useState();
   const [sendMessage, {isLoading, isError}] = useSendMessageMutation();
-  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   const [
     getMessages,
-    {isLoading: isLoadingGetMessages, isError: isErrorGetMessages, isSuccess},
+    {isLoading: isLoadingGetMessages, isError: isErrorGetMessages},
   ] = useLazyGetMessagesQuery();
-  const [profile, {isLoading: isLoadingUser, isError: isErrorLoading}] =
+  const [profile, {isLoading: isLoadingUser, isError: isErrorUser}] =
     useLazyProfileQuery();
   const refTextInput: any = useRef();
 
   const flatRef: any = useRef();
 
   useEffect(() => {
-    const fun = async () => {
+    const interval = setInterval(async () => {
       const result = await getMessages({chatId: chat?.id ?? chats?.id});
-
       setMessages(result?.data?.messages);
-    };
-    fun();
+    }, 2000);
+
     const fun2 = async () => {
       const response = await profile();
 
       setUser(response?.data?.status?.data?.id);
     };
     fun2();
-
+    return () => {
+      clearInterval(interval);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -103,13 +105,13 @@ const ChatScreen = ({navigation, route}) => {
       setTimeout(() => {
         flatRef.current.scrollToIndex({
           animated: false,
-          index: messages.length - 1,
+          index: messages.length - 2,
         });
-      }, 0);
+      }, 100);
     }
   };
   return (
-    <View>
+    <SafeAreaView>
       <View style={styles.headerView}>
         <CustomBackArrowButton navigation={navigation} />
         <CustomLeavingFromGoingToArrow
@@ -117,7 +119,6 @@ const ChatScreen = ({navigation, route}) => {
           goingTo={rideData?.destination}
         />
       </View>
-
       <KeyboardAvoidingView
         behavior="position"
         keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>
@@ -132,17 +133,12 @@ const ChatScreen = ({navigation, route}) => {
                 <CustomMessage
                   index={index}
                   name={item?.content}
-                  side={
-                    item?.receiver_id === userData?.user?.id ||
-                    item?.receiver_id === chat?.receiver?.id
-                      ? 1
-                      : 0
-                  }
-                  date={fun(
+                  side={item?.receiver_id === user ? 0 : 1}
+                  date={
                     new Date(item?.created_at).getMonth() +
-                      ':' +
-                      new Date(item?.created_at).getDate(),
-                  )}
+                    ':' +
+                    new Date(item?.created_at).getDate()
+                  }
                   time={new Date(item?.created_at)}
                 />
               )}
@@ -175,11 +171,14 @@ const ChatScreen = ({navigation, route}) => {
               multiline={true}
             />
           </View>
-          {(isLoadingGetMessages || isLoading) && <ActivityIndicator />}
           {isErrorGetMessages && <Text>{COMMON_CONSTS.ERROR}</Text>}
         </View>
+        {(isLoadingGetMessages || isLoadingUser) && <BlurViews />}
+        {(isLoadingGetMessages || isLoading || isLoadingUser) && (
+          <LoadingIndicator />
+        )}
       </KeyboardAvoidingView>
-    </View>
+    </SafeAreaView>
   );
 };
 

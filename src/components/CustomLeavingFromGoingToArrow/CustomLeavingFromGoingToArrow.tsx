@@ -25,7 +25,7 @@ const CustomLeavingFromGoingToArrow: React.FC<Props> = ({
       <View style={styles.container}>
         <View style={styles.leavingFromGoingToView}>
           <Text style={styles.textLeavingFromGoingTo}>
-            {leavingFrom.slice(0, 30)}
+            {leavingFrom?.slice(0, 30)}
           </Text>
           <SvgBlackRightArrow
             width={widthPercentageToDP(4)}

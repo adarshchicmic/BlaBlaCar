@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -18,6 +12,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const WhatIsYourFirstName = ({navigation}: any) => {
   const [firstName, setFirstName] = useState<string>('');
@@ -81,7 +77,8 @@ const WhatIsYourFirstName = ({navigation}: any) => {
           defaultValue={firstNameValue}
         />
       </View>
-      {isLoading && <ActivityIndicator />}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
       {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {!showError && <Text>{COMMON_CONSTS.NAME_WARN}</Text>}
       {firstName && (

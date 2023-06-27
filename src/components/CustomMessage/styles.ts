@@ -40,8 +40,9 @@ const styles = StyleSheet.create<any>({
     padding: hp(1),
     textAlign: 'left',
     alignSelf: 'flex-start',
-    fontSize: RFValue(12),
+    fontSize: RFValue(10),
     fontWeight: '500',
+    margin: 0,
   },
   dateStyle: {
     textAlign: 'center',

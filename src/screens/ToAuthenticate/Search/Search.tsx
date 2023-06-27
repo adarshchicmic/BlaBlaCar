@@ -6,7 +6,6 @@ import {
   ImageBackground,
   TouchableOpacity,
   Pressable,
-  ActivityIndicator,
 } from 'react-native';
 import React, {memo} from 'react';
 import styles from './styles';
@@ -19,6 +18,8 @@ import {swapLocation} from '../../../store/slices/rideSlice';
 import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
 import {updateSearch} from '../../../store/slices/searchSlice';
 import {useLazySearchQuery} from '../../../services/modules/Search';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
@@ -92,7 +93,7 @@ const Search = ({navigation}: any) => {
             onPress={handleleavingFromPress}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 25)}
+              {numberOfSeat?.rideSlice?.leavingFrom?.slice(0, 25)}
             </Text>
           </Pressable>
           <Pressable
@@ -100,7 +101,7 @@ const Search = ({navigation}: any) => {
             onPress={() => handleGoingToPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {(numberOfSeat?.rideSlice?.goingTo).slice(0, 30)}
+              {numberOfSeat?.rideSlice?.goingTo?.slice(0, 30)}
             </Text>
           </Pressable>
           <View style={styles.dateAndUserView}>
@@ -138,7 +139,6 @@ const Search = ({navigation}: any) => {
         </View>
       )}
       {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
-      {isLoading && <ActivityIndicator />}
       <View style={styles.addressView}>
         {numberOfSeat?.searchSlice?.search?.map((val, id) => (
           <View style={styles.leavingFromGoingToStyle} key={id}>
@@ -153,6 +153,8 @@ const Search = ({navigation}: any) => {
           </View>
         ))}
       </View>
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
     </ScrollView>
   );
 };

@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -18,6 +12,9 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
+
 const WhatIsYourEmail = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
   const [email, setEmail] = useState<string>('');
@@ -51,7 +48,7 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
         const dataa: any = await confirmEmail({
           email: email,
         });
-
+        console.log(dataa, 'this is data');
         // if (dataa?.data?.status?.code === 200) {
         //   dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         //   navigation.goBack();
@@ -104,9 +101,7 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
             {COMMON_CONSTS.ENTER_VALID_EMAIL}
           </Text>
         )}
-        {(confirmEmailIsLoading || updateProfileIsLoading) && (
-          <ActivityIndicator />
-        )}
+
         {(confirmEmailIsError || updateProfileIsError) && (
           <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>
         )}
@@ -120,6 +115,10 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
             <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.SAVE}</Text>
           </TouchableOpacity>
         </View>
+      )}
+      {(confirmEmailIsLoading || updateProfileIsLoading) && <BlurViews />}
+      {(confirmEmailIsLoading || updateProfileIsLoading) && (
+        <LoadingIndicator />
       )}
     </KeyboardAvoidingView>
   );

@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState, memo} from 'react';
 import styles from './styles';
 import {SvgLeftArrow} from '../../../assets/svg';
@@ -12,6 +12,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const AddAboutRide = ({navigation, route}) => {
   const screen = route?.params?.screen;
@@ -20,8 +22,7 @@ const AddAboutRide = ({navigation, route}) => {
   const [showError, setShowError] = useState(false);
   const [unprocessableError, setUnprocessableError] = useState(false);
   const [publish, {isLoading, isError}] = usePublishRideMutation();
-  const [vehicle, {isLoading: isLoadingVehicle, isSuccess}]: any =
-    useLazyVehiclesQuery();
+  const [vehicle, {isLoading: isLoadingVehicle}]: any = useLazyVehiclesQuery();
   const [vehicleId, setVehicleId] = useState('');
   const states: any = useSelector(state => state);
   console.log(states, 'this is states');
@@ -68,7 +69,7 @@ const AddAboutRide = ({navigation, route}) => {
         vehicleId: vehicleId,
         bookInstantly: states.publishRideSlice.bookInstantly,
         midSeat: states.publishRideSlice.midSeat,
-        estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+        estimatedTime: states.publishRideSlice.estimatedTime,
         selectRoute: states.publishRideSlice.select_route,
       });
       console.log(
@@ -130,7 +131,7 @@ const AddAboutRide = ({navigation, route}) => {
           vehicleId: vehicleId,
           bookInstantly: states.publishRideSlice.bookInstantly,
           midSeat: states.publishRideSlice.midSeat,
-          estimatedTime: states.publishRideSlice.select_route.estimatedTime,
+          estimatedTime: states.publishRideSlice.estimatedTime,
           selectRoute: states.publishRideSlice.select_route,
         });
       }
@@ -183,7 +184,7 @@ const AddAboutRide = ({navigation, route}) => {
         <Text style={styles.errorStyle}>{COMMON_CONSTS.VEHICLE_ERROR}</Text>
       ) : null}
       {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
-      {(isLoading || isLoadingVehicle) && <ActivityIndicator />}
+
       {unprocessableError && (
         <Text style={styles.errorStyle}>
           {COMMON_CONSTS.UNPROCESSABLE_ERROR}
@@ -196,6 +197,8 @@ const AddAboutRide = ({navigation, route}) => {
           <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.PUBLISH}</Text>
         </TouchableOpacity>
       )}
+      {(isLoading || isLoadingVehicle) && <BlurViews />}
+      {(isLoading || isLoadingVehicle) && <LoadingIndicator />}
     </View>
   );
 };

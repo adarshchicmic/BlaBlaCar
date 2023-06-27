@@ -150,9 +150,14 @@ const publishRideSlice: any = createSlice({
       const {returnPrice} = action.payload;
       state.set_priceR = returnPrice;
     },
+    updateEstimatedTime: (state, action) => {
+      const {estimatedTime} = action.payload;
+      state.estimatedTime = estimatedTime;
+    },
   },
 });
 export const {
+  updateEstimatedTime,
   updateReturnPrice,
   updatePublishDateReturn,
   updatePublishTimeReturn,

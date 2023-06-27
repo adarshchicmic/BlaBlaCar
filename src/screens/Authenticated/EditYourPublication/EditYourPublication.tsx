@@ -1,14 +1,17 @@
-import {ActivityIndicator, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import React from 'react';
 import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import styles from './styles';
-import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
+// import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {useCancelPublishMutation} from '../../../services/modules/cancelPublish';
 import {useDispatch, useSelector} from 'react-redux';
-import {updatePublishDate} from '../../../store/slices/publishRideSlice';
+import {
+  updateEstimatedTime,
+  updatePublishDate,
+} from '../../../store/slices/publishRideSlice';
 import {updatePublishTime} from '../../../store/slices/publishRideSlice';
 import {updateCity} from '../../../store/slices/publishRideSlice';
 import {updatePrice} from '../../../store/slices/publishRideSlice';
@@ -19,6 +22,8 @@ import {updateMidSeat} from '../../../store/slices/publishRideSlice';
 import {updateBookInstantly} from '../../../store/slices/publishRideSlice';
 import {updatePickUp} from '../../../store/slices/rideSlice';
 import {updateDropOff} from '../../../store/slices/rideSlice';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
+import BlurViews from '../../../components/BlurView/BlurView';
 
 const EditYourPublication = ({navigation, route}) => {
   const data = route?.params?.data;
@@ -27,9 +32,9 @@ const EditYourPublication = ({navigation, route}) => {
   console.log(data, 'this is data');
   const dispatch = useDispatch();
   const [cancelPublish, {isLoading, isError}] = useCancelPublishMutation();
-  const handleEditYourPublicationPress = () => {
-    navigation.navigate('ItineraryDetails');
-  };
+  // const handleEditYourPublicationPress = () => {
+  //   navigation.navigate('ItineraryDetails');
+  // };
   const handleCancelButtonPress = async () => {
     console.log(data?.id);
     const result: any = await cancelPublish({publishId: data?.id});
@@ -70,12 +75,18 @@ const EditYourPublication = ({navigation, route}) => {
         duration: data?.select_route?.estimatedTime,
       }),
     );
+    dispatch(
+      updateEstimatedTime({estimatedTime: data?.select_route?.estimatedTime}),
+    );
     dispatch(updateRouteDetail({selectRoute: data?.select_route?.selectRoute}));
     dispatch(updateMidSeat({midSeat: data?.mid_seat}));
     dispatch(updateBookInstantly({instant: data?.book_instantly}));
     navigation.navigate('DatePicker', {screen: COMMON_CONSTS.RETURN});
   };
   const handlePublishYourReturnRide = () => {
+    dispatch(
+      updateEstimatedTime({estimatedTime: data?.select_route?.estimatedTime}),
+    );
     dispatch(
       updateDropOff({
         dropOff: data?.destination,
@@ -106,7 +117,7 @@ const EditYourPublication = ({navigation, route}) => {
       updateRoadDistanceDuration({
         road: data?.select_route?.road_name,
         distance: data?.select_route?.distance,
-        duration: data?.select_route?.estimatedTime,
+        duration: data?.estimate_time,
       }),
     );
     dispatch(updateRouteDetail({selectRoute: data?.select_route?.selectRoute}));
@@ -119,14 +130,14 @@ const EditYourPublication = ({navigation, route}) => {
       <CustomBackArrowButton navigation={navigation} />
       <CustomTitleText text={COMMON_CONSTS.EDIT_YOUR_PUBLICATION} />
 
-      <View style={styles.buttonView}>
+      {/* <View style={styles.buttonView}>
         <NameArrowButton
           name={COMMON_CONSTS.ITINERARY_DETAILS}
           onPressFunction={() => handleEditYourPublicationPress()}
         />
         <NameArrowButton name={COMMON_CONSTS.PRICE} />
         <NameArrowButton name={COMMON_CONSTS.SEAT_AND_OPTIONS} />
-      </View>
+      </View> */}
       <CustomButton
         btnText={COMMON_CONSTS.CANCEL_YOUR_RIDE}
         styleTxt={styles.btnTextStyle}
@@ -142,7 +153,8 @@ const EditYourPublication = ({navigation, route}) => {
         styleTxt={styles.btnTextStyle}
         onPressFunction={() => handlePublishYourReturnRide()}
       />
-      {isLoading && <ActivityIndicator />}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
       {isError && <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>}
     </View>
   );

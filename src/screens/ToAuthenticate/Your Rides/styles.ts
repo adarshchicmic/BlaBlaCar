@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

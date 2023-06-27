@@ -1,7 +1,9 @@
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import {CheckPrevios} from './CheckPrevios';
+import {checkPreviousUser} from './CheckPreviousUser';
+import {checkPreviousTime} from './CheckPreviosTime';
 
 interface Props {
   name: string;
@@ -24,7 +26,7 @@ const mS = [
   'Nov',
   'Dec',
 ];
-const CustomMessage: React.FC<Props> = ({name, side, time, date, index}) => {
+const CustomMessage: React.FC<Props> = ({name, side, time, index}) => {
   return (
     <View>
       {(CheckPrevios(time?.getDate()) || index === 0) && (
@@ -36,27 +38,44 @@ const CustomMessage: React.FC<Props> = ({name, side, time, date, index}) => {
             time?.getFullYear()}
         </Text>
       )}
+      {/* {(checkPreviousUser(side) || index === 0) && (
+        <Image source={{uri: 'adshkl'}} />
+      )} */}
       {side === 1 ? (
         <View style={styles.mainContainer(side)}>
           <View style={styles.container(side)}>
             <Text style={styles.textStyle(side)}>{name}</Text>
           </View>
-          <Text style={styles.timeStyle}>
-            {time?.getHours()?.toString()?.padStart(2, '0') +
+          {(checkPreviousTime(
+            time?.getHours()?.toString()?.padStart(2, '0') +
               ':' +
-              time?.getMinutes()?.toString()?.padStart(2, '0')}
-          </Text>
+              time?.getMinutes()?.toString()?.padStart(2, '0'),
+          ) ||
+            index === 0) && (
+            <Text style={styles.timeStyle}>
+              {time?.getHours()?.toString()?.padStart(2, '0') +
+                ':' +
+                time?.getMinutes()?.toString()?.padStart(2, '0')}
+            </Text>
+          )}
         </View>
       ) : (
         <View style={styles.mainContainer(side)}>
           <View style={styles.container(side)}>
             <Text style={styles.textStyle(side)}>{name}</Text>
           </View>
-          <Text style={styles.timeStyle}>
-            {time.getHours()?.toString()?.padStart(2, '0') +
+          {(checkPreviousTime(
+            time?.getHours()?.toString()?.padStart(2, '0') +
               ':' +
-              time.getMinutes()?.toString()?.padStart(2, '0')}
-          </Text>
+              time?.getMinutes()?.toString()?.padStart(2, '0'),
+          ) ||
+            index === 0) && (
+            <Text style={styles.timeStyle}>
+              {time?.getHours()?.toString()?.padStart(2, '0') +
+                ':' +
+                time?.getMinutes()?.toString()?.padStart(2, '0')}
+            </Text>
+          )}
         </View>
       )}
     </View>

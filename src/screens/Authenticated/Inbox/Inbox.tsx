@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, ActivityIndicator} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React, {memo, useEffect, useState} from 'react';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -6,6 +6,8 @@ import styles from './styles';
 import CustomGroup from '../../../components/CustomGroup/CustomGroup';
 import {useLazyGetChatQuery} from '../../../services/modules/getChatRoom';
 import {useIsFocused} from '@react-navigation/native';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const Inbox = ({navigation}) => {
   // const name = route?.params?.name;
@@ -36,7 +38,11 @@ const Inbox = ({navigation}) => {
       ) : (
         <CustomTitleText text={COMMON_CONSTS.INBOX} />
       )}
-      {isLoading && <ActivityIndicator />}
+      {isError && (
+        <Text style={styles.errorStyle}>
+          {COMMON_CONSTS.ERROR_WHILE_LOADING_DATA}
+        </Text>
+      )}
       {chats?.map((val, index) => (
         <CustomGroup
           key={index}
@@ -48,6 +54,8 @@ const Inbox = ({navigation}) => {
           time={val?.time}
         />
       ))}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
     </ScrollView>
   );
 };

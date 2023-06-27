@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-  TextInput,
-} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import React, {useState, memo, useEffect} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -18,6 +12,8 @@ import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton
 import {SvgRightArrow} from '../../../assets/svg';
 import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
 import {updateVehicleNumber} from '../../../store/slices/vehicleSlice';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const LicensePlateNumber = ({navigation, route}) => {
   const screen = route?.params?.screen;
@@ -101,7 +97,7 @@ const LicensePlateNumber = ({navigation, route}) => {
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.PLATE_ERROR}</Text>}
-      {isLoading && <ActivityIndicator />}
+
       {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {licensePlateNumber && (
         <View style={styles.buttonView}>
@@ -116,6 +112,8 @@ const LicensePlateNumber = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
       )}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
     </View>
   );
 };

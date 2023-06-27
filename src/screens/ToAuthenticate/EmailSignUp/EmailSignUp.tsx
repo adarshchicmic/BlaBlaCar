@@ -1,22 +1,18 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import React, {useState, memo, useRef} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {updateEmail} from '../../../store/slices/UserSlice';
 import {useEmailExistMutation} from '../../../services/modules/checkEmailExist';
 import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {BlurView} from '@react-native-community/blur';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const EmailSignUp = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -38,7 +34,6 @@ const EmailSignUp = ({navigation}: any) => {
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
   };
-  const states = useSelector(state => state);
 
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -48,8 +43,7 @@ const EmailSignUp = ({navigation}: any) => {
 
     refInput?.current?.blur();
     if (validEmail) {
-      const result = await emailExist({email: email});
-
+      const result: any = await emailExist({email: email});
       result?.error?.data?.status?.code === 422
         ? setEmailAlreadyExist(true)
         : navigation.navigate('FirstNameLastName');
@@ -86,7 +80,6 @@ const EmailSignUp = ({navigation}: any) => {
           </Text>
         )}
       </View>
-      {isLoading && <ActivityIndicator />}
       {isError && (
         <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR}</Text>
       )}
@@ -104,6 +97,8 @@ const EmailSignUp = ({navigation}: any) => {
           </TouchableOpacity>
         </View>
       )}
+      {isLoading && <BlurView />}
+      {isLoading && <LoadingIndicator />}
     </KeyboardAvoidingView>
   );
 };

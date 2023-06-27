@@ -1,10 +1,12 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useRef, useState, memo} from 'react';
+import React, {useRef, useState, memo, useEffect} from 'react';
 import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
-// import Geolocation from '@react-native-community/geolocation';
+import Geolocation from '@react-native-community/geolocation';
 import {useDispatch} from 'react-redux';
+
+navigator.geolocation = require('@react-native-community/geolocation');
 
 import {
   updateDropOff,
@@ -22,11 +24,12 @@ const Location = ({navigation, route}) => {
   const screen = route.params.screen;
   const dispatch = useDispatch();
   const myRef: any = useRef();
-  // useEffect(() => {
-  //   Geolocation.getCurrentPosition(info => {
-  //     // setLatitude(info?.coords?.latitude);
-  //   });
-  // }, []);
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      // setLatitude(info?.coords?.latitude);
+      console.log(info, 'this is info ');
+    });
+  }, []);
 
   const arrowButtonPress = () => {
     navigation.goBack();
@@ -105,6 +108,7 @@ const Location = ({navigation, route}) => {
         </View>
         <GooglePlacesAutocomplete
           ref={myRef}
+          enableHighAccuracyLocation={true}
           styles={styles.styleTextInput}
           placeholder="Search"
           onPress={(data, details) => handlePlaceSelected(data, details)}
@@ -117,7 +121,7 @@ const Location = ({navigation, route}) => {
           onFail={() => onFail()}
           nearbyPlacesAPI="GooglePlacesSearch"
           // currentLocation={true}
-          currentLocationLabel="current location"
+          currentLocationLabel="Current Location"
           // preProcess={(index) => preProcessFunction(index)}
           autoFillOnNotFound={true}
           timeout={2000}

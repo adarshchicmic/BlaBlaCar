@@ -2,9 +2,7 @@ import {
   View,
   Text,
   KeyboardAvoidingView,
-  ActivityIndicator,
   TouchableOpacity,
-  ScrollView,
   Platform,
 } from 'react-native';
 import React, {useState, memo} from 'react';
@@ -19,6 +17,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -63,9 +63,10 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
   };
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : ''}>
-      <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
+      // style={styles.container}
+      behavior="position"
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>
+      <View style={styles.container}>
         <TouchableOpacity onPress={() => handleBackArrowPress()}>
           <SvgLeftArrow
             width={widthPercentageToDP(8)}
@@ -135,8 +136,9 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
             onPressFunction={() => handelLoginButtonPress()}
           />
         )}
-        {isLoading && <ActivityIndicator />}
-      </ScrollView>
+        {isLoading && <BlurViews />}
+        {isLoading && <LoadingIndicator />}
+      </View>
     </KeyboardAvoidingView>
   );
 };

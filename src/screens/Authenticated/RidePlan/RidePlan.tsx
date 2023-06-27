@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  TouchableOpacity,
-  View,
-  Text,
-  Image,
-} from 'react-native';
+import {TouchableOpacity, View, Text, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import CustomBackArrowButton from '../../../components/CustomBackArrowButton/CustomBackArrowButton';
 import CustomTitleText from '../../../components/CustomTiteText/CustomTitleText';
@@ -15,6 +9,8 @@ import styles from './styles';
 import CustomLeavingFromGoingToButton from '../../../components/CustomLeavingFromGoingToButton/CustomLeavingFromGoingToButton';
 import {useCancelRideMutation} from '../../../services/modules/CancelRide';
 import {useLazyRideWithPassengerQuery} from '../../../services/modules/rideWithPassenger';
+import {BlurView} from '@react-native-community/blur';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const RidePlan = ({navigation, route}) => {
   const [cancelRideData, setCancelRideData] = useState<any>(null);
@@ -77,8 +73,8 @@ const RidePlan = ({navigation, route}) => {
             <Text style={styles.passengerTextStyle}>
               {COMMON_CONSTS.PASSENGERS}
             </Text>
-            {passenger.map(val => (
-              <View style={styles.userViewStyle}>
+            {passenger.map((val, index) => (
+              <View style={styles.userViewStyle} key={index}>
                 <View>
                   <Text style={styles.nameStyle}>{val?.first_name}</Text>
                   {/* <Text>{'rating'}</Text> */}
@@ -111,8 +107,8 @@ const RidePlan = ({navigation, route}) => {
           />
         </View>
       )}
-      {isLoadingCancelRide && <ActivityIndicator />}
-      {isLoading && <ActivityIndicator />}
+      {isLoadingCancelRide || isLoading ? <BlurView /> : null}
+      {isLoading || isLoadingCancelRide ? <LoadingIndicator /> : null}
 
       {(isError || isErrorCancelRide) && (
         <Text style={styles.errorStyle}>

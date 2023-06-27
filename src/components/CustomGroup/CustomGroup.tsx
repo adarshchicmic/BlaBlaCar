@@ -11,7 +11,7 @@ import {useLazyGetUserByIdQuery} from '../../services/modules/getUserById';
 import {useLazyRideWithPassengerQuery} from '../../services/modules/rideWithPassenger';
 import {useLazyProfileQuery} from '../../services/modules/profile';
 
-const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
+const CustomGroup = ({navigation, time, data}) => {
   const [userData, setUserData] = useState<any>('');
   const [rideData, setRideData] = useState<any>({});
   const [user, setUser] = useState(null);
@@ -76,7 +76,7 @@ const CustomGroup = ({navigation, name, leavingFrom, goingTo, time, data}) => {
           <Text>{time}</Text>
         </View>
         <View style={styles.svgArrowStyle}>
-          {userData?.image_url ? (
+          {data?.sender_image !== null ? (
             <Image
               source={{
                 uri:

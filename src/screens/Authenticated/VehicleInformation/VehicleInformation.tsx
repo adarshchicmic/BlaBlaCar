@@ -3,7 +3,6 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Text,
-  ActivityIndicator,
   Platform,
   Keyboard,
 } from 'react-native';
@@ -20,6 +19,8 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
@@ -210,7 +211,6 @@ const VehicleInformation = ({navigation, route}: any) => {
           <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
         ) : null}
 
-        {isLoading || isLoadingUpdate ? <ActivityIndicator /> : null}
         {(vehicleBrand &&
           vehicleColor &&
           vehicleModelYear &&
@@ -226,6 +226,8 @@ const VehicleInformation = ({navigation, route}: any) => {
           </View>
         ) : null}
       </ScrollView>
+      {(isLoading || isLoadingUpdate) && <BlurViews />}
+      {(isLoading || isLoadingUpdate) && <LoadingIndicator />}
     </KeyboardAvoidingView>
   );
 };

@@ -30,6 +30,9 @@ const styles = StyleSheet.create<any>({
     textAlign: 'center',
     fontWeight: '500',
   }),
+  buttonStyle: {
+    marginTop: hp(0.5),
+  },
   textView: {
     mariginTop: hp(5),
   },

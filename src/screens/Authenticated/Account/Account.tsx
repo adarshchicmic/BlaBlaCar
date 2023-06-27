@@ -1,4 +1,4 @@
-import {View, ScrollView, ActivityIndicator, SafeAreaView} from 'react-native';
+import {View, ScrollView, SafeAreaView} from 'react-native';
 import React, {memo, useState} from 'react';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -10,6 +10,8 @@ import {updateToken} from '../../../store/slices/UserSlice';
 import {destroy} from '../../../store/slices/searchSlice';
 
 import CustomModal from '../../../components/CustomModal/CustomModal';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const Account = ({navigation}) => {
   const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
@@ -57,7 +59,7 @@ const Account = ({navigation}) => {
           <NameArrowButton name={COMMON_CONSTS.DATA_PROTECTION} />
           <NameArrowButton name={COMMON_CONSTS.LICENSES} />
         </View>
-        {isLoadingSignOut && <ActivityIndicator />}
+
         <CustomButton
           btnText={COMMON_CONSTS.LOG_OUT}
           styleTxt={styles.logoutTextStyle}
@@ -77,6 +79,8 @@ const Account = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </Modal> */}
+      {isLoadingSignOut && <BlurViews />}
+      {isLoadingSignOut && <LoadingIndicator />}
     </SafeAreaView>
   );
 };
