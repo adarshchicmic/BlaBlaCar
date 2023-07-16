@@ -57,7 +57,7 @@ const styles = StyleSheet.create<Style | any>({
   },
   crossStyle: {
     color: '#2dbeff',
-    fontSize: RFValue(15),
+    fontSize: RFValue(22),
     marginTop: hp(2),
   },
   crossButtonStyle: {

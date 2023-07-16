@@ -9,7 +9,6 @@ const styles = StyleSheet.create<any>({
   container: {
     justifyContent: 'center',
     marginLeft: wp(5),
-    flex: 1,
   },
   textStyle: {
     fontSize: RFValue(30),
@@ -17,7 +16,7 @@ const styles = StyleSheet.create<any>({
     color: '#000',
   },
   textView: {
-    marginVertical: hp(4),
+    marginVertical: hp(2),
   },
   arrowStyle: {
     marginTop: hp(1),

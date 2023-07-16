@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   crossStyle: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(22),
     color: '#2dbeff',
     marginTop: hp(2),
     marginHorizontal: wp(5),
@@ -63,6 +63,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#2dbeff',
     padding: hp(1),
     borderRadius: 10,
+  },
+  errorTextStyle: {
+    color: '#f00',
+    marginHorizontal: hp(5),
   },
 });
 

@@ -15,6 +15,10 @@ const SelectSignUpLogIn = ({navigation}: any) => {
     <View style={styles.container}>
       <View>
         <Image
+          style={styles.chicmicLogoStyle}
+          source={require('../../../assets/images/chicmic.png')}
+        />
+        <Image
           style={styles.imageStyle}
           source={require('../../../assets/images/selectSignUpLogin.jpg')}
         />

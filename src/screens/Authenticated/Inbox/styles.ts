@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: RFValue(14),
   },
+  errorStyle: {
+    color: '#f00',
+    marginLeft: wp(5),
+  },
 });
 
 export default styles;

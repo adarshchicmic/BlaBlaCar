@@ -1,22 +1,19 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-  TextInput,
-} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import React, {useState, memo, useEffect} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
+
 // import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
-// import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 // import {updateProfileData} from '../../../store/slices/profileSlice';
 // import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import NameArrowButton from '../../../components/NameArrowButton/NameArrowButton';
 import {SvgRightArrow} from '../../../assets/svg';
 import {useLazyVehicleQuery} from '../../../services/modules/getVehicle';
 import {updateVehicleNumber} from '../../../store/slices/vehicleSlice';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const LicensePlateNumber = ({navigation, route}) => {
   const screen = route?.params?.screen;
@@ -26,6 +23,7 @@ const LicensePlateNumber = ({navigation, route}) => {
   const [showError, setShowError] = useState<boolean>(false);
   const [vehicle, {isLoading, isError}] = useLazyVehicleQuery();
   const [vehicleData, setVehicleData] = useState<any>('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fun = async () => {
@@ -55,7 +53,7 @@ const LicensePlateNumber = ({navigation, route}) => {
   };
   const handleSaveButtonPress = async () => {
     if (validLicensePlate) {
-      updateVehicleNumber({vehicleNumber: licensePlateNumber});
+      dispatch(updateVehicleNumber({vehicleNumber: licensePlateNumber}));
       setShowError(false);
       navigation.navigate('VehicleInformation', {
         screen: screen,
@@ -89,7 +87,7 @@ const LicensePlateNumber = ({navigation, route}) => {
           style={styles.inputTextStyle}
           placeholder={COMMON_CONSTS.NUMBER_PLATE}
           onChangeText={value => handleTextChange(value)}
-          defaultValue={vehicleData?.vehicle_number}
+          defaultValue={vehicleData?.vehicle_number?.toString()}
         />
       </View>
       <View style={styles.nameArrowButtonView}>
@@ -99,7 +97,7 @@ const LicensePlateNumber = ({navigation, route}) => {
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.PLATE_ERROR}</Text>}
-      {isLoading && <ActivityIndicator />}
+
       {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {licensePlateNumber && (
         <View style={styles.buttonView}>
@@ -114,6 +112,8 @@ const LicensePlateNumber = ({navigation, route}) => {
           </TouchableOpacity>
         </View>
       )}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
     </View>
   );
 };

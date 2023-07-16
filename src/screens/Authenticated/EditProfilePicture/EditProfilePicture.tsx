@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React, {memo} from 'react';
 import {SvgLeftArrow} from '../../../assets/svg';
 import styles from './styles';
@@ -12,6 +12,8 @@ import {
 import {useUpdateProfilePicMutation} from '../../../services/modules/updateProfilePic';
 import {updateImage} from '../../../store/slices/profileSlice';
 import {useDispatch} from 'react-redux';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
+import BlurViews from '../../../components/BlurView/BlurView';
 
 const EditProfilePicture = ({navigation}: any) => {
   const [updateProfilePic, {isLoading, isError}] =
@@ -53,7 +55,11 @@ const EditProfilePicture = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.buttonView}>
         <Text style={styles.textStyle}>
@@ -69,12 +75,14 @@ const EditProfilePicture = ({navigation}: any) => {
           onPressFunction={() => handleTakeAPicturePress()}
         />
         <CustomButton
+          styleBtn={styles.buttonStyle}
           btnText={COMMON_CONSTS.CHOOSE_A_PICTURE}
           styleTxt={styles.btnTextStyle(COMMON_CONSTS.CHOOSE_A_PICTURE)}
           onPressFunction={() => handleChooseAPicturePress()}
         />
       </View>
-      {isLoading && <ActivityIndicator />}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
       {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
     </View>
   );

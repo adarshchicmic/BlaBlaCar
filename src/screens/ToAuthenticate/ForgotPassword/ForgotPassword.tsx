@@ -5,6 +5,10 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {useForgotPasswordMutation} from '../../../services/modules/ForgotPassword/ForgotPassword';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const ForgotPassword = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
@@ -22,7 +26,7 @@ const ForgotPassword = ({navigation}: any) => {
   const handleForwardArrowButtonPress = async () => {
     if (validEmail) {
       const result: any = await forgotPassword({email: email});
-      console.log(result, 'this is result');
+
       result?.data?.code === 200
         ? navigation.navigate('VerifyOtp', {email: email})
         : null;
@@ -35,7 +39,10 @@ const ForgotPassword = ({navigation}: any) => {
       <TouchableOpacity
         style={styles.buttonGoBackStyle}
         onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow height={25} width={25} />
+        <SvgLeftArrow
+          height={heightPercentageToDP(5)}
+          width={widthPercentageToDP(8)}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle(1)}>
@@ -61,7 +68,9 @@ const ForgotPassword = ({navigation}: any) => {
         )}
       </View>
       {isLoading ? <ActivityIndicator /> : null}
-      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
+      {isError && (
+        <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR}</Text>
+      )}
       {email && (
         <View style={styles.buttonView}>
           <TouchableOpacity

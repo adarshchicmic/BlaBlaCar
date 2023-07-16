@@ -7,14 +7,17 @@ import {
 } from 'react-native-responsive-screen';
 import {COMMON_CONSTS} from '../../shared/Constants/Constants';
 import styles from './styles';
+import {useDispatch} from 'react-redux';
+import {updateGoingTo, updateLeavingFrom} from '../../store/slices/rideSlice';
 
 interface Props {
   leavingFrom: string;
   goingTo: string;
   passengerCount: number;
-  onPress?: any;
+  // onPress?: any;
   show?: any;
   moreStyle?: any;
+  navigation?: any;
 }
 
 const CustomLeavingFromGoingTo: React.FC<Props> = ({
@@ -23,10 +26,17 @@ const CustomLeavingFromGoingTo: React.FC<Props> = ({
   show,
   passengerCount,
   moreStyle,
-  onPress = () => {},
+  navigation,
+  // onPress = () => {},
 }) => {
+  const dispatch = useDispatch();
+  const handleOnPress = () => {
+    navigation.navigate('DateComponent', {screen: COMMON_CONSTS.SEARCH});
+    dispatch(updateLeavingFrom({leavingFrom: leavingFrom}));
+    dispatch(updateGoingTo({goingTo: goingTo}));
+  };
   return (
-    <TouchableOpacity style={styles.svgTextView} onPress={onPress}>
+    <TouchableOpacity style={styles.svgTextView} onPress={handleOnPress}>
       {show && (
         <SvgTimes
           width={widthPercentageToDP(6)}
@@ -39,7 +49,7 @@ const CustomLeavingFromGoingTo: React.FC<Props> = ({
           <Text style={styles.textStyle}>{leavingFrom?.slice(0, 25)}</Text>
           <SvgBlackRightArrow
             width={widthPercentageToDP(5)}
-            height={heightPercentageToDP(5)}
+            height={heightPercentageToDP(2)}
             style={styles.svgArrowStyle}
           />
           <Text style={styles.textStyle}>{goingTo?.slice(0, 25)}</Text>

@@ -3,10 +3,14 @@ import React from 'react';
 import styles from './styles';
 
 interface Props {
-  leavingFrom: string;
-  goingTo: string;
-  date: any;
-  time: any;
+  leavingFrom?: string;
+  goingTo?: string;
+  date?: any;
+  time?: any;
+  navigation?: any;
+  data?: any;
+  booked?: any;
+  bookingId?: number;
 }
 const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
 const monthNames = [
@@ -23,9 +27,25 @@ const monthNames = [
   'November',
   'December',
 ];
-const DateToFrom: React.FC<Props> = ({leavingFrom, goingTo, date, time}) => {
+const DateToFrom: React.FC<Props> = ({
+  bookingId,
+  leavingFrom,
+  goingTo,
+  date,
+  time,
+  navigation,
+  data,
+  booked,
+}) => {
+  const handleOnPress = () => {
+    navigation.navigate('RidePlan', {
+      data: data,
+      booked: booked,
+      bookingId: bookingId,
+    });
+  };
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => handleOnPress()}>
       <View>
         <Text style={styles.dateTextStyle}>
           {days[date.getDay()] +
@@ -47,9 +67,11 @@ const DateToFrom: React.FC<Props> = ({leavingFrom, goingTo, date, time}) => {
         </View>
         <View style={styles.leavingFromGoingToView}>
           <Text style={styles.leavingFromGoingToText}>
-            {leavingFrom.slice(0, 35)}
+            {leavingFrom?.slice(0, 35)}
           </Text>
-          <Text style={styles.leavingFromGoingToText}>{goingTo}</Text>
+          <Text style={styles.leavingFromGoingToText}>
+            {goingTo?.slice(0, 35)}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

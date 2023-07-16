@@ -17,7 +17,7 @@ const VerifyOtp = ({navigation, route}) => {
   };
   const handleVerifyButtonPress = async () => {
     const result: any = await verifyOtp({otp: otp, email: email});
-    console.log(result, 'this is result');
+
     result?.data?.code === 200
       ? navigation.navigate('ResetPassword', {email: email})
       : null;

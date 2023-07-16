@@ -2,10 +2,10 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   ImageBackground,
   TouchableOpacity,
   Pressable,
-  ActivityIndicator,
 } from 'react-native';
 import React, {memo} from 'react';
 import styles from './styles';
@@ -18,11 +18,13 @@ import {swapLocation} from '../../../store/slices/rideSlice';
 import CustomLeavingFromGoingTo from '../../../components/CustomLeavingFromGoingTo/CustomLeavingFromGoingTo';
 import {updateSearch} from '../../../store/slices/searchSlice';
 import {useLazySearchQuery} from '../../../services/modules/Search';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const Search = ({navigation}: any) => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
-  const [search, {isLoading}] = useLazySearchQuery();
+  const [search, {isLoading, isError}] = useLazySearchQuery();
   const numberOfSeat: any = useSelector(state => state);
   const handleleavingFromPress = () => {
     navigation.navigate('Location', {screen: COMMON_CONSTS.LEAVING_FROM});
@@ -40,15 +42,7 @@ const Search = ({navigation}: any) => {
         },
       }),
     );
-    console.log(
-      numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
-      numberOfSeat?.rideSlice?.statsGoingTo?.longitude,
-      'destination latitude',
-    );
-    console.log(
-      typeof numberOfSeat?.rideSlice?.numberOfSeats,
-      'this is numberOf seat',
-    );
+
     const result = await search({
       sourceLatitude: numberOfSeat?.rideSlice?.statsLeavingFrom?.longitude,
       destinationLatitude: numberOfSeat?.rideSlice?.statsGoingTo?.latitude,
@@ -57,9 +51,13 @@ const Search = ({navigation}: any) => {
       passCount: numberOfSeat?.rideSlice?.numberOfSeats,
       date: numberOfSeat?.rideSlice?.date,
     });
-    console.log(result, 'this is result');
+    numberOfSeat?.rideSlice?.leavingFrom !== COMMON_CONSTS.LEAVING_FROM &&
+    numberOfSeat?.rideSlice?.goingTo !== COMMON_CONSTS.GOING_TO &&
     result?.data?.code === 200
-      ? navigation.navigate('SearchResult', {object: result?.data})
+      ? navigation.navigate('SearchResult', {
+          object: result?.data,
+          routeDetail: result,
+        })
       : null;
     // navigation.navigate('SearchResult');
   };
@@ -69,9 +67,13 @@ const Search = ({navigation}: any) => {
         style={styles.imageBackgroundStyle}
         source={require('../../../assets/images/search.jpg')}>
         <View style={styles.textUpperViewStyle}>
-          <Text style={styles.textUpperStyle}>
+          {/* <Text style={styles.textUpperStyle}>
             {COMMON_CONSTS.YOUR_PICK_OF_RIDES_AT}
-          </Text>
+          </Text> */}
+          <Image
+            style={styles.chicmicLogoStyle}
+            source={require('../../../assets/images/chicmic.png')}
+          />
           {/* <Text style={styles.textUpperStyle}>{COMMON_CONSTS.LOW_PRICES}</Text> */}
         </View>
       </ImageBackground>
@@ -91,7 +93,7 @@ const Search = ({navigation}: any) => {
             onPress={handleleavingFromPress}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {(numberOfSeat?.rideSlice?.leavingFrom).slice(0, 20)}
+              {numberOfSeat?.rideSlice?.leavingFrom?.slice(0, 25)}
             </Text>
           </Pressable>
           <Pressable
@@ -99,7 +101,7 @@ const Search = ({navigation}: any) => {
             onPress={() => handleGoingToPress()}>
             <SvgCircle width={15} height={15} style={styles.svgStyle} />
             <Text style={styles.continueWithEmail}>
-              {(numberOfSeat?.rideSlice?.goingTo).slice(0, 25)}
+              {numberOfSeat?.rideSlice?.goingTo?.slice(0, 30)}
             </Text>
           </Pressable>
           <View style={styles.dateAndUserView}>
@@ -127,7 +129,7 @@ const Search = ({navigation}: any) => {
               </Pressable>
             </View>
           </View>
-          {/* <DatePicker onPress={date => console.log('date', date)} /> */}
+
           <CustomButton
             btnText={COMMON_CONSTS.SEARCH}
             styleBtn={styles.buttonStyle}
@@ -136,7 +138,7 @@ const Search = ({navigation}: any) => {
           />
         </View>
       )}
-      {isLoading && <ActivityIndicator />}
+      {isError && <Text>{COMMON_CONSTS.ERROR}</Text>}
       <View style={styles.addressView}>
         {numberOfSeat?.searchSlice?.search?.map((val, id) => (
           <View style={styles.leavingFromGoingToStyle} key={id}>
@@ -146,10 +148,13 @@ const Search = ({navigation}: any) => {
               goingTo={val.goingTo}
               passengerCount={val?.passengerCount}
               show={true}
+              navigation={navigation}
             />
           </View>
         ))}
       </View>
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
     </ScrollView>
   );
 };

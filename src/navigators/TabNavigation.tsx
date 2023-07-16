@@ -17,6 +17,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {RFValue} from 'react-native-responsive-fontsize';
 interface Props {
   width: number;
   height: number;
@@ -24,7 +25,10 @@ interface Props {
 const Tab: any = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Tab.Screen
         name="Search"
         component={Search}

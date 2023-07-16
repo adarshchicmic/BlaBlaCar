@@ -55,7 +55,6 @@ const CustomLoginSignUpOption: React.FC<Props> = ({
           <Text style={styles.continueWithEmail}>
             {COMMON_CONSTS.CONTINUE_WITH_EMAIL}
           </Text>
-          <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.bottomTextView}>

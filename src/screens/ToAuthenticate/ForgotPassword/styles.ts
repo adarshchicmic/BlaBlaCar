@@ -20,7 +20,7 @@ const styles = StyleSheet.create<Style | any>({
     color: '#000',
   }),
   textView: {
-    marginVertical: hp(3),
+    marginVertical: hp(2),
   },
   bottomTextView: {
     alignSelf: 'flex-start',
@@ -80,6 +80,9 @@ const styles = StyleSheet.create<Style | any>({
     width: wp(20),
     padding: 10,
     borderRadius: 10,
+  },
+  errorTextStyle: {
+    color: '#f00',
   },
 });
 

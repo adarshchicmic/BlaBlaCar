@@ -12,7 +12,7 @@ const StatusBarr: React.FC<Props> = ({
   const [height, setHeight] = useState<number>(0);
   const {StatusBarManager} = NativeModules;
   Platform.OS === 'ios' &&
-    StatusBarManager.getHeight((statusBarHeight: any) => {
+    StatusBarManager?.getHeight((statusBarHeight: any) => {
       setHeight(statusBarHeight?.height);
     });
   const STATUSBAR_HEIGHT: number =

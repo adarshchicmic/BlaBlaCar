@@ -20,7 +20,7 @@ const styles = StyleSheet.create<any>({
     color: '#000',
   },
   textView: {
-    marginVertical: hp(4),
+    marginVertical: hp(2),
     zIndex: 1,
   },
   textInputStyle: {

@@ -53,5 +53,9 @@ const styles = StyleSheet.create({
     marginRight: wp(5),
     marginTop: hp(4),
   },
+  errorStyle: {
+    color: '#f00',
+    paddingLeft: wp(5),
+  },
 });
 export default styles;

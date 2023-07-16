@@ -1,11 +1,11 @@
 import {
   View,
   Text,
-  ActivityIndicator,
   Image,
   SafeAreaView,
   ToastAndroid,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState, memo} from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -23,6 +23,8 @@ import {
 } from '../../../store/slices/profileSlice';
 import {useLazyVehiclesQuery} from '../../../services/modules/GetAllVehicles';
 import CustomVehicleComponent from '../../../components/CustomVehicleComponent/CustomVehicleComponent';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
+import BlurViews from '../../../components/BlurView/BlurView';
 
 const AboutYou = ({navigation}: any) => {
   const [userDetail, setUserDetail] = useState<any>({});
@@ -37,7 +39,7 @@ const AboutYou = ({navigation}: any) => {
   useEffect(() => {
     const fetchUserData = async () => {
       const userData = await profile();
-
+      console.log(userData, 'this is userData');
       userData?.data?.status?.data
         ? (setUserDetail(userData?.data?.status?.data),
           dispatch(
@@ -48,7 +50,7 @@ const AboutYou = ({navigation}: any) => {
       const vehiclesData = await vehicle();
       setVehicleData(vehiclesData);
     };
-    fetchUserData();
+    focus ? fetchUserData() : null;
     isError &&
       Platform.OS === 'android' &&
       ToastAndroid.show('Error while fetching data', ToastAndroid.SHORT);
@@ -82,6 +84,12 @@ const AboutYou = ({navigation}: any) => {
   //     : null;
   //   console.log('render');
   // };
+  const handleProfilePicturePress = () => {
+    navigation.navigate('YourProfile', {
+      name: userDetail?.first_name,
+      imageUri: imageUri,
+    });
+  };
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
@@ -93,7 +101,9 @@ const AboutYou = ({navigation}: any) => {
                 {COMMON_CONSTS.NEWCOMER}
               </Text>
             </View>
-            <View style={styles.svgArrowStyle}>
+            <TouchableOpacity
+              style={styles.svgArrowStyle}
+              onPress={() => handleProfilePicturePress()}>
               {imageUri ? (
                 <View>
                   <Image style={styles.imageStyle} source={{uri: imageUri}} />
@@ -101,8 +111,8 @@ const AboutYou = ({navigation}: any) => {
               ) : (
                 <SvgProfile width={'100'} height={'100'} />
               )}
-              <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text>
-            </View>
+              {/* <Text style={styles.arrowStyle}>{COMMON_CONSTS.ARROW}</Text> */}
+            </TouchableOpacity>
           </View>
           <CustomButton
             btnText={COMMON_CONSTS.EDIT_PROFILE_PICTURE}
@@ -132,7 +142,7 @@ const AboutYou = ({navigation}: any) => {
             />
           </View>
         </View>
-        {(isLoading || isLadingVehicle) && <ActivityIndicator />}
+
         {/* {isError && showToast()} */}
         <View style={styles.profileDetailContainer}>
           <Text style={styles.titleStyle}>{COMMON_CONSTS.ABOUT_YOU}</Text>
@@ -167,6 +177,8 @@ const AboutYou = ({navigation}: any) => {
           />
         </View>
       </ScrollView>
+      {isLoading && <BlurViews />}
+      {(isLoading || isLadingVehicle) && <LoadingIndicator />}
     </SafeAreaView>
   );
 };

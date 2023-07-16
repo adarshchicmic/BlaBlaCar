@@ -14,7 +14,7 @@ const CustomBackArrowButton = ({navigation}) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => handleOnPress()}>
       <SvgLeftArrow
-        width={widthPercentageToDP(7)}
+        width={widthPercentageToDP(8)}
         height={heightPercentageToDP(6)}
       />
     </TouchableOpacity>

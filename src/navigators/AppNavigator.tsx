@@ -35,8 +35,29 @@ import DeleteACar from '../screens/Authenticated/DeleteACar/DeleteACar';
 import WhichCarYouDriving from '../screens/Authenticated/WhichCarYouDriving/WhichCarYouDriving';
 import RideDetail from '../screens/Authenticated/RideDetail/RideDetail';
 import CheckDetailAndBook from '../screens/Authenticated/CheckDetailAndBook/CheckDetailAndBook';
+import ChangePassword from '../screens/Authenticated/ChangePassword/ChangePassword';
+import SearchMap from '../screens/Authenticated/SearchMap/SearchMap';
+import RidePlan from '../screens/Authenticated/RidePlan/RidePlan';
+import ComingBackAsWell from '../screens/Authenticated/ComingBackAsWell/ComingBackAsWell';
+import EditYourPublication from '../screens/Authenticated/EditYourPublication/EditYourPublication';
+import ItineraryDetails from '../screens/Authenticated/ItineraryDetails/ItineraryDetails';
+import YourProfile from '../screens/Authenticated/YourProfile/YourProfile';
+import ChatScreen from '../screens/Authenticated/ChatScreen/ChatScreen';
+import Filter from '../screens/Authenticated/FilterPage/Filter';
+import BookedScreen from '../screens/Authenticated/BookedScreen/BookedScreen';
+import PublishOnline from '../screens/Authenticated/publishOnline/PublishOnline';
+import DropOffSearch from '../screens/ToAuthenticate/DropOffSearch/DropOffSearch';
+import AddStopOverSearch from '../screens/Authenticated/AddStopOverSearch/AddStopOverSearch';
+import WhenAreYouComing from '../screens/Authenticated/WhenAreYouComing/WhenAreYouComing';
+import ReturnTime from '../screens/Authenticated/ReturnTime/ReturnTime';
+import ReturnPrice from '../screens/Authenticated/ReturnPrice/ReturnPrice';
+import SelectPickUpMap from '../screens/Authenticated/SelectPickUpMap/SelectPickUpMap';
+import SelectDropOffMap from '../screens/Authenticated/SelectDropOffMap/SelectDropOffMap';
+import AddCityMap from '../screens/Authenticated/AddCityMap/AddCityMap';
+import LocationMap from '../screens/Authenticated/LocationMap/LocationMap';
+import Chat from '../screens/Authenticated/Chat/Chat';
 
-const Stack = createNativeStackNavigator();
+const Stack: any = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -45,6 +66,7 @@ const AppNavigator = () => {
       <Stack.Screen name="Publish" component={Publish} />
       <Stack.Screen name="Location" component={Location} />
       <Stack.Screen name="Profile" component={Profile} />
+
       <Stack.Screen name="DatePicker" component={DateComponent} />
       <Stack.Screen name="NumberOfSeats" component={NumberOfSeatsToBook} />
       <Stack.Screen name="EditPersonalDetail" component={EditPersonalDetail} />
@@ -83,6 +105,30 @@ const AppNavigator = () => {
       <Stack.Screen name="WhichCarYouDriving" component={WhichCarYouDriving} />
       <Stack.Screen name="RideDetail" component={RideDetail} />
       <Stack.Screen name="CheckDetailAndBook" component={CheckDetailAndBook} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="SearchMap" component={SearchMap} />
+      <Stack.Screen name="RidePlan" component={RidePlan} />
+      <Stack.Screen name="ComingBackAsWell" component={ComingBackAsWell} />
+      <Stack.Screen
+        name="EditYourPublication"
+        component={EditYourPublication}
+      />
+      <Stack.Screen name="ItineraryDetails" component={ItineraryDetails} />
+      <Stack.Screen name="YourProfile" component={YourProfile} />
+      <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      <Stack.Screen name="Filter" component={Filter} />
+      <Stack.Screen name="BookedScreen" component={BookedScreen} />
+      <Stack.Screen name="DropOffSearch" component={DropOffSearch} />
+      <Stack.Screen name="PublishOnline" component={PublishOnline} />
+      <Stack.Screen name="AddStopOverSearch" component={AddStopOverSearch} />
+      <Stack.Screen name="WhenAreYouComing" component={WhenAreYouComing} />
+      <Stack.Screen name="ReturnTime" component={ReturnTime} />
+      <Stack.Screen name="ReturnPrice" component={ReturnPrice} />
+      <Stack.Screen name="SelectDropOffMap" component={SelectDropOffMap} />
+      <Stack.Screen name="SelectPickUpMap" component={SelectPickUpMap} />
+      <Stack.Screen name="AddCityMap" component={AddCityMap} />
+      <Stack.Screen name="LocationMap" component={LocationMap} />
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   );
 };

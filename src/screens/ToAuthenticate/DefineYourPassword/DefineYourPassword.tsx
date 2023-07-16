@@ -26,6 +26,9 @@ const DefineYourPassword = ({navigation}: any) => {
   const handlePasswordChange = value => {
     setPassword(value);
     setValidPassword(COMMON_CONSTS.PASSWORD_REGEX.test(value));
+    if (showWarning) {
+      setShowWarning(COMMON_CONSTS.PASSWORD_REGEX.test(value));
+    }
   };
   const handleBackArrowPress = () => {
     navigation.goBack();
@@ -44,8 +47,14 @@ const DefineYourPassword = ({navigation}: any) => {
   };
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+      <TouchableOpacity
+        style={styles.arrowStyle}
+        onPress={() => handleBackArrowPress()}>
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(5)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle}>{COMMON_CONSTS.DEFINE_YOUR}</Text>

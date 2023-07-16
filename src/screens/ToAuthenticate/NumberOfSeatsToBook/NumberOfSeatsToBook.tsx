@@ -34,8 +34,18 @@ const NumberOfSeatsToBook = ({navigation, route}: any) => {
         viewStyleButton={styles.crossButtonStyle}
       />
       <View style={styles.textView}>
-        <Text style={styles.textStyle}>{COMMON_CONSTS.NUMBER_OF_SEATS}</Text>
-        <Text style={styles.textStyle}>{COMMON_CONSTS.BOOK}</Text>
+        {screen === COMMON_CONSTS.BOOK ? (
+          <Text style={styles.textStyle}>
+            {COMMON_CONSTS.SO_HOW_MANY_PASSENGERS_YOU_CAN_TAKE}
+          </Text>
+        ) : (
+          <View>
+            <Text style={styles.textStyle}>
+              {COMMON_CONSTS.NUMBER_OF_SEATS}
+            </Text>
+            <Text style={styles.textStyle}>{COMMON_CONSTS.BOOK}</Text>
+          </View>
+        )}
       </View>
       <View style={styles.plushMinusView}>
         <TouchableOpacity

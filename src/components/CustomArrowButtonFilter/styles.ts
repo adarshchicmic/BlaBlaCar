@@ -11,9 +11,12 @@ const styles = StyleSheet.create({
     width: wp(90),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: wp(0.5),
+    borderWidth: wp(0.2),
     borderRadius: wp(5),
     alignSelf: 'center',
+    borderColor: '#91908d',
+    marginVertical: hp(1.5),
+    paddingVertical: hp(1),
   },
   filterStyle: {
     color: '#2dbeff',
@@ -21,12 +24,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     fontWeight: '600',
+    marginRight: wp(2),
   },
   filterButtonStyle: {
     width: wp(20),
     position: 'absolute',
-    top: hp(2),
-    right: wp(1),
+    top: hp(1),
     justifyContent: 'center',
     alignSelf: 'flex-end',
   },
@@ -37,6 +40,7 @@ const styles = StyleSheet.create({
   backArrowStyle: {
     justifyContent: 'center',
     alignContent: 'center',
+    marginLeft: wp(2),
   },
 });
 export default styles;

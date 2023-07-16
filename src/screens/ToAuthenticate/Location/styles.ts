@@ -13,14 +13,17 @@ const styles = StyleSheet.create<any>({
   },
   styleTextInput: {
     textInputContainer: {
-      width: wp(80),
+      width: wp(90),
       alignSelf: 'center',
+      justifyContent: 'center',
     },
     textInput: {
-      paddingLeft: wp(4),
+      paddingLeft: wp(10),
       color: '#000000',
-      fontSize: RFValue(18),
+      fontSize: RFValue(20),
       backgroundColor: '#d7d8de',
+      justifyContent: 'center',
+      alignSelf: 'center',
     },
     predefinedPlacesDescription: {
       color: '#1faadb',
@@ -45,10 +48,22 @@ const styles = StyleSheet.create<any>({
   },
   leftArrowViewStyle: {
     fontSize: RFValue(20),
+    position: 'absolute',
+    zIndex: 1,
+    // justifyContent: 'center',
+    // alignSelf: 'center',
+    // left: wp(1),
+    top: wp(0.5),
   },
   leftArrowStyle: {
-    fontSize: RFValue(23),
+    top: 0,
+    left: wp(0.1),
+    // justifyContent: 'center',
+    // alignSelf: 'center',
+    fontSize: RFValue(25),
     color: '#9fa0a6',
+    fontWeight: '600',
+    paddingHorizontal: wp(4),
   },
   nameArrowButtonViewStyle: {
     position: 'absolute',

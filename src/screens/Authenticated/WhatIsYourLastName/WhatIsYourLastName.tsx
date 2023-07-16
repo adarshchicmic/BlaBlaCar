@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -13,6 +7,12 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import {updateProfileData} from '../../../store/slices/profileSlice';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const WhatIsYourLastName = ({navigation}: any) => {
   const [lastName, setLastName] = useState<string>('');
@@ -55,7 +55,11 @@ const WhatIsYourLastName = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
 
       <View style={styles.textView}>
@@ -71,7 +75,8 @@ const WhatIsYourLastName = ({navigation}: any) => {
           defaultValue={lastNameValue}
         />
       </View>
-      {isLoading && <ActivityIndicator />}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
       {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {!showError && <Text>{COMMON_CONSTS.NAME_WARN}</Text>}
       {lastName && (

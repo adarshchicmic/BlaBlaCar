@@ -5,7 +5,12 @@ import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import {SvgMinus, SvgPlush, SvgRightArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
-import {addPrice, subtractPrice} from '../../../store/slices/publishRideSlice';
+import {
+  addPrice,
+  addPriceR,
+  subtractPrice,
+  subtractPriceR,
+} from '../../../store/slices/publishRideSlice';
 const PricePerSeat = ({navigation, route}: any) => {
   const screen = route.params.screen;
   const numberOfSeat: any = useSelector(state => state);
@@ -15,16 +20,23 @@ const PricePerSeat = ({navigation, route}: any) => {
     navigation.goBack();
   };
   const handleMinusButton = () => {
-    dispatch(subtractPrice());
+    screen === COMMON_CONSTS.RETURN
+      ? dispatch(subtractPriceR())
+      : dispatch(subtractPrice());
   };
   const handlePlusButton = () => {
-    dispatch(addPrice());
+    screen === COMMON_CONSTS.RETURN
+      ? dispatch(addPriceR())
+      : dispatch(addPrice());
   };
   const handleForwardArrowButtonPress = () => {
     screen === COMMON_CONSTS.BOOK ? navigation.navigate('BookInstantly') : null;
     screen === COMMON_CONSTS.SEARCH ? navigation.goBack() : null;
     screen === COMMON_CONSTS.CAN_PASSENGER_BOOK_INSTANTLY
-      ? navigation.navigate('AddAboutRide')
+      ? navigation.navigate('ComingBackAsWell')
+      : null;
+    screen === COMMON_CONSTS.RETURN
+      ? navigation.navigate('AddAboutRide', {screen: COMMON_CONSTS.RETURN})
       : null;
   };
   return (
@@ -44,19 +56,30 @@ const PricePerSeat = ({navigation, route}: any) => {
         <TouchableOpacity
           onPress={() => handleMinusButton()}
           disabled={
-            numberOfSeat?.publishRideSlice?.set_price ===
-            numberOfSeat?.publishRideSlice?.minPrice
+            screen === COMMON_CONSTS.RETURN
+              ? numberOfSeat?.publishRideSlice?.set_priceR ===
+                numberOfSeat?.publishRideSlice?.minPriceR
+              : numberOfSeat?.publishRideSlice?.set_price ===
+                numberOfSeat?.publishRideSlice?.minPrice
           }>
           <SvgMinus width={50} height={50} />
         </TouchableOpacity>
         <Text style={styles.numberStyle}>
           {COMMON_CONSTS.RS}
-          {numberOfSeat?.publishRideSlice?.set_price}
+          {screen === COMMON_CONSTS.RETURN
+            ? numberOfSeat?.publishRideSlice?.set_priceR
+            : numberOfSeat?.publishRideSlice?.set_price}
         </Text>
 
         <TouchableOpacity
           onPress={() => handlePlusButton()}
-          disabled={numberOfSeat?.rideSlice?.numberOfSeats === 8}>
+          disabled={
+            screen === COMMON_CONSTS.RETURN
+              ? numberOfSeat?.publishRideSlice?.set_priceR ===
+                numberOfSeat?.publishRideSlice?.maxPriceR
+              : numberOfSeat?.publishRideSlice?.set_price ===
+                numberOfSeat?.publishRideSlice?.maxPrice
+          }>
           <SvgPlush width={50} height={50} />
         </TouchableOpacity>
       </View>

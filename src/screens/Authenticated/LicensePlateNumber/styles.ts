@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   crossStyle: {
-    fontSize: RFValue(20),
+    fontSize: RFValue(22),
     color: '#2dbeff',
     marginTop: hp(2),
     marginHorizontal: wp(5),

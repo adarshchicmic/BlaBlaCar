@@ -3,7 +3,6 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Text,
-  ActivityIndicator,
   Platform,
   Keyboard,
 } from 'react-native';
@@ -14,19 +13,39 @@ import styles from './styles';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useAddVehicleMutation} from '../../../services/modules/addVehicle';
+import {useUpdateVehicleMutation} from '../../../services/modules/editVehicle/editVehicle';
 import {useSelector} from 'react-redux';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const VehicleInformation = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
+  const vehicleData = route?.params?.vehicleData;
+
   const [vehicleBrand, setVehicleBrand] = useState<string>('');
   const [vehicleName, setVehicleName] = useState<string>('');
   const [vehicleType, setVehicleType] = useState<string>('');
   const [vehicleColor, setVehicleColor] = useState<string>('');
-  const [vehicleModelYear, setVehicleModelYear] = useState<string>('');
+  const [vehicleModelYear, setVehicleModelYear] = useState<any>('');
   const states: any = useSelector(state => state);
-  const [addVehicle, {isLoading, isError, isSuccess}] = useAddVehicleMutation();
+  const [addVehicle, {isLoading, isError}] = useAddVehicleMutation();
+  const [updateVehicle, {isLoading: isLoadingUpdate, isError: isErrorUpdate}] =
+    useUpdateVehicleMutation();
   let scrollV: any = useRef();
-  console.log(states, 'this is states');
+
+  useEffect(() => {
+    setVehicleColor(vehicleData?.vehicle_color);
+    setVehicleBrand(vehicleData?.vehicle_brand);
+    setVehicleType(vehicleData?.vehicle_type);
+    setVehicleModelYear(vehicleData?.vehicle_model_year);
+    setVehicleName(vehicleData?.vehicle_name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
@@ -78,28 +97,50 @@ const VehicleInformation = ({navigation, route}: any) => {
   };
 
   const handleForwardArrowButtonPress = async () => {
-    const result: any = await addVehicle({
-      country: 'India',
-      vehicleNumber: states?.vehicleSlice?.vehicle?.vehicleNumber,
-      vehicleBrand: vehicleBrand,
-      vehicleName: vehicleName,
-      vehicleType: vehicleType,
-      vehicleColor: vehicleColor,
-      vehicleModelYear: vehicleModelYear,
-    });
-    console.log(result, 'this is data from vehicle addd');
     if (screen === COMMON_CONSTS.ABOUT_YOU) {
+      const result: any = await addVehicle({
+        country: 'India',
+        vehicleNumber: states?.vehicleSlice?.vehicle?.vehicleNumber,
+        vehicleBrand: vehicleBrand,
+        vehicleName: vehicleName,
+        vehicleType: vehicleType,
+        vehicleColor: vehicleColor,
+        vehicleModelYear: vehicleModelYear,
+      });
       result?.data?.status?.code === 201
         ? navigation.navigate('HomeScreen')
         : null;
     }
     if (screen === COMMON_CONSTS.ADD_ABOUT_RIDE) {
+      const result: any = await addVehicle({
+        country: 'India',
+        vehicleNumber: states?.vehicleSlice?.vehicle?.vehicleNumber,
+        vehicleBrand: vehicleBrand,
+        vehicleName: vehicleName,
+        vehicleType: vehicleType,
+        vehicleColor: vehicleColor,
+        vehicleModelYear: vehicleModelYear,
+      });
+
       result?.data?.status?.code === 201
-        ? navigation.navigate('AddAboutRide')
+        ? navigation.navigate('AddAboutRide', {
+            screen: COMMON_CONSTS.UPDATE_VEHICLE,
+          })
         : null;
     }
     if (screen === COMMON_CONSTS.EDIT_INFO) {
-      result?.data?.status?.code === 201
+      const result: any = await updateVehicle({
+        country: 'India',
+        vehicleNumber: states?.vehicleSlice?.vehicle?.vehicleNumber,
+        vehicleBrand: vehicleBrand,
+        vehicleName: vehicleName,
+        vehicleType: vehicleType,
+        vehicleColor: vehicleColor,
+        vehicleModelYear: vehicleModelYear,
+        vehicleId: vehicleData?.id,
+      });
+
+      result?.data?.status?.code === 200
         ? navigation.navigate('HomeScreen')
         : null;
     }
@@ -122,7 +163,10 @@ const VehicleInformation = ({navigation, route}: any) => {
           <TouchableOpacity
             onPress={() => handleBackArrowPress()}
             style={styles.arrowStyle}>
-            <SvgLeftArrow width={25} height={25} />
+            <SvgLeftArrow
+              width={widthPercentageToDP(8)}
+              height={heightPercentageToDP(6)}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.textView}>
@@ -135,44 +179,55 @@ const VehicleInformation = ({navigation, route}: any) => {
             inputTextPlaceholder={COMMON_CONSTS.VEHICLE_BRAND}
             styleInputText={styles.inputTextStyle}
             onChangeTextFunction={value => handleVehicleBrandChange(value)}
+            defaultValue={vehicleData?.vehicle_brand}
           />
           <CustomTextInput
             styleInputText={styles.inputTextStyle}
             inputTextPlaceholder={COMMON_CONSTS.VEHICLE_NAME}
             onChangeTextFunction={value => handleVehicleNameChange(value)}
+            defaultValue={vehicleData?.vehicle_name}
           />
           <CustomTextInput
             styleInputText={styles.inputTextStyle}
             inputTextPlaceholder={COMMON_CONSTS.VEHICLE_TYPE}
             onChangeTextFunction={value => handleVehicleTypeChange(value)}
+            defaultValue={vehicleData?.vehicle_type}
           />
           <CustomTextInput
             styleInputText={styles.inputTextStyle}
             inputTextPlaceholder={COMMON_CONSTS.VEHICLE_COLOR}
             onChangeTextFunction={value => handleVehicleColorChange(value)}
+            defaultValue={vehicleData?.vehicle_color}
           />
           <CustomTextInput
             styleInputText={styles.inputTextStyle}
             inputTextPlaceholder={COMMON_CONSTS.VEHICLE_MODEL_YEAR}
             onChangeTextFunction={value => handleVehicleModelYearChange(value)}
+            keyboardTypeTextInput="numeric"
+            defaultValue={vehicleData?.vehicle_model_year?.toString()}
           />
         </View>
-        {isError && <Text> {COMMON_CONSTS.ERROR}</Text>}
-        {isLoading && <ActivityIndicator />}
-        {vehicleBrand &&
+        {isError || isErrorUpdate ? (
+          <Text style={styles.errorStyle}>{COMMON_CONSTS.ERROR}</Text>
+        ) : null}
+
+        {(vehicleBrand &&
           vehicleColor &&
           vehicleModelYear &&
           vehicleName &&
-          vehicleType && (
-            <View style={styles.buttonView}>
-              <TouchableOpacity
-                style={styles.buttonStyle}
-                onPress={() => handleForwardArrowButtonPress()}>
-                <SvgRightArrow />
-              </TouchableOpacity>
-            </View>
-          )}
+          vehicleType) ||
+        screen === COMMON_CONSTS?.EDIT_INFO ? (
+          <View style={styles.buttonView}>
+            <TouchableOpacity
+              style={styles.buttonStyle}
+              onPress={() => handleForwardArrowButtonPress()}>
+              <SvgRightArrow />
+            </TouchableOpacity>
+          </View>
+        ) : null}
       </ScrollView>
+      {(isLoading || isLoadingUpdate) && <BlurViews />}
+      {(isLoading || isLoadingUpdate) && <LoadingIndicator />}
     </KeyboardAvoidingView>
   );
 };

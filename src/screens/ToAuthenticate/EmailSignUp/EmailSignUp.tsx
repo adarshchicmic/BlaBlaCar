@@ -1,31 +1,52 @@
 import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
-import React, {useState, memo} from 'react';
+import React, {useState, memo, useRef} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
 import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput';
 import {SvgLeftArrow, SvgRightArrow} from '../../../assets/svg';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {updateEmail} from '../../../store/slices/UserSlice';
+import {useEmailExistMutation} from '../../../services/modules/checkEmailExist';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import {BlurView} from '@react-native-community/blur';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const EmailSignUp = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
   const [validEmail, setValidEmail] = useState<boolean>(false);
+  const [emailExist, {isLoading, isError}] = useEmailExistMutation();
   const [showValidationError, setShowValidationError] =
     useState<boolean>(false);
+  const [emailAlreadyExist, setEmailAlreadyExist] = useState<boolean>(false);
   const dispatch = useDispatch();
+  const refInput: any = useRef();
 
   const handleTextChange = value => {
+    if (emailAlreadyExist) {
+      setEmailAlreadyExist(false);
+    }
+    if (showValidationError) {
+      setShowValidationError(!COMMON_CONSTS.EMAIL_REGEX.test(value));
+    }
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
   };
-  const states = useSelector(state => state);
 
   const handleBackArrowPress = () => {
     navigation.goBack();
   };
-  const handleForwardArrowButtonPress = () => {
+  const handleForwardArrowButtonPress = async () => {
+    // const res = await emailExist({email: email});
+
+    refInput?.current?.blur();
     if (validEmail) {
-      navigation.navigate('FirstNameLastName');
+      const result: any = await emailExist({email: email});
+      result?.error?.data?.status?.code === 422
+        ? setEmailAlreadyExist(true)
+        : navigation.navigate('FirstNameLastName');
       dispatch(updateEmail({email: email}));
     } else {
       setShowValidationError(true);
@@ -35,13 +56,19 @@ const EmailSignUp = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={handleBackArrowPress}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(5)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAILQ}</Text>
       </View>
       <View>
         <CustomTextInput
+          autoCapitalizeTextInput={'none'}
+          refInput={refInput}
           styleInputText={styles.textInputStyle}
           placeholderTextColor={'#969693'}
           inputTextPlaceholder={COMMON_CONSTS.EMAIL}
@@ -53,7 +80,14 @@ const EmailSignUp = ({navigation}: any) => {
           </Text>
         )}
       </View>
-
+      {isError && (
+        <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR}</Text>
+      )}
+      {emailAlreadyExist && (
+        <Text style={styles.errorTextStyle}>
+          {COMMON_CONSTS.EMAIL_ALREADY_EXIST}
+        </Text>
+      )}
       {email && (
         <View style={styles.buttonView}>
           <TouchableOpacity
@@ -63,6 +97,8 @@ const EmailSignUp = ({navigation}: any) => {
           </TouchableOpacity>
         </View>
       )}
+      {isLoading && <BlurView />}
+      {isLoading && <LoadingIndicator />}
     </KeyboardAvoidingView>
   );
 };

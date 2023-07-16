@@ -9,7 +9,7 @@ const DropOff = ({navigation}: any) => {
   //     navigation.goBack();
   //   };
   const handleButtonPress = () => {
-    navigation.navigate('Location', {screen: COMMON_CONSTS.DROP_OFF});
+    navigation.navigate('DropOffSearch', {screen: COMMON_CONSTS.DROP_OFF});
   };
   return (
     <View>

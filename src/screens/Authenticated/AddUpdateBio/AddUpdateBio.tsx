@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -7,6 +7,8 @@ import CustomTextInput from '../../../components/CustomTextInput/CustomTextInput
 import {useSelector, useDispatch} from 'react-redux';
 import {updateProfileData} from '../../../store/slices/profileSlice';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const AddUpdateBio = ({navigation}) => {
   const [bio, setBio] = useState<string>('');
@@ -73,9 +75,15 @@ const AddUpdateBio = ({navigation}) => {
           defaultValue={bioValue}
         />
       </View>
-      {showError && <Text>{COMMON_CONSTS.ERROR_BIO}</Text>}
-      {isLoading && <ActivityIndicator />}
-      {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
+      {showError && (
+        <Text style={styles.errorTextStyle}>{COMMON_CONSTS.ERROR_BIO}</Text>
+      )}
+
+      {isError && (
+        <Text style={styles.errorTextStyle}>
+          {COMMON_CONSTS.ERROR_WHILE_UPDATING}
+        </Text>
+      )}
       {bio && (
         <View style={styles.buttonView}>
           <TouchableOpacity
@@ -85,6 +93,8 @@ const AddUpdateBio = ({navigation}) => {
           </TouchableOpacity>
         </View>
       )}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
     </View>
   );
 };

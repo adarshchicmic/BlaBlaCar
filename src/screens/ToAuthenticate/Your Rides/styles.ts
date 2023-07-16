@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     marginTop: hp(3),
     width: wp(90),
     alignSelf: 'center',
+  },
+  errorStyle: {
+    color: '#f00',
+    paddingLeft: wp(5),
   },
 });
 

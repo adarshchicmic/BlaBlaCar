@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -14,6 +8,13 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
 import {updateProfileData} from '../../../store/slices/profileSlice';
 import {useConfirmEmailMutation} from '../../../services/modules/confirmEmail';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
+
 const WhatIsYourEmail = ({navigation, route}: any) => {
   const screen = route?.params?.screen;
   const [email, setEmail] = useState<string>('');
@@ -47,7 +48,7 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
         const dataa: any = await confirmEmail({
           email: email,
         });
-
+        console.log(dataa, 'this is data');
         // if (dataa?.data?.status?.code === 200) {
         //   dispatch(updateProfileData({profileData: dataa?.data?.status?.data}));
         //   navigation.goBack();
@@ -78,7 +79,11 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={handleBackArrowPress}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAILQ}</Text>
@@ -96,9 +101,7 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
             {COMMON_CONSTS.ENTER_VALID_EMAIL}
           </Text>
         )}
-        {(confirmEmailIsLoading || updateProfileIsLoading) && (
-          <ActivityIndicator />
-        )}
+
         {(confirmEmailIsError || updateProfileIsError) && (
           <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>
         )}
@@ -112,6 +115,10 @@ const WhatIsYourEmail = ({navigation, route}: any) => {
             <Text style={styles.buttonTextStyle}>{COMMON_CONSTS.SAVE}</Text>
           </TouchableOpacity>
         </View>
+      )}
+      {(confirmEmailIsLoading || updateProfileIsLoading) && <BlurViews />}
+      {(confirmEmailIsLoading || updateProfileIsLoading) && (
+        <LoadingIndicator />
       )}
     </KeyboardAvoidingView>
   );

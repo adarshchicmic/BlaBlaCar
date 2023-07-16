@@ -1,14 +1,14 @@
 import {StyleSheet} from 'react-native';
 import {
   widthPercentageToDP as wp,
-  // heightPercentageToDP as hp,
+  heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   textViewStyle: {
     // width: wp(70),
-    width: wp(72),
+    width: wp(70),
     flexDirection: 'row',
     alignSelf: 'flex-start',
     flexWrap: 'wrap',
@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   textArrowText: {
     width: wp(80),
     marginLeft: wp(2),
+    alignSelf: 'center',
+    justifyContent: 'center',
     // alignSelf: 'flex-start',
   },
   svgTextView: {
@@ -30,10 +32,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   textStyle: {
-    fontSize: RFValue(15),
+    fontSize: RFValue(16),
     alignSelf: 'center',
     color: '#000',
     fontWeight: '600',
+    // fontFamily: 'sans-serif',
+    marginBottom: hp(0),
+    letterSpacing: wp(0.1),
   },
   svgArrowStyle: {
     marginHorizontal: wp(2),
@@ -45,6 +50,7 @@ const styles = StyleSheet.create({
   },
   passengerTextStyle: {
     fontSize: RFValue(12),
+    color: '#a3a0a0',
   },
 });
 

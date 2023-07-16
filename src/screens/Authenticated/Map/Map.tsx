@@ -22,9 +22,14 @@ import {
   SvgTime,
 } from '../../../assets/svg';
 import {
+  updateEstimatedTime,
   updateRoadDistanceDuration,
   updateRouteDetail,
 } from '../../../store/slices/publishRideSlice';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -68,13 +73,13 @@ const MapScreen = ({navigation}: any) => {
       destLatitude: destLocation?.latitude,
       destLongitude: destLocation?.longitude,
     });
-    console.log(val, 'this is data guys ');
+
     const data = val?.data;
     if (data.status === 'OK') {
       const routeCoordinates = data.routes[0].overview_polyline.points;
       const dis = data.routes[0].legs[0].distance.text;
       const dur = data.routes[0].legs[0].duration.text;
-      console.log(dis, 'this is distance guys ');
+
       const legs: any = [
         {
           distance: data.routes[0].legs[0].distance,
@@ -84,7 +89,6 @@ const MapScreen = ({navigation}: any) => {
       const overview_polyline = {points: routeCoordinates};
       const route: any = [];
       route.push({legs, overview_polyline});
-      console.log({route}, ':this is route');
 
       dispatch(updateRouteDetail({selectRoute: {route}}));
       dispatch(
@@ -94,6 +98,7 @@ const MapScreen = ({navigation}: any) => {
           duration: dur,
         }),
       );
+      dispatch(updateEstimatedTime({estimatedTime: dur}));
       setRouteName(data.routes[0].summary);
       setDistance(dis);
       setDuration(dur);
@@ -114,7 +119,10 @@ const MapScreen = ({navigation}: any) => {
         <TouchableOpacity
           onPress={() => handleBackArrowPress()}
           style={styles.arrowStyle}>
-          <SvgLeftArrow width={35} height={35} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(6)}
+          />
         </TouchableOpacity>
       </View>
 
@@ -126,7 +134,7 @@ const MapScreen = ({navigation}: any) => {
           latitudeDelta: LATITUDE_DELTA,
           longitudeDelta: LONGITUDE_DELTA,
         }}>
-        <Marker coordinate={currLocation} />
+        {/* <Marker coordinate={currLocation} /> */}
         {destLocation && <Marker coordinate={destLocation} />}
         {route && (
           <Polyline

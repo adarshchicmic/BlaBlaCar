@@ -2,9 +2,7 @@ import {
   View,
   Text,
   KeyboardAvoidingView,
-  ActivityIndicator,
   TouchableOpacity,
-  ScrollView,
   Platform,
 } from 'react-native';
 import React, {useState, memo} from 'react';
@@ -19,17 +17,24 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const EmailAndPasswordLogIn = ({navigation}: any) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [openEye, setOpenEye] = useState<boolean>(false);
   const [validEmail, setValidEmail] = useState<boolean>(true);
+  const [response, setResponse] = useState<any>();
+  const [showError, setShowError] = useState<boolean>(false);
   const [logIn, {isLoading, isError}] = useLogInMutation();
 
   const handleTextChange = value => {
     setEmail(value);
     setValidEmail(COMMON_CONSTS.EMAIL_REGEX.test(value));
+    if (showError) {
+      setShowError(COMMON_CONSTS.EMAIL_REGEX.test(value));
+    }
   };
   const handlePasswordChange = value => {
     setPassword(value);
@@ -49,19 +54,25 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
         email: email,
         password: password,
       });
+      setResponse(res);
 
-      if (res?.data?.status?.code === 200) {
-        // navigation.navigate('HomeScreen');
-      }
+      setShowError(false);
+    } else {
+      setShowError(true);
     }
   };
   return (
     <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : ''}>
-      <ScrollView contentContainerStyle={{flex: 1}} bounces={false}>
+      // style={styles.container}
+      behavior="position"
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>
+      <View style={styles.container}>
         <TouchableOpacity onPress={() => handleBackArrowPress()}>
-          <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(5)}
+            style={styles.arrowStyle}
+          />
         </TouchableOpacity>
         <View style={styles.textView}>
           <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_EMAIL}</Text>
@@ -82,7 +93,16 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
               secureTextEntry={!openEye}
               onChangeTextFunction={text => handlePasswordChange(text)}
             />
-            {isError && <Text style={styles.errorStyle}>error</Text>}
+            {isError && (
+              <Text style={styles.errorStyle}>
+                {response?.error?.data?.status?.error}
+              </Text>
+            )}
+            {showError && (
+              <Text style={styles.errorStyle}>
+                {COMMON_CONSTS.ENTER_VALID_EMAIL}
+              </Text>
+            )}
             {password && (
               <View style={styles.svgOpenCloseStyle}>
                 <TouchableOpacity onPress={handleShowOpenOrCloseEye}>
@@ -116,8 +136,9 @@ const EmailAndPasswordLogIn = ({navigation}: any) => {
             onPressFunction={() => handelLoginButtonPress()}
           />
         )}
-        {isLoading && <ActivityIndicator />}
-      </ScrollView>
+        {isLoading && <BlurViews />}
+        {isLoading && <LoadingIndicator />}
+      </View>
     </KeyboardAvoidingView>
   );
 };

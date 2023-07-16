@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import styles from './styles';
@@ -13,6 +7,12 @@ import {SvgLeftArrow} from '../../../assets/svg';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateProfileData} from '../../../store/slices/profileSlice';
 import {useUpdateProfileMutation} from '../../../services/modules/updateProfile';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const WhatIsYourDob = ({navigation}: any) => {
   const [dob, setDob] = useState<string>('');
@@ -70,7 +70,11 @@ const WhatIsYourDob = ({navigation}: any) => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <TouchableOpacity onPress={() => handleBackArrowPress()}>
-        <SvgLeftArrow width={25} height={25} style={styles.arrowStyle} />
+        <SvgLeftArrow
+          width={widthPercentageToDP(8)}
+          height={heightPercentageToDP(6)}
+          style={styles.arrowStyle}
+        />
       </TouchableOpacity>
       <View style={styles.textView}>
         <Text style={styles.textStyle}>{COMMON_CONSTS.WHATS_YOUR_DATE_OF}</Text>
@@ -88,7 +92,8 @@ const WhatIsYourDob = ({navigation}: any) => {
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.ENTER_VALID_DOB}</Text>}
-      {isLoading && <ActivityIndicator />}
+      {isLoading && <BlurViews />}
+      {isLoading && <LoadingIndicator />}
       {isError && <Text>{COMMON_CONSTS.ERROR_WHILE_UPDATING}</Text>}
       {dob && (
         <View style={styles.buttonView}>

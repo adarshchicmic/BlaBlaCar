@@ -1,10 +1,12 @@
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
-import React, {useEffect, useRef, useState, memo} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import React, {useRef, useState, memo, useEffect} from 'react';
 import styles from './styles';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
 import Geolocation from '@react-native-community/geolocation';
 import {useDispatch} from 'react-redux';
+
+navigator.geolocation = require('@react-native-community/geolocation');
 
 import {
   updateDropOff,
@@ -17,16 +19,17 @@ import {
 import {updateCity} from '../../../store/slices/publishRideSlice';
 
 const Location = ({navigation, route}) => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(false);
   const screen = route.params.screen;
   const dispatch = useDispatch();
   const myRef: any = useRef();
-  // useEffect(() => {
-  //   Geolocation.getCurrentPosition(info => {
-  //     // setLatitude(info?.coords?.latitude);
-  //   });
-  // }, []);
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      // setLatitude(info?.coords?.latitude);
+      console.log(info, 'this is info ');
+    });
+  }, []);
 
   const arrowButtonPress = () => {
     navigation.goBack();
@@ -61,7 +64,11 @@ const Location = ({navigation, route}) => {
             longitude: longitudee,
           }),
         ),
-        navigation.navigate('DropOff'))
+        // navigation.navigate('DropOff'))
+        navigation.navigate('SelectPickUpMap', {
+          latitude: latitudee,
+          longitude: longitudee,
+        }))
       : null;
     screen === COMMON_CONSTS.DROP_OFF
       ? (dispatch(
@@ -77,8 +84,8 @@ const Location = ({navigation, route}) => {
       ? (dispatch(
           updateCity({
             city: data?.description,
-            latitude: latitudee,
-            longitude: longitudee,
+            latitude: longitudee,
+            longitude: latitudee,
           }),
         ),
         navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER}))
@@ -101,6 +108,7 @@ const Location = ({navigation, route}) => {
         </View>
         <GooglePlacesAutocomplete
           ref={myRef}
+          enableHighAccuracyLocation={true}
           styles={styles.styleTextInput}
           placeholder="Search"
           onPress={(data, details) => handlePlaceSelected(data, details)}
@@ -113,14 +121,14 @@ const Location = ({navigation, route}) => {
           onFail={() => onFail()}
           nearbyPlacesAPI="GooglePlacesSearch"
           // currentLocation={true}
-          currentLocationLabel="current location"
+          currentLocationLabel="Current Location"
           // preProcess={(index) => preProcessFunction(index)}
           autoFillOnNotFound={true}
           timeout={2000}
         />
       </View>
       {showError && <Text>{COMMON_CONSTS.NETWORK_ERROR}</Text>}
-      {isLoading && <ActivityIndicator />}
+      {/* {isLoading && <ActivityIndicator />} */}
     </View>
   );
 };

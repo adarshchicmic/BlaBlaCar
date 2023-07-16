@@ -59,6 +59,7 @@ const styles = StyleSheet.create<any>({
     fontSize: RFValue(20),
     marginVertical: hp(2),
     color: '#000',
+    fontWeight: '600',
   },
   plushSvgTextStyle: {
     flexDirection: 'row',

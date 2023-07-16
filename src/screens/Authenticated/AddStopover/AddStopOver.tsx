@@ -17,7 +17,7 @@ const AddStopOver = ({navigation}) => {
     navigation.navigate('DateComponent', {screen: COMMON_CONSTS.STOPOVER});
   };
   const handleOnPressAddCity = () => {
-    navigation.navigate('Location', {screen: COMMON_CONSTS.ADD_CITY});
+    navigation.navigate('AddStopOverSearch', {screen: COMMON_CONSTS.ADD_CITY});
   };
   return (
     <View>
@@ -25,7 +25,10 @@ const AddStopOver = ({navigation}) => {
         <TouchableOpacity
           onPress={() => handleBackArrowPress()}
           style={styles.arrowStyle}>
-          <SvgLeftArrow width={35} height={35} />
+          <SvgLeftArrow
+            width={widthPercentageToDP(8)}
+            height={heightPercentageToDP(6)}
+          />
         </TouchableOpacity>
       </View>
       <View>

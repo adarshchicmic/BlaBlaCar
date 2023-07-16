@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import React, {useState, memo} from 'react';
 import CustomButton from '../../../components/CustomButton/CustomButton';
 import {COMMON_CONSTS} from '../../../shared/Constants/Constants';
@@ -15,6 +9,8 @@ import {useVerifyMobileMutation} from '../../../services/modules/verifyMobile/ve
 import {useSelector} from 'react-redux';
 
 import {useSignUpMutation} from '../../../services/modules/signUp';
+import BlurViews from '../../../components/BlurView/BlurView';
+import LoadingIndicator from '../../../components/LoadingIndicator/LoadingIndicator';
 
 const VerifyMobileNumber = ({navigation}: any) => {
   const [mobileNumber, setMobileNumber] = useState<string>('');
@@ -124,7 +120,7 @@ const VerifyMobileNumber = ({navigation}: any) => {
           onPressFunction={() => handleDoItLater()}
         />
       </View>
-      {(isLoadingVerifyMobile || isLoadingsignOut) && <ActivityIndicator />}
+
       {mobileNumber && (
         <View style={styles.buttonView}>
           <TouchableOpacity
@@ -134,6 +130,8 @@ const VerifyMobileNumber = ({navigation}: any) => {
           </TouchableOpacity>
         </View>
       )}
+      {(isLoadingVerifyMobile || isLoadingsignOut) && <BlurViews />}
+      {(isLoadingVerifyMobile || isLoadingsignOut) && <LoadingIndicator />}
     </View>
   );
 };
